@@ -1,0 +1,30 @@
+
+#MKL path
+MKLROOT=/opt/intel
+COMPOSERLIB=$(MKLROOT)
+
+CFLAGS= -O3 -openmp
+INTEL= icpc
+MPI= mpicxx
+LIBS= -lpthread -lm -ldl -liomp5 -lmkl_rt
+
+
+#My library a. chacon
+MyPath=.
+OWN_LIB=${MyPath}/include
+
+
+Program0=hhg_kr4_hm.cpp
+
+comp: compileMPI 
+
+compileMPI: ${Program0} 
+	$(MPI)  ${Program0} -w -I${OWN_LIB} -o exec_hhg_ACM
+
+clean: 
+	rm a.out
+
+#ROOT_PATH=/home/achacon
+#LD_FFTW=$(ROOT_PATH)/libraries/fftw-3.3.4/LFFTW3
+
+
