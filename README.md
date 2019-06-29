@@ -107,11 +107,8 @@ export M3C_GAUSSIAN_SCRATCH=/scratch/$USER/gaussian
 
 ## Authors
 
+* Alexis Chacon ( ftachacon@gmail.com )
 * Nestor F. Aguirre ( nfaguirrec@gmail.com )
-* Sergio Díaz-Tendero ( sergio.diaztendero@uam.es )
-* Paul-Antoine Hervieux ( paul-antoine.hervieux@ipcms.unistra.fr )
-* Manuel Alcamí ( manuel.alcami@uam.es )
-* Fernando Martín ( fernando.martin@uam.es )
 
 ## Citing
 
