@@ -1,4 +1,4 @@
-## Antelope project: Attosecond electron dynamics in condensed-matter physics 
+## Antelope: Attosecond electron dynamics in condensed-matter physics 
 
 M3C is a general-purpose code, though its primary targets are those fragmentation processes that take place through non- radiative transitions, where their fragments remain together enough time such that the excess of energy becomes randomly distributed over all internal degrees of freedom. M3C allows studying fragmentation processes in a large variety of systems irrespective of their composition and the nature of the chemical bonding between their elementary constituents.
 
