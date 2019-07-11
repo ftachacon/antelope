@@ -1,10 +1,11 @@
 ## Antelope: Attosecond electron dynamics in condensed-matter physics 
 
-M3C is a general-purpose code, though its primary targets are those fragmentation processes that take place through non- radiative transitions, where their fragments remain together enough time such that the excess of energy becomes randomly distributed over all internal degrees of freedom. M3C allows studying fragmentation processes in a large variety of systems irrespective of their composition and the nature of the chemical bonding between their elementary constituents.
+Antelope pursues to develop a general code to simulate the non-linear light emission responses from a solid while an strong and ultrashort femtosecond laser source interacts with the target. To this end, we compute the inter- and intra-band currents by solving the Semiconductor Bloch Equations (SBE) or equation of motions for the occupations and the coherences of the system.
 
-In essence, the M3C consists in partitioning the mass, charge, energy, and momentum (linear and angular) of an excited molecular system (which are conserved in the microcanonical approach) among all accessible fragmentation channels with probabilities governed by considerations of maximum entropy. The key aspect of this methodology is that it provides a random way to move in phase space until a region of maximum entropy is reached, where the physical observables are computed. Here, only energy and entropy are responsible for the fate of the system.
+# what is it
+#how is done
+#what it do 
 
-The simplest calculation requires quantities such as geometries, electronic energies, and harmonic frequencies of all molecules included in the fragmentation model. This approach has already successfully been applied to the fragmentation of neutral and singly-charged carbon clusters, hydrogenated and nitrogenated carbon clusters, and small and medium-sized molecules in different physical scenarios or ionizing radiation.
 
 <p align="center">
 <img src="https://lh3.googleusercontent.com/1ixhD27CF22LvT67of6t08wtl_EDYkO3W5tNiYESIaEN1b-e9i-u0sUKDzMJY4GHHWl7d8Lvx38Enm24twtKfMq-mwUNsLEBnEDuwf_6p7ct0mfpqHkDglp5AtV8w6v7_X389aabTg8c2TlALqcVm2KJafsOfZ-K35T77g4XgWDDBhJPuFZ6g6I7LJ1dJJlghBqsFjz7LfW1axte_XjjT-pOOl3QYDn1VSIyAhOJk7R-7tbQqKNJZjpp_5bxX-M9sfmQIWcQ62o9XFgeToTxxIZhGm9E_pDrHassLt-DjmbMwsjH9n5BAiP9blJejvLF9k0Q53CxPvek6tnYBX17WRhNVCrs4Jq5a2SxikdobOzXh_a9rpSWFO2rK9phOHfm14ceqU7ZVhYlr02VOJC_ZaXaUS9-YCqdDSotoU3JbdwVzF7ADZFx-mI3wrT17pB9hrZ_1Nqy_cTIzn1vbsz4ZVtYDR970Up9ZCzkDmChtqKAuROcxbLrvQl1S1mi_ObPZvU5QQGNYDgGhNXCNqW3MtlS7dfZy4N3X2SYewF7_BZ7TXzQ5k2MJESjafJbnXcofF2RoofUQFBWUlk6Gey7M9Di-mO5vZlRp7kYUNWK8T2ae9HglHegI0Z6nawKg8_g4kwhWqcx--3N_areV_cyQcNFPFtLyDQ=w876-h534-no" width="70%" height="70%">
