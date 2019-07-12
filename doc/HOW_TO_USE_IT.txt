@@ -1,4 +1,54 @@
+
+####################################
 #Alexis Chacon
 #July 12, 2019
+
+
+
+####################################
+How to use the version of antelope? 
+
+
+####################################
+1) Verify OpenMPI compilers installation in your computer
+
+
+
+####################################
+2) Download the code version located at: 
+
+
+$ ./antelope/src/SBE_HaldaneModel_Update
+
+
+
+####################################
+3) Open a command terminal and run the basic example via: 
+
+
+$ ./example_test.sh 
+
+
+
+####################################
+4) Go to ./Test/AlsisPythonShort typing via terminal
+
+
+$ cd ./Test/AlsisPythonShort
+
+
+
+####################################
+5) Run the python script, AnalysisReader_PyDir.py, typing 
+
+$ python2 AnalysisReader_PyDir.py 6 0 / xy
+
+
+#Enjoy the visualization of your first HHG spectrum for the trivial topological phase
+...
+
+
+
+
 
 
