@@ -1,6 +1,6 @@
 ## Antelope: Attosecond electron dynamics in condensed-matter physics 
 
-Antelope pursues to develop a general code to simulate the non-linear light emission responses from a solid while an strong and ultrashort femtosecond laser source interacts with the target. To this end, we compute the inter- and intra-band currents by solving the Semiconductor Bloch Equations (SBE) or equation of motions for the occupations and the coherences of the system.
+Antelope pursues the development of a general code to simulate the non-linear light emission responses from a solid while an strong and ultrashort femtosecond laser source interacts with the target. To this end, we compute the inter- and intra-band currents by solving the Semiconductor Bloch Equations (SBE) or equation of motions for the occupations and the coherences of the system.
 
 
 
