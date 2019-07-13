@@ -120,7 +120,7 @@ OUTPUTs
 
 
 
-2) edispersion.dat, contains the energy dispersion as a function of momentum (kx,ky) in the gnuplot format
+2) edispersion.dat, contains the energy dispersion as a function of momentum (kx,ky) in the gnuplot format for the  splot command 
   # kx in the 1rst column in a.u.
   # ky in the 2nd column in a.u.
   # valence band VB energies in a.u. in the 3rd column 
