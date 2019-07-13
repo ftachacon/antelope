@@ -1,9 +1,17 @@
-
+########################################
 # how to load/push info to the server, git-hup
+
 git add introduction.pptx
 
+
+########################################
 # commit, local repository 
+
 git commit -m "loading introduction slide"
 
+
+########################################
 # sycronized with the serverm, introduction or changes
 git push
+
+

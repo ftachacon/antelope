@@ -2,7 +2,9 @@
 
 Antelope pursues the development of a general code to simulate the non-linear light emission responses from a solid while a strong and ultrashort femtosecond laser source interacts with the target. To this end, we solve the Semiconductor Bloch Equations (SBE) or equation of motions for the occupations and the coherences of the system and compute the time-dependent inter- and intra-band currents of the medium.
 
+You can download and clone typing via terminal:
 
+$ git clone https://github.com/ftachacon/antelope.git
 
 
 <p align="center">
