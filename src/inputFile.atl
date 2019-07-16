@@ -1,0 +1,55 @@
+BEGIN GLOBAL_VARIABLES
+	pi = acos(-1)
+	c  = 137.0359996287515
+
+	# Electric field parameters
+	lambda =  1.27  microm          # Wave lenght
+	T      =  lambda/c              # Period
+ 	E0     =  0.024  au             # Electric field amplitude
+	omega  =  2.0*pi/T              # Frequency
+	A0     =  E0/omega              # Vector potential amplitude
+	phi    =  0.000  au             # Carrier envelopment phase
+	w      =  6*T
+	dw     =  2*T
+	tc     =  (w+2*dw)/2
+	
+	# Haldane Model parameters for Honney Comb lattice
+    la0   =   1.0 ang        # Lattice constant
+    t1    =   0.075 au       # Neirest Neighbour hopping parameters
+    t2    =   t1/3.0         # Amplitude of the Next Neirest Neighbour
+    phi0  =   0.1 rad        # Magnetic flux or phase in radians 
+    M0    =   1.0*t2         # Local or on-site potential
+END GLOBAL_VARIABLES
+
+BEGIN SIMULATION_SETUP
+	kbox.min  = -2*pi/la0
+	kbox.max  =  2*pi/la0
+	kbox.size = 101
+
+	tgrid.min = 0.0
+	tgrid.max = 12*T
+	tgrid.step = 0.1
+END SIMULATION_SETUP
+
+BEGIN PROPERTIES
+	energy = TRUE
+	norm = TRUE
+	
+	dipAccZ = TRUE
+	dipAccZ.ofile = dipoleZ.dat
+END PROPERTIES
+
+BEGIN SYSTEM
+	E(k).model = MODEL_HALDANE_BANDS( la0, t1, t2, phi0, M0 )
+# 	E(k).ifile = ../mybands.dat
+
+	U_f(t).model = LASER_TOPHAT_SIN( E0, tc, w, dw, omega )
+# 	U_f(t).ifile = ../mylaser.dat
+# 	U_f(t).formula = E0*sin(ometa*t)*tanh(t-t0)
+END SYSTEM
+
+BEGIN SOLVER
+	ksolver = CRANK_NICOLSON()
+	tsolver = RUNGE_KUTTA_4()
+END SOLVER
+

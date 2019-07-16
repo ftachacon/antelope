@@ -5,7 +5,7 @@ COMPOSERLIB=$(MKLROOT)
 
 CFLAGS= -O3 -openmp
 INTEL= icpc
-MPI= /usr/local/bin/mpicxx
+MPI= mpicxx
 LIBS= -lpthread -lm -ldl -liomp5 -lmkl_rt
 
 

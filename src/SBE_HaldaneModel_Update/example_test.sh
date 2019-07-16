@@ -10,7 +10,7 @@ mkdir Test #creating test directory
 
 
 ####################################
-make #compiling code and generating executable 
+make compileSQ #compiling code and generating executable 
 
 
 
@@ -28,7 +28,8 @@ cd ./Test
 
 date
 
-time -p mpirun -n ${N_MPI_TASKs} exec_hhg_mpi 0. 2.54 100 11 0.006 5 1.25 440 0.0 0.0 2
+# time -p mpirun -n ${N_MPI_TASKs} exec_hhg_mpi 0. 2.54 100 11 0.006 5 1.25 440 0.0 0.0 2
+time -p ./exec_hhg_mpi 0. 2.54 100 11 0.006 5 1.25 440 0.0 0.0 2
 
 date 
 
