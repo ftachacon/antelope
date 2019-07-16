@@ -15,9 +15,17 @@ $ git clone https://github.com/ftachacon/antelope.git
 
 **System Requirements:**
 
-M3C is known to work on GNU/Linux. However, it should work on any POSIX-compliant system.
+antelope is known to work on GNU/Linux. However, it should work on any POSIX-compliant system.
 
 **Dependencies:**
+
+- **mpicxx** (ubuntu: sudo apt-get install mpi-default-dev)
+
+- **python-tk** (ubuntu: sudo apt-get install python-tk)
+
+- **matplotlib** (pip2 install matplotlib --user)
+
+- **numpy** (pip2 install numpy --user)
 
 - **[GNU Bash](https://www.gnu.org/software/bash/)**
 
