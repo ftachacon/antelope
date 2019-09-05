@@ -29,6 +29,15 @@ using namespace std;
 
 class solidstructure
 {
+  
+private:
+    
+    
+    //Indexes on loops for
+    int i, j, l, n;
+    int ai, aj, al;
+    
+    
     
 public:
     
@@ -38,11 +47,13 @@ public:
      
      */
     
+    int rflag;
+    
     //Hopping parameters
     double t1, t2, phi0, M0;
     
     //Lattice constant
-    double lattice_a0;
+    //double lattice_a0;
     
     momaxis *g; //Momentum grid input
     
@@ -77,6 +88,7 @@ public:
     double *zbcurva_v;
     double *zbcurva_c;
     double T2;
+
     
     
     /************************************
@@ -159,12 +171,6 @@ public:
     //Maxima momentum
     double honeycomb_lattice_kmax[Ngrad];
     
-    
-    //Indexes on loops for
-    int i, j, l, n;
-    int ai, aj, al;
-    
-    
     double flag;
     double angle_a0, angle_b0;
     
@@ -186,17 +192,17 @@ public:
     
     
     
-    void haldane_model_params( double *_t1
-                              ,double *_t2
-                              ,double *_phi0
-                              ,double *_M0
-                              ,int _gauge );
+    void haldane_model_params( double const *_t1
+                              ,double const *_t2
+                              ,double const *_phi0
+                              ,double const *_M0
+                              ,int const _gauge );
     
     
     
     void bases_vectors( );
     
-    void Set_Of_B_BGrad( double *kx, double *ky );
+    void Set_Of_B_BGrad( double const *kx, double const *ky );
     
     
     void Ec( );
@@ -213,10 +219,11 @@ public:
     double max( double *v, int Nsize );
     
 
-    double myRegularization( double *kx, double *ky, double *skx, double *sky  );
+    double myRegularization( double const *kx, double const *ky, double *skx, double *sky  );
     
     void lattice_structure( );
-    void anomalous_velCV( complex efield );
+    
+    void anomalous_velCV( complex const efield, double const zBerryCurvature );
     
     void cdot( complex *v1, complex *v2, int Nv, complex *res);
     
@@ -245,22 +252,28 @@ solidstructure::solidstructure(  momaxis *_g
                                )
 {
     
-    
-    g = new momaxis( _g->N, _g->kmaxs );
-    
-    lattice_a0  = *_a0;
-    
-    
+
+    //##################################
+    //lattice_a0  = *_a0;
     T2          = *_dephasing;
     flag        = 0;
     
-    bases_vectors();
-    set_memory();
     
-    //##################################
     //Regularization parameters by defaul
     reg0        = 0.;
     re_width    = 0.11;  //5% of total ky-momentum-length
+    rflag       = 0;
+    
+    
+    //Momentum axis and grid
+    g = new momaxis( _g->N, _g->kmaxs, &(_g->lattice_a0) );
+    g->integral_method( "Trapz" );
+    
+
+    //Bravais vector-basis
+    bases_vectors();
+    set_memory();
+
     
     
 }
@@ -297,7 +310,7 @@ solidstructure::~solidstructure( )
 }
 
 
-double solidstructure::myRegularization( double *kx, double *ky, double *skx, double *sky  )
+double solidstructure::myRegularization( double const *kx, double const *ky, double *skx, double *sky  )
 {
     
     
@@ -308,7 +321,11 @@ double solidstructure::myRegularization( double *kx, double *ky, double *skx, do
 
 
 //######################################
-void  solidstructure::haldane_model_params( double *_t1, double *_t2, double *_phi0, double *_M0 ,int _gauge )
+void  solidstructure::haldane_model_params( double const *_t1
+                                           ,double const *_t2
+                                           ,double const *_phi0
+                                           ,double const *_M0
+                                           ,int const _gauge )
 {
     
     t1          = *_t1;
@@ -317,6 +334,7 @@ void  solidstructure::haldane_model_params( double *_t1, double *_t2, double *_p
     M0          = *_M0;
     eps_phi0    = t1/10.;
     gauge       = _gauge;
+
     
 
     
@@ -383,7 +401,7 @@ double solidstructure::min( double *v, int Nsize )
 
 
 //######################################
-double solidstructure::max(double *v, int Nsize)
+double solidstructure::max( double *v, int Nsize)
 {
 
 	double max0 = v[0];
@@ -440,39 +458,39 @@ void solidstructure::bases_vectors()
 {
     //First vector base: position atom
     vec_a[0][0] = 0.;
-    vec_a[1][0] = lattice_a0;
+    vec_a[1][0] = g->lattice_a0;
     
-    vec_a[0][1] = -sqrt(3.)/2.*lattice_a0;
-    vec_a[1][1] = -1./2.*lattice_a0;
+    vec_a[0][1] = -sqrt(3.)/2.*(g->lattice_a0);
+    vec_a[1][1] = -1./2.*(g->lattice_a0);
     
-    vec_a[0][2] =  sqrt(3.)/2.*lattice_a0;
-    vec_a[1][2] = -1./2.*lattice_a0;
+    vec_a[0][2] =  sqrt(3.)/2.*(g->lattice_a0);
+    vec_a[1][2] = -1./2.*(g->lattice_a0);
     
     
     
     //b-vectors of the hexagonal lattice
-    vec_b[0][0] = sqrt( 3. )*lattice_a0;
+    vec_b[0][0] = sqrt( 3. )*(g->lattice_a0);
     vec_b[1][0] = 0.;
     
-    vec_b[0][1] = -sqrt(3.)/2.*lattice_a0;
-    vec_b[1][1] = +3./2.*lattice_a0;
+    vec_b[0][1] = -sqrt(3.)/2.*(g->lattice_a0);
+    vec_b[1][1] = +3./2.*(g->lattice_a0);
     
-    vec_b[0][2] = -sqrt(3.)/2.*lattice_a0;
-    vec_b[1][2] = -3./2.*lattice_a0;
+    vec_b[0][2] = -sqrt(3.)/2.*(g->lattice_a0);
+    vec_b[1][2] = -3./2.*(g->lattice_a0);
     
     
     //K and K' points
-    K[0] = 2.*dospi/sqrt(3.)/3./lattice_a0 ;
+    K[0] = 2.*dospi/sqrt(3.)/3./(g->lattice_a0) ;
     K[1] = 0. ;
     
     
-    Kprime[0] = -2.*dospi/sqrt(3.)/3./lattice_a0 ;
+    Kprime[0] = -2.*dospi/sqrt(3.)/3./(g->lattice_a0) ;
     Kprime[1] = 0. ;
     
     
     //Honeycomb lattice maxima momentum on x and y directions definition
-    honeycomb_lattice_kmax[0] = dospi/sqrt(3.)/lattice_a0;
-    honeycomb_lattice_kmax[1] = dospi/3./lattice_a0;
+    honeycomb_lattice_kmax[0] = dospi/sqrt(3.)/(g->lattice_a0);
+    honeycomb_lattice_kmax[1] = dospi/3./(g->lattice_a0);
     
 
     ks00[0]= -1.7;
@@ -525,23 +543,17 @@ void solidstructure::bases_vectors()
 
 //######################################
 //New function
-void solidstructure::Set_Of_B_BGrad( double *kx, double *ky )
+void solidstructure::Set_Of_B_BGrad( double const *kx, double const *ky )
 {
     
-    b0res0  = 0.;
-    b1res0  = 0.;
-    b2res0  = 0.;
-    b3res0  = 0.;
+    b0res0  = 0.; b1res0  = 0.;
+    b2res0  = 0.; b3res0  = 0.;
     
-    xb0der0 = 0.;
-    xb1der0 = 0.;
-    xb2der0 = 0.;
-    xb3der0 = 0.;
+    xb0der0 = 0.; xb1der0 = 0.;
+    xb2der0 = 0.; xb3der0 = 0.;
     
-    yb0der0 = 0.;
-    yb1der0 = 0.;
-    yb2der0 = 0.;
-    yb3der0 = 0.;
+    yb0der0 = 0.; yb1der0 = 0.;
+    yb2der0 = 0.; yb3der0 = 0.;
     
     
     for ( n = 0; n < Nvects; n++ )
@@ -572,6 +584,7 @@ void solidstructure::Set_Of_B_BGrad( double *kx, double *ky )
     b3res0*= -2.0 * t2 * sin( phi0 );
     b3res0+= M0;
     
+
     
     bnorm = sqrt(
                   b1res0 * b1res0
@@ -593,38 +606,67 @@ void solidstructure::Set_Of_B_BGrad( double *kx, double *ky )
     yb3der0*= -2.*t2*sin( phi0 );
     
     
+    //Gauge validation
     if( gauge == 0 )
     {
+        
         gauge_b_set[0] = b1res0; gauge_b_set[1] = b2res0; gauge_b_set[2] = b3res0;
         gauge_b_set_grad[0][0] = xb1der0; gauge_b_set_grad[0][1] = xb2der0; gauge_b_set_grad[0][2]= xb3der0;
         gauge_b_set_grad[1][0] = yb1der0; gauge_b_set_grad[1][1] = yb2der0; gauge_b_set_grad[1][2]= yb3der0;
+        
     }
+    
     if( gauge == 1 )
     {
+        
         gauge_b_set[0] = b2res0; gauge_b_set[1] = b3res0; gauge_b_set[2] = b1res0;
         gauge_b_set_grad[0][0] = xb2der0; gauge_b_set_grad[0][1] = xb3der0; gauge_b_set_grad[0][2]= xb1der0;
         gauge_b_set_grad[1][0] = yb2der0; gauge_b_set_grad[1][1] = yb3der0; gauge_b_set_grad[1][2]= yb1der0;
+        
     }
+    
     if( gauge == 2 )
     {
+        
         gauge_b_set[0] = b3res0; gauge_b_set[1] = b1res0; gauge_b_set[2] = b2res0;
         gauge_b_set_grad[0][0] = xb3der0; gauge_b_set_grad[0][1] = xb1der0; gauge_b_set_grad[0][2]= xb2der0;
         gauge_b_set_grad[1][0] = yb3der0; gauge_b_set_grad[1][1] = yb1der0; gauge_b_set_grad[1][2]= yb2der0;
+        
     }
     
     
     
     //######################################
     //## Wavefunction normalization factor
-    //wave_norm  = sqrt( 2.*( bnorm * bnorm + bnorm * gauge_b_set[2] ) );
-    wave_norm = sqrt( 2.*( bnorm * bnorm + bnorm * gauge_b_set[2] ) ) +
-    myRegularization( kx, ky, &ks00[0], &ks00[1]  ) + myRegularization( kx, ky, &ks01[0], &ks01[1]  )
-    + myRegularization( kx, ky, &ks10[0], &ks10[1]  ) + myRegularization( kx, ky, &ks11[0], &ks11[1]  )
-    + myRegularization( kx, ky, &ks12[0], &ks12[1]  ) + myRegularization( kx, ky, &ks13[0], &ks13[1]  )
-    + myRegularization( kx, ky, &ks20[0], &ks20[1]  ) + myRegularization( kx, ky, &ks21[0], &ks21[1]  )
-    + myRegularization( kx, ky, &ks22[0], &ks22[1]  ) + myRegularization( kx, ky, &ks23[0], &ks23[1]  );
+    if ( rflag == 0 )
+    {
+        
+        wave_norm  = sqrt( 2.*( bnorm * bnorm +  bnorm * gauge_b_set[2] ) );
+        
+    }
     
+    if ( rflag==1 )
+    {
+        
+        wave_norm = 2./sqrt( 2. ) * ( bnorm + gauge_b_set[2]/2. - gauge_b_set[2] * gauge_b_set[2] / bnorm / 8. );
+        
+    }
     
+    if ( rflag == 2 )
+    {
+        
+        wave_norm  =      sqrt( 2.*( bnorm * bnorm + bnorm * gauge_b_set[2] ) ) +
+        myRegularization( kx, ky, &ks00[0], &ks00[1]  ) + myRegularization( kx, ky, &ks01[0], &ks01[1]  )
+        + myRegularization( kx, ky, &ks10[0], &ks10[1]  ) + myRegularization( kx, ky, &ks11[0], &ks11[1]  )
+        + myRegularization( kx, ky, &ks12[0], &ks12[1]  ) + myRegularization( kx, ky, &ks13[0], &ks13[1]  )
+        + myRegularization( kx, ky, &ks20[0], &ks20[1]  ) + myRegularization( kx, ky, &ks21[0], &ks21[1]  )
+        + myRegularization( kx, ky, &ks22[0], &ks22[1]  ) + myRegularization( kx, ky, &ks23[0], &ks23[1]  );
+        
+    }
+    
+
+    
+ 
 
     //############################
     //##Wave-functions
@@ -643,12 +685,26 @@ void solidstructure::Set_Of_B_BGrad( double *kx, double *ky )
     // Gradient on the  wavefunction normalization factor
     for (n = 0; n<Ngrad; n++)
     {
+        
+        
         grad_bnorm[n]  = (gauge_b_set_grad[n][0] * gauge_b_set[0] + gauge_b_set_grad[n][1]*gauge_b_set[1] + gauge_b_set_grad[n][2] * gauge_b_set[2] )/bnorm;
         
-        w_norm_grad[n] = ( grad_bnorm[n] * ( 2. * bnorm + gauge_b_set[2] ) + bnorm * gauge_b_set_grad[n][2] )/wave_norm;
         
-//        rw_norm_grad[n] = ( grad_bnorm[n] * ( 2. * bnorm + gauge_b_set[2] ) + bnorm * gauge_b_set_grad[n][2] )/rwave_norm;
-
+       
+        if ( rflag == 0 || rflag==2 )
+        {
+            
+            w_norm_grad[n] = ( grad_bnorm[n] * ( 2. * bnorm + gauge_b_set[2] ) + bnorm * gauge_b_set_grad[n][2] )/wave_norm;
+            
+        }
+        else
+        {
+            
+            w_norm_grad[n] = 2./sqrt( 2. ) * ( grad_bnorm[n] + gauge_b_set_grad[n][2]/2.
+                                          -  ( 2. *  bnorm * gauge_b_set[2] * gauge_b_set_grad[n][2]  - grad_bnorm[n] * gauge_b_set[2] * gauge_b_set[2] )/ bnorm/bnorm/8. );
+        }
+        
+        //*/
     }
     //###########################################################
 
@@ -671,27 +727,29 @@ void solidstructure::Set_Of_B_BGrad( double *kx, double *ky )
     
     
     
+    
+    //wavefunction norm, its square
     wave_norm2  = wave_norm * wave_norm;
     
     
     
     
-    //##########################
-    //## VALENCE BAND GRAD
+    //##################################
+    //## W.F. VALENCE BAND GRAD
     wv_grad0[0][0]  = ( -xtemp[0] +  I*xtemp[1]  )/wave_norm2;
-    wv_grad0[0][1]  = (  xtemp[2] -   xtemp[3]   )/wave_norm2;
+    wv_grad0[0][1]  = ( +xtemp[2] -   xtemp[3]   )/wave_norm2;
     
     wv_grad0[1][0]   = ( -ytemp[0] + I*ytemp[1]  )/wave_norm2;
-    wv_grad0[1][1]   = (  ytemp[2] -  ytemp[3]   )/wave_norm2;
+    wv_grad0[1][1]   = ( +ytemp[2] -  ytemp[3]   )/wave_norm2;
     
     
     
-    //##########################
-    //## CONDUCTION BAND GRAD
+    //#################################
+    //## W.F. CONDUCTION BAND GRAD
     wc_grad0[0][0] = (  xtemp[2] -   xtemp[3]  )/wave_norm2;
     wc_grad0[0][1] = (  xtemp[0] + I*xtemp[1]  )/wave_norm2;
     
-    wc_grad0[1][0] = (  ytemp[2]  - ytemp[3]  )/wave_norm2;
+    wc_grad0[1][0] = (  ytemp[2]  - ytemp[3]   )/wave_norm2;
     wc_grad0[1][1] = (  ytemp[0] + I*ytemp[1]  )/wave_norm2;
     
     
@@ -705,14 +763,15 @@ void solidstructure::Set_Of_B_BGrad( double *kx, double *ky )
     
     
     
-    //Connection difference Xig0 = Xi_c - Xi_v = 2*Xi_c
+    //Berry Connection difference: Xig0 = Xi_c - Xi_v = 2*Xi_c
     cdot( uwave_cond0, wc_grad0[0], Ngrad, &tempc[0] ) ;
     cdot( uwave_cond0, wc_grad0[1], Ngrad, &tempc[1] ) ;
     
     
+    //Connection Difference
+    chig0[0]    = 2.* real( I * tempc[0] ) ;
+    chig0[1]    = 2.* real( I * tempc[1] ) ;
     
-    chig0[0]    = 2. * real( I * tempc[0] ) ;
-    chig0[1]    = 2. * real( I * tempc[1] ) ;
     
     
     
@@ -722,23 +781,13 @@ void solidstructure::Set_Of_B_BGrad( double *kx, double *ky )
     cdot( uwave_cond0, wv_grad0[0], Ngrad, &tempc[0] );
     cdot( uwave_cond0, wv_grad0[1], Ngrad, &tempc[1] );
     
+    
     dip_cv0[0]  =  I*tempc[0];
     dip_cv0[1]  =  I*tempc[1];
     
+    
     zBcurva_c0 =  2. * imag( conj(dip_cv0[0])*dip_cv0[1] );
-//    dip_cv0[1]  = sqrt( complex(zBcurva_c0/2.,0.) );
-//    dip_cv0[0]  = -I*dip_cv0[1];
     
-    
-    
-    if (*ky < 0.)
-    {
-        chig0[0]*=-1.;
-        
-        dip_cv0[0] = conj(dip_cv0[0]);
-        dip_cv0[1] = complex(-real(dip_cv0[1]), imag(dip_cv0[1]));
-        
-    }//*/
     
     
 }
@@ -798,9 +847,11 @@ void solidstructure::dipoleCV( )
 //Cond. Band Berry Curvature: -((xGradtheta*yGradphi - xGradphi*yGradtheta)*Sin(theta))/2.
 void solidstructure::zBerryCurvaCV( )
 {
+    
 /*****************
  Before using this fungtion we should called:
  *******/
+    
     cdot(  wc_grad0[0] , wc_grad0[1], Ngrad, &curvatemp1 );
     cdot(  wc_grad0[1] , wc_grad0[0], Ngrad, &curvatemp2 );
     
@@ -830,28 +881,28 @@ void solidstructure::group_velCV( )
 
 //##########################
 //Anomalous velocity
-void solidstructure::anomalous_velCV( complex efield )
+void solidstructure::anomalous_velCV( complex const efield, double const zBerryCurvature )
 {
     
     
-    xanomalous_c0   =  -imag( efield ) * zBcurva_c0;
-    yanomalous_c0   =   real( efield ) * zBcurva_c0;
+    xanomalous_c0   =  -imag( efield ) * zBerryCurvature;
+    yanomalous_c0   =   real( efield ) * zBerryCurvature;
     
     
-    xanomalous_v0   =  -imag( efield ) * (-zBcurva_c0);
-    yanomalous_v0   =  +real( efield ) * (-zBcurva_c0);
+    xanomalous_v0   =  -imag( efield ) * (-zBerryCurvature);
+    yanomalous_v0   =  +real( efield ) * (-zBerryCurvature);
     
     
 }
 
 
 //###########################
-
 double solidstructure::ChernNumber( )
 {
     
     double chern0=0.;
-    
+    int ktemp=0;
+
     for ( l = 0; l < g->N[2]; l++ )
         for ( j = 0; j < g->N[1]; j++ )
         {
@@ -860,9 +911,8 @@ double solidstructure::ChernNumber( )
             {
             
                 Set_Of_B_BGrad( &g->k[0][i], &g->k[1][j] );
-                zBerryCurvaCV( );
                
-                chern0+=zBcurva_c0*g->dk[0]*g->dk[1]/4./pi;
+                chern0+=zBcurva_c0*g->weight[ g->index(&i,&j,&ktemp) ]*g->dk[0]*g->dk[1]/4./pi;
             
             }
         
