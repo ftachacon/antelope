@@ -28,41 +28,39 @@ N_MPI_TASKs=2   #No. of MPI task or cores for parallelization
 ### SOME INPUTs PARAMETERS
 ## Set of Haldane M. Parameters
 
-phi0=0.06       # Magnetic flux or phase of the complex 2nd hopping (rad.)
-Mt2=2.54 #1. #2.54        # Ratio of on-site potential and 2nd hopping
+phi0=0.4      # Magnetic flux or phase of the complex 2nd hopping (rad.)
+ellip=01 #+01           # Ellipticity
 
 
-gauge=2         # gauge parameter, can be 0, 1 and 2
+Mt2=2.54       # Ratio of on-site potential and 2nd hopping
+gauge=2        # gauge parameter, can be 0, 1 and 2
 
 
-rflag=0         # flag =0, No-reg.; flag=1, Taylor-Reg.; flag=2, Local-Gauss-Reg.
-eps=0.1         # Reg. parameter for a fixed gauge, i.e. gauge=1
-
+rflag=0        # flag =0, No-reg.; flag=1, Taylor-Reg.; flag=2, Local-Gauss-Reg.
+eps=0.1        # Reg. parameter for a fixed gauge, i.e. gauge=1
 
 gbox_ky_down=0.01          #Botton Boundary  (lower) ky-BZ point for gauge modification
 gbox_ky_up=0.70            #Upper  Boundary  (higher) ky-BZ point for gauge modification
 ky_shift_down=-0.35        #Lowest BZ ky shift in a.u.
 
 
-fbz_shift=1                #Controlling BZ shift. it has to be 1 for yes, 0 for none 
+fbz_shift=1               #Controlling BZ shift. it has to be 1 for yes, 0 for none
+diag=1                      #diagnostic
 
 
-
-diag=1  #diagnostic
-
-Nx=100 #140   #280 #250  #90   #170  #  #160  #90        # No. of points along kx
-Ny=58 #82#58   #162 #146  #52   #70  #52  #94  58 #          # No. of points along ky, ratio Nx/Ny=1.72
+Nx=203 #41   #101  #41   #201 #40#             # No. of points along kx
+Ny=233 #47   #117  #47   #233 #117#            # No. of points along ky, ratio Nx/Ny=1.72 or, dpending on box 1.16
 
 
 
 ###############################
 ## Some laser field inputs ##
 E0=0.0050           # Electric field strength (a.u.)
-Ncycles=5.          # No. of Opt. cycles
-ellip=1.            # Ellipticity
+Ncycles=10.         # No. of Opt. cycles
+#ellip=-1.0         # Ellipticity
 
-dt=0.75             # Time-Steps (a.u.)
-dephasing=880.  #1440. #220      # Dephasing (a.u.)
+dt=1.00             # Time-Steps (a.u.)
+dephasing=220.      #1440. #220      # Dephasing (a.u.)
 
 
 

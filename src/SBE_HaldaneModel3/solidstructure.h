@@ -153,7 +153,8 @@ public:
     complex dip_cv0[Ngrad];
     complex tempc[Ngrad];
     
-    complex *dipole_cv[Ngrad];
+    complex *dipole_cv[ Ngrad ];
+    complex velocity_cv0[ Ngrad ];
     
     double chi_c0[Ngrad];
     double chi_v0[Ngrad];
@@ -185,7 +186,7 @@ public:
          INPUTS, PROCESSES and OUTPUTS
         *******************************/
 
-    solidstructure(  momaxis *_g ,double *_a0, double *_dephasing );
+    solidstructure(  const momaxis *_g ,const double *_a0, const double *_dephasing );
     ~solidstructure( );
     void set_memory();
     
@@ -225,7 +226,7 @@ public:
     
     void anomalous_velCV( complex const efield, double const zBerryCurvature );
     
-    void cdot( complex *v1, complex *v2, int Nv, complex *res);
+    void cdot( const complex *v1, const complex *v2, const int Nv, complex *res);
     
     double ChernNumber( );
     
@@ -246,9 +247,9 @@ public:
 
 
 //######################################
-solidstructure::solidstructure(  momaxis *_g
-                                ,double *_a0
-                                ,double *_dephasing
+solidstructure::solidstructure(  const momaxis *_g
+                                ,const double *_a0
+                                ,const double *_dephasing
                                )
 {
     
@@ -267,14 +268,12 @@ solidstructure::solidstructure(  momaxis *_g
     
     //Momentum axis and grid
     g = new momaxis( _g->N, _g->kmaxs, &(_g->lattice_a0) );
-    g->integral_method( "Trapz" );
+    g->integral_method( _g->imethod );
     
 
     //Bravais vector-basis
-    bases_vectors();
-    set_memory();
-
-    
+    bases_vectors( );
+    set_memory( );
     
 }
 
@@ -287,7 +286,7 @@ solidstructure::~solidstructure( )
    
     
     delete g;
-    free(energy_gap);
+    free( energy_gap );
     
     
     for (n = 0; n < Ngrad; n++ )
@@ -328,15 +327,14 @@ void  solidstructure::haldane_model_params( double const *_t1
                                            ,int const _gauge )
 {
     
+    
     t1          = *_t1;
     t2          = *_t2;
     phi0        = *_phi0;
     M0          = *_M0;
     eps_phi0    = t1/10.;
     gauge       = _gauge;
-
     
-
     
 }
 
@@ -406,7 +404,7 @@ double solidstructure::max( double *v, int Nsize)
 
 	double max0 = v[0];
 	
-	for (n=1;n<Nsize;n++)   
+	for (int n=1;n<Nsize;n++)
 		if (v[n]>max0) max0=v[n];
 	
 	return max0;
@@ -595,7 +593,7 @@ void solidstructure::Set_Of_B_BGrad( double const *kx, double const *ky )
     
     xb0der0*= -2.*t2*cos( phi0 ) ;
     xb1der0*= -t1;
-    xb2der0*= t1;
+    xb2der0*= +t1;
     xb3der0*= -2.*t2*sin( phi0 );
     
     
@@ -606,7 +604,7 @@ void solidstructure::Set_Of_B_BGrad( double const *kx, double const *ky )
     yb3der0*= -2.*t2*sin( phi0 );
     
     
-    //Gauge validation
+    //Gauge choise
     if( gauge == 0 )
     {
         
@@ -645,7 +643,7 @@ void solidstructure::Set_Of_B_BGrad( double const *kx, double const *ky )
         
     }
     
-    if ( rflag==1 )
+    if ( rflag == 1 )
     {
         
         wave_norm = 2./sqrt( 2. ) * ( bnorm + gauge_b_set[2]/2. - gauge_b_set[2] * gauge_b_set[2] / bnorm / 8. );
@@ -784,6 +782,9 @@ void solidstructure::Set_Of_B_BGrad( double const *kx, double const *ky )
     
     dip_cv0[0]  =  I*tempc[0];
     dip_cv0[1]  =  I*tempc[1];
+    
+    velocity_cv0[0] = I*eg0*dip_cv0[0];
+    velocity_cv0[1] = I*eg0*dip_cv0[1];
     
     
     zBcurva_c0 =  2. * imag( conj(dip_cv0[0])*dip_cv0[1] );
@@ -924,11 +925,11 @@ double solidstructure::ChernNumber( )
 
 
 //##########################
-void solidstructure::cdot( complex *v1, complex *v2, int Nv, complex *res)
+void solidstructure::cdot( const complex *v1, const complex *v2, const int Nv, complex *res)
 {
     
     *res = 0.;
-    for ( n = 0; n<Nv; n++)
+    for ( int n = 0; n<Nv; n++)
         *res+= conj(v1[n])*v2[n];
     
 }

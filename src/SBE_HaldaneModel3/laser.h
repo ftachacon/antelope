@@ -503,23 +503,26 @@ void laser::Laser_Grid()
     a_ef1=0.;
     a_af1=0.;
     
-    width   = twidth[0];//
-    atmin   = -1.2*width;//
-    atmax   = +1.2*width;
+    /*width   = twidth[0];//
+    atmin   = -1.35*width;//
+    atmax   = +1.35*width;
     double tempMin=-width;
+    //*/
     
-    
-    /*width   = twidth[0]/( 2.*sqrt( 2.*log(2.) ) );
+    width   = twidth[0]/( 2.*sqrt( 2.*log(2.) ) );
     atmin   = -5.*width;
     atmax   = +5.*width;
     
-    double tempMin=atmin;//*/
+    double tempMin  = atmin;//*/
 
     a_ef1 = elaser(  &(tempMin) );
     a_af1 = avlaser( &(tempMin) );
     
     NewNt   = floor( (atmax - atmin)/dt );
-
+    
+    if ( NewNt%2 !=0 )
+        NewNt+=1;
+    
     
     
     cout << "\n\n*************************";
@@ -775,7 +778,7 @@ void laser::put_on_envelope()
 complex laser::elaser( double const *t )
 {
     
-    a_ef0=0.;
+    /*a_ef0=0.;
     ncycles2=cycles0[0]*2.;
     if ( abs( *t ) <= twidth[0] )
     {
@@ -787,7 +790,7 @@ complex laser::elaser( double const *t )
    
     return a_ef0;//*/
     
-    /*
+    
     return complex(
                     E0x[0]*(
                             
@@ -818,7 +821,7 @@ complex laser::elaser( double const *t )
 complex laser::avlaser( double const *t )
 {
     
-    
+   /*
     ncycles2=cycles0[0]*2.;
     
      a_af0=0.;
@@ -852,7 +855,7 @@ complex laser::avlaser( double const *t )
     
     
     
-    /*
+    
     return  complex(   E0x[0]*cos( (*t)* w0[0] - cep0[0] )
                      , E0y[0]*sin( (*t)* w0[0] - cep0[0] )
                      )*exp( -.5* ( *t )*( *t )/width/width )/w0[0] - a_af1;//*/

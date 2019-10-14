@@ -15,8 +15,9 @@ OWN_LIB=${MyPath}/include
 
 #ProgramMPI=hhg_kr2_hm_mpi.cpp
 #ProgramMPI=hhg_fdm_hm_mpi.cpp
-#ProgramMPI=hhg_kr4_hm_mpi_mod.cp
-ProgramMPI=hhg_kr5_hm_mpi_mod.cp
+#ProgramMPI=hhg_rk5_hm_mpi_mod.cp
+ProgramMPI=hhg_rk5_hm_mpi_full_vel.cpp  #hhg_rk2_hm_mpi_mod.cp  #hhg_kr5_hm_mpi_mod.cp
+#ProgramMPI=hhg_rk5_hm_mpi_full.cp
 
 Program0=hhg_kr4_hm.cpp
 exnamempi=exec_hhg_mpi
