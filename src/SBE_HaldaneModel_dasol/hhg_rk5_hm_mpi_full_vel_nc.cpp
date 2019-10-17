@@ -120,7 +120,7 @@ int main( int argc, char *argv[] )
     
     int diagnostic = atoi( argv[17] );
     ksfactor       = atoi( argv[18] );
-    int shotRate   = atoi( argv[19] );
+    int shotNumber   = atoi( argv[19] );
     
     //String Type of variables, envelope and integration rule
     string env_name     = "gauss";          //Name envel: "rect", "sin2", "gauss" or "rsin2"
@@ -699,7 +699,7 @@ int main( int argc, char *argv[] )
 
         fprintf(sparamout,"\n\n%s","#Params.,   BZ-shift-Switch,     ky-shift-0,       ky-shift-f,      BZ.-kxmax,      BZ.-kymax,      snapshot rate,     --- ");
         
-        fprintf(sparamout,"\n              %d          %e         %e        %e      %e      %d      %e      \n\n", fbz_shift, kyShift[0], kyShift[1], kmaxs0[0], kmaxs0[1], shotRate, 0. );
+        fprintf(sparamout,"\n              %d          %e         %e        %e      %e      %d      %e      \n\n", fbz_shift, kyShift[0], kyShift[1], kmaxs0[0], kmaxs0[1], shotNumber, 0. );
 
         
         fflush(sparamout );
@@ -889,7 +889,12 @@ int main( int argc, char *argv[] )
         }//End loop of evaluation of KR4 vars.
         //#####################################
 
-        if (shotRate > 0 && ktime%(int)floor((fpulse.NewNt)/shotRate) == 0 )
+        //################################################
+        // Plotting snapshots of conduction band density
+        // First and last time grid is included in shots, 
+        // and others are distributed uniformly as much as possible
+        if (shotNumber > 0 && (ktime%((fpulse.NewNt-1)/(shotNumber-1)) == min((fpulse.NewNt-1)%(shotNumber-1), ktime/((fpulse.NewNt-1)/(shotNumber-1))) 
+        || ktime == fpulse.NewNt-1))
         {
             if (rank == MASTER)
             {
@@ -1297,7 +1302,7 @@ int main( int argc, char *argv[] )
     }//END OF DIAGNOSTIC
     //###################################
 
-    if (shotRate > 0)    
+    if (shotNumber > 0)    
         MPI_Barrier( MPI_COMM_WORLD );
         
 }//End of Time integration loop

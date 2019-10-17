@@ -48,8 +48,8 @@ fbz_shift=1                 #Controlling BZ shift. it has to be 1 for yes, 0 for
 diag=1                      #diagnostic
 
 
-Nx=43 #210 #401   #201 #201 #40#             # No. of points along kx
-Ny=50 #240 #465   #233 #233 #117#            # No. of points along ky, ratio Nx/Ny=1.72 or, dpending on box 1.16
+Nx=250 #210 #401   #201 #201 #40#             # No. of points along kx
+Ny=260 #240 #465   #233 #233 #117#            # No. of points along ky, ratio Nx/Ny=1.72 or, dpending on box 1.16
 
 
 
@@ -63,7 +63,7 @@ dt=0.5             # Time-Steps (a.u.)
 dephasing=110.      #1440. #220      # Dephasing (a.u.)
 
 ksfactor=1
-shotRate=10
+shotNumber=100
 
 
 ###################################
@@ -97,7 +97,7 @@ cd ./${dirname}
 
 date
 ls -lh exe*
-time -p mpirun -n ${N_MPI_TASKs} exec_hhg_mpi ${phi0}  ${Mt2}  ${Nx}  ${Ny}  ${E0}  ${Ncycles}  ${dt}  ${dephasing} ${ellip} ${eps} ${gauge} ${rflag} ${gbox_ky_down} ${gbox_ky_up} ${fbz_shift} ${ky_shift_down} ${diag} ${ksfactor} ${shotRate}
+time -p mpirun -n ${N_MPI_TASKs} exec_hhg_mpi ${phi0}  ${Mt2}  ${Nx}  ${Ny}  ${E0}  ${Ncycles}  ${dt}  ${dephasing} ${ellip} ${eps} ${gauge} ${rflag} ${gbox_ky_down} ${gbox_ky_up} ${fbz_shift} ${ky_shift_down} ${diag} ${ksfactor} ${shotNumber}
 
 date 
 
@@ -118,7 +118,7 @@ date
 
 
 ##removing temporary files
-rm full_*
+#rm full_*
 
 
 ###################################
