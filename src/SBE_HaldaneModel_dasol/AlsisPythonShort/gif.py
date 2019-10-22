@@ -1,6 +1,6 @@
 ## Creating gif using imageio
-```python
-#gif.py 
+# using as
+# python gif.py duration filenames
 import sys
 import datetime
 import imageio

@@ -248,7 +248,7 @@ int main( int argc, char *argv[] )
     double offset       = 8.*period0;
     double outset       = 8.*period0;
     double ellipticity  = ellip;
-    double relativephase= 0.;
+    double relativephase= pi/2;//0.;
     double ltheta0      = 0.;               //Inclination angle
     
     
@@ -377,7 +377,7 @@ int main( int argc, char *argv[] )
     FILE *dipout, *conout, *curvaout, *gvelout;
     FILE *inh_out, *occup_out, *sparamout;
     FILE *simulation_out;
-    FILE *density_out, *densitytime_out;
+    FILE *density_out, *densitytime_out, *polarization_out;
     FILE *intraj_out, *interj_out;
     
     
@@ -387,24 +387,25 @@ int main( int argc, char *argv[] )
     {
         
         
-        laserout        = fopen( "outlaserdata.dat","w" ); // Laser field characteristics,time axis,
-        mout            = fopen( "mgrid.dat","w" );
+        laserout         = fopen( "outlaserdata.dat","w" ); // Laser field characteristics,time axis,
+        mout             = fopen( "mgrid.dat","w" );
         
-        engout          = fopen( "edispersion.dat","w" );
-        dipout          = fopen( "dipoles.dat","w" );
+        engout           = fopen( "edispersion.dat","w" );
+        dipout           = fopen( "dipoles.dat","w" );
         
-        conout          = fopen( "connection.dat","w" );
-        curvaout        = fopen( "curvature.dat","w" );
+        conout           = fopen( "connection.dat","w" );
+        curvaout         = fopen( "curvature.dat","w" );
         
-        gvelout         = fopen( "gvelocities.dat","w" );
-        sparamout       = fopen( "setOfparameters.dat", "w" );
+        gvelout          = fopen( "gvelocities.dat","w" );
+        sparamout        = fopen( "setOfparameters.dat", "w" );
         
-        density_out     = fopen( "density.dat", "wb");
-        densitytime_out = fopen( "densityTimestamp.dat", "w");
+        density_out      = fopen( "density.dat", "wb");
+        polarization_out = fopen( "polarization.dat", "wb");
+        densitytime_out  = fopen( "densityTimestamp.dat", "w");
 
-        interj_out      = fopen( "interband_dipole_full_evol.dat", "w");
-        intraj_out      = fopen( "intraband_current_full_evol.dat", "w");
-        occup_out       = fopen( "occupation__full__evol.dat", "w");
+        interj_out       = fopen( "interband_dipole_full_evol.dat", "w");
+        intraj_out       = fopen( "intraband_current_full_evol.dat", "w");
+        occup_out        = fopen( "occupation__full__evol.dat", "w");
         
     }
     
@@ -899,15 +900,18 @@ int main( int argc, char *argv[] )
             if (rank == MASTER)
             {
                 MPI_Gatherv(MPI_IN_PLACE, blockcounts[rank], MPI_DOUBLE, rkutta_nc, blockcounts, displs, MPI_DOUBLE, MASTER, MPI_COMM_WORLD);
+                MPI_Gatherv(MPI_IN_PLACE, blockcounts[rank], MPI_DOUBLE_COMPLEX, rkutta_pi, blockcounts, displs, MPI_DOUBLE_COMPLEX, MASTER, MPI_COMM_WORLD);
             }
             else
             {
                 MPI_Gatherv(&rkutta_nc[displs[rank]], blockcounts[rank], MPI_DOUBLE, rkutta_nc, blockcounts, displs, MPI_DOUBLE, MASTER, MPI_COMM_WORLD);
+                MPI_Gatherv(&rkutta_pi[displs[rank]], blockcounts[rank], MPI_DOUBLE_COMPLEX, rkutta_pi, blockcounts, displs, MPI_DOUBLE_COMPLEX, MASTER, MPI_COMM_WORLD);
             }
             if (rank == MASTER)
             {
                 fwrite(rkutta_nc, sizeof(double), NTotal, density_out);
-                fprintf(densitytime_out, "%d    %e    %e    %e\n", ktime, t5[0], fpulse.elaser(&t5[0]), fpulse.avlaser(&t5[0]));
+                fwrite(rkutta_pi, sizeof(complex), NTotal, polarization_out);
+                fprintf(densitytime_out, "%d    %e    %e    %e\n", ktime, t5[0], real(fpulse.elaser(&t5[0])), real(fpulse.avlaser(&t5[0])));
             }
         }
         
@@ -1445,6 +1449,7 @@ int main( int argc, char *argv[] )
         fclose( curvaout );
         fclose( gvelout );
         fclose( density_out );
+        fclose( polarization_out );
         fclose( densitytime_out );
         fclose( interj_out );
         fclose( intraj_out );

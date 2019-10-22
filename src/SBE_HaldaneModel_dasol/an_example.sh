@@ -57,12 +57,12 @@ Ny=260 #240 #465   #233 #233 #117#            # No. of points along ky, ratio Nx
 ## Some laser field inputs ##
 E0=0.0019           # Electric field strength (a.u.)
 Ncycles=4         # No. of Opt. cycles
-#ellip=-1.0         # Ellipticity
+ellip=1.0         # Ellipticity
 
 dt=0.5             # Time-Steps (a.u.)
 dephasing=110.      #1440. #220      # Dephasing (a.u.)
 
-ksfactor=1
+ksfactor=2
 shotNumber=100
 
 
