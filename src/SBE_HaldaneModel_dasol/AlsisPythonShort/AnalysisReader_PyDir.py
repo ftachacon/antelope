@@ -61,7 +61,6 @@ FileParameters 		= '/setOfparameters.dat';
 set_DataName 	        = '/SetData0';
 
 
-
 #####################################################
 FigureDir 	        = '/' + mparam + 'Figure';
 IntraInterPath 	        = ProjPath  + FileNameIntraInter;
@@ -85,13 +84,14 @@ except OSError as exc:
         raise exc;
     pass
 
+
+#########################
 # LOADING DATA # 
 InterC 	        = np.loadtxt( IntraInterPath );
 IntraC          = np.loadtxt( IntraInterPath1 );
 Laser 	        = np.loadtxt( LaserPath );
-Params 		= np.loadtxt( ParamPath );
+Params 		    = np.loadtxt( ParamPath );
 
-print("Params = \n" , Params);
 
 
 #####################################################
@@ -103,12 +103,35 @@ t2          = Params[1,6] ;
 M0t2        = M0/t2;
 ChernNo     = Params[2,4] ;
 Eg          = Params[2,2]; 
+ellip       = Params[3,1];
 
+if abs(ChernNo) < 1.e-4:
+    ChernNo=0.;
 
 
 #####################################################
-print( "\nEg= ", Eg, " Chern No.= ", ChernNo, "; Phi= ", Phi0 );
-print('\n............');
+print"\n\n+++++++++++++++++++++++++++++\nHALDANE M. STRUCTUTRE INFO.:"
+print"Eg        = ", Eg, " a.u."   ;
+print"Chern No. = ", ChernNo      ;
+print"phi0      = ", Phi0, " rad." ;
+print"M0        = ", M0    ;
+print"t1        = ", t1    ;
+print"t2        = ", t2    ;
+print"M0/t2     = ", M0t2  ;
+
+
+print"\n\n+=+++++++++++++++++++++++++=+\nLaser features:" ;
+print"E0        = ", Params[0,0], " a.u." ;
+print"I0        = ", Params[0,1], " W/cm^2" ;
+print"w0        = ", Params[0,2], " a.u." ;
+print"N.O.C.    = ", Params[0,3], " " ;
+print"Ellip     = ", ellip, " " ;
+
+
+print"\n\n\n+++++++++++++++++++++++++++++"
+print"Time-step dt             = ", Params[0,6], " a.u. " ;
+print"Total No. of time-steps  = ", int(Params[0,5]), " " ;
+print'+=+++++++++++++++++++++++=+\n\n';
 #####################################################
 
 
@@ -123,9 +146,8 @@ w0		= Params[0,2];
 T0		= 2.*np.pi/w0;
 
 
-
-print( "period: ", T0, " a.u.")
-print( "mean-freq: ", w0, " a.u.")
+print "Period, T0  = ", T0, " a.u.";
+print "Mean-freq   = ", w0, " a.u.";
 
 
 #####################################################
@@ -133,26 +155,27 @@ print( "mean-freq: ", w0, " a.u.")
 E0          = np.sqrt( Params[0,1]/3.5e16);
 
 
+
+
 #####################################################
 #Time axis and electric field 
-t		= Laser[:,0];
-Efield		= Laser[:,1];
+t		    = Laser[:,0];
+Efield      = Laser[:,1];
 
-Nt          	= len(t)
-dt 	        = t[1]-t[0]; 
+Nt          = len(t)
+dt 	        = Params[0,6]#t[1]-t[0];
 
 
-print( "dt: ", dt, " a.u." );
-print( "Ntime: ", Nt );
+print "dt          =  ", dt, " a.u." ;
+print "Ntime       =  ", Nt ;
 
 
 #####################################################
 #Frequency axis 
 wmax 	    	= np.pi/dt;
-dw		= 2.*wmax/float(Nt);
+dw		        = 2.*wmax/float(Nt);
 wmin  	    	= -wmax;
 wmax 	    	= +wmax;
-w		= np.arange( wmin, wmax-dw, dw );
 w           	= np.linspace( wmin, wmax-dw, num = Nt )
 
 
@@ -160,18 +183,15 @@ w           	= np.linspace( wmin, wmax-dw, num = Nt )
 
 #####################################################
 if (Nt != len(w)):
-    print ("\n Ntime have to be equal to length (w)\n")
+    print "\nsNtime have to be equal to length (w)\n"
     exit()
 #####################################################
 
 
-
-
-print( "Lengths of omega axis, Nomega: ", w.shape)
-print( "dw= ", dw )
-print( '\nwmax={0:.2f}'.format(wmax) );
-
-
+print "\nNomega-Shape   = ", w.shape
+print "dw             = ", dw
+print 'wmax           = {0:.2f}'.format(wmax) ;
+print '+=++++++++++++++++++++++++=+\n'; 
 
 
 #####################################################
@@ -199,8 +219,8 @@ plt.savefig( fileNamePicture ) ;
 
 
 #####################################################
-print( "\nlen of interC: ", InterC.shape)
-print('\n---')
+print "\n\nLen of interC = ", InterC.shape
+
 
 
 
@@ -208,10 +228,10 @@ print('\n---')
 #####################################################
 #Momentum Integration for the "remains" of MPI code
 xinterC 	= InterC[:,0] - InterC[0,0];
-yinterC     	= InterC[:,1] - InterC[0,1];
+yinterC     = InterC[:,1] - InterC[0,1];
 
 xJintra  	= IntraC[:,0] - IntraC[0,0];
-yJintra     	= IntraC[:,1] - IntraC[0,1];
+yJintra     = IntraC[:,1] - IntraC[0,1];
 
 
 
@@ -281,18 +301,18 @@ hight = width/1.62
 #############################################################
 ## Computing harmonic spectra, inter and intra contribution
 i 	= cmath.sqrt(-1)#complex(0,1);
-print( "\ncomplex number: ", i )
+print "complex number, imag. base = ", i
 
 
 #############################################################
 #filtering dipole and current oscillations by means of 
 #applying a smoth time mask over the beginning and end of pulses, this will avoid 
 #high esporeous frequencies...
-ta 	    = t[0]  + T0*2.0;#T0*3.0;
-tb 	    = t[-1] - T0*2.0;#T0*3.0;
+ta 	    = t[0]  + T0*6.0;#T0*3.0;
+tb 	    = t[-1] - T0*6.0;#T0*3.0;
 
-asigma  = T0*0.75
-bsigma  = T0*0.75
+asigma  = T0*2
+bsigma  = T0*2
 
 
 xJinterMasked = masking_dipole(t, xJinter, ta, tb, asigma, bsigma);
@@ -300,15 +320,15 @@ yJinterMasked = masking_dipole(t, yJinter, ta, tb, asigma, bsigma);
 
 
 
-#ta     = t[0]  + T0*5.0;
-#tb     = t[-1] - T0*5.0;
+ta     = t[0]  + T0*6.00500;
+tb     = t[-1] - T0*6.00500;
 
 
-#asigma  = T0*1.50;
-#bsigma  = T0*1.50;
+asigma  = T0*2.;
+bsigma  = T0*2.;
 
-xJintraMasked = 1.*masking_dipole(t, xJintra, ta, tb, asigma, bsigma);
-yJintraMasked = 1.*masking_dipole(t, yJintra, ta, tb, asigma, bsigma);
+xJintraMasked = masking_dipole(t, xJintra, ta, tb, asigma, bsigma);
+yJintraMasked = masking_dipole(t, yJintra, ta, tb, asigma, bsigma);
 
 
 
@@ -392,30 +412,39 @@ yFFT_Jinter      = -np.fft.fftshift( yFFT_Jinter )*(1j)*w;
 xFFT_Jintra  	 = -np.fft.fftshift( xFFT_Jintra )*(1j)*w;
 yFFT_Jintra  	 = -np.fft.fftshift( yFFT_Jintra )*(1j)*w;
 
-xFullRadiation 	 = 1.*xFFT_Jinter   +  1.*xFFT_Jintra;
-yFullRadiation   = 1.*yFFT_Jinter   +  1.*yFFT_Jintra;
+xFullRadiation 	 = xFFT_Jinter   +  xFFT_Jintra;
+yFullRadiation   = yFFT_Jinter   +  yFFT_Jintra;
+
+dJ_p            = xFullRadiation - (1j)*yFullRadiation
+dJ_m            = xFullRadiation + (1j)*yFullRadiation
 
 
 ############################
 ############################
-hzero           = 9e-18
-xSinter 	    = np.log10( abs( xFFT_Jinter)**2 + hzero );
-ySinter 	    = np.log10( abs( yFFT_Jinter)**2 + hzero );
+hzero           = .98e-25;
 
-xSintra         = np.log10( abs( xFFT_Jintra)**2 + hzero );
-ySintra         = np.log10( abs( yFFT_Jintra)**2 + hzero );
+xSinter         = np.log10( abs( xFFT_Jinter )**2 + hzero );
+ySinter         = np.log10( abs( yFFT_Jinter )**2 + hzero );
+Sinter          = np.log10( abs( xFFT_Jinter )**2 + abs( yFFT_Jinter )**2 + hzero );
+
+
+xSintra         = np.log10( abs( xFFT_Jintra )**2 + hzero );
+ySintra         = np.log10( abs( yFFT_Jintra )**2 + hzero );
+Sintra 	        = np.log10( abs( xFFT_Jintra )**2 + abs( yFFT_Jintra )**2 + hzero);
+
 
 xSpectrum 	    = np.log10( abs( xFullRadiation )**2 + hzero );
 ySpectrum       = np.log10( abs( yFullRadiation )**2 + hzero );
 Spectrum        = np.log10( abs( xFullRadiation )**2 + abs( yFullRadiation )**2 + hzero );
 
+
+a_dJ_p          = np.log10( abs( dJ_p )**2 + hzero );
+a_dJ_m          = np.log10( abs( dJ_m )**2 + hzero );
 #####################################################
 
 
-
-
-print( "Spectra shape= ",  xSinter.shape )
-print( ";     frequency axis shape= ", w.shape )
+print "\n\n+=+++++++++++++++++++++=+\nSpectra shape       = ",  xSinter.shape
+print "Frequency axis shape = ", w.shape, "\n"
 
 
 w.shape             = (Nt,1)
@@ -423,30 +452,60 @@ xSpectrum.shape     = (Nt,1)
 ySpectrum.shape     = (Nt,1)
 Spectrum.shape      = (Nt,1)
 
-OutputData      = w/w0  #[]#np.array([Nt])
-OutputData      = np.concatenate((OutputData,xSpectrum),axis=1 );
-OutputData      = np.concatenate((OutputData,ySpectrum),axis=1 );
-OutputData      = np.concatenate( (OutputData,Spectrum),axis=1 );
+xFullRadiation.shape = (Nt,1);
+yFullRadiation.shape = (Nt,1);
 
 
 
-ofname          = "/HHG__CNo" + str("%.1f"%ChernNo) +"__E0index__" +str("%.4d"%iparam) + "__.dat"
+Nthalf          = int(np.floor(Nt/2));
+temp0           = np.array([Nthalf]);
+temp0.shape     = (1,1)
+w_output        = np.concatenate( ( temp0, w[Nthalf:Nt-1]/w0 ),axis=0 );
+
+
+temp0           = np.array([Phi0]);
+temp0.shape     = (1,1)
+real_jxoutput   = np.concatenate( ( temp0, np.real(xFullRadiation[Nthalf:Nt-1]) ),axis=0 );
+
+
+temp0           = np.array([M0t2]);
+temp0.shape     = (1,1)
+imag_jxoutput    = np.concatenate( ( temp0, np.imag(xFullRadiation[Nthalf:Nt-1]) ),axis=0 );
+
+
+
+temp0           = np.array([ChernNo]);
+temp0.shape     = (1,1)
+real_jyoutput   = np.concatenate( ( temp0, np.real( yFullRadiation[Nthalf:Nt-1]) ),axis=0 );
+
+
+temp0           = np.array([Eg]);
+temp0.shape     = (1,1)
+imag_jyoutput   = np.concatenate( ( temp0, np.imag( yFullRadiation[Nthalf:Nt-1] ) ),axis=0 );
+
+
+temp0           = np.array([dt]);
+temp0.shape     = (1,1)
+spectrum_output = np.concatenate( ( temp0, pow( 10., Spectrum[Nthalf:Nt-1] ) ),axis=0 );
+
+
+OutputData      = w_output;
+OutputData      = np.concatenate( (OutputData, real_jxoutput   ), axis=1 );
+OutputData      = np.concatenate( (OutputData, imag_jxoutput   ), axis=1 );
+OutputData      = np.concatenate( (OutputData, real_jyoutput   ), axis=1 );
+OutputData      = np.concatenate( (OutputData, imag_jyoutput   ), axis=1 );
+OutputData      = np.concatenate( (OutputData, spectrum_output ), axis=1 );
+
+
+
+ofname          = "/HHG__Phi0__" + str("%.3f"%Phi0) + "__M0t2__" + str("%.3f"%M0t2) + "__e0__" + str("%.3f"%ellip) + "__.dat"
 
 out                = ProjPath + ofname
-
-np.savetxt(out, OutputData , fmt='%1.10e')
-
-#outfile            = open( out, 'w' );
-#for i in range(0,len(OutputData)):
-#    outfile.write( str("%.12e"%OutputData[i,:])+"\n" );
-#outfile.close()
-
+np.savetxt(out, OutputData , fmt='%1.16e')
 
 
 NewDir = "./SetData0" + ofname
 shutil.copyfile( out, NewDir );
-
-
 
 
 #####################################################
@@ -460,15 +519,14 @@ fig = plt.figure(figsize=(width,hight) )
 ax1 = fig.add_axes([0.2, 0.15, 0.75, 0.75])
 
 
-p1, = plt.plot( w/w0, xSpectrum, 'r-', lw = 2., label='$J_{x}$' );
-p2, = plt.plot( w/w0, ySpectrum, 'b',  lw = 1.5, label='$J_{y}$' );
-p3, = plt.plot( w/w0, Spectrum, 'g',  lw = 1.2, label='$J_{t}$' );
+p11, = plt.plot( w[Nthalf:Nt-1]/w0, Sinter[Nthalf:Nt-1], 'b',  lw = 1.2, label='$J_{er}$' );
+p22, = plt.plot( w[Nthalf:Nt-1]/w0, Sintra[Nthalf:Nt-1], 'r',  lw = 1.2, label='$J_{ra}$' );
 
-plt.legend([p1, p2], ['$J_{x}$', '$J_{y}$'],fontsize=18);
+plt.legend([p11, p22], [ '$J_{er}$', '$J_{ra}$'],fontsize=18);
 
 
-xp = 1.3
-yp = -1.1
+xp  = 1.3
+yp  = -1.1
 
 
 plt.xlabel(r'$\rm Harmonic-Order$', fontsize=30 );
@@ -484,7 +542,7 @@ plt.ylim(xaxmin, xaxmax);
 xticks0  = np.arange(1,50,4);
 plt.xticks( xticks0 );
 
-yticks0  = [-20., -15, -10.0, -5, 0, 5 ]#10., 15, 5.0];
+yticks0  = [-25., -20., -15, -10., -5., 0., 5.]#10., 15, 5.0];
 plt.yticks( yticks0 );
 
 
@@ -496,14 +554,15 @@ if (mparam=='y'):
 plt.grid(True)
 
 
-xaxmin      = 0;    # controling harmonic-order axis limits, down
-xaxmax      = 37;   # controling harmonic-order axis limits, u
+xaxmin      = 0.0;  # controling harmonic-order axis limits, down
+xaxmax      = 43.; # controling harmonic-order axis limits, u
 
 
-plt.xlim(xaxmin, xaxmax);
-plt.ylim( np.log10(hzero),1 )
+plt.xlim( xaxmin, xaxmax );
+plt.ylim( np.log10(hzero), 1.5 );
 
-fname='/'+str(mparam)+'PaperHarmonicSpectrumCNo'+ str("%.1f"%ChernNo) + 'M_' + str("%.2f"%M0) + 'Phi_' + str("%.2f"%Phi0) + '.pdf'
+
+fname='/'+str(mparam)+'InterIntraHarmonicSpectrumCNo'+ str("%.2f"%ChernNo) + "__Phi0__" + str("%.3f"%Phi0) + "__M0t2__" + str("%.3f"%M0t2) + "__e0__" + str("%.3f"%ellip) + '.pdf'
 
 
 filename1           = FigureDir + fname;
@@ -515,7 +574,76 @@ shutil.copyfile( fileNamePicture, BasicPath + set_DataName + fname );
 
 
 
-print( 'Eg = ',Eg, 'M0 = ',M0, ' phi0 = ', Phi0, 'C = ',ChernNo, 'mparam =', mparam, '-direction')
+
+
+#####################################################
+############################
+#Ploting the harmonic current radiations-oscillations
+width = 11
+hight = width/1.62
+
+
+fig  = plt.figure(figsize=(width,hight) )
+ax1  = fig.add_axes([0.2, 0.15, 0.75, 0.75])
+p1,  = plt.plot( w[Nthalf:Nt-1]/w0, a_dJ_p[Nthalf:Nt-1], 'r-', lw = 2., label='$J_{x}$' );
+p2,  = plt.plot( w[Nthalf:Nt-1]/w0, a_dJ_m[Nthalf:Nt-1], 'b',  lw = 1.5, label='$J_{y}$' );
+p3,  = plt.plot( w[Nthalf:Nt-1]/w0, Spectrum[Nthalf:Nt-1], 'g',  lw = 1.2, label='$J_{t}$' );
+
+plt.legend([p1, p2,p3], ['$J_{+}$', '$J_{-}$', '$J_{tot}\,\,\phi_0 = $ ' + str("%.2f"%Phi0) ],fontsize=18);
+
+
+xp = 1.3
+yp = -1.1
+
+
+plt.xlabel(r'$\rm Harmonic-Order$', fontsize=30 );
+plt.ylabel(r'$\rm Log_{10}(I_{HHG})$', fontsize=30 );
+plt.tick_params(labelsize = 28 );
+
+
+xaxmin      = np.log10(hzero);      # controling harmonic-order
+xaxmax      = +5;                   # controling harmonic-order
+
+plt.ylim( xaxmin, xaxmax );
+
+
+xticks0  = np.arange(1,50,4);
+plt.xticks( xticks0 );
+
+yticks0  = [-25.,-20., -15., -10., -5., 0., 5. ]#10., 15, 5.0];
+plt.yticks( yticks0 );
+
+
+if (mparam=='x'):
+    plt.ylim([-12, .2]);
+if (mparam=='y'):
+    plt.ylim([-10, .2]);
+
+
+plt.grid(True)
+
+
+xaxmin      = 0;    # controling harmonic-order axis limits, down
+xaxmax      = 43;   # controling harmonic-order axis limits, u
+
+
+plt.xlim(xaxmin, xaxmax);
+plt.ylim( np.log10(hzero),1.5 )
+
+fname='/'+str(mparam)+'PaperHarmonicSpectrumCNo'+ str("%.2f"%ChernNo) + "__Phi0__" + str("%.3f"%Phi0) + "__M0t2__" + str("%.3f"%M0t2) + "__e0__" + str("%.3f"%ellip) + '.pdf'
+
+
+filename1           = FigureDir + fname;
+fileNamePicture     = ProjPath  + filename1; 
+
+
+plt.savefig(fileNamePicture, dpi = 300);
+shutil.copyfile( fileNamePicture, BasicPath + set_DataName + fname );
+
+print '\n\n+=+++++++++++++++++=+'
+print 'Eg         = ',Eg, '\nM0        = ',M0, '\nphi0      = ', Phi0, '\nC         = ',ChernNo, '\nmparam    =', mparam, '-direction'
+print '+=+++++++++++++++++=+\n\n'
+
 
 plt.show();
 #####################################################
