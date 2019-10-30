@@ -43,7 +43,8 @@ public:
 
 
 	double cep0;		                    //Carrier envelope phase per pulse
-	double phi_rel;		                    //Relative phase between Ex and Ey components of the electric field of the laser pulse
+	double phi_x;		                    //Additional phase in the x-direction given by elliptical polarization 
+    double phi_y;                           //Additional phase in the y-direction given by elliptical polarization 
 
     double twidth;		                    //Time bandwidth per pulse
     double t0;                              // Mid-time of pulses
@@ -52,18 +53,18 @@ public:
 	Envelope envelope = ENVELOPE_GAUSSIAN;	//Envelope type used
 
     // Essential initial values - I0, e, w0, cycles0, cep0, phi_rel, t0, theta0
-    void Initialize(double _I0, double _e, double _w0, int _ncycle, double _cep, double _phi_rel, double _t0, double _theta0)
+    void Initialize(double _E0, double _e, double _w0, int _ncycle, double _cep,  double _t0, double _theta0)
     {
-        I0 = _I0;   e = _e; w0 = _w0;   cycles0 = _ncycle;  cep0 = _cep;    phi_rel = _phi_rel; t0 = _t0;   theta0 = _theta0;
+        E0 = _E0;   e = _e; w0 = _w0;   cycles0 = _ncycle;  cep0 = _cep;  t0 = _t0;   theta0 = _theta0;
     }
     void PreProcessing()
     {
         
-        E0 = sqrt( I0/3.5e16 );
-        
+        I0 = E0*E0 * 3.5e16;
+
         period0    =  dospi/w0; // laser period or cycle
         
-        twidth = cycles0*period0; // laser time duration
+        // laser time duration
         switch (envelope)
         {
         case ENVELOPE_SIN2:
@@ -75,32 +76,35 @@ public:
             break;
         }
         
-		double factor              =  1.0/( 1.0 + e*e ); // ellipticity factor
-        
-        //The ellipticity is defined by e = E0y/E0x.
-        //That ellipticity param can vary between -1 and +1
+        // The ellipticity is defined by e = b/a. and -1 <= e <= 1
+        // theta0 is degree between major axis and x-axis
+        // If there is no additional phase, E(t=t0) = {E0 cos(theta0), E0 sin(theta0)}
+        // i.e. additional phase is adjusted to electric field is at major axis at t=t0
+        // Also note that theta0 and pi-theta0 represents same major axis, but phase of electric field is changed
+        // i.e. E(theta0 = pi-at0) = -E(theta0 = at0)
+        // If e = 0, the laser is circularly polarized independent of value of theta0
+        // however, theta0 give additional CEP. additional CEP = theta0 in this case
+        // e < 0 --> right helicity, e > 0 --> lefet helicity, e = 0 --> linear polarization
+
+        // Note that here we assume that laser filed is propagating in +z direction
+        // i.e. E is proportional to cos(kz - wt + phase), so cos(wt - phase) is used in code.
+
         // For e= 0 and phi_rel = 0, the laser is linearly polarized along x-direction
         // For e= 0 and phi_rel = 0, and theta != 0 (different to zero), the laser is linearly
         //polarized along a stringht line with theta angle with respect to positive x-direction
         // For e= 1 and phi_rel = pi/2., the laser is circularly polarized
         // Between e = (0, 1) and phi_rel = pi/2., the laser is ellipticaly polarized with major axis along x
         
-        //Condition for linear or elliptical polarized laser field
-        // Note - only linear and circular is available now, fix it later
-        if (e == 0 )
-        {
-            phi_rel = 0.;
+        // not fully tested yet!
 
-            E0x        =  E0*cos( theta0 );
-            
-            E0y        =  E0*sin( theta0 );
-        }
-        else
-        {
-            E0x        =  sqrt( factor )*E0;
-            
-            E0y        =  e*sqrt( factor )*E0;
-        }
+        double temp_a = 1.0 / sqrt(1.0 + e*e) * E0;
+        double temp_b = temp_a * e;
+
+        E0x = sqrt(pow(temp_a*cos(theta0), 2) + pow(temp_b*sin(theta0), 2));
+        E0y = sqrt(pow(temp_a*sin(theta0), 2) + pow(temp_b*cos(theta0), 2));
+
+        phi_x = atan2(-temp_b*sin(theta0), temp_a*cos(theta0));
+        phi_y = atan2( temp_b*cos(theta0), temp_a*sin(theta0));
     };
 };
 
@@ -165,7 +169,9 @@ public:
 	/*==========================*/
 	/*      MAIN FUNCTIONS
 	/*==========================*/
-	laser(int _Npulses);      							                                // Creator Object
+    laser(){};
+    laser(int _Npulses);
+	void init_laser(int _Npulses);      							                                // Creator Object
 	//~laser();														//Destructor
 	//void laser_pulses(double _dt, double _t01, double _blaser, double _alaser);	        // LASER PULSES TRAIN
     void laser_pulses(double _dt, double _blaser, double _alaser);	        // LASER PULSES TRAIN
@@ -222,6 +228,10 @@ public:
 		/*=== OBJECT'S LASER CONSTRUCTOR  ===*/
 laser::laser(int _Npulses)
 {
+    init_laser(_Npulses);
+}
+void laser::init_laser(int _Npulses)
+{
     Npulses = _Npulses;
 
     clock0.resize( Npulses, 0.0 );
@@ -234,14 +244,14 @@ laser::laser(int _Npulses)
     
     PulseParam.resize(Npulses);
     
-    ef  = new timeobject[Npulses];			// reserve memory
-    env = new timeobject[Npulses];			// reserve memory
-    av  = new timeobject[Npulses];
+    //ef  = new timeobject[Npulses];			// reserve memory
+    //env = new timeobject[Npulses];			// reserve memory
+    //av  = new timeobject[Npulses];
     
     
     
-    av_int    = new timeobject[Npulses];		// reserve memory
-    avsq_int  = new timeobject[Npulses];		// reserve memory	  	  
+    //av_int    = new timeobject[Npulses];		// reserve memory
+    //avsq_int  = new timeobject[Npulses];		// reserve memory	  	  
     
     a_ef0 = 0.;
     a_af0 = 0.;
@@ -453,7 +463,7 @@ void laser::Laser_Grid()
     double timelength       = major0 + alaser - axisinitialtime;
     
     
-	Nmaxt = ceil(  timelength /dt );
+	/*Nmaxt = ceil(  timelength /dt );
     
 	if ( Nmaxt%2!=0 )
 		Nmaxt = Nmaxt+1;
@@ -483,7 +493,7 @@ void laser::Laser_Grid()
 		
         av[kfield].put_on_grid(g);
         
-	}
+	}*/
 
     a_ef1=0.;
     a_af1=0.;
@@ -795,10 +805,10 @@ complex laser::elaser( double const *t )
 }
 inline complex laser::elaser( double const *t, LaserParam const *p1)
 {
-    return complex(p1->E0x*cos((*t)* p1->w0 - p1->cep0) * f_envelope((*t), p1, false)
-            + p1->E0x/p1->w0 * sin((*t) * p1->w0 - p1->cep0) * f_envelope((*t), p1, true),
-            p1->E0y * sin((*t) * p1->w0 - p1->cep0 + p1->phi_rel) * f_envelope((*t), p1, false)
-            - p1->E0y/p1->w0 * cos((*t) * p1->w0 - p1->cep0 + p1->phi_rel) * f_envelope((*t), p1, true));
+    return complex(p1->E0x*cos((*t)* p1->w0 - p1->cep0 - p1->phi_x) * f_envelope((*t), p1, false)
+            + p1->E0x/p1->w0 * sin((*t) * p1->w0 - p1->cep0 - p1->phi_x) * f_envelope((*t), p1, true),
+            p1->E0y * cos((*t) * p1->w0 - p1->cep0 - p1->phi_y) * f_envelope((*t), p1, false)
+            + p1->E0y/p1->w0 * sin((*t) * p1->w0 - p1->cep0 - p1->phi_y) * f_envelope((*t), p1, true));
 }
 // Value of phase is adjust to E0x = E0(t=t0, cep = 0)
 // So E(cos, sin) --> A(sin, -cos)
@@ -818,8 +828,8 @@ complex laser::avlaser( double const *t )
 }
 inline complex laser::avlaser( double const *t, LaserParam const *p1)
 {
-    return complex(-p1->E0x/p1->w0 * sin((*t) * p1->w0 - p1->cep0) * f_envelope((*t), p1, false),
-            p1->E0y/p1->w0 * cos((*t) * p1->w0 - p1->cep0 + p1->phi_rel) * f_envelope((*t), p1, false));
+    return complex(-p1->E0x/p1->w0 * sin((*t) * p1->w0 - p1->cep0 - p1->phi_x) * f_envelope((*t), p1, false),
+            -p1->E0y/p1->w0 * sin((*t) * p1->w0 - p1->cep0 - p1->phi_y) * f_envelope((*t), p1, false));
 }
 
 

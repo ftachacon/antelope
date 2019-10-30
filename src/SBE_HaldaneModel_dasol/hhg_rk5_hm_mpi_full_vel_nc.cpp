@@ -21,6 +21,7 @@
 #include "mpi.h"
 //#include "mkl.h"
 
+#include <unistd.h>
 
 // My Own Headers
 #include "constant.h"
@@ -32,6 +33,7 @@
 #include "solidstructure.h"
 //#include "observables.h"
 //#include "sbeqs.h"
+#include "utility.h"
 
 #define MASTER 0    /* task id of master task or node */
 #define energy_factor 27.2
@@ -52,9 +54,6 @@ complex jaco_pi_RK5( double const *eg, double const *xig_ef, double const *T2 );
 double der_nc_RK5( complex const *ROmega, complex const *cpi );
 
 void My_MPI_CLX_SUM( complex *in, complex *inout, int *len, MPI_Datatype *dptr );
-
-void ParaRange(int totalLength, int offset, int mpi_size, int mpi_rank, int *istart, int *iend);
-
 
 
 
@@ -89,8 +88,65 @@ double flag_occ_dephasing = 0.;
 //################################
 int main( int argc, char *argv[] )
 {
+
+
+    /*ifstream inputParam;
+    string inputline, paramName;
+    stringstream lineFstream;
+
+    if (argc == 1)
+    {
+        inputParam.open("input.dat", ios::in);
+    }
+    else
+    {
+        inputParam.open(argv[1], ios::in);
+    }
+
+    if (!inputParam)
+    {
+        cout << "=============================================\n";
+        cout << "===Can't open input files. Check once more===\n\n\n";
+        cout << "=============================================\n";
+        exit(1);
+    }
     
-    
+    while(inputParam.good())
+    {
+        while(getline(inputParam, inputline))
+        {
+            if (inputline.empty())  continue;
+            trim_left(inputline);
+            if (inputline.at(0)=='#')   continue;
+            lineFstream.str(inputline);
+            lineFstream >> paramName;
+
+            if (paramName == "npulses")
+            {
+                lineFstream >> npulses;
+                fpulse.init_laser(npulses);
+                for (int i = 0; i < npulses; ++i)
+                {
+                    getline(inputParam, inputline);
+                    if (inputline.empty())
+                    {
+                        --i;
+                        continue;
+                    }
+                    trim_left(inputline);
+                    if (inputline.at(0)=='#')
+                    {
+                        --i;
+                        continue;
+                    }
+                    lineFstream.str(inputline);
+                    lineFstream >> E0 >> wfreq >> ncycles >> ellip >> cep >> phi_rel >> t0 >> theta0 >> env_name;
+                    fpulse.PulseParam[i].Initialize(E0*E0*3.5e16, ellip, wfreq, ncycles, cep, phi_rel, t0, theta0);
+                }
+            }
+            else if (paramName == "")
+        }
+    }*/
     
     
     //################################
@@ -121,10 +177,7 @@ int main( int argc, char *argv[] )
     int diagnostic = atoi( argv[17] );
     ksfactor       = atoi( argv[18] );
     int shotNumber   = atoi( argv[19] );
-    
-    //String Type of variables, envelope and integration rule
-    string env_name     = "gauss";          //Name envel: "rect", "sin2", "gauss" or "rsin2"
-    string IntionMethod = "Trapz";//       // "Trapz" or "Simpson" or "NoneTrapz"/"NoneSimpson"
+
 
     
 	MPI_Op MPI_CLX_SUM;
@@ -134,16 +187,14 @@ int main( int argc, char *argv[] )
 	MPI_Init(&argc, &argv);	
 	
     
-    
 	//Creating our MPI-operation to sum up complex arrays
 	MPI_Op_create((MPI_User_function *) My_MPI_CLX_SUM, true, &MPI_CLX_SUM);	
 	
-    
     //#############################
 	//Getting rank and size variables
 	int rank=0, size=1;
 	int Nprocessors=1,NumberOfDoubles=1,NumberOfComplex=1;
-    
+
 
 	MPI_Comm_rank( MPI_COMM_WORLD, &rank );	//Getting the local id or rank process
 	MPI_Comm_size( MPI_COMM_WORLD, &size );	//Getting the size or number of proccesses or nodes
@@ -159,9 +210,6 @@ int main( int argc, char *argv[] )
 	}
     
     
-	
-    
-    
     //#############################
 	//Number of processes
 	Nprocessors		= size;
@@ -169,7 +217,6 @@ int main( int argc, char *argv[] )
 	NumberOfComplex = 1;
 	
 
-    
     //#############################
 	MPI_Barrier( MPI_COMM_WORLD );		
 	// -- Printing on terminal the PARAMETERs -- //	
@@ -182,26 +229,7 @@ int main( int argc, char *argv[] )
 		cout << "\n---\nTotal of Processors= " << Nprocessors << "\n";
 	}
 	//End of Part 1	
-	
-    
-
-
-    //###############################
-    //Variables
-    int N[Ndim]={1,1,1};
-    int n=0;
-    int ktime=0, itemp=0, jtemp=0, ltemp=0,ktemp=0;
-    int jstart=0, jend=0, jstep=0;
-    long long int NTotal=1;
-
-
-    
-    //Wavefunction Bloch Gauge choice
-    int gauge1   = 1;
-    int gauge2   = tgauge2 ;
-    
-    
-    //#############################
+//#############################
     /*****************************************
      
       HM. Parameters for Honney Comb lattice
@@ -214,19 +242,8 @@ int main( int argc, char *argv[] )
     double phi0           = iparam;     //Magnetic flux or phase of the NNN hoping parameter
     double M0             = jparam*t2;  //Local or on-site potential
     double chernN0        = 0.;
-    
-    
-     //Controlling momentum gauge variation window
-    double gauge_ky_down  =  0.;//-0.16;
-    double gauge_ky_up    =  0.;//0.90
-    double kmaxs0[Ndim]   = {0.,0.,0.};
-    double kyShift[Ngrad] = {0.,0.}; //{-0.38,gauge_ky_down};
 
-    
-    
-    
-    
-    //#############################
+     //#############################
     /*************************************
     //Laser Parameters
      */
@@ -238,8 +255,9 @@ int main( int argc, char *argv[] )
     double I0           = 0.;           //Intensity
     double ncycles      = ncyparam;     // Number of Optical cycles at FWHM or at 1/e
     double cep          = 0.;           // Carrier envelope phase
-    
-    
+    double phi_rel      = 0.;           // Phase difference between Ex and Ey (Ex=cos and Ey=sin is default)
+    double t0           = 0.;           // Peak time of envelope
+    double theta0       = 0.;           // Angle of major axis relative to x-axis
     
     
     //Time step dt
@@ -251,8 +269,36 @@ int main( int argc, char *argv[] )
     double relativephase= pi/2;//0.;
     double ltheta0      = 0.;               //Inclination angle
     
-    
     double T2           = dephasing;        //Dephasing time in the crystal
+
+    //String Type of variables, envelope and integration rule
+    string env_name     = "gauss";          //Name envel: "rect", "sin2", "gauss" or "rsin2"
+    string IntionMethod = "Trapz";//       // "Trapz" or "Simpson" or "NoneTrapz"/"NoneSimpson"
+    
+    //laser fpulse;
+
+    //###############################
+    //Variables
+    int N[Ndim]={1,1,1};
+    int n=0;
+    int ktime=0, itemp=0, jtemp=0, ltemp=0,ktemp=0;
+    int jstart=0, jend=0, jstep=0;
+    long long int NTotal=1;
+
+    
+    //Wavefunction Bloch Gauge choice
+    int gauge1   = 1;
+    int gauge2   = tgauge2 ;
+    
+    
+     //Controlling momentum gauge variation window
+    double gauge_ky_down  =  0.;//-0.16;
+    double gauge_ky_up    =  0.;//0.90
+    double kmaxs0[Ndim]   = {0.,0.,0.};
+    double kyShift[Ngrad] = {0.,0.}; //{-0.38,gauge_ky_down};
+
+    
+    
     
     double kx = 1., ky = 1.; 
     double dxdt=0., dydt=0.;                //Time-derivative for Jx and Jy inter-band contributions
@@ -310,7 +356,6 @@ int main( int argc, char *argv[] )
     int *blockcounts;
     int *displs;
 
-    
     //Initializing RK4 variables
     for (n=0; n<Nrk5; n++)
     {
@@ -342,7 +387,6 @@ int main( int argc, char *argv[] )
         
     }
     
-    
     /*************************************s
      
      Momentum box via momaxis class
@@ -370,7 +414,6 @@ int main( int argc, char *argv[] )
     kyShift[1]     = gauge_ky_down;
     
     
-    
     //######################################
     //Opening output files!
     FILE *laserout, *mout, *fout, *engout;
@@ -379,8 +422,6 @@ int main( int argc, char *argv[] )
     FILE *simulation_out;
     FILE *density_out, *densitytime_out, *polarization_out;
     FILE *intraj_out, *interj_out;
-    
-    
     
     
     if ( rank == MASTER )
@@ -412,7 +453,6 @@ int main( int argc, char *argv[] )
     
     
     
-    
     /*char full_rad[200] = "full_integrated_currents_rank";
     char dat0[]        = ".dat";
     char ctemp0[50];
@@ -438,22 +478,20 @@ int main( int argc, char *argv[] )
     
 
     npulses = 1;
+    //fpulse.init_laser(npulses);
     laser fpulse(   npulses );             // Constructor of Laser Pulses
 
     I0      = E0*E0*3.5e16;             // Intensity W/cm^2
     
     
-    
     //Collecting parameters
     //double laserparam[]  = { I0, wfreq, ncycles, cep, ellipticity, relativephase, ltheta0, dt, tstart, offset, outset };
 
-    fpulse.PulseParam[0].Initialize(I0, 1, wfreq, ncycles, cep, 0, 0, 0);
-    //fpulse.PulseParam[1].Initialize(I0, 1.0, 1.5498/27.211, 2, cep, 0, -5 * 1000/24.2, 0);
-    //fpulse.PulseParam[0].envelope = ENVELOPE_SIN2;
-    //fpulse.PulseParam[1].envelope = ENVELOPE_SIN2;
+    fpulse.PulseParam[0].Initialize(E0, 1.0, wfreq, ncycles, cep, 0, 0);
+    //fpulse.PulseParam[1].Initialize(I0/10, 1.0, 1.5498/27.211, 2, cep, -7 * 1000/24.2, 0);
+    fpulse.PulseParam[0].envelope = ENVELOPE_SIN2;
     fpulse.laser_pulses(dt, 0.35 * ncycles*dospi/wfreq, 0.35 * ncycles*dospi/wfreq);
     
-
     
     //Initializing laser parameters ...
     //initialize_laser_parameters( laserparam, env_name, fpulse );
@@ -1618,21 +1656,3 @@ void My_MPI_CLX_SUM( complex *in, complex *inout, int *len, MPI_Datatype *dptr )
 		inout++;
 	}
 }
-
-// Distribute jobs through processors
-// divide domain offset <= x < totalLength + offset
-// Note that if mpi_size > totalLength && mpi_rank >= totalLength, 
-// then istart = totalLength, iend = totalLength
-void ParaRange(int totalLength, int offset, int mpi_size, int mpi_rank, int *istart, int *iend)
-{
-    int iwork1, iwork2;
-
-    iwork1 = totalLength / mpi_size;
-    iwork2 = totalLength % mpi_size;
-
-    *istart = iwork1 * mpi_rank + min(iwork2, mpi_rank) + offset;
-    *iend = *istart + iwork1;
-    if (iwork2 > mpi_rank)
-        *iend = *iend + 1;
-}
-
