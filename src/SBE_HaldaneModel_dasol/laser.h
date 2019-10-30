@@ -15,7 +15,8 @@
 #include <vector>
 using namespace std;
 
-const double gaussian_factor = 4*log(2);
+const int gaussian_width_multiply = 2.12;
+const double gaussian_factor = gaussian_width_multiply*gaussian_width_multiply* 4*log(2);
 enum Envelope
 {
     ENVELOPE_GAUSSIAN,
@@ -63,6 +64,16 @@ public:
         period0    =  dospi/w0; // laser period or cycle
         
         twidth = cycles0*period0; // laser time duration
+        switch (envelope)
+        {
+        case ENVELOPE_SIN2:
+            twidth = cycles0*period0;
+            break;
+        
+        default:
+            twidth = gaussian_width_multiply * cycles0*period0;
+            break;
+        }
         
 		double factor              =  1.0/( 1.0 + e*e ); // ellipticity factor
         
@@ -492,8 +503,8 @@ void laser::Laser_Grid()
     
     double tempMin=atmin;//*/
 
-    a_ef1 = elaser(  &(tempMin) );
-    a_af1 = avlaser( &(tempMin) );
+    //a_ef1 = elaser(  &(tempMin) );
+    //a_af1 = avlaser( &(tempMin) );
     
     NewNt   = floor( (atmax - atmin)/dt );
 
@@ -770,7 +781,7 @@ double laser::f_envelope(double _t, LaserParam const * p1, bool _isDt)
 
 complex laser::elaser( double const *t )
 {
-    if (*t < minus0 || *t > major0) return 0;
+    //if (*t < minus0 || *t > major0) return 0;
     a_ef0=0.;
     double kt;
     LaserParam *p1;
@@ -793,7 +804,7 @@ inline complex laser::elaser( double const *t, LaserParam const *p1)
 // So E(cos, sin) --> A(sin, -cos)
 complex laser::avlaser( double const *t )
 {
-    if (*t < minus0 || *t > major0) return 0;
+    //if (*t < minus0 || *t > major0) return 0;
     a_af0=0.;
     double kt;
     LaserParam *p1;
