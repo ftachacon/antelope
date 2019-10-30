@@ -50,12 +50,14 @@ public:
     double t0;                              // Mid-time of pulses
     double theta0;
     
-	Envelope envelope = ENVELOPE_GAUSSIAN;	//Envelope type used
+	Envelope envelope;	//Envelope type used
 
     // Essential initial values - I0, e, w0, cycles0, cep0, phi_rel, t0, theta0
-    void Initialize(double _E0, double _e, double _w0, int _ncycle, double _cep,  double _t0, double _theta0)
+    void Initialize(double _E0, double _e, double _w0, int _ncycle, double _cep,  double _t0, double _theta0, string _env_name)
     {
         E0 = _E0;   e = _e; w0 = _w0;   cycles0 = _ncycle;  cep0 = _cep;  t0 = _t0;   theta0 = _theta0;
+        if (_env_name == "sin2")    envelope = ENVELOPE_SIN2;
+        else    envelope = ENVELOPE_GAUSSIAN;
     }
     void PreProcessing()
     {

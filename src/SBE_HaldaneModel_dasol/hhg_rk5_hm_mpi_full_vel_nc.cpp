@@ -84,15 +84,84 @@ double gbox_ky_down = 0.;
 double gbox_ky_up   = 0.;
 double ksfactor = 1;
 double flag_occ_dephasing = 0.;
+int diagnostic = 0;
+int shotNumber   = 0;
 
 //################################
 int main( int argc, char *argv[] )
 {
+    MPI_Op MPI_CLX_SUM;
+    
+    
+	//Fundamental initialization of MPI
+	MPI_Init(&argc, &argv);	
+	
+    
+	//Creating our MPI-operation to sum up complex arrays
+	MPI_Op_create((MPI_User_function *) My_MPI_CLX_SUM, true, &MPI_CLX_SUM);	
+	
+    //#############################
+	//Getting rank and size variables
+	int rank=0, size=1;
+	int Nprocessors=1,NumberOfDoubles=1,NumberOfComplex=1;
 
 
-    /*ifstream inputParam;
+	MPI_Comm_rank( MPI_COMM_WORLD, &rank );	//Getting the local id or rank process
+	MPI_Comm_size( MPI_COMM_WORLD, &size );	//Getting the size or number of proccesses or nodes
+	MPI_Barrier( MPI_COMM_WORLD );	
+
+    // Set default values here
+    //#############################
+    /*****************************************
+     
+      HM. Parameters for Honney Comb lattice (input)
+     
+     ****/
+    double la0            = 1.0;         //Lattice constant in Angstroms
+    double a0             = la0/0.529;  //Lattice constant in atomic units (a.u.)
+    double t1             = 0.075;      //NN Hopping parameters in a.u.
+    double t2             = t1/3;      //Amplitude of the Next Neirest Neibour of HM
+    double phi0           = iparam;     //Magnetic flux or phase of the NNN hoping parameter
+    double M0             = jparam*t2;  //Local or on-site potential
+
+
+    //#############################
+    /*****************************************
+     
+      HM. Parameters for Honney Comb lattice (output)
+     
+     ****/
+    double chernN0        = 0.;
+
+     //#############################
+    /*************************************
+    //Laser Parameters
+     */
+    
+    int npulses         = 0;             // Number of pulses
+    double wfreq        = 0.;         // Frequency in atomic units (a.u.)
+    double E0           = 0.;       // Laser field strenth
+    double I0           = 0.;           //Intensity
+    double ncycles      = 0;     // Number of Optical cycles at FWHM or at 1/e
+    double cep          = 0.;           // Carrier envelope phase
+    double t0           = 0.;           // Peak time of envelope
+    double theta0       = 0.;           // Angle of major axis relative to x-axis
+    
+    
+    //Time step dt
+    double dt           = 0.5;           // Time step
+    
+    double T2           = 0.;        //Dephasing time in the crystal
+
+    //String Type of variables, envelope and integration rule
+    string env_name     = "gauss";          //Name envel: "rect", "sin2", "gauss" or "rsin2"
+    string IntionMethod = "Trapz";//       // "Trapz" or "Simpson" or "NoneTrapz"/"NoneSimpson"
+    
+    laser fpulse;
+
+    ifstream inputParam;
     string inputline, paramName;
-    stringstream lineFstream;
+    //istringstream lineFstream;
 
     if (argc == 1)
     {
@@ -105,9 +174,12 @@ int main( int argc, char *argv[] )
 
     if (!inputParam)
     {
-        cout << "=============================================\n";
-        cout << "===Can't open input files. Check once more===\n\n\n";
-        cout << "=============================================\n";
+        if (rank == MASTER)
+        {
+            cout << "=============================================\n";
+            cout << "===Can't open input files. Check once more===\n\n\n";
+            cout << "=============================================\n";
+        }
         exit(1);
     }
     
@@ -118,7 +190,7 @@ int main( int argc, char *argv[] )
             if (inputline.empty())  continue;
             trim_left(inputline);
             if (inputline.at(0)=='#')   continue;
-            lineFstream.str(inputline);
+            istringstream lineFstream(inputline);
             lineFstream >> paramName;
 
             if (paramName == "npulses")
@@ -139,66 +211,47 @@ int main( int argc, char *argv[] )
                         --i;
                         continue;
                     }
-                    lineFstream.str(inputline);
-                    lineFstream >> E0 >> wfreq >> ncycles >> ellip >> cep >> phi_rel >> t0 >> theta0 >> env_name;
-                    fpulse.PulseParam[i].Initialize(E0*E0*3.5e16, ellip, wfreq, ncycles, cep, phi_rel, t0, theta0);
+                    istringstream linePstream(inputline);
+                    linePstream >> E0 >> wfreq >> ncycles >> ellip >> cep >> t0 >> theta0 >> env_name;
+                    fpulse.PulseParam[i].Initialize(E0, ellip, wfreq, ncycles, cep, t0, theta0, env_name);
                 }
             }
-            else if (paramName == "")
+            else if (paramName == "Npoints") lineFstream >> nxparam >> nyparam;     // Nx, Ny points
+            else if (paramName == "dt") lineFstream >> dt;                          // Time step
+            else if (paramName == "la0")  lineFstream >> la0;                       // Lattice constant in Angstroms
+            else if (paramName == "t1") lineFstream >> t1;                          // NN hopping parameters in a.u.                       
+            else if (paramName == "t2") lineFstream >> t2;                          // NNN hopping amplitude in a.u.
+            else if (paramName == "T2") lineFstream >> T2;                          // Dephasing time T2
+            else if (paramName == "phi0") lineFstream >> phi0;                      // Magnetic flux
+            else if (paramName == "Mt2") lineFstream >> jparam;                     // On Site potential ratio to t2, i.e M/t2
+            else if (paramName == "eps") lineFstream >> treg0;                      // Regularizatoin paramter, eps
+            else if (paramName == "gauge") lineFstream >> tgauge2;                  // gauge2
+            else if (paramName == "rflag") lineFstream >> trflag;                   // controlling regul. type, 0, non, 1 local, 2 taylor
+            else if (paramName == "gbox_ky_down") lineFstream >> gbox_ky_down;      // Boundary down  (lower) ky-BZ point for gauge modification
+            else if (paramName == "gbox_ky_up") lineFstream >> gbox_ky_up;          // Boundary upper (higher) ky-BZ point for gauge modification
+            else if (paramName == "fbz_shift") lineFstream >> fbz_shift;            // controlling BZ shift. it has to be 1 for yes, 0 for none 
+            else if (paramName == "ky_shift_down") lineFstream >> ky_shift_down;    // Lowest BZ ky shift in a.u. 
+            else if (paramName == "diagnostic") lineFstream >> diagnostic;          // diagonostic
+            else if (paramName == "ksfactor") lineFstream >> ksfactor;              // extend BZ with ksfactor ratio
+            else if (paramName == "shotNumber") lineFstream >> shotNumber;          // Number of snapshot, snapshot is disabled with shotNumber <=0
+            else
+            {
+                if (rank == MASTER)
+                {
+                    cout << "Undefined paramter :" << paramName << "\n";
+                }
+                exit(1);
+            }
         }
-    }*/
-    
-    
-    //################################
-    //Numerical parameter and set
-    iparam        = atof( argv[1] );         //Magnetic flux
-    jparam        = atof( argv[2] );         //On Side potential ratio to t2, i.e M/t2
-    nxparam       = atoi( argv[3] );         //Nx points
-    nyparam       = atoi( argv[4] );         //Nx points
-    kparam        = atof( argv[5] );         //Laser field strength 
-    ncyparam      = atoi( argv[6] );         //Number of cycles at FWHM 
-    dtparam       = atof( argv[7] );         //Time step, param dt
-    dephasing     = atof( argv[8] );         //Dephasing time
-    ellip         = atof( argv[9] );         //Laser field Ellipticity
-    
-    
-    treg0         = atof( argv[10] );        //Regularization parameter
-    tgauge2       = atoi( argv[11] );        //gauge2
-    trflag        = atoi( argv[12] );        //controlling regul. type, 0, non, 1 local, 2 taylor
-    
-    
-    gbox_ky_down  = atof( argv[13] );        //Boundary down  (lower) ky-BZ point for gauge modification
-    gbox_ky_up    = atof( argv[14] );        //Boundary upper (higher) ky-BZ point for gauge modification
-    
-    
-    fbz_shift      = atoi( argv[15] );        //controlling BZ shift. it has to be 1 for yes, 0 for none 
-    ky_shift_down  = atof( argv[16] );        //Lowest BZ ky shift in a.u.
-    
-    int diagnostic = atoi( argv[17] );
-    ksfactor       = atoi( argv[18] );
-    int shotNumber   = atoi( argv[19] );
+    }
 
+    // Some post-processing 
+    M0 = jparam * t2;                                // On-site potential
+    a0 = la0 / 0.529;                                // Lattice constant in atomic units (a.u.)
+    fpulse.laser_pulses(dt, 500., 500.);
 
     
-	MPI_Op MPI_CLX_SUM;
-    
-    
-	//Fundamental initialization of MPI
-	MPI_Init(&argc, &argv);	
 	
-    
-	//Creating our MPI-operation to sum up complex arrays
-	MPI_Op_create((MPI_User_function *) My_MPI_CLX_SUM, true, &MPI_CLX_SUM);	
-	
-    //#############################
-	//Getting rank and size variables
-	int rank=0, size=1;
-	int Nprocessors=1,NumberOfDoubles=1,NumberOfComplex=1;
-
-
-	MPI_Comm_rank( MPI_COMM_WORLD, &rank );	//Getting the local id or rank process
-	MPI_Comm_size( MPI_COMM_WORLD, &size );	//Getting the size or number of proccesses or nodes
-	MPI_Barrier( MPI_COMM_WORLD );	
 
 
 	if (rank==MASTER)
@@ -229,53 +282,7 @@ int main( int argc, char *argv[] )
 		cout << "\n---\nTotal of Processors= " << Nprocessors << "\n";
 	}
 	//End of Part 1	
-//#############################
-    /*****************************************
-     
-      HM. Parameters for Honney Comb lattice
-     
-     ****/
-    double la0            = 3.3;         //Lattice constant in Angstroms
-    double a0             = la0/0.529;  //Lattice constant in atomic units (a.u.)
-    double t1             = 0.01554;      //NN Hopping parameters in a.u.
-    double t2             = 0.002042;      //Amplitude of the Next Neirest Neibour of HM
-    double phi0           = iparam;     //Magnetic flux or phase of the NNN hoping parameter
-    double M0             = jparam*t2;  //Local or on-site potential
-    double chernN0        = 0.;
 
-     //#############################
-    /*************************************
-    //Laser Parameters
-     */
-    
-    int npulses         = 1;             // Number of pulses
-    double wfreq        = 0.00608;         // Frequency in atomic units (a.u.)
-    double period0      = dospi/wfreq;   // Optical Period in a.u.
-    double E0           = kparam;       // Laser field strenth
-    double I0           = 0.;           //Intensity
-    double ncycles      = ncyparam;     // Number of Optical cycles at FWHM or at 1/e
-    double cep          = 0.;           // Carrier envelope phase
-    double phi_rel      = 0.;           // Phase difference between Ex and Ey (Ex=cos and Ey=sin is default)
-    double t0           = 0.;           // Peak time of envelope
-    double theta0       = 0.;           // Angle of major axis relative to x-axis
-    
-    
-    //Time step dt
-    double dt           = dtparam;           // Time step
-    double tstart       = 0.;                // Starting time of the laser
-    double offset       = 8.*period0;
-    double outset       = 8.*period0;
-    double ellipticity  = ellip;
-    double relativephase= pi/2;//0.;
-    double ltheta0      = 0.;               //Inclination angle
-    
-    double T2           = dephasing;        //Dephasing time in the crystal
-
-    //String Type of variables, envelope and integration rule
-    string env_name     = "gauss";          //Name envel: "rect", "sin2", "gauss" or "rsin2"
-    string IntionMethod = "Trapz";//       // "Trapz" or "Simpson" or "NoneTrapz"/"NoneSimpson"
-    
-    //laser fpulse;
 
     //###############################
     //Variables
@@ -467,47 +474,19 @@ int main( int argc, char *argv[] )
     simulation_out  = fopen( full_rad, "w" );*/
     
     
-    
-
-    
-    /********************************************************
-     
-     Creating LASER PULSE and defining other parameters
-     
-     *****/
-    
-
-    npulses = 1;
-    //fpulse.init_laser(npulses);
-    laser fpulse(   npulses );             // Constructor of Laser Pulses
-
-    I0      = E0*E0*3.5e16;             // Intensity W/cm^2
-    
-    
-    //Collecting parameters
-    //double laserparam[]  = { I0, wfreq, ncycles, cep, ellipticity, relativephase, ltheta0, dt, tstart, offset, outset };
-
-    fpulse.PulseParam[0].Initialize(E0, 1.0, wfreq, ncycles, cep, 0, 0);
-    //fpulse.PulseParam[1].Initialize(I0/10, 1.0, 1.5498/27.211, 2, cep, -7 * 1000/24.2, 0);
-    fpulse.PulseParam[0].envelope = ENVELOPE_SIN2;
-    fpulse.laser_pulses(dt, 0.35 * ncycles*dospi/wfreq, 0.35 * ncycles*dospi/wfreq);
-    
-    
-    //Initializing laser parameters ...
-    //initialize_laser_parameters( laserparam, env_name, fpulse );
 
     if (rank == MASTER)
     {
         //Output of the laser field
         //fpulse.laser_outs_EA( laserout );
 
-        cout << "\n*=============================*\nLaser Parameters:\n";
+        /*cout << "\n*=============================*\nLaser Parameters:\n";
         cout << "E0           = " << E0 << " a.u.  I0 = " << I0 << endl;
         cout << "w0           = " << wfreq << " a.u." << endl;
         cout << "A0           = " << E0 / wfreq << " a.u." << endl;
         cout << "NCycles      = " << ncycles << " No. Opt. Cycles" << endl;
         cout << "Up           = " << E0 * E0 / wfreq / wfreq / 4. << " a.u." << endl;
-        cout << "ellipticity  = " << ellip << endl;
+        cout << "ellipticity  = " << ellip << endl;*/
         cout << "\nTime-step dt = " << dt << " a.u." << endl;
         cout << "New-No. Of Total time Steps = " << fpulse.NewNt << "\n---\n";
 
