@@ -437,7 +437,7 @@ int main( int argc, char *argv[] )
      *****/
     
 
-
+    npulses = 1;
     laser fpulse(   npulses );             // Constructor of Laser Pulses
 
     I0      = E0*E0*3.5e16;             // Intensity W/cm^2
@@ -445,13 +445,18 @@ int main( int argc, char *argv[] )
     
     
     //Collecting parameters
-    double laserparam[]  = { I0, wfreq, ncycles, cep, ellipticity, relativephase, ltheta0, dt, tstart, offset, outset };
+    //double laserparam[]  = { I0, wfreq, ncycles, cep, ellipticity, relativephase, ltheta0, dt, tstart, offset, outset };
 
+    fpulse.PulseParam[0].Initialize(I0, 1, wfreq, ncycles, cep, 0, 0, 0);
+    //fpulse.PulseParam[1].Initialize(I0, 1.0, 1.5498/27.211, 2, cep, 0, -5 * 1000/24.2, 0);
+    //fpulse.PulseParam[0].envelope = ENVELOPE_SIN2;
+    //fpulse.PulseParam[1].envelope = ENVELOPE_SIN2;
+    fpulse.laser_pulses(dt, 0.35 * ncycles*dospi/wfreq, 0.35 * ncycles*dospi/wfreq);
     
 
     
     //Initializing laser parameters ...
-    initialize_laser_parameters( laserparam, env_name, fpulse );
+    //initialize_laser_parameters( laserparam, env_name, fpulse );
 
     if (rank == MASTER)
     {
@@ -1494,7 +1499,7 @@ int main( int argc, char *argv[] )
 
 
 //initializing laser parameters
-void initialize_laser_parameters( double eparam[],  string ename, laser &lobject )
+/*void initialize_laser_parameters( double eparam[],  string ename, laser &lobject )
 {
     
     
@@ -1515,7 +1520,7 @@ void initialize_laser_parameters( double eparam[],  string ename, laser &lobject
     lobject.theta0[0]        = eparam[6];       // Angle between of the laser with respect to x direction in radians
     
     
-    lobject.envelope[0]      = ename;           // Envelop name
+    //lobject.envelope[0]      = ename;           // Envelop name
     
     
     
@@ -1526,7 +1531,7 @@ void initialize_laser_parameters( double eparam[],  string ename, laser &lobject
     
     
    
-}
+}*/
 
 
 void der_pi( const double  *eg, const double *xig_ef, const double *T2, const complex *ROmega, const complex *cohPi0, const double *_nc, complex *cpi)

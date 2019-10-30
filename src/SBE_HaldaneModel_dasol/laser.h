@@ -15,6 +15,84 @@
 #include <vector>
 using namespace std;
 
+const double gaussian_factor = 4*log(2);
+enum Envelope
+{
+    ENVELOPE_GAUSSIAN,
+    ENVELOPE_SIN2,
+    ENVELOPE_RSIN2,
+    ENVELOPE_REC,
+    ENVELOPE_CONST
+};
+
+struct LaserParam
+{
+public:
+    double I0;			                    //Intensity per pulse
+	double e;			                    //Ellipticity per pulse
+    double E0;                              //Electric Field Magnitude
+
+
+    double E0x;			                    //Electric Field Component in the x-direction
+	double E0y;			                    //Electric Field Component in the y-direction
+
+    double w0;			                    //Frequency per pulse
+	double period0;		                    //Period per pulse
+	double cycles0;		                    //Cycles number per pulse
+
+
+	double cep0;		                    //Carrier envelope phase per pulse
+	double phi_rel;		                    //Relative phase between Ex and Ey components of the electric field of the laser pulse
+
+    double twidth;		                    //Time bandwidth per pulse
+    double t0;                              // Mid-time of pulses
+    double theta0;
+    
+	Envelope envelope = ENVELOPE_GAUSSIAN;	//Envelope type used
+
+    // Essential initial values - I0, e, w0, cycles0, cep0, phi_rel, t0, theta0
+    void Initialize(double _I0, double _e, double _w0, int _ncycle, double _cep, double _phi_rel, double _t0, double _theta0)
+    {
+        I0 = _I0;   e = _e; w0 = _w0;   cycles0 = _ncycle;  cep0 = _cep;    phi_rel = _phi_rel; t0 = _t0;   theta0 = _theta0;
+    }
+    void PreProcessing()
+    {
+        
+        E0 = sqrt( I0/3.5e16 );
+        
+        period0    =  dospi/w0; // laser period or cycle
+        
+        twidth = cycles0*period0; // laser time duration
+        
+		double factor              =  1.0/( 1.0 + e*e ); // ellipticity factor
+        
+        //The ellipticity is defined by e = E0y/E0x.
+        //That ellipticity param can vary between -1 and +1
+        // For e= 0 and phi_rel = 0, the laser is linearly polarized along x-direction
+        // For e= 0 and phi_rel = 0, and theta != 0 (different to zero), the laser is linearly
+        //polarized along a stringht line with theta angle with respect to positive x-direction
+        // For e= 1 and phi_rel = pi/2., the laser is circularly polarized
+        // Between e = (0, 1) and phi_rel = pi/2., the laser is ellipticaly polarized with major axis along x
+        
+        //Condition for linear or elliptical polarized laser field
+        // Note - only linear and circular is available now, fix it later
+        if (e == 0 )
+        {
+            phi_rel = 0.;
+
+            E0x        =  E0*cos( theta0 );
+            
+            E0y        =  E0*sin( theta0 );
+        }
+        else
+        {
+            E0x        =  sqrt( factor )*E0;
+            
+            E0y        =  e*sqrt( factor )*E0;
+        }
+    };
+};
+
 class laser 
 {
 
@@ -26,7 +104,7 @@ public:
 	int Nmaxt;					//Total iteration number
     int NewNt;
 
-    
+    vector<LaserParam> PulseParam; // paramters for pulses
     
 	double t01;					//Initial time to first pulse
 	double dt;					//Time step
@@ -46,46 +124,13 @@ public:
 	vector<double> clock0;      //Initial time per pulse
 	vector<double> clock1;      //The time until half per pulse
 	vector<double> clock2;		//The time until final per pulse
-	vector<double> twidth;		//Time bandwidth per pulse
+	
 	
     
     
 	vector<int> kclock0;		//k-th value to the initial time per pulse 
 	vector<int> kclock1;		//k-th value to the time until half per pulse
 	vector<int> kclock2;		//k-th value to the time until final per pulse
-	
-	
-    
-	vector<double> I0;			//Intensity per pulse
-	vector<double> e;			//Ellipticity per pulse
-    vector<double> E0;          //Electric Field Magnitude
-	
-    
-    
-    vector<double> E0x;			//Electric Field Component in the x-direction
-	vector<double> E0y;			//Electric Field Component in the y-direction
-	
-	
-    
-    vector<double> w0;			//Frequency per pulse
-	vector<double> period0;		//Period per pulse
-	vector<double> cycles0;		//Cycles number per pulse
-	
-    
-    
-    
-	vector<double> cep0;		//Carrier envelope phase per pulse
-	vector<double> phi_rel;		//Relative phase between Ex and Ey components of the electric field of the laser pulse
-	
-    
-    
-    vector<double> delay0;		//Delay between consecutive pulses
-    vector<double> theta0;
-    
-    
-    
-	vector<string> envelope;	//Envelope name used
-	
     
 
     timegrid g;					//Object of the time grid
@@ -111,7 +156,8 @@ public:
 	/*==========================*/
 	laser(int _Npulses);      							                                // Creator Object
 	//~laser();														//Destructor
-	void laser_pulses(double _dt, double _t01, double _blaser, double _alaser);	        // LASER PULSES TRAIN
+	//void laser_pulses(double _dt, double _t01, double _blaser, double _alaser);	        // LASER PULSES TRAIN
+    void laser_pulses(double _dt, double _blaser, double _alaser);	        // LASER PULSES TRAIN
 	
     
     
@@ -132,10 +178,14 @@ public:
     
     void Vector_Potential();							// Total vector potential
 	void put_on_envelope();								// Generator of Envelope of the pulses
+
+    double f_envelope(double _t, LaserParam const *_param1, bool _isDt);    // Generate enevelop function
     
     
     complex avlaser( double const *t );
     complex elaser( double const *t );
+    inline complex avlaser( double const *t , LaserParam const *_param1);
+    inline complex elaser( double const *t , LaserParam const *_param1);
     
     
     void Set_Av_Integral();
@@ -161,68 +211,37 @@ public:
 		/*=== OBJECT'S LASER CONSTRUCTOR  ===*/
 laser::laser(int _Npulses)
 {
-	  Npulses = _Npulses;
+    Npulses = _Npulses;
+
+    clock0.resize( Npulses, 0.0 );
+    clock1.resize( Npulses, 0.0 );
+    clock2.resize( Npulses, 0.0 );
     
-      clock0.resize( Npulses, 0.0 );
-	  clock1.resize( Npulses, 0.0 );
-	  clock2.resize( Npulses, 0.0 );
-	  
-	  kclock0.resize( Npulses, 0.0 );
-	  kclock1.resize( Npulses, 0.0 );
-	  kclock2.resize( Npulses, 0.0 );
-	  
-	  twidth.resize(Npulses,0.0);
+    kclock0.resize( Npulses, 0.0 );
+    kclock1.resize( Npulses, 0.0 );
+    kclock2.resize( Npulses, 0.0 );
     
-      I0.resize(Npulses,0.0);
-	  e.resize(Npulses,0.0);	  
+    PulseParam.resize(Npulses);
     
-      envelope.resize(Npulses);
-	  
-      for (int kpulse=0; kpulse<Npulses; kpulse++)
-		 envelope[kpulse] ="gauss";
-    
-      E0.resize(Npulses,0.0);
-	  E0x.resize(Npulses,0.0);
-	  E0y.resize(Npulses,0.0);	  
-    
-      theta0.resize(Npulses,0.);
-	  w0.resize(Npulses,0.0);
-	  period0.resize(Npulses,0.0);
-      
-	  
-      
-	  cycles0.resize(Npulses,0.0); 
-	  cep0.resize(Npulses,0.0);	  
-	  phi_rel.resize(Npulses,0.0);
-	  
-	  
-	  
-	  ef  = new timeobject[Npulses];			// reserve memory
-	  env = new timeobject[Npulses];			// reserve memory
-	  av  = new timeobject[Npulses];
-     
-	  
-	  
-	  av_int    = new timeobject[Npulses];		// reserve memory
-	  avsq_int  = new timeobject[Npulses];		// reserve memory	  	  
-	  
-      a_ef0 = 0.;
-      a_af0 = 0.;
-      a_ef1 = 0.;
-      a_af1 = 0.;
+    ef  = new timeobject[Npulses];			// reserve memory
+    env = new timeobject[Npulses];			// reserve memory
+    av  = new timeobject[Npulses];
     
     
-	  if (Npulses > 1 )
-		  delay0.resize(Npulses-1,0.0);
-      
     
+    av_int    = new timeobject[Npulses];		// reserve memory
+    avsq_int  = new timeobject[Npulses];		// reserve memory	  	  
     
-  }//End initialize variable  
+    a_ef0 = 0.;
+    a_af0 = 0.;
+    a_ef1 = 0.;
+    a_af1 = 0.;
+}//End initialize variable  
 
 
 
 
-void laser::copy_laser( laser *lcopy )
+/*void laser::copy_laser( laser *lcopy )
 {
     
     if (lcopy->Npulses==NULL)
@@ -265,18 +284,18 @@ void laser::copy_laser( laser *lcopy )
     laser_pulses( lcopy->dt, lcopy->t01,  lcopy->blaser, lcopy->alaser );  //Routine that computes the laser
     
     
-}
+}*/
 
 
 
 /*===========================================================          		
  /*===  LASER PULSES FUNCTION  ===*/
-void laser::laser_pulses(double _dt, double _t01, double _blaser, double _alaser)
+void laser::laser_pulses(double _dt, double _blaser, double _alaser)
 {
     
     
    	/*======= Pulse's Parameter ======*/
-   	t01     = _t01;									//	Start time first pulse
+   	//t01     = _t01;									//	Start time first pulse
    	dt      = abs( _dt );			                    //	Time step
     
     
@@ -306,18 +325,18 @@ void laser::laser_pulses(double _dt, double _t01, double _blaser, double _alaser
     
     
     	Laser_Grid();       	     	                //	Objet time axis
-   	Evaluation_Laser_Pulse();          	            //	Evaluation pulses
+   //	Evaluation_Laser_Pulse();          	            //	Evaluation pulses
 	
     
     
     
-    	Sum_Pulses();	     	     	                //	Pulses sum (build pulses train)
-   	Set_Vector_Potential();		     	            //	Vector potential by each pulse
+    //	Sum_Pulses();	     	     	                //	Pulses sum (build pulses train)
+   	//Set_Vector_Potential();		     	            //	Vector potential by each pulse
     
     
     
     
-   	Vector_Potential();								//	Vector potential to pulses train
+   	//Vector_Potential();								//	Vector potential to pulses train
     
     
 
@@ -334,61 +353,11 @@ void laser::laser_pulses(double _dt, double _t01, double _blaser, double _alaser
 //== Function initialize max amplitude and period ==// 
 inline void laser::Initialize_Amplitude_Period()
 {
-    
-    //The ellipticity is defined by e = E0y/E0x.
-    //That ellipticity param can vary between -1 and +1
-    // For e= 0 and phi_rel = 0, the laser is linearly polarized along x-direction
-    // For e= 0 and phi_rel = 0, and theta != 0 (different to zero), the laser is linearly
-    //polarized along a stringht line with theta angle with respect to positive x-direction
-    // For e= 1 and phi_rel = pi/2., the laser is circularly polarized
-    // Between e = (0, 1) and phi_rel = pi/2., the laser is ellipticaly polarized with major axis along x
-    
-    double factor;
-    
-    
 	for( int kpulse = 0; kpulse < Npulses; kpulse++ )
 	{
-        
-        
-        //Electric field amplitude
-        E0[kpulse]         =  sqrt( I0[kpulse]/3.5e16 );
-        
-        period0[kpulse]    =  dospi/w0[kpulse]; // laser period or cycle
-        
-        twidth[kpulse]       =  cycles0[kpulse]*period0[kpulse]; // laser time duration
-        
-		factor              =  1.0/( 1.0 + e[kpulse]*e[kpulse] ); // ellipticity factor
-        
-        
-        
-        //Condition for linear or elliptical polarized laser field
-        if (e[kpulse] == 0 )
-        {
-            
-            
-            phi_rel[kpulse] = 0.;
-
-            E0x[ kpulse ]        =  E0[ kpulse ]*cos( theta0[ kpulse ] );
-            
-            E0y[ kpulse ]        =  E0[ kpulse ]*sin( theta0[ kpulse ] );
-            
-            
-        }
-        else
-        {
-            
-           
-            E0x[kpulse]        =  sqrt( factor )*E0[kpulse];
-            
-            E0y[kpulse]        =  e[kpulse]*sqrt( I0[kpulse]*factor/3.5e16 );
-            
-            
-        }
-        
+        PulseParam[kpulse].PreProcessing();
 	}
 
-
-    
 }
 
 
@@ -401,7 +370,7 @@ inline void laser::Set_StartTime_EndTime()
 	for (int kpulse=0;kpulse<Npulses;kpulse++)
 	{
         
-		if(kpulse==0)
+		/*if(kpulse==0)
 		{
             
 			clock0[kpulse]   = t01;
@@ -425,7 +394,10 @@ inline void laser::Set_StartTime_EndTime()
 			
             clock2[kpulse]  = clock0[kpulse] + twidth[kpulse];
 			
-		}
+		}*/
+        clock0[kpulse] = PulseParam[kpulse].t0 - PulseParam[kpulse].twidth;
+        clock1[kpulse] = PulseParam[kpulse].t0;
+        clock2[kpulse] = PulseParam[kpulse].t0 + PulseParam[kpulse].twidth;
         
 	}//End loop
  
@@ -505,10 +477,13 @@ void laser::Laser_Grid()
     a_ef1=0.;
     a_af1=0.;
     
-    width   = twidth[0];
+    /*width   = twidth[0];
     atmin   = -1.35*width;
     atmax   = +1.35*width;
-    double tempMin=-width;
+    double tempMin=-width;*/
+    double tempMin = minus0;
+    atmin = axisinitialtime;
+    atmax = major0 + alaser;
     //*/
     /*
     width   = twidth[0]/( 2.*sqrt( 2.*log(2.) ) );
@@ -532,48 +507,48 @@ void laser::Laser_Grid()
 /***********************************/
 //==Building pulses train ==//
 /***********************************/
-void laser::Evaluation_Laser_Pulse()
-{
+// void laser::Evaluation_Laser_Pulse()
+// {
     
     
-	double arg1;  // Phase x
-	double arg2;  // Phase y
+// 	double arg1;  // Phase x
+// 	double arg2;  // Phase y
 	
     
     
-	put_on_envelope( );
+// 	put_on_envelope( );
 	
     
-	//Evaluating train of pulses
-    for( int kpulse=0; kpulse<Npulses; kpulse++ )
-	{
+// 	//Evaluating train of pulses
+//     for( int kpulse=0; kpulse<Npulses; kpulse++ )
+// 	{
         
         
-		for( int ktime=0; ktime<Nmaxt; ktime++ )
-		{
+// 		for( int ktime=0; ktime<Nmaxt; ktime++ )
+// 		{
             
-			arg1 = w0[kpulse]*( g.t[ktime] - clock1[kpulse] ) - cep0[kpulse];           // Phase x
+// 			arg1 = w0[kpulse]*( g.t[ktime] - clock1[kpulse] ) - cep0[kpulse];           // Phase x
 			
-            arg2 = arg1 + phi_rel[kpulse];                                              // Phase y
+//             arg2 = arg1 + phi_rel[kpulse];                                              // Phase y
 				
             
-            ef[kpulse].f[ktime]  = complex(
+//             ef[kpulse].f[ktime]  = complex(
                                            
-                                           real( env[kpulse].f[ktime] )*sin( arg1 ), //x-laser field component
+//                                            real( env[kpulse].f[ktime] )*sin( arg1 ), //x-laser field component
                                            
-                                           imag( env[kpulse].f[ktime] )*sin( arg2 )  //y-laser field component
+//                                            imag( env[kpulse].f[ktime] )*sin( arg2 )  //y-laser field component
                                            
-                                           );
+//                                            );
             
 			
-			av[kpulse].f[ktime] = ef[kpulse].f[ktime] ;
+// 			av[kpulse].f[ktime] = ef[kpulse].f[ktime] ;
 
-        }
+//         }
         
-    }
+//     }
     
     
-}//End of pulses
+// }//End of pulses
 /***********************************/
 //E(t) = (E0x,E0y)*exp( aarg1 )*sin( arg1 )
 /***********************************/
@@ -582,275 +557,258 @@ void laser::Evaluation_Laser_Pulse()
 
 
 
-/*************************************************
-                Building envelope
-        *************************************************/
-void laser::put_on_envelope()
-{
-	double arg0;	
-	double gaussian_factor=64.*log10(2.);
-    double fgauss;
-    double ts;
+// /*************************************************
+//                 Building envelope
+//         *************************************************/
+// void laser::put_on_envelope()
+// {
+// 	double arg0;	
+// 	double gaussian_factor=64.*log10(2.);
+//     double fgauss;
+//     double ts;
 
     
-	vector<string> envelopes (5);
+// 	vector<string> envelopes (5);
 	
-	envelopes[0]="rect";
-	envelopes[1]="sin2";		
-	envelopes[2]="rsin2";
-	envelopes[3]="gauss";	
-	envelopes[4]="konst";	
+// 	envelopes[0]="rect";
+// 	envelopes[1]="sin2";		
+// 	envelopes[2]="rsin2";
+// 	envelopes[3]="gauss";	
+// 	envelopes[4]="konst";	
 	
     
-	for(int kpulse=0;kpulse<Npulses;kpulse++)
-	{
+// 	for(int kpulse=0;kpulse<Npulses;kpulse++)
+// 	{
         
         
         
-        /****************************/
-        //Rectangle Envelope
-        /****************************/
-		if( envelope[kpulse] == envelopes[0] )
-		{
+//         /****************************/
+//         //Rectangle Envelope
+//         /****************************/
+// 		if( envelope[kpulse] == ENVELOPE_REC )
+// 		{
             
             
-			for ( int ktime = 0; ktime < Nmaxt; ktime++ )
-			{
+// 			for ( int ktime = 0; ktime < Nmaxt; ktime++ )
+// 			{
 				
-				if (g.t[ktime] < clock0[kpulse] || g.t[ktime] > clock2[kpulse])
-                {
+// 				if (g.t[ktime] < clock0[kpulse] || g.t[ktime] > clock2[kpulse])
+//                 {
                 
-                    env[kpulse].f[ktime] = 0.;
+//                     env[kpulse].f[ktime] = 0.;
                     
-                }
-				else
-                {
+//                 }
+// 				else
+//                 {
                     
-                    env[kpulse].f[ktime] = complex( E0x[kpulse], E0y[kpulse] );
+//                     env[kpulse].f[ktime] = complex( E0x[kpulse], E0y[kpulse] );
                 
-                }
+//                 }
 				
 				
-			}
+// 			}
             
             
-		}
-        /****************************/
-        //End Rectangle Envelope
-        /****************************/
+// 		}
+//         /****************************/
+//         //End Rectangle Envelope
+//         /****************************/
 
         
         
         
         
-        /****************************/
-        //sin2 Envelope
-        /****************************/
-		if ( envelope[kpulse] == envelopes[1] )
+//         /****************************/
+//         //sin2 Envelope
+//         /****************************/
+// 		if ( envelope[kpulse] == ENVELOPE_SIN2 )
             
             
-			for( int ktime = 0; ktime < Nmaxt; ktime++ )
-			{
+// 			for( int ktime = 0; ktime < Nmaxt; ktime++ )
+// 			{
             
                 
-                ts      =  g.t[ktime] - clock0[kpulse] ;
-				arg0    = w0[kpulse] * ts/cycles0[kpulse]/2.;
+//                 ts      =  g.t[ktime] - clock0[kpulse] ;
+// 				arg0    = w0[kpulse] * ts/cycles0[kpulse]/2.;
 
                 
-                env[kpulse].f[ktime] = complex( E0x[kpulse], E0y[kpulse] )*sin(arg0)*sin(arg0);
+//                 env[kpulse].f[ktime] = complex( E0x[kpulse], E0y[kpulse] )*sin(arg0)*sin(arg0);
 
 				
-			}
-        /****************************/
-		    //End sin2 Envelope//
-        /****************************/
+// 			}
+//         /****************************/
+// 		    //End sin2 Envelope//
+//         /****************************/
         
         
         
         
-        /*************************************************/
-		//Rectangle Multiplied by a sin2 Envelope (rsin2)
-        /*************************************************/
-		if (envelope[kpulse]==envelopes[2]) 
-		{
+//         /*************************************************/
+// 		//Rectangle Multiplied by a sin2 Envelope (rsin2)
+//         /*************************************************/
+// 		if (envelope[kpulse]==ENVELOPE_RSIN2) 
+// 		{
             
             
             
-			for(int ktime=0;ktime<Nmaxt;ktime++)
-			{
+// 			for(int ktime=0;ktime<Nmaxt;ktime++)
+// 			{
 				
                 
                 
-				if ( g.t[ktime] < clock0[kpulse] || g.t[ktime] > clock2[kpulse] )
-                {
+// 				if ( g.t[ktime] < clock0[kpulse] || g.t[ktime] > clock2[kpulse] )
+//                 {
                     
                     
-                    env[kpulse].f[ktime] = 0.0;
+//                     env[kpulse].f[ktime] = 0.0;
                     
                     
-				} 
-				else
-				{
+// 				} 
+// 				else
+// 				{
                 
-                    ts      = g.t[ktime] - clock0[kpulse] ;
+//                     ts      = g.t[ktime] - clock0[kpulse] ;
                     
-					arg0    = w0[kpulse]*ts/cycles0[kpulse]/2.;
+// 					arg0    = w0[kpulse]*ts/cycles0[kpulse]/2.;
 					
-                    env[kpulse].f[ktime] = complex( E0x[kpulse], E0y[kpulse] )*sin(arg0)*sin(arg0);
+//                     env[kpulse].f[ktime] = complex( E0x[kpulse], E0y[kpulse] )*sin(arg0)*sin(arg0);
 
                     
-				}
+// 				}
                 
                 
                 
-			}
+// 			}
             
             
             
-		}/********************************************************/
-             //End Rectangle  Multiplied sin2 Envelop (rsin2)
-        /********************************************************/
+// 		}/********************************************************/
+//              //End Rectangle  Multiplied sin2 Envelop (rsin2)
+//         /********************************************************/
         
         
         
-        /*************************************************/
-                    //Gaussian Envelope
-        /*************************************************/
-		if (envelope[kpulse]==envelopes[3])
+//         /*************************************************/
+//                     //Gaussian Envelope
+//         /*************************************************/
+// 		if (envelope[kpulse]==ENVELOPE_GAUSSIAN)
 			
 		  
 		  
-			for(int ktime=0;ktime<Nmaxt;ktime++)
-			{
+// 			for(int ktime=0;ktime<Nmaxt;ktime++)
+// 			{
 				
-                ts      = g.t[ktime] - clock1[kpulse] ;
+//                 ts      = g.t[ktime] - clock1[kpulse] ;
                 
                 
-                arg0    = gaussian_factor*ts*ts/twidth[kpulse]/twidth[kpulse];
+//                 arg0    = gaussian_factor*ts*ts/twidth[kpulse]/twidth[kpulse];
                 
                 
-				fgauss = exp( -arg0 );
+// 				fgauss = exp( -arg0 );
                 
                 
-                env[kpulse].f[ktime] = complex( E0x[kpulse] ,E0y[kpulse] )*fgauss;
+//                 env[kpulse].f[ktime] = complex( E0x[kpulse] ,E0y[kpulse] )*fgauss;
                 
                 
-			}
-        /*************************************************/
-                    //End Gaussian Envelope
-        /*************************************************/
+// 			}
+//         /*************************************************/
+//                     //End Gaussian Envelope
+//         /*************************************************/
         
         
         
-        /*************************************************/
-                    //Constant Envelope
-        /*************************************************/
-		if (envelope[kpulse]==envelopes[4]) 
-		{
+//         /*************************************************/
+//                     //Constant Envelope
+//         /*************************************************/
+// 		if (envelope[kpulse]==ENVELOPE_CONST) 
+// 		{
             
-			for(int ktime=0;ktime<Nmaxt;ktime++)
-			{
+// 			for(int ktime=0;ktime<Nmaxt;ktime++)
+// 			{
                 
-                env[kpulse].f[ktime] = complex( E0x[kpulse], E0y[kpulse] );
+//                 env[kpulse].f[ktime] = complex( E0x[kpulse], E0y[kpulse] );
 
-			}
+// 			}
             
-		}//End Constant Envelope
+// 		}//End Constant Envelope
         
-	}//End number of pulses
+// 	}//End number of pulses
     
     
-    /*
-     a_af0 =  complex( -E0x[0]*sin( (*t)* w0[0] - cep0[0] )
-     , E0y[0]*cos( (*t)* w0[0] - cep0[0] )
-     )*(1.-pow( sin(  (*t)* w0[0]/4./cycles0[0]/1.5 ),2.))/w0[0];// - a_af1;
+//     /*
+//      a_af0 =  complex( -E0x[0]*sin( (*t)* w0[0] - cep0[0] )
+//      , E0y[0]*cos( (*t)* w0[0] - cep0[0] )
+//      )*(1.-pow( sin(  (*t)* w0[0]/4./cycles0[0]/1.5 ),2.))/w0[0];// - a_af1;
      
      
-     }//*/
+//      }//*/
 
     
     
     
-}
+// }
 /*************************************************/
                 //End of laser or pulse train envelopes
         /*************************************************/
 
-complex laser::elaser( double const *t )
+double laser::f_envelope(double _t, LaserParam const * p1, bool _isDt)
 {
-    
-    
-    a_ef0    = 0.;
-    ncycles2 = cycles0[0]*2.;
-    if ( abs( *t ) <= twidth[0] )
+    switch (p1->envelope)
     {
-        
-        a_ef0 = complex( E0x[0]*cos( (*t)* w0[0] - cep0[0] )
-                        ,E0y[0]*sin( (*t)* w0[0] - cep0[0] )
-                        )*pow( cos(  (*t)* w0[0]/2./ncycles2 ), 2. ) - a_ef1;
-        
+    case ENVELOPE_SIN2:
+        if (abs(_t) > p1->twidth) return 0;
+        if (_isDt) return -p1->w0*sin(p1->w0*_t/2/p1->cycles0)/(4*p1->cycles0);
+        else return pow( cos(_t* p1->w0/(4*p1->cycles0) ), 2. );
+        break;
+    
+    default:
+        if (_isDt) return -2*gaussian_factor* _t*exp( -gaussian_factor* _t*_t/p1->twidth/p1->twidth )/(p1->twidth*p1->twidth);
+        else return exp( -gaussian_factor* _t*_t/p1->twidth/p1->twidth );
+        break;
     }
-   
-    return a_ef0;//*/
-    
-    /*
-    return complex(
-                    E0x[0]*(
-                            
-                             (*t)*cos( cep0[0] - (*t)*w0[0] )
-                             *exp( -0.5*(*t)*(*t)/width/width )/width/width/w0[0]
-                             
-                             - sin( cep0[0] - (*t)*w0[0] )
-                              *exp( -0.5*(*t)*(*t)/width/width )
-                            )
-                   
-                   
-                   ,-E0y[0]*(
-                             
-                             (*t)*sin( cep0[0] - (*t)*w0[0] )
-                             *exp( -0.5*(*t)*(*t)/width/width )/width/width/w0[0]
-                             
-                             + cos( cep0[0] - (*t)*w0[0] )
-                             *exp( -0.5*(*t)*(*t)/width/width )
-                             )
-                   
-                   
-                    )  - a_ef1;//*/
-    
-    
-    
 }
 
+complex laser::elaser( double const *t )
+{
+    if (*t < minus0 || *t > major0) return 0;
+    a_ef0=0.;
+    double kt;
+    LaserParam *p1;
+    for (int kpulse = 0; kpulse < Npulses; ++kpulse)
+    {
+        p1= &(PulseParam[kpulse]);
+        kt = *t - p1->t0;
+        a_ef0 += elaser(&kt, p1);
+    }
+    return a_ef0-  a_ef1;
+}
+inline complex laser::elaser( double const *t, LaserParam const *p1)
+{
+    return complex(p1->E0x*cos((*t)* p1->w0 - p1->cep0) * f_envelope((*t), p1, false)
+            + p1->E0x/p1->w0 * sin((*t) * p1->w0 - p1->cep0) * f_envelope((*t), p1, true),
+            p1->E0y * sin((*t) * p1->w0 - p1->cep0 + p1->phi_rel) * f_envelope((*t), p1, false)
+            - p1->E0y/p1->w0 * cos((*t) * p1->w0 - p1->cep0 + p1->phi_rel) * f_envelope((*t), p1, true));
+}
+// Value of phase is adjust to E0x = E0(t=t0, cep = 0)
+// So E(cos, sin) --> A(sin, -cos)
 complex laser::avlaser( double const *t )
 {
-    
-   
-    ncycles2=cycles0[0]*2.;
-    
-     a_af0=0.;
-    if ( abs(*t) <= twidth[0] )
+    if (*t < minus0 || *t > major0) return 0;
+    a_af0=0.;
+    double kt;
+    LaserParam *p1;
+    for (int kpulse = 0; kpulse < Npulses; ++kpulse)
     {
-
-        a_af0 =  complex(
-                         
-                         E0x[0]*(2.*(-1. + pow( ncycles2, 2.) )*sin(cep0[0] - (*t)*w0[0]) + ncycles2*(1. + ncycles2)*sin( cep0[0] + (-1. + 1./ncycles2)*(*t)*w0[0]) +
-                                  (-1. + ncycles2)*ncycles2*sin(cep0[0] - ((1. + ncycles2)*(*t)*w0[0] )/ncycles2))/(4.*(-1. + ncycles2)*(1. + ncycles2)*w0[0])
-                         
-                         ,
-                         
-                         E0y[0]*(2.*(-1. + pow(ncycles2,2.))*cos(cep0[0] - (*t)*w0[0]) + ncycles2*( 1. + ncycles2)*cos(cep0[0] + (-1. + 1./ncycles2)*(*t)*w0[0]) +
-                                   (-1. + ncycles2)*ncycles2*cos(cep0[0] - ((1. + ncycles2)*(*t)*w0[0])/ncycles2))/(4.*(-1. + ncycles2)*(1. + ncycles2)*w0[0]                                                                                                                          )
-                         ) - a_af1;
-     }
-    return a_af0;//*/
-    
-    
-    /*
-    return  complex(   E0x[0]*cos( (*t)* w0[0] - cep0[0] )
-                     , E0y[0]*sin( (*t)* w0[0] - cep0[0] )
-                     )*exp( -.5* ( *t )*( *t )/width/width )/w0[0] - a_af1;//*/
-    
-
+        p1= &(PulseParam[kpulse]);
+        kt = *t - p1->t0;
+        a_af0 += avlaser(&kt, p1);
+    }
+    return a_af0-  a_af1;
+}
+inline complex laser::avlaser( double const *t, LaserParam const *p1)
+{
+    return complex(-p1->E0x/p1->w0 * sin((*t) * p1->w0 - p1->cep0) * f_envelope((*t), p1, false),
+            p1->E0y/p1->w0 * cos((*t) * p1->w0 - p1->cep0 + p1->phi_rel) * f_envelope((*t), p1, false));
 }
 
 

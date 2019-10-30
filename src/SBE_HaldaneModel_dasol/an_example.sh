@@ -29,7 +29,6 @@ N_MPI_TASKs=23 #2   #No. of MPI task or cores for parallelization
 ## Set of Haldane M. Parameters
 
 phi0=0.00           # Magnetic flux or phase of the complex 2nd hopping (rad.)
-ellip=00            # Ellipticity
 
 
 Mt2=14.4       # Ratio of on-site potential and 2nd hopping
@@ -57,7 +56,7 @@ Ny=260 #240 #465   #233 #233 #117#            # No. of points along ky, ratio Nx
 ## Some laser field inputs ##
 E0=0.0019           # Electric field strength (a.u.)
 Ncycles=4         # No. of Opt. cycles
-ellip=1.0         # Ellipticity
+ellip=-1.0         # Ellipticity
 
 dt=0.5             # Time-Steps (a.u.)
 dephasing=110.      #1440. #220      # Dephasing (a.u.)
