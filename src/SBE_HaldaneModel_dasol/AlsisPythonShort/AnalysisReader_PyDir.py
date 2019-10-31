@@ -93,7 +93,7 @@ InterC 	        = np.loadtxt( IntraInterPath );
 IntraC          = np.loadtxt( IntraInterPath1 );
 Laser 	        = np.loadtxt( LaserPath );
 Params 		    = np.loadtxt( ParamPath );
-LParams       = np.loadtxt( LParamPath )
+LParams       = np.loadtxt( LParamPath , ndmin=2)
 
 
 
@@ -169,7 +169,7 @@ t		    = Laser[:,0];
 Efield      = Laser[:,1];
 
 Nt          = len(t)
-dt 	        = Params[0,6]#t[1]-t[0];
+dt 	        = Params[0,1]#t[1]-t[0];
 
 
 print "dt          =  ", dt, " a.u." ;
@@ -516,6 +516,69 @@ np.savetxt(out, OutputData , fmt='%1.16e')
 NewDir = "./SetData0" + ofname
 shutil.copyfile( out, NewDir );
 
+#####################################################
+############################
+#Ploting the harmonic current radiations-oscillations
+width = 11
+hight = width/1.62
+
+
+fig = plt.figure(figsize=(width,hight) )
+ax1 = fig.add_axes([0.2, 0.15, 0.75, 0.75])
+
+
+p1, = plt.plot( w/w0, xSpectrum, 'r-', lw = 2., label='$J_{x}$' );
+p2, = plt.plot( w/w0, ySpectrum, 'b',  lw = 1.5, label='$J_{y}$' );
+p3, = plt.plot( w/w0, Spectrum, 'g',  lw = 1.2, label='$J_{t}$' );
+
+plt.legend([p1, p2], ['$J_{x}$', '$J_{y}$'],fontsize=18);
+
+
+xp = 1.3
+yp = -1.1
+
+
+plt.xlabel(r'$\rm Harmonic-Order$', fontsize=30 );
+plt.ylabel(r'$\rm Log_{10}(I_{HHG})$', fontsize=30 );
+plt.tick_params(labelsize = 28 );
+
+
+
+xaxmin      = np.log10(hzero);      # controling harmonic-order
+xaxmax      = +5;                   # controling harmonic-order
+
+plt.ylim(xaxmin, xaxmax);
+xticks0  = np.arange(1,50,4);
+plt.xticks( xticks0 );
+
+yticks0  = [-20., -15, -10.0, -5, 0, 5 ]#10., 15, 5.0];
+plt.yticks( yticks0 );
+
+
+if (mparam=='x'):
+    plt.ylim([-12, .2])
+if (mparam=='y'):
+    plt.ylim([-10, .2])
+
+plt.grid(True)
+
+
+xaxmin      = 0;    # controling harmonic-order axis limits, down
+xaxmax      = 37;   # controling harmonic-order axis limits, u
+
+
+plt.xlim(xaxmin, xaxmax);
+plt.ylim( np.log10(hzero),1 )
+
+fname='/'+str(mparam)+'PaperHarmonicSpectrumCNo'+ str("%.1f"%ChernNo) + 'M_' + str("%.2f"%M0) + 'Phi_' + str("%.2f"%Phi0) + '.pdf'
+
+
+filename1           = FigureDir + fname;
+fileNamePicture     = ProjPath  + filename1; 
+
+
+plt.savefig(fileNamePicture, dpi = 300);
+shutil.copyfile( fileNamePicture, BasicPath + set_DataName + fname );
 
 #####################################################
 ############################
