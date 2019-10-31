@@ -58,6 +58,7 @@ FileNameIntraInter      = '/interband_dipole_full_evol.dat';
 FileNameIntraInter1     = '/intraband_current_full_evol.dat';
 FileNameLaser 	        = '/outlaserdata.dat';
 FileParameters 		= '/setOfparameters.dat';
+FileLaserParams   = '/laserParameters.dat'
 set_DataName 	        = '/SetData0';
 
 
@@ -67,6 +68,7 @@ IntraInterPath 	        = ProjPath  + FileNameIntraInter;
 IntraInterPath1         = ProjPath  + FileNameIntraInter1;
 LaserPath 	        = ProjPath  + FileNameLaser;
 ParamPath 	        = ProjPath  + FileParameters;
+LParamPath          = ProjPath  + FileLaserParams
 
 
 
@@ -91,6 +93,7 @@ InterC 	        = np.loadtxt( IntraInterPath );
 IntraC          = np.loadtxt( IntraInterPath1 );
 Laser 	        = np.loadtxt( LaserPath );
 Params 		    = np.loadtxt( ParamPath );
+LParams       = np.loadtxt( LParamPath )
 
 
 
@@ -120,17 +123,20 @@ print"t2        = ", t2    ;
 print"M0/t2     = ", M0t2  ;
 
 
+Npulses = int(Params[0, 2])
 print"\n\n+=+++++++++++++++++++++++++=+\nLaser features:" ;
-print"E0        = ", Params[0,0], " a.u." ;
-print"I0        = ", Params[0,1], " W/cm^2" ;
-print"w0        = ", Params[0,2], " a.u." ;
-print"N.O.C.    = ", Params[0,3], " " ;
-print"Ellip     = ", ellip, " " ;
+for i in range(Npulses):
+  print("Pulse ", i)
+  print"E0        = ", LParams[i,0], " a.u." ;
+  print"I0        = ", LParams[i,1], " W/cm^2" ;
+  print"w0        = ", LParams[i,2], " a.u." ;
+  print"N.O.C.    = ", LParams[i,3], " " ;
+  print"Ellip     = ", LParams[i,4], " " ;
 
 
 print"\n\n\n+++++++++++++++++++++++++++++"
-print"Time-step dt             = ", Params[0,6], " a.u. " ;
-print"Total No. of time-steps  = ", int(Params[0,5]), " " ;
+print"Time-step dt             = ", Params[0,2], " a.u. " ;
+print"Total No. of time-steps  = ", int(Params[0,1]), " " ;
 print'+=+++++++++++++++++++++++=+\n\n';
 #####################################################
 
@@ -139,10 +145,10 @@ print'+=+++++++++++++++++++++++=+\n\n';
 #Arranging/organizing data and parameters 
 #Nt			= cs.Ntime;
 
-
+refPulse = 0
 
 #frequency and laser period
-w0		= Params[0,2];
+w0		= LParams[refPulse,2];
 T0		= 2.*np.pi/w0;
 
 
@@ -152,7 +158,7 @@ print "Mean-freq   = ", w0, " a.u.";
 
 #####################################################
 #Laser intensity
-E0          = np.sqrt( Params[0,1]/3.5e16);
+#E0          = np.sqrt( Params[0,1]/3.5e16);
 
 
 
@@ -315,8 +321,10 @@ asigma  = T0*2
 bsigma  = T0*2
 
 
-xJinterMasked = masking_dipole(t, xJinter, ta, tb, asigma, bsigma);
-yJinterMasked = masking_dipole(t, yJinter, ta, tb, asigma, bsigma);
+#xJinterMasked = masking_dipole(t, xJinter, ta, tb, asigma, bsigma);
+#yJinterMasked = masking_dipole(t, yJinter, ta, tb, asigma, bsigma);
+xJinterMasked = np.blackman(Nt)*xJinter
+yJinterMasked = np.blackman(Nt)*yJinter
 
 
 
@@ -327,9 +335,10 @@ tb     = t[-1] - T0*6.00500;
 asigma  = T0*2.;
 bsigma  = T0*2.;
 
-xJintraMasked = masking_dipole(t, xJintra, ta, tb, asigma, bsigma);
-yJintraMasked = masking_dipole(t, yJintra, ta, tb, asigma, bsigma);
-
+#xJintraMasked = masking_dipole(t, xJintra, ta, tb, asigma, bsigma);
+#yJintraMasked = masking_dipole(t, yJintra, ta, tb, asigma, bsigma);
+xJintraMasked = np.blackman(Nt)*xJintra
+yJintraMasked = np.blackman(Nt)*yJintra
 
 
 #####################################################

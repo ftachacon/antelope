@@ -425,7 +425,7 @@ int main( int argc, char *argv[] )
     //Opening output files!
     FILE *laserout, *mout, *fout, *engout;
     FILE *dipout, *conout, *curvaout, *gvelout;
-    FILE *inh_out, *occup_out, *sparamout;
+    FILE *inh_out, *occup_out, *sparamout, *lparamout;
     FILE *simulation_out;
     FILE *density_out, *densitytime_out, *polarization_out;
     FILE *intraj_out, *interj_out;
@@ -446,6 +446,7 @@ int main( int argc, char *argv[] )
         
         gvelout          = fopen( "gvelocities.dat","w" );
         sparamout        = fopen( "setOfparameters.dat", "w" );
+        lparamout        = fopen( "laserParameters.dat", "w" );
         
         density_out      = fopen( "density.dat", "wb");
         polarization_out = fopen( "polarization.dat", "wb");
@@ -489,9 +490,6 @@ int main( int argc, char *argv[] )
         cout << "ellipticity  = " << ellip << endl;*/
         cout << "\nTime-step dt = " << dt << " a.u." << endl;
         cout << "New-No. Of Total time Steps = " << fpulse.NewNt << "\n---\n";
-
-        fprintf(sparamout, "\n%s", "#Laser-Parameters,  E0,          I0,              w0,             Ncycles,           CEP,     No.-time-steps,  Time-step-dt ");
-        fprintf(sparamout, "\n          %e      %e      %e      %e      %e      %d      %e      \n\n", E0, I0, wfreq, ncycles, cep, fpulse.NewNt, dt);
 
         fpulse.Print_LaserInfo();
     }
@@ -702,6 +700,8 @@ int main( int argc, char *argv[] )
     //cs.T2   = period0;
         cout << "Dephasing, T2  = "     << cs.T2 << " a.u.\n\n\n";
     
+        fprintf(sparamout,"\n\n%s","#Time grid, No.-time-steps,  Time-step-dt,     No.-pulses     ---,     ---,     ---,     --- ");
+        fprintf(sparamout,"\n          %d      %e      %d      %e      %e      %e      %e      \n\n", fpulse.NewNt, dt, fpulse.Npulses, 1.0, 1.0, 1.0, 1.0 );
     
         fprintf(sparamout,"\n\n%s","#Momentum mesh & H.M. params., dkx (a.u.),  dky (a.u.),  Nx,  Ny, a0 (a.u.),  t1(a.u.),  t2 ");
         fprintf(sparamout,"\n          %e      %e      %d      %d      %e      %e      %e      \n\n", g.dk[0], g.dk[1], g.N[0], g.N[1], a0, t1, t2 );
@@ -729,6 +729,14 @@ int main( int argc, char *argv[] )
         
         
         fclose(sparamout);
+
+        fprintf(lparamout, "\n%s", "#Laser-Parameters,  E0,          I0,              w0,             Ncycles,           ellipticity,           CEP,           t0,           theta0,     envelope (0 - gauss, 1 - sin2) ");
+        for (int i = 0; i < fpulse.Npulses; ++i)
+        {
+            fprintf(lparamout, "\n          %e      %e      %e      %e      %e      %e      %e      %e      %d   \n\n", fpulse.PulseParam[i].E0, fpulse.PulseParam[i].I0, fpulse.PulseParam[i].w0, fpulse.PulseParam[i].cycles0, fpulse.PulseParam[i].e, fpulse.PulseParam[i].cep0, fpulse.PulseParam[i].t0, fpulse.PulseParam[i].theta0, fpulse.PulseParam[i].envelope);
+        }
+        fflush(lparamout );
+        fclose(lparamout);
         
         
         
@@ -1387,6 +1395,7 @@ int main( int argc, char *argv[] )
     //##############################################
     // inter, intrabnad currents, occupation, cohereneces are integrated through every sub-grids (all-processors)
     // inter, intra - currents and radiation by group and anomalous velocity
+    MPI_Barrier( MPI_COMM_WORLD );
     for (int i = 0; i < 2; ++i)
     {
         if (rank == MASTER)
@@ -1397,6 +1406,7 @@ int main( int argc, char *argv[] )
         {
             MPI_Reduce(inter_rad[i], inter_rad[i], fpulse.NewNt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
         }
+        MPI_Barrier( MPI_COMM_WORLD );
         if (rank == MASTER)
         {
             MPI_Reduce(MPI_IN_PLACE, intra_rad[i], fpulse.NewNt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
@@ -1405,6 +1415,7 @@ int main( int argc, char *argv[] )
         {
             MPI_Reduce(intra_rad[i], intra_rad[i], fpulse.NewNt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
         }
+        MPI_Barrier( MPI_COMM_WORLD );
         if (rank == MASTER)
         {
             MPI_Reduce(MPI_IN_PLACE, group_rad[i], fpulse.NewNt, MPI_DOUBLE, MPI_SUM, MASTER, MPI_COMM_WORLD);
@@ -1413,6 +1424,7 @@ int main( int argc, char *argv[] )
         {
             MPI_Reduce(group_rad[i], group_rad[i], fpulse.NewNt, MPI_DOUBLE, MPI_SUM, MASTER, MPI_COMM_WORLD);
         }
+        MPI_Barrier( MPI_COMM_WORLD );
         if (rank == MASTER)
         {
             MPI_Reduce(MPI_IN_PLACE, anomalous_rad[i], fpulse.NewNt, MPI_DOUBLE, MPI_SUM, MASTER, MPI_COMM_WORLD);
@@ -1421,6 +1433,7 @@ int main( int argc, char *argv[] )
         {
             MPI_Reduce(anomalous_rad[i], anomalous_rad[i], fpulse.NewNt, MPI_DOUBLE, MPI_SUM, MASTER, MPI_COMM_WORLD);
         }
+        MPI_Barrier( MPI_COMM_WORLD );
     }
     // occupation of conduction band
     if (rank == MASTER)
@@ -1431,7 +1444,7 @@ int main( int argc, char *argv[] )
     {
         MPI_Reduce(ConductionOccup, ConductionOccup, fpulse.NewNt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
     }
-
+    MPI_Barrier( MPI_COMM_WORLD );
     // coherence
     if (rank == MASTER)
     {
