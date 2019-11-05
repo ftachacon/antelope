@@ -87,7 +87,7 @@ public:
     
     double *zbcurva_v;
     double *zbcurva_c;
-    double T2;
+    double T1,T2;
 
     
     
@@ -186,7 +186,7 @@ public:
          INPUTS, PROCESSES and OUTPUTS
         *******************************/
 
-    solidstructure(  const momaxis *_g ,const double *_a0, const double *_dephasing );
+    solidstructure(  const momaxis *_g ,const double *_a0, const double *_dephasing, const double *_dephasing2 );
     ~solidstructure( );
     void set_memory();
     
@@ -250,13 +250,15 @@ public:
 solidstructure::solidstructure(  const momaxis *_g
                                 ,const double *_a0
                                 ,const double *_dephasing
+                                ,const double *_dephasing2
                                )
 {
     
 
     //##################################
     //lattice_a0  = *_a0;
-    T2          = *_dephasing;
+    T1          = *_dephasing;
+    T2          = *_dephasing2;
     flag        = 0;
     
     

@@ -46,7 +46,7 @@ void setting_complex_memory(complex **_TempPointer, long long int _Ntime);
 void setting_double_memory(double **_TempPointer, long long int _Ntime );
 void der_pi( const double *eg, const double *xig_ef, const double *T2, const  complex *ROmega, const  complex *cohPi0, const double *nc, complex *cpi);
 void der_nc( const complex *ROmega, const complex *cpi, double *nc );
-void der_nc2( const complex *ROmega, const complex *cpi, const double *T2, const double *tnc,  double *nc );
+void der_nc2( const complex *ROmega, const complex *cpi, const double *T1, const double *tnc,  double *nc );
 
 complex der_pi_RK5( double const *eg, double const *xig_ef, double const *T2, complex const *ROmega, complex const *cohPi0);
 complex jaco_pi_RK5( double const *eg, double const *xig_ef, double const *T2 );
@@ -150,8 +150,12 @@ int main( int argc, char *argv[] )
     
     //Time step dt
     double dt           = 0.5;           // Time step
-    
-    double T2           = 0.;        //Dephasing time in the crystal
+
+    double offset_before       = 1000;
+    double offset_after        = 1000;
+
+    double T1           = 0.;
+    double T2           = -1.0;        //Dephasing time in the crystal
 
     //String Type of variables, envelope and integration rule
     string env_name     = "gauss";          //Name envel: "rect", "sin2", "gauss" or "rsin2"
@@ -221,6 +225,7 @@ int main( int argc, char *argv[] )
             else if (paramName == "la0")  lineFstream >> la0;                       // Lattice constant in Angstroms
             else if (paramName == "t1") lineFstream >> t1;                          // NN hopping parameters in a.u.                       
             else if (paramName == "t2") lineFstream >> t2;                          // NNN hopping amplitude in a.u.
+            else if (paramName == "T1") lineFstream >> T1;                          // Dephasing time T2
             else if (paramName == "T2") lineFstream >> T2;                          // Dephasing time T2
             else if (paramName == "phi0") lineFstream >> phi0;                      // Magnetic flux
             else if (paramName == "Mt2") lineFstream >> jparam;                     // On Site potential ratio to t2, i.e M/t2
@@ -234,6 +239,8 @@ int main( int argc, char *argv[] )
             else if (paramName == "diagnostic") lineFstream >> diagnostic;          // diagonostic
             else if (paramName == "ksfactor") lineFstream >> ksfactor;              // extend BZ with ksfactor ratio
             else if (paramName == "shotNumber") lineFstream >> shotNumber;          // Number of snapshot, snapshot is disabled with shotNumber <=0
+            else if (paramName == "offset_before") lineFstream >> offset_before;
+            else if (paramName == "offset_after") lineFstream >> offset_after;
             else
             {
                 if (rank == MASTER)
@@ -248,7 +255,8 @@ int main( int argc, char *argv[] )
     // Some post-processing 
     M0 = jparam * t2;                                // On-site potential
     a0 = la0 / 0.529;                                // Lattice constant in atomic units (a.u.)
-    fpulse.laser_pulses(dt, 500., 500.);
+    if (T1 > 0) flag_occ_dephasing = 1.0;
+    fpulse.laser_pulses(dt, offset_before, offset_after);
 
     
 	
@@ -599,7 +607,7 @@ int main( int argc, char *argv[] )
       Crystal structure object for the Haldane model
      
      *********/
-    solidstructure cs( &g, &a0, &T2 );
+    solidstructure cs( &g, &a0, &T1, &T2 );
     
 
 
@@ -1220,7 +1228,7 @@ int main( int argc, char *argv[] )
             
             
             der_pi( &teg5[0], &txig5[0], &cs.T2, &tROmega5[0], &temp_pi5[0], &temp_nc5[0], &k_pi5[0] );
-            der_nc2( &tROmega5[0], &temp_pi5[0], &cs.T2, &temp_nc5[0], &k_nc5[0] );
+            der_nc2( &tROmega5[0], &temp_pi5[0], &cs.T1, &temp_nc5[0], &k_nc5[0] );
             
             
             
@@ -1230,7 +1238,7 @@ int main( int argc, char *argv[] )
             
             
             der_pi( &teg5[1], &txig5[1], &cs.T2, &tROmega5[1], &temp_pi5[1], &temp_nc5[1], &k_pi5[1] );
-            der_nc2( &tROmega5[1], &temp_pi5[1], &cs.T2, &temp_nc5[1], &k_nc5[1] );
+            der_nc2( &tROmega5[1], &temp_pi5[1], &cs.T1, &temp_nc5[1], &k_nc5[1] );
             
             
             
@@ -1241,7 +1249,7 @@ int main( int argc, char *argv[] )
             
             der_pi( &teg5[2], &txig5[2], &cs.T2, &tROmega5[2], &temp_pi5[2], &temp_nc5[2], &k_pi5[2] );
             //der_nc( &tROmega5[2], &temp_pi5[2], &k_nc5[2] );
-            der_nc2( &tROmega5[2], &temp_pi5[2], &cs.T2, &temp_nc5[2], &k_nc5[2] );            
+            der_nc2( &tROmega5[2], &temp_pi5[2], &cs.T1, &temp_nc5[2], &k_nc5[2] );            
             
             
             
@@ -1253,7 +1261,7 @@ int main( int argc, char *argv[] )
             
             
             der_pi( &teg5[3], &txig5[3], &cs.T2, &tROmega5[3], &temp_pi5[3], &temp_nc5[3], &k_pi5[3] );
-            der_nc2( &tROmega5[3], &temp_pi5[3], &cs.T2, &temp_nc5[3], &k_nc5[3] );            
+            der_nc2( &tROmega5[3], &temp_pi5[3], &cs.T1, &temp_nc5[3], &k_nc5[3] );            
             //der_nc( &tROmega5[3], &temp_pi5[3], &k_nc5[3] );
             
             
@@ -1266,7 +1274,7 @@ int main( int argc, char *argv[] )
             
             
             der_pi( &teg5[4], &txig5[4], &cs.T2, &tROmega5[4], &temp_pi5[4], &temp_nc5[4], &k_pi5[4] );
-            der_nc2( &tROmega5[4], &temp_pi5[4], &cs.T2, &temp_nc5[4], &k_nc5[4] );            
+            der_nc2( &tROmega5[4], &temp_pi5[4], &cs.T1, &temp_nc5[4], &k_nc5[4] );            
             //der_nc( &tROmega5[4], &temp_pi5[4], &k_nc5[4] );
 
             
@@ -1279,7 +1287,7 @@ int main( int argc, char *argv[] )
             
             
             der_pi( &teg5[5], &txig5[5], &cs.T2, &tROmega5[5], &temp_pi5[5], &temp_nc5[5], &k_pi5[5] );
-            der_nc2( &tROmega5[5], &temp_pi5[5], &cs.T2, &temp_nc5[5], &k_nc5[5] );            
+            der_nc2( &tROmega5[5], &temp_pi5[5], &cs.T1, &temp_nc5[5], &k_nc5[5] );            
             //der_nc( &tROmega5[5], &temp_pi5[5], &k_nc5[5] );
             
             
@@ -1579,10 +1587,10 @@ void der_nc( const complex *ROmega, const complex *cpi,  double *nc )
 }
 
 
-void der_nc2( const complex *ROmega, const complex *cpi, const double *T2, const double *tnc,  double *nc )
+void der_nc2( const complex *ROmega, const complex *cpi, const double *T1, const double *tnc,  double *nc )
 {
     
-    *nc = -2.*imag( conj( *ROmega )*( *cpi ) ) - (*tnc)/(*T2) * flag_occ_dephasing;
+    *nc = -2.*imag( conj( *ROmega )*( *cpi ) ) - (*tnc)/(*T1) * flag_occ_dephasing;
     
 }
 

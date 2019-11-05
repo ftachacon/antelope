@@ -2,37 +2,41 @@
 # npulses {npulses}
 #   {E0}  {w0}  {ncycles}  {ellip}  {cep}  {t0}  {theta0}  {env_name}
 #   env_name - sin2, gauss
-npulses 2
-    0.0019    0.00608    4    0.0    0.0    0.0    0.0    sin2
-    0.0008    0.05695    2    1.0    0.0    -300.0    0.0    gauss
+npulses 1
+    0.0019    0.006079    4    0.0    0.0    0.0    0.0    sin2
+    #0.00019    0.059578    8    1.0    0.0    0.0    0.0    gauss
 
 
 # number of points - Nx, Ny
-Npoints  250  260
+Npoints  600  690
 
 # timestep (a.u.)
-dt 0.5
+dt 0.2
 
 # Lattice constant in Angstroms
-la0 3.3
+la0 3.32
 
 # NN hopping paramter in a.u.
-t1  0.01554
+t1  0.0176058
 
 # NNN hopping amplitude in a.u.
-t2  0.002042
+t2  0.00220295
 
 # dephasing time T2 (a.u.)
-T2  110
+T1  250
+T2  500
 
 # Magnetic flux
 phi0  0
 
 # On Site potential ratio to t2, i.e M/t2
-Mt2  14.4
+Mt2  13.5209
 
-ksfactor  2
-shotNumber 100
+ksfactor  1
+shotNumber -1
+
+offset_before 1000
+offset_after 1000
 
 
 # ...
