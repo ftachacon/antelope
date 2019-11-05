@@ -135,8 +135,8 @@ for i in range(Npulses):
 
 
 print"\n\n\n+++++++++++++++++++++++++++++"
-print"Time-step dt             = ", Params[0,2], " a.u. " ;
-print"Total No. of time-steps  = ", int(Params[0,1]), " " ;
+print"Time-step dt             = ", Params[0,1], " a.u. " ;
+print"Total No. of time-steps  = ", int(Params[0,0]), " " ;
 print'+=+++++++++++++++++++++++=+\n\n';
 #####################################################
 
