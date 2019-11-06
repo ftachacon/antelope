@@ -2,13 +2,13 @@
 # npulses {npulses}
 #   {E0}  {w0}  {ncycles}  {ellip}  {cep}  {t0}  {theta0}  {env_name}
 #   env_name - sin2, gauss
-npulses 1
+npulses 2
     0.0019    0.006079    4    0.0    0.0    0.0    0.0    sin2
-    #0.00019    0.059578    8    1.0    0.0    0.0    0.0    gauss
+    0.00019    0.059578    40    1.0    0.0    0.0    0.0    gauss
 
 
 # number of points - Nx, Ny
-Npoints  600  690
+Npoints  400  460
 
 # timestep (a.u.)
 dt 0.2

@@ -29,29 +29,55 @@ def masking_dipole(t,f,ta,tb,asigma,bsigma):
       
   return amask;
 
-
-
 #Clear
 #plt.cla()
 #plt.clf()
 
-#Getting parameters
-set_of_params   = sys.argv;
+##########################################################################
+################ FIX IT LATER!!!!!!! ####################################
+#Getting parameters 
+# - dir name, HHG or HSG, refpulse number(ref frequency of x-axis in spectrum )
+# paramters can be omiited - allowed combination is written below
+# no paramter, 1 paramter (folder), 
+# 2 parameter (folder, HHG or HSG), 3 paramters(folder, HHG or HSG, refpulse num)
 
-iparam 	    	=  int( set_of_params[1] );  #intensity param
-kparam          =  int( set_of_params[2] );  # Chern-No.
-lparam      	=  set_of_params[3] ;       #dir-name
-mparam      	=  set_of_params[4] ;       #xdirection
+# if spectrumType parametr is not given, type is determined by number of the pulses
+# 2 pulses --> HSG, others --> HHG
+
+# if refpulse is not given, default value (=0) becomes reference
+################################################################################
+###########################################################################
 
 
+set_of_params   = sys.argv
+
+lparam = ""
+mparam = "xy"
+spectrumType = ""
+refPulse = 0
+
+argc = len(set_of_params)
+if (argc > 1):
+  lparam = set_of_params[1]
+if (argc > 2):
+  nparam = set_of_params[2]
 
 
+##########################################################################
+################ FIX IT LATER!!!!!!! ####################################
+#if (argc > 2):
+#  spectrumType = set_of_params[2]
+#if (argc > 3):
+#  refPulse = int(set_of_params[3])
+#mparam      	=  set_of_params[4] ;       #xdirection
+################################################################################
+###########################################################################
 
 #Creating path and file name for reading files 
-BasicPath	        = os.getcwd();
+BasicPath	        = os.getcwd()
 
-FolderName              = "/" + lparam;
-ProjPath  	        = BasicPath + FolderName;
+FolderName              = "/" + lparam
+ProjPath  	        = BasicPath + FolderName
 
 
 FileNameIntraInter      = '/interband_dipole_full_evol.dat';
@@ -80,7 +106,7 @@ except OSError as exc:
   pass  
 
 try:
-    os.mkdir( "SetData0" );
+    os.mkdir( BasicPath + set_DataName );
 except OSError as exc:
     if (exc.errno != errno.EEXIST):
         raise exc;
@@ -145,23 +171,47 @@ print'+=+++++++++++++++++++++++=+\n\n';
 #Arranging/organizing data and parameters 
 #Nt			= cs.Ntime;
 
-refPulse = 0
-
-#frequency and laser period
-w0		= LParams[refPulse,2];
-T0		= 2.*np.pi/w0;
-
-
-print "Period, T0  = ", T0, " a.u.";
-print "Mean-freq   = ", w0, " a.u.";
-
 
 #####################################################
 #Laser intensity
 #E0          = np.sqrt( Params[0,1]/3.5e16);
 
+#####
+# paramters changing for each plots
+# width and height is applied for 'every' plots including current
+width = 11
+hight = width/1.62
 
+# these are for plotting spectrums
+hzero           = .98e-25
 
+# By default 2 pulse = HSG, other = HHG
+# if there is additional paramters from argumets, follow that
+if (Npulses==2 and spectrumType != "HHG"):
+  spectrumType = "HSG"
+  spectrum_xmin = -5
+  spectrum_xmax = 15
+  spectrum_ymin = np.log10(hzero)
+  spectrum_ymax = 1
+  xticks0  = np.arange(-4,14,4)
+  yticks0  = np.arange(-20,6,5)
+else:
+  spectrumType = "HHG"
+  spectrum_xmin = 0
+  spectrum_xmax = 37
+  spectrum_ymin = np.log10(hzero)
+  spectrum_ymax = 1
+  xticks0  = np.arange(1,50,4)
+  yticks0  = np.arange(-20,6,5)
+
+#frequency and laser period
+w0		= LParams[refPulse,2];
+T0		= 2.*np.pi/w0;
+
+print("Type of spectrum = ", spectrumType)
+
+print "Period, T0  = ", T0, " a.u.";
+print "Mean-freq   = ", w0, " a.u.";
 
 #####################################################
 #Time axis and electric field 
@@ -201,8 +251,8 @@ print '+=++++++++++++++++++++++++=+\n';
 
 
 #####################################################
-width = 11
-hight = width/1.62
+#width = 11
+#hight = width/1.62
 
 
 fig = plt.figure(figsize=(width,hight) );
@@ -256,8 +306,8 @@ yJinter        = yinterC    #np.diff( yinterC )/dt;
 
 #####################################################
 #Ploting the current oscillations
-width = 11
-hight = width/1.62
+#width = 11
+#hight = width/1.62
 
 
 fig = plt.figure(figsize=(width,hight) )
@@ -300,8 +350,8 @@ plt.savefig( fileNamePicture );
 
 #####################################################
 #Populations
-width = 11
-hight = width/1.62
+#width = 11
+#hight = width/1.62
 
 
 #############################################################
@@ -314,11 +364,11 @@ print "complex number, imag. base = ", i
 #filtering dipole and current oscillations by means of 
 #applying a smoth time mask over the beginning and end of pulses, this will avoid 
 #high esporeous frequencies...
-ta 	    = t[0]  + T0*6.0;#T0*3.0;
-tb 	    = t[-1] - T0*6.0;#T0*3.0;
+#ta 	    = t[0]  + T0*6.0;#T0*3.0;
+#tb 	    = t[-1] - T0*6.0;#T0*3.0;
 
-asigma  = T0*2
-bsigma  = T0*2
+#asigma  = T0*2
+#bsigma  = T0*2
 
 
 #xJinterMasked = masking_dipole(t, xJinter, ta, tb, asigma, bsigma);
@@ -328,12 +378,12 @@ yJinterMasked = np.blackman(Nt)*yJinter
 
 
 
-ta     = t[0]  + T0*6.00500;
-tb     = t[-1] - T0*6.00500;
+#ta     = t[0]  + T0*6.00500;
+#tb     = t[-1] - T0*6.00500;
 
 
-asigma  = T0*2.;
-bsigma  = T0*2.;
+#asigma  = T0*2.;
+#bsigma  = T0*2.;
 
 #xJintraMasked = masking_dipole(t, xJintra, ta, tb, asigma, bsigma);
 #yJintraMasked = masking_dipole(t, yJintra, ta, tb, asigma, bsigma);
@@ -380,8 +430,8 @@ plt.savefig( fileNamePicture );
 
 #####################################################
 #Ploting the current oscillations
-width   = 11
-hight   = width/1.62
+#width   = 11
+#hight   = width/1.62
 fig     = plt.figure( figsize=(width,hight) )
 
 p2,= plt.plot( t, xJinterMasked, 'green', lw = 1 );
@@ -430,7 +480,6 @@ dJ_m            = xFullRadiation + (1j)*yFullRadiation
 
 ############################
 ############################
-hzero           = .98e-25;
 
 xSinter         = np.log10( abs( xFFT_Jinter )**2 + hzero );
 ySinter         = np.log10( abs( yFFT_Jinter )**2 + hzero );
@@ -454,6 +503,10 @@ a_dJ_m          = np.log10( abs( dJ_m )**2 + hzero );
 
 print "\n\n+=+++++++++++++++++++++=+\nSpectra shape       = ",  xSinter.shape
 print "Frequency axis shape = ", w.shape, "\n"
+
+## Note that this assumes that HSG uses only two pulses...
+if (spectrumType == 'HSG'):
+  w -= LParams[(refPulse+1)%2, 2]
 
 
 w.shape             = (Nt,1)
@@ -506,85 +559,65 @@ OutputData      = np.concatenate( (OutputData, imag_jyoutput   ), axis=1 );
 OutputData      = np.concatenate( (OutputData, spectrum_output ), axis=1 );
 
 
-
-ofname          = "/HHG__Phi0__" + str("%.3f"%Phi0) + "__M0t2__" + str("%.3f"%M0t2) + "__e0__" + str("%.3f"%ellip) + "__.dat"
+ofname          = "/HHG__Phi0__" + str("%.3f"%Phi0) + "__M0t2__" + str("%.3f"%M0t2) + "__e0__" + str("%.3f"%ellip) + "__" + nparam  + "__.dat"
 
 out                = ProjPath + ofname
 np.savetxt(out, OutputData , fmt='%1.16e')
 
 
-NewDir = "./SetData0" + ofname
-shutil.copyfile( out, NewDir );
+NewDir = '.' + set_DataName + ofname
+if (not os.path.exists(NewDir)):
+  shutil.copyfile( out, NewDir )
+else:
+  print("Warning file already exists - check whether you make typo")
+  inputkey = raw_input("If you want to replace the file and proceed, press y: ")
+  if (inputkey == 'y'):
+    shutil.copyfile( out, NewDir )
+  else:
+    sys.exit()
 
 #####################################################
 ############################
 #Ploting the harmonic current radiations-oscillations
-width = 11
-hight = width/1.62
 
 
 fig = plt.figure(figsize=(width,hight) )
 ax1 = fig.add_axes([0.2, 0.15, 0.75, 0.75])
 
+p1, = plt.plot( w/w0, xSpectrum, 'r-', lw = 2., label='$J_{x}$' )
+p2, = plt.plot( w/w0, ySpectrum, 'b',  lw = 1.5, label='$J_{y}$' )
+p3, = plt.plot( w/w0, Spectrum, 'g',  lw = 1.2, label='$J_{t}$' )
 
-p1, = plt.plot( w/w0, xSpectrum, 'r-', lw = 2., label='$J_{x}$' );
-p2, = plt.plot( w/w0, ySpectrum, 'b',  lw = 1.5, label='$J_{y}$' );
-p3, = plt.plot( w/w0, Spectrum, 'g',  lw = 1.2, label='$J_{t}$' );
+plt.legend([p1, p2], ['$J_{x}$', '$J_{y}$'],fontsize=18)
 
-plt.legend([p1, p2], ['$J_{x}$', '$J_{y}$'],fontsize=18);
-
-
-xp = 1.3
-yp = -1.1
-
-
-plt.xlabel(r'$\rm Harmonic-Order$', fontsize=30 );
-plt.ylabel(r'$\rm Log_{10}(I_{HHG})$', fontsize=30 );
-plt.tick_params(labelsize = 28 );
+plt.xlabel(r'$\rm Harmonic-Order$', fontsize=30 )
+plt.ylabel(r'$\rm Log_{10}(I_{HHG})$', fontsize=30 )
+plt.tick_params(labelsize = 28 )
 
 
-
-xaxmin      = np.log10(hzero);      # controling harmonic-order
-xaxmax      = +5;                   # controling harmonic-order
-
-plt.ylim(xaxmin, xaxmax);
-xticks0  = np.arange(1,50,4);
-plt.xticks( xticks0 );
-
-yticks0  = [-20., -15, -10.0, -5, 0, 5 ]#10., 15, 5.0];
-plt.yticks( yticks0 );
-
-
-if (mparam=='x'):
-    plt.ylim([-12, .2])
-if (mparam=='y'):
-    plt.ylim([-10, .2])
+plt.xticks( xticks0 )
+plt.yticks( yticks0 )
 
 plt.grid(True)
 
+plt.xlim(spectrum_xmin, spectrum_xmax)
+plt.ylim(spectrum_ymin, spectrum_ymax)
 
-xaxmin      = 0;    # controling harmonic-order axis limits, down
-xaxmax      = 37;   # controling harmonic-order axis limits, u
-
-
-plt.xlim(xaxmin, xaxmax);
-plt.ylim( np.log10(hzero),1 )
-
-fname='/'+str(mparam)+'PaperHarmonicSpectrumCNo'+ str("%.1f"%ChernNo) + 'M_' + str("%.2f"%M0) + 'Phi_' + str("%.2f"%Phi0) + '.pdf'
+fname='/'+str(mparam)+'LinearHarmonicSpectrumCNo'+ str("%.2f"%ChernNo) + "__Phi0__" + str("%.3f"%Phi0) + "__M0t2__" + str("%.3f"%M0t2) + "__e0__" + str("%.3f"%ellip) + "__" + nparam + '.pdf'
 
 
-filename1           = FigureDir + fname;
+filename1           = FigureDir + fname
 fileNamePicture     = ProjPath  + filename1; 
 
 
-plt.savefig(fileNamePicture, dpi = 300);
-shutil.copyfile( fileNamePicture, BasicPath + set_DataName + fname );
+plt.savefig(fileNamePicture, dpi = 300)
+shutil.copyfile( fileNamePicture, BasicPath + set_DataName + fname )
 
 #####################################################
 ############################
 #Ploting the harmonic current radiations-oscillations
-width = 11
-hight = width/1.62
+#width = 11
+#hight = width/1.62
 
 
 fig = plt.figure(figsize=(width,hight) )
@@ -594,47 +627,23 @@ ax1 = fig.add_axes([0.2, 0.15, 0.75, 0.75])
 p11, = plt.plot( w[Nthalf:Nt-1]/w0, Sinter[Nthalf:Nt-1], 'b',  lw = 1.2, label='$J_{er}$' );
 p22, = plt.plot( w[Nthalf:Nt-1]/w0, Sintra[Nthalf:Nt-1], 'r',  lw = 1.2, label='$J_{ra}$' );
 
-plt.legend([p11, p22], [ '$J_{er}$', '$J_{ra}$'],fontsize=18);
-
-
-xp  = 1.3
-yp  = -1.1
-
+plt.legend([p11, p22], [ '$J_{er}$', '$J_{ra}$'],fontsize=18)
 
 plt.xlabel(r'$\rm Harmonic-Order$', fontsize=30 );
 plt.ylabel(r'$\rm Log_{10}(I_{HHG})$', fontsize=30 );
 plt.tick_params(labelsize = 28 );
 
-
-
-xaxmin      = np.log10(hzero);      # controling harmonic-order
-xaxmax      = +5;                   # controling harmonic-order
-
-plt.ylim(xaxmin, xaxmax);
-xticks0  = np.arange(1,50,4);
-plt.xticks( xticks0 );
-
-yticks0  = [-25., -20., -15, -10., -5., 0., 5.]#10., 15, 5.0];
-plt.yticks( yticks0 );
-
-
-if (mparam=='x'):
-    plt.ylim([-12, .2])
-if (mparam=='y'):
-    plt.ylim([-10, .2])
+plt.xticks( xticks0 )
+plt.yticks( yticks0 )
 
 plt.grid(True)
 
+plt.xlim(spectrum_xmin, spectrum_xmax)
+plt.ylim(spectrum_ymin, spectrum_ymax)
 
-xaxmin      = 0.0;  # controling harmonic-order axis limits, down
-xaxmax      = 43.; # controling harmonic-order axis limits, u
+plt.grid(True)
 
-
-plt.xlim( xaxmin, xaxmax );
-plt.ylim( np.log10(hzero), 1.5 );
-
-
-fname='/'+str(mparam)+'InterIntraHarmonicSpectrumCNo'+ str("%.2f"%ChernNo) + "__Phi0__" + str("%.3f"%Phi0) + "__M0t2__" + str("%.3f"%M0t2) + "__e0__" + str("%.3f"%ellip) + '.pdf'
+fname='/'+str(mparam)+'InterIntraHarmonicSpectrumCNo'+ str("%.2f"%ChernNo) + "__Phi0__" + str("%.3f"%Phi0) + "__M0t2__" + str("%.3f"%M0t2) + "__e0__" + str("%.3f"%ellip) + "__" + nparam +'.pdf'
 
 
 filename1           = FigureDir + fname;
@@ -651,8 +660,8 @@ shutil.copyfile( fileNamePicture, BasicPath + set_DataName + fname );
 #####################################################
 ############################
 #Ploting the harmonic current radiations-oscillations
-width = 11
-hight = width/1.62
+#width = 11
+#hight = width/1.62
 
 
 fig  = plt.figure(figsize=(width,hight) )
@@ -663,46 +672,20 @@ p3,  = plt.plot( w[Nthalf:Nt-1]/w0, Spectrum[Nthalf:Nt-1], 'g',  lw = 1.2, label
 
 plt.legend([p1, p2,p3], ['$J_{+}$', '$J_{-}$', '$J_{tot}\,\,\phi_0 = $ ' + str("%.2f"%Phi0) ],fontsize=18);
 
-
-xp = 1.3
-yp = -1.1
-
-
 plt.xlabel(r'$\rm Harmonic-Order$', fontsize=30 );
 plt.ylabel(r'$\rm Log_{10}(I_{HHG})$', fontsize=30 );
-plt.tick_params(labelsize = 28 );
+plt.tick_params(labelsize = 28 )
 
-
-xaxmin      = np.log10(hzero);      # controling harmonic-order
-xaxmax      = +5;                   # controling harmonic-order
-
-plt.ylim( xaxmin, xaxmax );
-
-
-xticks0  = np.arange(1,50,4);
-plt.xticks( xticks0 );
-
-yticks0  = [-25.,-20., -15., -10., -5., 0., 5. ]#10., 15, 5.0];
-plt.yticks( yticks0 );
-
-
-if (mparam=='x'):
-    plt.ylim([-12, .2]);
-if (mparam=='y'):
-    plt.ylim([-10, .2]);
-
+plt.xticks( xticks0 )
+plt.yticks( yticks0 )
 
 plt.grid(True)
 
+plt.xlim(spectrum_xmin, spectrum_xmax)
+plt.ylim(spectrum_ymin, spectrum_ymax)
 
-xaxmin      = 0;    # controling harmonic-order axis limits, down
-xaxmax      = 43;   # controling harmonic-order axis limits, u
 
-
-plt.xlim(xaxmin, xaxmax);
-plt.ylim( np.log10(hzero),1.5 )
-
-fname='/'+str(mparam)+'PaperHarmonicSpectrumCNo'+ str("%.2f"%ChernNo) + "__Phi0__" + str("%.3f"%Phi0) + "__M0t2__" + str("%.3f"%M0t2) + "__e0__" + str("%.3f"%ellip) + '.pdf'
+fname='/'+str(mparam)+'CircularHarmonicSpectrumCNo'+ str("%.2f"%ChernNo) + "__Phi0__" + str("%.3f"%Phi0) + "__M0t2__" + str("%.3f"%M0t2) + "__e0__" + str("%.3f"%ellip) + "__" + nparam +'.pdf'
 
 
 filename1           = FigureDir + fname;
@@ -717,5 +700,5 @@ print 'Eg         = ',Eg, '\nM0        = ',M0, '\nphi0      = ', Phi0, '\nC     
 print '+=+++++++++++++++++=+\n\n'
 
 
-plt.show();
+plt.show()
 #####################################################
