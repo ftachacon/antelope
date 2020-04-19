@@ -83,7 +83,8 @@ double ky_shift_down  = 0.;
 double gbox_ky_down = 0.;
 double gbox_ky_up   = 0.;
 double ksfactor = 1;
-double flag_occ_dephasing = 0.;
+//double flag_occ_dephasing = 0.;
+double dephasing_factor_inter, dephasing_factor_intra;
 int diagnostic = 0;
 int shotNumber   = 0;
 
@@ -255,7 +256,16 @@ int main( int argc, char *argv[] )
     // Some post-processing 
     M0 = jparam * t2;                                // On-site potential
     a0 = la0 / 0.529;                                // Lattice constant in atomic units (a.u.)
-    if (T1 > 0) flag_occ_dephasing = 1.0;
+    double eps = 1.0e-16;
+    if (T2 < eps)
+        dephasing_factor_inter = 0.;
+    else
+        dephasing_factor_inter = 1.0 / T2;
+    
+    if (T1 < eps)
+        dephasing_factor_intra = 0.;
+    else
+        dephasing_factor_intra = 1.0 / T1;
     fpulse.laser_pulses(dt, offset_before, offset_after);
 
     
@@ -1140,11 +1150,11 @@ int main( int argc, char *argv[] )
             
             
             //Classical velocities  at time tn
-            classical_velocity_v[0] = group_velocity_v[0] + anomalous_vel_v[0];
-            classical_velocity_v[1] = group_velocity_v[1] + anomalous_vel_v[1];
+            classical_velocity_v[0] = group_velocity_v[0];// + anomalous_vel_v[0];
+            classical_velocity_v[1] = group_velocity_v[1];// + anomalous_vel_v[1];
             
-            classical_velocity_c[0] = group_velocity_c[0] + anomalous_vel_c[0];
-            classical_velocity_c[1] = group_velocity_c[1] + anomalous_vel_c[1];
+            classical_velocity_c[0] = group_velocity_c[0];// + anomalous_vel_c[0];
+            classical_velocity_c[1] = group_velocity_c[1];// + anomalous_vel_c[1];
             
             
             //Radiation by group velocity
@@ -1575,7 +1585,8 @@ int main( int argc, char *argv[] )
 void der_pi( const double  *eg, const double *xig_ef, const double *T2, const complex *ROmega, const complex *cohPi0, const double *_nc, complex *cpi)
 {
     
-    *cpi = -I*( ( *eg + *xig_ef - I/(*T2) ) *( *cohPi0 ) + (*ROmega)*( 1. - 2.*(*_nc ) )   );
+    //*cpi = -I*( ( *eg + *xig_ef /*- I/(*T2)*/ ) *( *cohPi0 ) + (*ROmega)*( 1. - 2.*(*_nc ) )   );
+    *cpi = -I*( ( *eg + *xig_ef - I *dephasing_factor_inter ) *( *cohPi0 ) + (*ROmega)*( 1. - 2.*(*_nc ) )   );
     
 }
 
@@ -1590,7 +1601,7 @@ void der_nc( const complex *ROmega, const complex *cpi,  double *nc )
 void der_nc2( const complex *ROmega, const complex *cpi, const double *T1, const double *tnc,  double *nc )
 {
     
-    *nc = -2.*imag( conj( *ROmega )*( *cpi ) ) - (*tnc)/(*T1) * flag_occ_dephasing;
+    *nc = -2.*imag( conj( *ROmega )*( *cpi ) ) - (*tnc) * dephasing_factor_intra;
     
 }
 

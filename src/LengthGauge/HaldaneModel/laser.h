@@ -515,8 +515,8 @@ void laser::Laser_Grid()
     
     double tempMin=atmin;//*/
 
-    //a_ef1 = elaser(  &(tempMin) );
-    //a_af1 = avlaser( &(tempMin) );
+    a_ef1 = elaser(  &(atmin) );
+    a_af1 = avlaser( &(atmin) );
     
     NewNt   = floor( (atmax - atmin)/dt );
 
