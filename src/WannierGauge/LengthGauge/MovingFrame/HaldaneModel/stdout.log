@@ -1,0 +1,452 @@
+/usr/bin/mpicxx hhg_rk5_hm_mpi_full_vel_nc.cpp -w -I./include -o exec_hhg_mpi
+2020. 05. 04. (월) 06:51:08 KST
+-rwxrwxr-x 1 dasol dasol 243K  5월  4 06:51 exec_hhg_mpi
+
+
+
+#*============================================================*#
+       High order harmonic generation in the 
+       Topological Haldane Model (HM), Chern Insulator 
+       via the numerical integration of the 
+       Semiconductor Bloch Equation (SBEs) 
+          by Alexis Chacon June 27, 2019....
+#*=========================================================*#
+
+
+
+-------------
+PARAMETERS
+
+iparam = 1
+jparam = 2.54
+Nxparam = 101
+Nyparam = 131
+---
+Total of Processors= 23
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Time-step dt = 0.1 a.u.
+New-No. Of Total time Steps = 46928
+---
+
+
+*************************
+Ntime = 46928
+*************************** 
+
+
+
+
+==========================================
+First  K' point = (-1.27933 , 0 ) a.u.
+Second K' point = (0.639667 , 1.10794 ) a.u.
+Delta-K' point = (1.919 , 1.10794 ) a.u.
+========================
+
+
+
+==============================
+Momentum integral method for:
+Trapz
+First Raw of weight matrix: 
+weight[ 0, 0] = 0.25
+weight[ 1, 0] = 0.5
+weight[ 2, 0] = 0.5
+weight[ 3, 0] = 0.5
+weight[ 4, 0] = 0.5
+weight[ 5, 0] = 0.5
+weight[ 6, 0] = 0.5
+weight[ 7, 0] = 0.5
+weight[ 8, 0] = 0.5
+weight[ 9, 0] = 0.5
+weight[ 10, 0] = 0.5
+weight[ 11, 0] = 0.5
+weight[ 12, 0] = 0.5
+weight[ 13, 0] = 0.5
+weight[ 14, 0] = 0.5
+weight[ 15, 0] = 0.5
+weight[ 16, 0] = 0.5
+weight[ 17, 0] = 0.5
+weight[ 18, 0] = 0.5
+weight[ 19, 0] = 0.5
+weight[ 20, 0] = 0.5
+weight[ 21, 0] = 0.5
+weight[ 22, 0] = 0.5
+weight[ 23, 0] = 0.5
+weight[ 24, 0] = 0.5
+weight[ 25, 0] = 0.5
+weight[ 26, 0] = 0.5
+weight[ 27, 0] = 0.5
+weight[ 28, 0] = 0.5
+weight[ 29, 0] = 0.5
+weight[ 30, 0] = 0.5
+weight[ 31, 0] = 0.5
+weight[ 32, 0] = 0.5
+weight[ 33, 0] = 0.5
+weight[ 34, 0] = 0.5
+weight[ 35, 0] = 0.5
+weight[ 36, 0] = 0.5
+weight[ 37, 0] = 0.5
+weight[ 38, 0] = 0.5
+weight[ 39, 0] = 0.5
+weight[ 40, 0] = 0.5
+weight[ 41, 0] = 0.5
+weight[ 42, 0] = 0.5
+weight[ 43, 0] = 0.5
+weight[ 44, 0] = 0.5
+weight[ 45, 0] = 0.5
+weight[ 46, 0] = 0.5
+weight[ 47, 0] = 0.5
+weight[ 48, 0] = 0.5
+weight[ 49, 0] = 0.5
+weight[ 50, 0] = 0.5
+weight[ 51, 0] = 0.5
+weight[ 52, 0] = 0.5
+weight[ 53, 0] = 0.5
+weight[ 54, 0] = 0.5
+weight[ 55, 0] = 0.5
+weight[ 56, 0] = 0.5
+weight[ 57, 0] = 0.5
+weight[ 58, 0] = 0.5
+weight[ 59, 0] = 0.5
+weight[ 60, 0] = 0.5
+weight[ 61, 0] = 0.5
+weight[ 62, 0] = 0.5
+weight[ 63, 0] = 0.5
+weight[ 64, 0] = 0.5
+weight[ 65, 0] = 0.5
+weight[ 66, 0] = 0.5
+weight[ 67, 0] = 0.5
+weight[ 68, 0] = 0.5
+weight[ 69, 0] = 0.5
+weight[ 70, 0] = 0.5
+weight[ 71, 0] = 0.5
+weight[ 72, 0] = 0.5
+weight[ 73, 0] = 0.5
+weight[ 74, 0] = 0.5
+weight[ 75, 0] = 0.5
+weight[ 76, 0] = 0.5
+weight[ 77, 0] = 0.5
+weight[ 78, 0] = 0.5
+weight[ 79, 0] = 0.5
+weight[ 80, 0] = 0.5
+weight[ 81, 0] = 0.5
+weight[ 82, 0] = 0.5
+weight[ 83, 0] = 0.5
+weight[ 84, 0] = 0.5
+weight[ 85, 0] = 0.5
+weight[ 86, 0] = 0.5
+weight[ 87, 0] = 0.5
+weight[ 88, 0] = 0.5
+weight[ 89, 0] = 0.5
+weight[ 90, 0] = 0.5
+weight[ 91, 0] = 0.5
+weight[ 92, 0] = 0.5
+weight[ 93, 0] = 0.5
+weight[ 94, 0] = 0.5
+weight[ 95, 0] = 0.5
+weight[ 96, 0] = 0.5
+weight[ 97, 0] = 0.5
+weight[ 98, 0] = 0.5
+weight[ 99, 0] = 0.5
+weight[ 100, 0] = 0.25
+
+Last Raw of weight matrix: 
+weight[ 0, 130] = 0.25
+weight[ 1, 130] = 0.5
+weight[ 2, 130] = 0.5
+weight[ 3, 130] = 0.5
+weight[ 4, 130] = 0.5
+weight[ 5, 130] = 0.5
+weight[ 6, 130] = 0.5
+weight[ 7, 130] = 0.5
+weight[ 8, 130] = 0.5
+weight[ 9, 130] = 0.5
+weight[ 10, 130] = 0.5
+weight[ 11, 130] = 0.5
+weight[ 12, 130] = 0.5
+weight[ 13, 130] = 0.5
+weight[ 14, 130] = 0.5
+weight[ 15, 130] = 0.5
+weight[ 16, 130] = 0.5
+weight[ 17, 130] = 0.5
+weight[ 18, 130] = 0.5
+weight[ 19, 130] = 0.5
+weight[ 20, 130] = 0.5
+weight[ 21, 130] = 0.5
+weight[ 22, 130] = 0.5
+weight[ 23, 130] = 0.5
+weight[ 24, 130] = 0.5
+weight[ 25, 130] = 0.5
+weight[ 26, 130] = 0.5
+weight[ 27, 130] = 0.5
+weight[ 28, 130] = 0.5
+weight[ 29, 130] = 0.5
+weight[ 30, 130] = 0.5
+weight[ 31, 130] = 0.5
+weight[ 32, 130] = 0.5
+weight[ 33, 130] = 0.5
+weight[ 34, 130] = 0.5
+weight[ 35, 130] = 0.5
+weight[ 36, 130] = 0.5
+weight[ 37, 130] = 0.5
+weight[ 38, 130] = 0.5
+weight[ 39, 130] = 0.5
+weight[ 40, 130] = 0.5
+weight[ 41, 130] = 0.5
+weight[ 42, 130] = 0.5
+weight[ 43, 130] = 0.5
+weight[ 44, 130] = 0.5
+weight[ 45, 130] = 0.5
+weight[ 46, 130] = 0.5
+weight[ 47, 130] = 0.5
+weight[ 48, 130] = 0.5
+weight[ 49, 130] = 0.5
+weight[ 50, 130] = 0.5
+weight[ 51, 130] = 0.5
+weight[ 52, 130] = 0.5
+weight[ 53, 130] = 0.5
+weight[ 54, 130] = 0.5
+weight[ 55, 130] = 0.5
+weight[ 56, 130] = 0.5
+weight[ 57, 130] = 0.5
+weight[ 58, 130] = 0.5
+weight[ 59, 130] = 0.5
+weight[ 60, 130] = 0.5
+weight[ 61, 130] = 0.5
+weight[ 62, 130] = 0.5
+weight[ 63, 130] = 0.5
+weight[ 64, 130] = 0.5
+weight[ 65, 130] = 0.5
+weight[ 66, 130] = 0.5
+weight[ 67, 130] = 0.5
+weight[ 68, 130] = 0.5
+weight[ 69, 130] = 0.5
+weight[ 70, 130] = 0.5
+weight[ 71, 130] = 0.5
+weight[ 72, 130] = 0.5
+weight[ 73, 130] = 0.5
+weight[ 74, 130] = 0.5
+weight[ 75, 130] = 0.5
+weight[ 76, 130] = 0.5
+weight[ 77, 130] = 0.5
+weight[ 78, 130] = 0.5
+weight[ 79, 130] = 0.5
+weight[ 80, 130] = 0.5
+weight[ 81, 130] = 0.5
+weight[ 82, 130] = 0.5
+weight[ 83, 130] = 0.5
+weight[ 84, 130] = 0.5
+weight[ 85, 130] = 0.5
+weight[ 86, 130] = 0.5
+weight[ 87, 130] = 0.5
+weight[ 88, 130] = 0.5
+weight[ 89, 130] = 0.5
+weight[ 90, 130] = 0.5
+weight[ 91, 130] = 0.5
+weight[ 92, 130] = 0.5
+weight[ 93, 130] = 0.5
+weight[ 94, 130] = 0.5
+weight[ 95, 130] = 0.5
+weight[ 96, 130] = 0.5
+weight[ 97, 130] = 0.5
+weight[ 98, 130] = 0.5
+weight[ 99, 130] = 0.5
+weight[ 100, 130] = 0.25
+
+
+*=============================*
+Haldane model structure
+a0           = 1.89036 a.u. (Lattice Const.)
+t1           = 0.075 a.u.
+t2           = 0.025
+M0           = 0.0635
+phi0         = 1.16
+gauge1        = 1
+gauge2        = 1
+
+
+
+-----
+Testing Structure quantities at k =(1,1)
+eg(1,1)     = 0.172712 a.u.
+group_c0     = 0.269582
+group_c1     = 0.0256236
+group_v0     = -0.127893
+group_v1     = -0.0211027
+BCon         = (-1.63127,0.699591)
+xdcv         = (-1.01549,-0.704971)
+ydcv         = (0.638554,-0.608597) 
+BCurv        = 2.13637\nn+++++++++++++++++++++++++++++
+ChernNo.     = 1
+++++++++++++++++++++++++++++++++
+
+MinGap  	    = 0.111199 a.u.
+MaxGap  	    = 0.467578 a.u. 
+
+---
+Regularization parameters
+ Type of flag = 0
+ eps0       = 0.1
+ with-eps0  = 0.2
+ fbz_shift  = 1
+
+Dephasing, T2  = -1 a.u.
+
+
+
+
+*===================================*
+Momentum Grid Features
+dkx          = 0.01919
+dky          = 0.0170452
+dkz          = 1
+
+No. of points
+Nx           = 101
+Ny           = 131
+Nz           = 1
+Ntotal=Nx*Ny*Nz= 13231
+
+Minima momentum points
+kxmin        = -0.9595
+kymin        = -1.10794
+kzmin        = 0
+
+ky         = -1.10794
+/*************************/
+
+rank = 18  uses j = 106;  to  j = 111  with Nprocesses = 23
+
+
+rank = 3  uses j = 18;  to  j = 24  with Nprocesses = 23
+
+
+rank = 2  uses j = 12;  to  j = 18  with Nprocesses = 23
+
+
+rank = 5  uses j = 30;  to  j = 36  with Nprocesses = 23
+
+
+rank = 8  uses j = 48;  to  j = 54  with Nprocesses = 23
+
+
+rank = 10  uses j = 60;  to  j = 66  with Nprocesses = 23
+
+
+
+rank = 19  uses j = 111;  to  j = 116  with Nprocesses = 23
+
+
+rank = 20  uses j = 116;  to  j = 121  with Nprocesses = 23
+
+
+rank = 21  uses j = 121;  to  j = 126  with Nprocesses = 23
+
+
+rank = 1  uses j = 6;  to  j = 12  with Nprocesses = 23
+
+
+rank = 4  uses j = 24;  to  j = 30  with Nprocesses = 23
+
+
+rank = 7  uses j = 42;  to  j = 48  with Nprocesses = 23
+
+
+rank = 9  uses j = 54;  to  j = 60  with Nprocesses = 23
+
+
+rank = 11  uses j = 66;  to  j = 72  with Nprocesses = 23
+
+
+rank = 12  uses j = 72;  to  j = 78  with Nprocesses = 23
+
+
+rank = 15  uses j = 90;  to  j = 96  with Nprocesses = 23
+
+
+rank = 14  uses j = 84;  to  j = 90  with Nprocesses = 23
+
+
+rank = 16  uses j = 96;  to  j = 101  with Nprocesses = 23
+
+
+rank = 17  uses j = 101;  to  j = 106  with Nprocesses = 23
+
+rank = 13  uses j = 78;  to  j = 84  with Nprocesses = 23
+
+
+rank = 22  uses j = 126;  to  j = 131  with Nprocesses = 23
+
+
+rank = 6  uses j = 36;  to  j = 42  with Nprocesses = 23
+
+Pi - Nc print 
+pi_wannier: (-0.354728,-6.06675e-18)
+nc_wannier 0.321408
+ pi_hamiltonian (1.83447e-16,-1.30972e-16), nc_hamiltonian 1.0443e-15, kindex:  79, 2, kx: 0.55651, ky: -1.07384, B1: 0.0152698, B2: 0.0108647, B3: -0.0530035
+ pi_hamiltonian (2.08817e-16,-1.84098e-16), nc_hamiltonian 2.1181e-15, kindex:  80, 1, kx: 0.5757, ky: -1.09089, B1: 0.00992021, B2: 0.00950916, B3: -0.0541809
+ pi_hamiltonian (2.09468e-16,1.83447e-16), nc_hamiltonian 2.1181e-15, kindex:  80, 129, kx: 0.5757, ky: 1.09089, B1: 0.00992021, B2: -0.00950916, B3: -0.0541809
+ pi_hamiltonian (1.43277e-16,-2.51535e-16), nc_hamiltonian 3.64986e-15, kindex:  81, 0, kx: 0.59489, ky: -1.10794, B1: 0.00465625, B2: 0.00806487, B3: -0.0549481
+ pi_hamiltonian (2.09902e-16,-3.75676e-17), nc_hamiltonian 1.61676e-15, kindex:  81, 3, kx: 0.59489, ky: -1.0568, B1: 0.0145785, B2: 0.00262684, B3: -0.0541524
+ pi_hamiltonian (2.15106e-16,1.02999e-17), nc_hamiltonian 1.36349e-15, kindex:  81, 126, kx: 0.59489, ky: 1.03975, B1: 0.0179302, B2: -0.000917393, B3: -0.0535355
+ pi_hamiltonian (1.91904e-16,3.27104e-16), nc_hamiltonian 4.31339e-15, kindex:  81, 130, kx: 0.59489, ky: 1.10794, B1: 0.00465625, B2: -0.00806487, B3: -0.0549481
+ pi_hamiltonian (1.64907e-16,-1.83908e-17), nc_hamiltonian 2.07386e-15, kindex:  82, 2, kx: 0.61408, ky: -1.07384, B1: 0.0091692, B2: 0.00104313, B3: -0.0550243
+ pi_hamiltonian (1.64799e-16,9.29703e-18), nc_hamiltonian 1.63064e-15, kindex:  82, 3, kx: 0.61408, ky: -1.0568, B1: 0.0124468, B2: -0.00068487, B3: -0.0545734
+ pi_hamiltonian (5.49198e-16,-9.49661e-16), nc_hamiltonian 8.99773e-14, kindex:  83, 0, kx: 0.63327, ky: -1.10794, B1: 0.000678106, B2: 0.00117451, B3: -0.0555831
+ pi_hamiltonian (6.88523e-16,1.11747e-16), nc_hamiltonian 1.96037e-14, kindex:  83, 1, kx: 0.63327, ky: -1.09089, B1: 0.0038504, B2: -0.000623499, B3: -0.055491
+ pi_hamiltonian (2.28767e-16,7.39019e-17), nc_hamiltonian 3.5397e-15, kindex:  83, 2, kx: 0.63327, ky: -1.07384, B1: 0.00704924, B2: -0.00236987, B3: -0.0552147
+ pi_hamiltonian (2.28875e-16,-7.86182e-17), nc_hamiltonian 3.76522e-15, kindex:  83, 128, kx: 0.63327, ky: 1.07384, B1: 0.00704924, B2: 0.00236987, B3: -0.0552147
+ pi_hamiltonian (7.62221e-16,-1.23046e-16), nc_hamiltonian 2.19325e-14, kindex:  83, 129, kx: 0.63327, ky: 1.09089, B1: 0.0038504, B2: 0.000623499, B3: -0.055491
+ pi_hamiltonian (5.63796e-16,9.73673e-16), nc_hamiltonian 9.20863e-14, kindex:  83, 130, kx: 0.63327, ky: 1.10794, B1: 0.000678106, B2: -0.00117451, B3: -0.0555831
+ pi_hamiltonian (-4.66022e-16,8.07851e-16), nc_hamiltonian 3.79106e-14, kindex:  84, 0, kx: 0.65246, ky: -1.10794, B1: -0.00136847, B2: -0.00237027, B3: -0.0555442
+ pi_hamiltonian (1.87974e-16,2.24701e-16), nc_hamiltonian 4.31686e-15, kindex:  84, 2, kx: 0.65246, ky: -1.07384, B1: 0.00488953, B2: -0.00584688, B3: -0.0551691
+ pi_hamiltonian (2.17057e-16,-1.8876e-16), nc_hamiltonian 3.01495e-15, kindex:  84, 127, kx: 0.65246, ky: 1.0568, B1: 0.00805669, B2: 0.00750504, B3: -0.0547011
+ pi_hamiltonian (1.65693e-16,-2.03722e-16), nc_hamiltonian 3.6542e-15, kindex:  84, 128, kx: 0.65246, ky: 1.07384, B1: 0.00488953, B2: 0.00584688, B3: -0.0551691
+ pi_hamiltonian (-4.66022e-16,-8.07851e-16), nc_hamiltonian 3.79106e-14, kindex:  84, 130, kx: 0.65246, ky: 1.10794, B1: -0.00136847, B2: 0.00237027, B3: -0.0555442
+ pi_hamiltonian (-1.35674e-16,2.33347e-16), nc_hamiltonian 4.26699e-15, kindex:  85, 0, kx: 0.67165, ky: -1.10794, B1: -0.00345071, B2: -0.00597681, B3: -0.0552732
+ pi_hamiltonian (-5.75982e-18,1.09342e-16), nc_hamiltonian 1.59421e-15, kindex:  85, 1, kx: 0.67165, ky: -1.09089, B1: -0.000393092, B2: -0.00770738, B3: -0.0551778
+ pi_hamiltonian (1.54824e-16,1.56559e-16), nc_hamiltonian 1.11369e-15, kindex:  85, 5, kx: 0.67165, ky: -1.02271, B1: 0.012089, B2: -0.0140822, B3: -0.0528995
+ pi_hamiltonian (-4.65529e-18,-8.64109e-17), nc_hamiltonian 1.26461e-15, kindex:  85, 129, kx: 0.67165, ky: 1.09089, B1: -0.000393092, B2: 0.00770738, B3: -0.0551778
+ pi_hamiltonian (-9.09375e-17,-1.55095e-16), nc_hamiltonian 2.94079e-15, kindex:  85, 130, kx: 0.67165, ky: 1.10794, B1: -0.00345071, B2: 0.00597681, B3: -0.0552732
+ pi_hamiltonian (-5.45354e-17,2.20527e-16), nc_hamiltonian 2.0435e-15, kindex:  86, 1, kx: 0.69084, ky: -1.09089, B1: -0.0025677, B2: -0.0113376, B3: -0.0546784
+ pi_hamiltonian (6.06476e-18,2.13588e-16), nc_hamiltonian 1.88564e-15, kindex:  86, 2, kx: 0.69084, ky: -1.07384, B1: 0.000459377, B2: -0.0129791, B3: -0.054388
+ pi_hamiltonian (1.05371e-17,-2.90349e-16), nc_hamiltonian 2.54137e-15, kindex:  86, 128, kx: 0.69084, ky: 1.07384, B1: 0.000459377, B2: 0.0129791, B3: -0.054388
+ pi_hamiltonian (-5.18791e-17,-2.2031e-16), nc_hamiltonian 2.0435e-15, kindex:  86, 129, kx: 0.69084, ky: 1.09089, B1: -0.0025677, B2: 0.0113376, B3: -0.0546784
+ pi_hamiltonian (-8.86877e-17,-1.43982e-16), nc_hamiltonian 1.18655e-15, kindex:  87, 130, kx: 0.71003, ky: 1.10794, B1: -0.00771391, B2: 0.0133609, B3: -0.0540561
+
+ pi_hamiltonian (-3.14665e-21,-2.09777e-21)
+ nc_hamiltonian 2.09777e-21-------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code.. Per user-direction, the job has been aborted.
+-------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[5689,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------
+2020. 05. 04. (월) 06:51:10 KST
+
+
