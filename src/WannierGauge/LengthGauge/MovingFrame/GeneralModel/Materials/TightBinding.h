@@ -33,13 +33,14 @@ public:
     int **indexRvec;                        ///< index of lattice vectors  (R = n1 a1 + n2 a2 + n3 a3 ), indexRvec[irpt, 0] = n1
     int indexRorigin;                       ///< index which R = 0
 
-    bool isDipoleNonzero;                   ///< make Wannier dipole zero if false (there is same variable in SBEsLWM and it's dangerous... fix it later)
+    bool isDipoleZero;                      ///< if true choose e^ik(R+t) basis and make Wannier dipole zero
 
     // Note that interal index order of Wannier90 is ham_w[j, i, irpt] = <0j|H|Ri>
     // Remeber that c++ memory order is first-slow, last-fast and the fortran order is first-fast, last-slow  (row vs column order)
     complex ***ham_w;          ///< Hamiltonian components in Wannier basis, ham_w[irpt][i][j] = <0i|H|Rj> (Wannier90 order)
     complex ****pos_w;         ///< Position operator in Wannier basis, pos_w[irpt][i][j][0] = <0i|x|Rj> (1 - y, 2 - z)
     double ****rvec;                        ///< value of r vector ( r = R + tn - tm ), rvec[irpt][m][n][0] = (R+tn-tm).x
+    double **Rvec;                          ///< value of R vector, Rvec[irpt][0] = Rx
 
     double Volume;                          ///< volume of unit cell
 
@@ -78,6 +79,9 @@ TightBinding::TightBinding( const libconfig::Setting *params )
     try
     {
         string w90_file = params->lookup("dataName");
+        Nval = params->lookup("Nval");
+        isDipoleZero = true;
+        params->lookupValue("isDipoleZero", isDipoleZero);
         ifstream w90_data(w90_file.c_str());
 
         int itemp, jtemp;
@@ -137,12 +141,23 @@ TightBinding::TightBinding( const libconfig::Setting *params )
             {
                 for (int irpt = 0; irpt < Nrpts; ++irpt)
                 {
-                    for (int iaxis = 0; iaxis < 3; ++iaxis)
+                    for (int iaxis = 0; iaxis < Ndim; ++iaxis)
                         rvec[irpt][m][n][iaxis] = indexRvec[irpt][0]*vec_lattice[0][iaxis] 
                                                 + indexRvec[irpt][1]*vec_lattice[1][iaxis] 
                                                 + indexRvec[irpt][2]*vec_lattice[2][iaxis]
-                                                + real(pos_w[irpt][n][n][iaxis] - pos_w[irpt][m][m][iaxis]);
+                                                + real(pos_w[indexRorigin][n][n][iaxis] - pos_w[indexRorigin][m][m][iaxis]);
                 }
+            }
+        }
+
+        // construct R vectors
+        for (int irpt = 0; irpt < Nrpts; ++irpt)
+        {
+            for (int iaxis = 0; iaxis < Ndim; ++iaxis)
+            {
+                Rvec[irpt][iaxis] = indexRvec[irpt][0]*vec_lattice[0][iaxis] 
+                                    + indexRvec[irpt][1]*vec_lattice[1][iaxis] 
+                                    + indexRvec[irpt][2]*vec_lattice[2][iaxis];
             }
         }
 
@@ -163,6 +178,7 @@ void TightBinding::Allocate()
     weight = new double[Nrpts];
     indexRvec = Create2D<int>(Nrpts, Ndim);
     rvec = Create4D<double>(Nrpts, Nband, Nband, Ndim);
+    Rvec = Create2D<double>(Nrpts, Ndim);
     ham_w = Create3D<complex>(Nrpts, Nband, Nband);
     pos_w = Create4D<complex>(Nrpts, Nband, Nband, Ndim);
 
@@ -178,6 +194,7 @@ TightBinding::~TightBinding()
     delete[] weight;
     Delete2D(indexRvec, Nrpts, Ndim);
     Delete4D(rvec, Nrpts, Nband, Nband, Ndim);
+    Delete2D(Rvec, Nrpts, Ndim);
     Delete3D(ham_w, Nrpts, Nband, Nband);
     Delete4D(pos_w, Nrpts, Nband, Nband, Ndim);
 
@@ -210,13 +227,29 @@ void TightBinding::GenInitialValue(complex *_dmstore, std::array<double, Ndim> _
 void TightBinding::GenHamiltonian(complex *_hstore, std::array<double, Ndim> _kpoint)
 {
     fill(_hstore, _hstore + Nband*Nband, 0.);
-    for (int m = 0; m < Nband; ++m)
+    if (isDipoleZero)
     {
-        for (int n = 0; n < Nband; ++n)
+        for (int m = 0; m < Nband; ++m)
         {
-            for (int irpt = 0; irpt < Nrpts; ++irpt)
+            for (int n = 0; n < Nband; ++n)
             {
-                _hstore[m*Nband + n] += ham_w[irpt][m][n] * exp( I* std::inner_product(_kpoint.begin(), _kpoint.end(), rvec[irpt][m][n], 0.) );
+                for (int irpt = 0; irpt < Nrpts; ++irpt)
+                {
+                    _hstore[m*Nband + n] += ham_w[irpt][m][n] * exp( I* std::inner_product(_kpoint.begin(), _kpoint.end(), rvec[irpt][m][n], 0.) );
+                }
+            }
+        }
+    }
+    else
+    {
+        for (int m = 0; m < Nband; ++m)
+        {
+            for (int n = 0; n < Nband; ++n)
+            {
+                for (int irpt = 0; irpt < Nrpts; ++irpt)
+                {
+                    _hstore[m*Nband + n] += ham_w[irpt][m][n] * exp( I* std::inner_product(_kpoint.begin(), _kpoint.end(), Rvec[irpt], 0.) );
+                }
             }
         }
     }
@@ -225,17 +258,18 @@ void TightBinding::GenDipole(complex **_dstore, std::array<double, Ndim> _kpoint
 {
     for (int i = 0; i < Ndim; ++i)
         fill(_dstore[i], _dstore[i] + Nband*Nband, 0.);
-    for (int i = 0; i < Ndim; ++i)
+    if (!isDipoleZero)
     {
-        for (int m = 0; m < Nband; ++m)
+        for (int i = 0; i < Ndim; ++i)
         {
-            for (int n = 0; n < Nband; ++n)
+            for (int m = 0; m < Nband; ++m)
             {
-                for (int irpt = 0; irpt < Nrpts; ++irpt)
+                for (int n = 0; n < Nband; ++n)
                 {
-                    if ( m==n && irpt ==indexRorigin )
-                        continue;
-                    _dstore[i][m*Nband + n] -= pos_w[irpt][m][n][i] * exp( I* std::inner_product(_kpoint.begin(), _kpoint.end(), rvec[irpt][m][n], 0.) );
+                    for (int irpt = 0; irpt < Nrpts; ++irpt)
+                    {
+                        _dstore[i][m*Nband + n] += pos_w[irpt][m][n][i] * exp( I* std::inner_product(_kpoint.begin(), _kpoint.end(), rvec[irpt][m][n], 0.) );
+                    }
                 }
             }
         }
@@ -247,16 +281,36 @@ void TightBinding::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoin
     double temp;
     for (int i = 0; i < Ndim; ++i)
         fill(_jstore[i], _jstore[i] + Nband*Nband, 0.);
-    for (int i = 0; i < Ndim; ++i)
+    if (isDipoleZero)
     {
-        for (int m = 0; m < Nband; ++m)
+        for (int i = 0; i < Ndim; ++i)
         {
-            for (int n = 0; n < Nband; ++n)
+            for (int m = 0; m < Nband; ++m)
             {
-                for (int irpt = 0; irpt < Nrpts; ++irpt)
+                for (int n = 0; n < Nband; ++n)
                 {
-                    temp = std::inner_product(_kpoint.begin(), _kpoint.end(), rvec[irpt][m][n], 0.);
-                    _jstore[i][m*Nband + n] += I*temp* ham_w[irpt][m][n] * exp( I* temp );
+                    for (int irpt = 0; irpt < Nrpts; ++irpt)
+                    {
+                        _jstore[i][m*Nband + n] -= I*rvec[irpt][m][n][i]* ham_w[irpt][m][n] 
+                            * exp( I* std::inner_product(_kpoint.begin(), _kpoint.end(), rvec[irpt][m][n], 0.) );
+                    }
+                }
+            }
+        }
+    }
+    else
+    {
+        for (int i = 0; i < Ndim; ++i)
+        {
+            for (int m = 0; m < Nband; ++m)
+            {
+                for (int n = 0; n < Nband; ++n)
+                {
+                    for (int irpt = 0; irpt < Nrpts; ++irpt)
+                    {
+                        _jstore[i][m*Nband + n] -= I*Rvec[irpt][i]* ham_w[irpt][m][n] 
+                            * exp( I* std::inner_product(_kpoint.begin(), _kpoint.end(), Rvec[irpt], 0.) );
+                    }
                 }
             }
         }
