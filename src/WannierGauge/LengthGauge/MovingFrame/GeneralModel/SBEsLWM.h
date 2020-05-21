@@ -66,7 +66,7 @@ public:
     double dephasing_time_inter, dephasing_time_intra;          // dephasing time, intrabnad dephasing has to be changed later
     double dephasing_factor_inter, dephasing_factor_intra;      // dephasing factor(1/dephasing time), to avoid expensive float division operation and remove if statement
 
-    bool isDipoleNonzero;   ///< default is false. Wannier dipole is non-zero in very rare cases.
+    bool isDipoleZero;                                  ///< default is true. Wannier dipole is non-zero in very rare cases.
 
     SBEsLWM(const libconfig::Setting * _cfg);
     ~SBEsLWM();
@@ -112,6 +112,7 @@ SBEsLWM::SBEsLWM(const libconfig::Setting * _cfg)
     else
     {
         material = new TightBinding( &(cfg[targetMaterial.c_str()]) );
+        isDipoleZero = dynamic_cast<TightBinding*>(material)->isDipoleZero;
     }
     
     Nband = material->Nband;
@@ -199,7 +200,7 @@ SBEsLWM::SBEsLWM(const libconfig::Setting * _cfg)
 void SBEsLWM::InitializeGeneral(const libconfig::Setting *_calc)
 {
     // default values of parameters
-    isDipoleNonzero = false;
+    isDipoleZero = true;
     fill(ksfactor.begin(), ksfactor.end(), 1.0);
     RKorder = 5;
     dephasing_time_inter = -1.;
@@ -416,7 +417,7 @@ void SBEsLWM::GenDifferentialDM(complex *out, complex *input, int _kindex, doubl
             }
         }
     }*/
-    if (isDipoleNonzero)
+    if (!isDipoleZero)
     {
         material->GenDipole(dipoleMatrix, _tkp);
         for (int m = 0; m < Nband; ++m)
