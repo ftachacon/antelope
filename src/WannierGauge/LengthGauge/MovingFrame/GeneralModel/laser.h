@@ -9,6 +9,7 @@
 #include <string>
 #include "constant.h"
 #include <vector>
+#include <array>
 #include <algorithm>
 using namespace std;
 

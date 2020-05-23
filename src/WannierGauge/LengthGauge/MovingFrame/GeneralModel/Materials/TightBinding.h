@@ -235,7 +235,7 @@ void TightBinding::GenHamiltonian(complex *_hstore, std::array<double, Ndim> _kp
             {
                 for (int irpt = 0; irpt < Nrpts; ++irpt)
                 {
-                    _hstore[m*Nband + n] += ham_w[irpt][m][n] * exp( I* std::inner_product(_kpoint.begin(), _kpoint.end(), rvec[irpt][m][n], 0.) );
+                    _hstore[m*Nband + n] += weight[irpt]*ham_w[irpt][m][n] * exp( I* std::inner_product(_kpoint.begin(), _kpoint.end(), rvec[irpt][m][n], 0.) );
                 }
             }
         }
@@ -248,7 +248,7 @@ void TightBinding::GenHamiltonian(complex *_hstore, std::array<double, Ndim> _kp
             {
                 for (int irpt = 0; irpt < Nrpts; ++irpt)
                 {
-                    _hstore[m*Nband + n] += ham_w[irpt][m][n] * exp( I* std::inner_product(_kpoint.begin(), _kpoint.end(), Rvec[irpt], 0.) );
+                    _hstore[m*Nband + n] += weight[irpt]*ham_w[irpt][m][n] * exp( I* std::inner_product(_kpoint.begin(), _kpoint.end(), Rvec[irpt], 0.) );
                 }
             }
         }
@@ -268,7 +268,7 @@ void TightBinding::GenDipole(complex **_dstore, std::array<double, Ndim> _kpoint
                 {
                     for (int irpt = 0; irpt < Nrpts; ++irpt)
                     {
-                        _dstore[i][m*Nband + n] += pos_w[irpt][m][n][i] * exp( I* std::inner_product(_kpoint.begin(), _kpoint.end(), rvec[irpt][m][n], 0.) );
+                        _dstore[i][m*Nband + n] += weight[irpt]*pos_w[irpt][m][n][i] * exp( I* std::inner_product(_kpoint.begin(), _kpoint.end(), rvec[irpt][m][n], 0.) );
                     }
                 }
             }
@@ -292,7 +292,7 @@ void TightBinding::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoin
                     for (int irpt = 0; irpt < Nrpts; ++irpt)
                     {
                         _jstore[i][m*Nband + n] -= I*rvec[irpt][m][n][i]* ham_w[irpt][m][n] 
-                            * exp( I* std::inner_product(_kpoint.begin(), _kpoint.end(), rvec[irpt][m][n], 0.) );
+                            * weight[irpt]*exp( I* std::inner_product(_kpoint.begin(), _kpoint.end(), rvec[irpt][m][n], 0.) );
                     }
                 }
             }
@@ -309,7 +309,7 @@ void TightBinding::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoin
                     for (int irpt = 0; irpt < Nrpts; ++irpt)
                     {
                         _jstore[i][m*Nband + n] -= I*Rvec[irpt][i]* ham_w[irpt][m][n] 
-                            * exp( I* std::inner_product(_kpoint.begin(), _kpoint.end(), Rvec[irpt], 0.) );
+                            * weight[irpt]*exp( I* std::inner_product(_kpoint.begin(), _kpoint.end(), Rvec[irpt], 0.) );
                     }
                 }
             }
