@@ -22,7 +22,7 @@ const double gaussian_factor = gaussian_width_multiply*gaussian_width_multiply* 
 enum Envelope
 {
     ENVELOPE_GAUSSIAN,
-    ENVELOPE_COS2,
+    //ENVELOPE_COS2,
     ENVELOPE_COS4,
     ENVELOPE_REC
 };
@@ -57,17 +57,22 @@ public:
     void Initialize(double _E0, double _e, double _w0, double _ncycle, double _cep,  double _t0, double _theta0, string _env_name)
     {
         E0 = _E0;   e = _e; w0 = _w0;   cycles0 = _ncycle;  cep0 = _cep;  t0 = _t0;   theta0 = _theta0;
-        if (_env_name == "COS2" || _env_name == "sin2")
+        /*if (_env_name == "COS2" || _env_name == "sin2")
         {
             envelope = ENVELOPE_COS2;
-        }
-        else if (_env_name == "COS4")
+        }*/
+        if (_env_name == "cos4")
         {
             envelope = ENVELOPE_COS4;
         }
-        else
+        else if (_env_name == "gauss")
         {
             envelope = ENVELOPE_GAUSSIAN;
+        }
+        else
+        {
+            cout << "Unknown envelope\n";
+            exit(1);
         }
     }
     void PreProcessing()
@@ -314,11 +319,11 @@ double laser::f_envelope(double _t, LaserParam const * p1, bool _isDt)
 {
     switch (p1->envelope)
     {
-    case ENVELOPE_COS2:
+    /*case ENVELOPE_COS2:
         if (abs(_t) > p1->twidth) return 0;
         if (_isDt) return -p1->w0/(2.*p1->cycles0)*sin(_t* p1->w0 /(p1->cycles0));
         else return pow( cos(_t* p1->w0/(2*p1->cycles0) ), 2. );
-        break;
+        break;*/
     
     case ENVELOPE_COS4:
         if (abs(_t) > p1->twidth) return 0;

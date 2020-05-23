@@ -507,7 +507,7 @@ int main( int argc, char *argv[] )
         cout << "Up           = " << E0 * E0 / wfreq / wfreq / 4. << " a.u." << endl;
         cout << "ellipticity  = " << ellip << endl;*/
         cout << "\nTime-step dt = " << dt << " a.u." << endl;
-        cout << "New-No. Of Total time Steps = " << fpulse.NewNt << "\n---\n";
+        cout << "New-No. Of Total time Steps = " << fpulse.Nt << "\n---\n";
 
         fpulse.Print_LaserInfo();
     }
@@ -529,14 +529,14 @@ int main( int argc, char *argv[] )
     for ( itemp=0; itemp<Ngrad; itemp++ )
     {        
         
-        setting_complex_memory( &inter_rad[itemp], fpulse.NewNt+1 );
-        setting_complex_memory( &intra_rad[itemp], fpulse.NewNt+1 );
+        setting_complex_memory( &inter_rad[itemp], fpulse.Nt+1 );
+        setting_complex_memory( &intra_rad[itemp], fpulse.Nt+1 );
         
         
-        setting_double_memory( &group_rad[itemp], fpulse.NewNt+1 );
-        setting_double_memory( &anomalous_rad[itemp], fpulse.NewNt+1 );
+        setting_double_memory( &group_rad[itemp], fpulse.Nt+1 );
+        setting_double_memory( &anomalous_rad[itemp], fpulse.Nt+1 );
         
-        for (jtemp=0; jtemp<fpulse.NewNt+1; jtemp++)
+        for (jtemp=0; jtemp<fpulse.Nt+1; jtemp++)
         {
             
             inter_rad[itemp][jtemp]=0.;
@@ -550,11 +550,11 @@ int main( int argc, char *argv[] )
     }
     
 
-    setting_complex_memory( &ConductionOccup, fpulse.NewNt+1 );
-    setting_complex_memory( &Coherence_Mom_Int, fpulse.NewNt+1 );
+    setting_complex_memory( &ConductionOccup, fpulse.Nt+1 );
+    setting_complex_memory( &Coherence_Mom_Int, fpulse.Nt+1 );
 
     
-    for (jtemp=0; jtemp<fpulse.NewNt+1; jtemp++)
+    for (jtemp=0; jtemp<fpulse.Nt+1; jtemp++)
     {
         
         ConductionOccup[jtemp]   = 0.;
@@ -719,7 +719,7 @@ int main( int argc, char *argv[] )
         cout << "Dephasing, T2  = "     << cs.T2 << " a.u.\n\n\n";
     
         fprintf(sparamout,"\n\n%s","#Time grid, No.-time-steps,  Time-step-dt,     No.-pulses     ---,     ---,     ---,     --- ");
-        fprintf(sparamout,"\n          %d      %e      %d      %e      %e      %e      %e      \n\n", fpulse.NewNt, dt, fpulse.Npulses, 1.0, 1.0, 1.0, 1.0 );
+        fprintf(sparamout,"\n          %d      %e      %d      %e      %e      %e      %e      \n\n", fpulse.Nt, dt, fpulse.Npulses, 1.0, 1.0, 1.0, 1.0 );
     
         fprintf(sparamout,"\n\n%s","#Momentum mesh & H.M. params., dkx (a.u.),  dky (a.u.),  Nx,  Ny, a0 (a.u.),  t1(a.u.),  t2 ");
         fprintf(sparamout,"\n          %e      %e      %d      %d      %e      %e      %e      \n\n", g.dk[0], g.dk[1], g.N[0], g.N[1], a0, t1, t2 );
@@ -783,7 +783,7 @@ int main( int argc, char *argv[] )
         
         //###############################
         //Saving or Output of laser
-        for ( n = 0; n < fpulse.NewNt; n++)
+        for ( n = 0; n < fpulse.Nt; n++)
            {
                
             at = fpulse.atmin + dt*n;
@@ -883,7 +883,7 @@ int main( int argc, char *argv[] )
         cout << "\n\n\n//############################################//" ;
         cout <<"\n#*********==============**********#\n ";
         cout << "Beginning of Momentum/Time integration loops\n (Nx,Ny,Nt)";
-        cout << " = ( "<< g.N[0] << " , " << g.N[1] <<" , " <<fpulse.NewNt << " ) " << scientific;
+        cout << " = ( "<< g.N[0] << " , " << g.N[1] <<" , " <<fpulse.Nt << " ) " << scientific;
         cout << "\nMomentum Steps and Time Step";
         cout << "\n ( dkx, dky, dt )     =   (" << g.dk[0] << ",  " << scientific;
         cout << g.dk[1] << ",  " << dt << "  )  a.u." << scientific << endl;
@@ -901,7 +901,7 @@ int main( int argc, char *argv[] )
     //#####################################
     //#####################################
     //Time integration loop
-    for( ktime = 0; ktime<fpulse.NewNt; ktime++ )
+    for( ktime = 0; ktime<fpulse.Nt; ktime++ )
     {
 
 
@@ -942,8 +942,8 @@ int main( int argc, char *argv[] )
         // Plotting snapshots of conduction band density
         // First and last time grid is included in shots, 
         // and others are distributed uniformly as much as possible
-        if (shotNumber > 0 && (ktime%((fpulse.NewNt-1)/(shotNumber-1)) == min((fpulse.NewNt-1)%(shotNumber-1), ktime/((fpulse.NewNt-1)/(shotNumber-1))) 
-        || ktime == fpulse.NewNt-1))
+        if (shotNumber > 0 && (ktime%((fpulse.Nt-1)/(shotNumber-1)) == min((fpulse.Nt-1)%(shotNumber-1), ktime/((fpulse.Nt-1)/(shotNumber-1))) 
+        || ktime == fpulse.Nt-1))
         {
             if (rank == MASTER)
             {
@@ -1033,8 +1033,8 @@ int main( int argc, char *argv[] )
 
 
             /*
-            //if ( ktime%((fpulse.NewNt)/4) == 0 & rank == MASTER & diagnostic == 1 )
-            if ( ktime == floor((fpulse.NewNt)/2) & rank == MASTER & diagnostic == 1 )
+            //if ( ktime%((fpulse.Nt)/4) == 0 & rank == MASTER & diagnostic == 1 )
+            if ( ktime == floor((fpulse.Nt)/2) & rank == MASTER & diagnostic == 1 )
             {
                 
                 //###############################
@@ -1335,19 +1335,19 @@ int main( int argc, char *argv[] )
         
     //###################################
     //OutPut for diagnostic
-    if( ktime%( (fpulse.NewNt-1)/200 )==0 )
+    if( ktime%( (fpulse.Nt-1)/200 )==0 )
     {
             
         if ( g.k[1][jtemp-1] >= kyShift[0] & g.k[1][jtemp-1] <= kyShift[1] & fbz_shift == 1)
         {
                 
-            printf( "\n%.6d / %.7d        %.3e        %.3e        %.2d        %.6d     %s  %.3f %s %.3f %s", ktime, fpulse.NewNt-1, real(ConductionOccup[ktime]*g.dV  ), real(Coherence_Mom_Int[ktime])*g.dV, cs.gauge, rank, "Shifted BZ (",tkx5[ 0 ],",",tky5[ 0 ],")" );
+            printf( "\n%.6d / %.7d        %.3e        %.3e        %.2d        %.6d     %s  %.3f %s %.3f %s", ktime, fpulse.Nt-1, real(ConductionOccup[ktime]*g.dV  ), real(Coherence_Mom_Int[ktime])*g.dV, cs.gauge, rank, "Shifted BZ (",tkx5[ 0 ],",",tky5[ 0 ],")" );
             
         }
         else
         {
                 
-            printf( "\n%.6d / %.7d        %.3e        %.3e        %.2d        %.6d     %s  %.3f %s %.3f %s", ktime, fpulse.NewNt-1, real(ConductionOccup[ktime]*g.dV  ), real(Coherence_Mom_Int[ktime])*g.dV, cs.gauge, rank, "Non-Shift BZ (",tkx5[ 0 ],",",tky5[ 0 ],")" );
+            printf( "\n%.6d / %.7d        %.3e        %.3e        %.2d        %.6d     %s  %.3f %s %.3f %s", ktime, fpulse.Nt-1, real(ConductionOccup[ktime]*g.dV  ), real(Coherence_Mom_Int[ktime])*g.dV, cs.gauge, rank, "Non-Shift BZ (",tkx5[ 0 ],",",tky5[ 0 ],")" );
                 
         }
             
@@ -1378,7 +1378,7 @@ int main( int argc, char *argv[] )
     
     
     
-    for( ktime = 1; ktime<fpulse.NewNt-1; ktime++ )
+    for( ktime = 1; ktime<fpulse.Nt-1; ktime++ )
     {
         
         
@@ -1397,7 +1397,7 @@ int main( int argc, char *argv[] )
     
     
     
-    ktime   = fpulse.NewNt-1;
+    ktime   = fpulse.Nt-1;
     
     dxdt = real( inter_rad[0][ktime]) * g.dV; //real( inter_rad[0][ktime+1] - inter_rad[0][ktime-1] )*g.dV/dt/2.;                                
     dydt = real( inter_rad[1][ktime]) * g.dV; //real( inter_rad[1][ktime+1] - inter_rad[1][ktime-1] )*g.dV/dt/2.;    
@@ -1407,7 +1407,7 @@ int main( int argc, char *argv[] )
     fprintf(simulation_out,"%.16e       %.16e        %.16e       %.16e       %.16e       %.16e      %.16e       %.16e       %.16e       %.16e       %.16e\n", at, dxdt , dydt  , real(intra_rad[0][ktime])*g.dV, real(intra_rad[1][ktime])*g.dV, real(ConductionOccup[ktime])*g.dV, real(Coherence_Mom_Int[ktime])*g.dV, group_rad[0][ktime]*g.dV, group_rad[1][ktime]*g.dV, anomalous_rad[0][ktime]*g.dV, anomalous_rad[1][ktime]*g.dV );
     
     
-    //cout <<"\nNo. of total time steps = " << fpulse.NewNt << endl;    
+    //cout <<"\nNo. of total time steps = " << fpulse.Nt << endl;    
     fflush( simulation_out ) ;*/
 
     //##############################################
@@ -1418,59 +1418,59 @@ int main( int argc, char *argv[] )
     {
         if (rank == MASTER)
         {
-            MPI_Reduce(MPI_IN_PLACE, inter_rad[i], fpulse.NewNt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
+            MPI_Reduce(MPI_IN_PLACE, inter_rad[i], fpulse.Nt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
         }
         else
         {
-            MPI_Reduce(inter_rad[i], inter_rad[i], fpulse.NewNt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
+            MPI_Reduce(inter_rad[i], inter_rad[i], fpulse.Nt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
         }
         MPI_Barrier( MPI_COMM_WORLD );
         if (rank == MASTER)
         {
-            MPI_Reduce(MPI_IN_PLACE, intra_rad[i], fpulse.NewNt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
+            MPI_Reduce(MPI_IN_PLACE, intra_rad[i], fpulse.Nt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
         }
         else
         {
-            MPI_Reduce(intra_rad[i], intra_rad[i], fpulse.NewNt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
+            MPI_Reduce(intra_rad[i], intra_rad[i], fpulse.Nt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
         }
         MPI_Barrier( MPI_COMM_WORLD );
         if (rank == MASTER)
         {
-            MPI_Reduce(MPI_IN_PLACE, group_rad[i], fpulse.NewNt, MPI_DOUBLE, MPI_SUM, MASTER, MPI_COMM_WORLD);
+            MPI_Reduce(MPI_IN_PLACE, group_rad[i], fpulse.Nt, MPI_DOUBLE, MPI_SUM, MASTER, MPI_COMM_WORLD);
         }
         else
         {
-            MPI_Reduce(group_rad[i], group_rad[i], fpulse.NewNt, MPI_DOUBLE, MPI_SUM, MASTER, MPI_COMM_WORLD);
+            MPI_Reduce(group_rad[i], group_rad[i], fpulse.Nt, MPI_DOUBLE, MPI_SUM, MASTER, MPI_COMM_WORLD);
         }
         MPI_Barrier( MPI_COMM_WORLD );
         if (rank == MASTER)
         {
-            MPI_Reduce(MPI_IN_PLACE, anomalous_rad[i], fpulse.NewNt, MPI_DOUBLE, MPI_SUM, MASTER, MPI_COMM_WORLD);
+            MPI_Reduce(MPI_IN_PLACE, anomalous_rad[i], fpulse.Nt, MPI_DOUBLE, MPI_SUM, MASTER, MPI_COMM_WORLD);
         }
         else
         {
-            MPI_Reduce(anomalous_rad[i], anomalous_rad[i], fpulse.NewNt, MPI_DOUBLE, MPI_SUM, MASTER, MPI_COMM_WORLD);
+            MPI_Reduce(anomalous_rad[i], anomalous_rad[i], fpulse.Nt, MPI_DOUBLE, MPI_SUM, MASTER, MPI_COMM_WORLD);
         }
         MPI_Barrier( MPI_COMM_WORLD );
     }
     // occupation of conduction band
     if (rank == MASTER)
     {
-        MPI_Reduce(MPI_IN_PLACE, ConductionOccup, fpulse.NewNt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
+        MPI_Reduce(MPI_IN_PLACE, ConductionOccup, fpulse.Nt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
     }
     else
     {
-        MPI_Reduce(ConductionOccup, ConductionOccup, fpulse.NewNt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
+        MPI_Reduce(ConductionOccup, ConductionOccup, fpulse.Nt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
     }
     MPI_Barrier( MPI_COMM_WORLD );
     // coherence
     if (rank == MASTER)
     {
-        MPI_Reduce(MPI_IN_PLACE, Coherence_Mom_Int, fpulse.NewNt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
+        MPI_Reduce(MPI_IN_PLACE, Coherence_Mom_Int, fpulse.Nt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
     }
     else
     {
-        MPI_Reduce(Coherence_Mom_Int, Coherence_Mom_Int, fpulse.NewNt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
+        MPI_Reduce(Coherence_Mom_Int, Coherence_Mom_Int, fpulse.Nt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
     }
 
     MPI_Barrier( MPI_COMM_WORLD );
@@ -1480,7 +1480,7 @@ int main( int argc, char *argv[] )
     {
         cout << "\n\nWriting output-data\n\n";
 
-        for (ktime = 0; ktime < fpulse.NewNt; ++ktime)
+        for (ktime = 0; ktime < fpulse.Nt; ++ktime)
         {
             fprintf(interj_out, "%.16e    %.16e\n", real(inter_rad[0][ktime]) * g.dV, real(inter_rad[1][ktime]) * g.dV);
             fprintf(intraj_out, "%.16e    %.16e\n", real(intra_rad[0][ktime]) * g.dV, real(intra_rad[1][ktime]) * g.dV);

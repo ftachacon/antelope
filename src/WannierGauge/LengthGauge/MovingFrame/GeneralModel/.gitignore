@@ -13,3 +13,5 @@ exec_hhg_mpi
 # Some temporaray files
 backup_an_example.sh
 
+# ignore dat files
+*.dat
