@@ -27,7 +27,6 @@ public:
     /// Bravais lattice vector and Reciprocal lattice vectors
     std::array<std::array<double, Ndim>, Ndim> vec_lattice, vec_reciprocal;
 
-    int Nband;                              ///< Number of Wannier function per unit cell = Number of bands
     int Nrpts;                              ///< Number of Bravais lattice vector used in system
     double *weight;                         ///< Weight of unit cell 
     int **indexRvec;                        ///< index of lattice vectors  (R = n1 a1 + n2 a2 + n3 a3 ), indexRvec[irpt, 0] = n1
@@ -44,7 +43,10 @@ public:
 
     double Volume;                          ///< volume of unit cell
 
-    int Nval;                               ///< Number of valence band (changing to fermi energy expression later?)
+    int Nval;                               ///< Number of valence band 
+    double FermiE;                          ///< Fermi energy in atomic unit
+    bool isFermiEUsed;                      ///< if true Fermi energy is used to generate initial value. if false valence band number is used.
+    double thermalE;                        ///< temperature in atomic unit (300K is defalut)
 
     double eps;                             ///< error epsilon used in this class
 
@@ -79,7 +81,16 @@ TightBinding::TightBinding( const libconfig::Setting *params )
     try
     {
         string w90_file = params->lookup("dataName");
-        Nval = params->lookup("Nval");
+        // If FermiE exists, valence band number is ignored
+        isFermiEUsed =  params->lookupValue("FermiE", FermiE);
+        if (isFermiEUsed)
+            FermiE = FermiE / au_eV;
+        else
+            Nval = params->lookup("Nval");
+        thermalE = 300.;
+        params->lookupValue("temperature", thermalE);
+        thermalE /= 3.15775024804e5;     // hartree energy (4.3597447222071×10−18) / Boltzman constant(1.380649×10−23)
+
         isDipoleZero = true;
         params->lookupValue("isDipoleZero", isDipoleZero);
         ifstream w90_data(w90_file.c_str());
@@ -111,7 +122,7 @@ TightBinding::TightBinding( const libconfig::Setting *params )
                 for (int m = 0; m < Nband*Nband; ++m)
                 {
                     w90_data >> jtemp >> itemp >> ftemp1 >> ftemp2;
-                    ham_w[irpt][jtemp][itemp] = ftemp1 * I*ftemp2;
+                    ham_w[irpt][jtemp-1][itemp-1] = ftemp1 * I*ftemp2;
                 }
             }
             // Read position matrix elements
@@ -128,7 +139,7 @@ TightBinding::TightBinding( const libconfig::Setting *params )
                     for (int i = 0; i < Ndim; ++i)
                     {
                         w90_data >> ftemp1 >> ftemp2;
-                        pos_w[irpt][jtemp][itemp][i] = ftemp1 * I*ftemp2;
+                        pos_w[irpt][jtemp-1][itemp-1][i] = ftemp1 * I*ftemp2;
                     }
                 }
             }
@@ -214,11 +225,19 @@ void TightBinding::GenInitialValue(complex *_dmstore, std::array<double, Ndim> _
     }
 
     // set valence = 1., conduction = 0. initial condition
-    // degeneracy between valence and conduction bands are not considered yet
+    // Fermi-Dirac distribution is used when FermiE is applied
+    // tempEigval is calculated inside the GenUMatrix, be careful about order or sideeffects.
     for (int m = 0; m < Nband; ++m)
     {
-        if (m < Nval)
-            _dmstore[m*Nband + m] = 1.;
+        if (isFermiEUsed)
+        {
+            _dmstore[m*Nband + m] = 1.0 / ( exp( (tempEigval[m] - FermiE) / thermalE ) + 1.0 );
+        }
+        else
+        {
+            if (m < Nval)
+                _dmstore[m*Nband + m] = 1.;
+        }
     }
     MatrixMult(tempMatrix, _dmstore, tempctransUmat, Nband);
     MatrixMult(_dmstore, tempUmat, tempMatrix, Nband);
@@ -325,11 +344,25 @@ void TightBinding::GenUMatrix(complex *_ustore, std::array<double, Ndim> _kpoint
     //    double abstol, lapack_int* m, double* w, lapack_complex_double* z, lapack_int ldz, lapack_int* isuppz );
     int num_of_eig; 
     int info = LAPACKE_zheevr( LAPACK_ROW_MAJOR, 'V', 'A', 'U',
-                                Nband*Nband, tempHamiltonian, Nband, 0., 0., 0., 0., 
+                                Nband, tempHamiltonian, Nband, 0., 0., 0., 0., 
                                 eps, &num_of_eig, tempEigval, _ustore, Nband, isuppz );
     if (info != 0)
     {
         std::cerr << "Problem in lapack, info = " << info << std::endl;
+        for (int m = 0; m < Nband; ++m)
+        {
+            for (int n = 0; n < Nband; ++ n)
+            {
+                std::cout << tempHamiltonian[m*Nband + n] << "     ";
+            }
+            std::cout << endl;
+        }
+        for (int m = 0; m < Nband; ++m)
+        {
+            std::cout << tempEigval[m] << "      ";
+        }
+        std::cout << endl;
+        exit(1);
     }
 }
 

@@ -26,6 +26,7 @@ for i in range(len(arrM)):
     config['WilsonMass']['mu'] = arrM[i]*2*config['WilsonMass']['t']
     f = io.open(foldername[i] + '/' + configfile, 'w')
     libconf.dump(config, f)
+    f.close()
 
 for i in range(len(arrM)):
     subprocess.run( ['sbatch', jobscript] , cwd=foldername[i])
