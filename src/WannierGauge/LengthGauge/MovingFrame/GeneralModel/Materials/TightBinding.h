@@ -131,6 +131,7 @@ TightBinding::TightBinding( const libconfig::Setting *params )
             {
                 w90_data >> vec_lattice[i][0] >> vec_lattice[i][1] >> vec_lattice[i][2];
             }
+            for (int i = 0; i < Ndim; ++i) for (int j = 0; j < Ndim; ++j) vec_lattice[i][j] /= au_angstrom;
             w90_data >> Nband >> Nrpts; // num_wann, nrpts in Wannier90
             Allocate(); // allocate
             for (int irpt = 0; irpt < Nrpts; ++irpt)
@@ -147,7 +148,7 @@ TightBinding::TightBinding( const libconfig::Setting *params )
                 for (int m = 0; m < Nband*Nband; ++m)
                 {
                     w90_data >> jtemp >> itemp >> ftemp1 >> ftemp2;
-                    ham_w[irpt][jtemp-1][itemp-1] = ftemp1 * I*ftemp2;
+                    ham_w[irpt][jtemp-1][itemp-1] = (ftemp1 * I*ftemp2)/au_eV;
                 }
             }
             // Read position matrix elements
@@ -164,7 +165,7 @@ TightBinding::TightBinding( const libconfig::Setting *params )
                     for (int i = 0; i < Ndim; ++i)
                     {
                         w90_data >> ftemp1 >> ftemp2;
-                        pos_w[irpt][jtemp-1][itemp-1][i] = ftemp1 * I*ftemp2;
+                        pos_w[irpt][jtemp-1][itemp-1][i] = (ftemp1 * I*ftemp2)/au_angstrom;
                     }
                 }
             }
