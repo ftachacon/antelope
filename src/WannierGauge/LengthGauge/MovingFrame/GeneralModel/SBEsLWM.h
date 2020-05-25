@@ -28,7 +28,7 @@ class SBEsLWM
 public:
     complex **dmatrix; 
 
-    WannierMaterial *material;  /// dipole&Hamiltonian generator
+    WannierMaterial *material;  ///< dipole&Hamiltonian generator
 
     // allocated memory with no value - to reduce costs for making temporoary variables
     complex *hamiltonian;
@@ -43,6 +43,9 @@ public:
     laser *fpulses;
 
     int Nband;
+
+    bool isWannier90;       ///< if true, it means target material is written by wannier90 input.
+    std::array<std::array<double, Ndim>, Ndim> vec_lattice; // only for wannier90 case, to project on reciprocal vectors
 
     //array<double, Ndim*Ndim> BzAxes;
     //array<double, Ndim> BzOrigin;
@@ -80,6 +83,8 @@ public:
     void InitializeGeneral(const libconfig::Setting *_calc);     ///< Initialize general stuff inside constructor
     void InitializeLaser(const libconfig::Setting *_laser);     ///< Initialize laser inside constructor
 
+    array<double, Ndim> GenKpulsA(array<double, Ndim> _kpoint, double time);
+
 };
 
 SBEsLWM::SBEsLWM(const libconfig::Setting * _cfg)
@@ -101,6 +106,7 @@ SBEsLWM::SBEsLWM(const libconfig::Setting * _cfg)
     // cout << "Target :  " << targetMaterial << endl;
 
     // Initialize specific material
+    isWannier90 = false;
     if (targetMaterial == "Haldane")
     {
         material = new Haldane( &(cfg[targetMaterial.c_str()]) );
@@ -113,6 +119,8 @@ SBEsLWM::SBEsLWM(const libconfig::Setting * _cfg)
     {
         material = new TightBinding( &(cfg[targetMaterial.c_str()]) );
         isDipoleZero = dynamic_cast<TightBinding*>(material)->isDipoleZero;
+        vec_lattice = dynamic_cast<TightBinding*>(material)->vec_lattice;
+        isWannier90 = true;
     }
     
     Nband = material->Nband;
@@ -122,6 +130,10 @@ SBEsLWM::SBEsLWM(const libconfig::Setting * _cfg)
     // generate k-grid
     kmesh = new momaxis( Nk, bzaxes, bzori );
 
+    if (isWannier90)
+    {
+        dynamic_cast<TightBinding*>(material)->CalculateKMesh(kmesh);
+    }
     
 
     dmatrix = Create2D<complex>(this->kmesh->Ntotal, Nband*Nband);
@@ -321,7 +333,6 @@ void SBEsLWM::InitializeLaser(const libconfig::Setting *_laser)
 SBEsLWM::~SBEsLWM()
 {
     Delete2D<complex>(dmatrix, this->kmesh->Ntotal, Nband*Nband);
-    delete kmesh;
 
     delete[] hamiltonian;
     delete[] newdMatrix;
@@ -342,6 +353,8 @@ SBEsLWM::~SBEsLWM()
 
     delete material;
     delete fpulses;
+
+    delete kmesh;
 }
 
 void SBEsLWM::RunSBEs(int _kindex, double  _time)
@@ -375,12 +388,10 @@ void SBEsLWM::RunSBEs(int _kindex, double  _time)
 }
 array<double, Ndim> SBEsLWM::GenCurrent(int _kindex, double _time)
 {
-    array<double, Ndim> _tkp = kmesh->kgrid[_kindex];
-    array<double, Ndim> avector = fpulses->avlaser(_time);
-    for (int i = 0; i < Ndim; ++i)  _tkp[i] += avector[i];
+    auto _tkp = GenKpulsA(kmesh->kgrid[_kindex], _time);
     material->GenJMatrix(jMatrix, _tkp);
 
-    // J = Tr{densiymatrix j}
+    // J = Tr{densitymatrix j}
     array<double, Ndim> outCurrent;
     fill(outCurrent.begin(), outCurrent.end(), 0.);
     for (int iaxis = 0; iaxis < Ndim; ++iaxis)
@@ -399,10 +410,8 @@ array<double, Ndim> SBEsLWM::GenCurrent(int _kindex, double _time)
 
 void SBEsLWM::GenDifferentialDM(complex *out, complex *input, int _kindex, double _time)
 {
-    array<double, Ndim> _tkp = kmesh->kgrid[_kindex];
-    array<double, Ndim> avector = fpulses->avlaser(_time);
     array<double, Ndim> evector = fpulses->elaser(_time);
-    for (int i = 0; i < Ndim; ++i)  _tkp[i] += avector[i];
+    auto _tkp = GenKpulsA(kmesh->kgrid[_kindex], _time);
     material->GenHamiltonian(hamiltonian, _tkp);
 
     //fill(out, out+Nband*Nband, 0.);
@@ -477,4 +486,31 @@ void SBEsLWM::GenDifferentialDM(complex *out, complex *input, int _kindex, doubl
             out[m*Nband + n] -= temp2Matrix[m*Nband + n];
         }
     }
+}
+
+array<double, Ndim> SBEsLWM::GenKpulsA(array<double, Ndim> _kpoint, double time)
+{
+    auto avector = fpulses->avlaser(time);
+    array<double, Ndim> tkp = {_kpoint[0]+avector[0], _kpoint[1]+avector[1], _kpoint[2]+avector[2]};
+    /*if (isWannier90)
+    {
+        // k = sum_i g_i bvec_i
+        // k.avec_i = 2pi g_i
+        array<double, Ndim> returnVal;
+        fill(returnVal.begin(), returnVal.end(), 0.0);
+        for (int i = 0; i < Ndim; ++i)
+        {
+            for (int j =0; j < Ndim; ++j)
+            {
+                returnVal[i] += vec_lattice[i][j] * tkp[j];
+            }
+            returnVal[i] /= (2*pi);
+        }
+        return returnVal;
+    }
+    else
+    {
+        return tkp;
+    }*/
+    return tkp;
 }

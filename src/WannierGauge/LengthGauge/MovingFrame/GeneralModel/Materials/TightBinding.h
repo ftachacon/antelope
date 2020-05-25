@@ -7,6 +7,7 @@
 
 #include "../wannier_system.h"
 #include "../utility.h"
+#include "../momaxis.h"
 
 #include <string>
 #include <iostream>
@@ -29,7 +30,7 @@ public:
 
     int Nrpts;                              ///< Number of Bravais lattice vector used in system
     double *weight;                         ///< Weight of unit cell 
-    int **indexRvec;                        ///< index of lattice vectors  (R = n1 a1 + n2 a2 + n3 a3 ), indexRvec[irpt, 0] = n1
+    int **indexRvec;                        ///< index of lattice vectors  (R = n1 a1 + n2 a2 + n3 a3 ), indexRvec[irpt][0] = n1
     int indexRorigin;                       ///< index which R = 0
 
     bool isDipoleZero;                      ///< if true choose e^ik(R+t) basis and make Wannier dipole zero
@@ -42,6 +43,21 @@ public:
     double **Rvec;                          ///< value of R vector, Rvec[irpt][0] = Rx
 
     double Volume;                          ///< volume of unit cell
+
+    momaxis *kmesh;                         ///< momentum axis used in calculation
+    bool isMeshAllocated;                   ///< check pre-calculated matrices are allocated or not
+
+    // Pre-calculated matrices for each k points
+    complex **pre_ham;
+    complex ***pre_pos;
+    complex ***pre_jmat;
+
+    // calculated differential of dipole and Hamiltonian
+    complex ***pre_d1ham;           ///< 1st order talyor for Hamiltonian, pre_d1ham[kindex][m*Nband+n][i] = \sum_R Hmn(R)*R_i
+    complex ****pre_d1pos;          ///< 1st order talyor for dipole, pre_d1pos[kindex][i][m*Nband+n][j] = \sum_R <0m|r_i|Rn>*R_j
+    complex ****pre_d1jmat;         ///< 1st order talyor for derivative of Hamiltonian, pre_d1jmat[kindex][i][m*Nband+n][j] = -im *sum_R R_i*R_j*Hmn(R)
+    //complex ****pre_d2ham;
+    //complex ****pre_d2pos;
 
     int Nval;                               ///< Number of valence band 
     double FermiE;                          ///< Fermi energy in atomic unit
@@ -73,11 +89,19 @@ public:
     void GenUMatrix(complex *_ustore, std::array<double, Ndim> _kpoint) override;
     std::tuple<std::array<double, Ndim*Ndim>, std::array<double, Ndim> > GenBrillouinzone(  ) override;
 
+    void GenHamiltonianPrimitive(complex *_hstore, std::array<double, Ndim> _kpoint);
+    void GenDipolePrimitive(complex **_dstore, std::array<double, Ndim> _kpoint);
+    void GenJMatrixPrimitive(complex **_jstore, std::array<double, Ndim> _kpoint);
+
     void PrintMaterialInformation() override;
+
+    void CalculateKMesh(momaxis *_kmesh);
+    std::tuple<int, std::array<double, Ndim> > GetNearestK(std::array<double, Ndim> _kpoint);
 };
 
 TightBinding::TightBinding( const libconfig::Setting *params )
 {
+    isMeshAllocated = false;
     try
     {
         string w90_file = params->lookup("dataName");
@@ -91,8 +115,9 @@ TightBinding::TightBinding( const libconfig::Setting *params )
         params->lookupValue("temperature", thermalE);
         thermalE /= 3.15775024804e5;     // hartree energy (4.3597447222071×10−18) / Boltzman constant(1.380649×10−23)
 
-        isDipoleZero = true;
-        params->lookupValue("isDipoleZero", isDipoleZero);
+        isDipoleZero = false;
+        //isDipoleZero = true;
+        //params->lookupValue("isDipoleZero", isDipoleZero);
         ifstream w90_data(w90_file.c_str());
 
         int itemp, jtemp;
@@ -210,6 +235,16 @@ TightBinding::~TightBinding()
     Delete4D(pos_w, Nrpts, Nband, Nband, Ndim);
 
     delete[] tempHamiltonian, tempUmat, tempctransUmat, tempMatrix, tempEigval, isuppz;
+
+    if (isMeshAllocated)
+    {
+        Delete2D<complex>(pre_ham, kmesh->Ntotal, Nband*Nband);
+        Delete3D<complex>(pre_pos, kmesh->Ntotal, Ndim, Nband*Nband);
+        Delete3D<complex>(pre_jmat, kmesh->Ntotal, Ndim, Nband*Nband);
+        Delete3D<complex>(pre_d1ham, kmesh->Ntotal, Nband*Nband, Ndim);
+        Delete4D<complex>(pre_d1pos, kmesh->Ntotal, Ndim, Nband*Nband, Ndim);
+        Delete4D<complex>(pre_d1jmat, kmesh->Ntotal, Ndim, Nband*Nband, Ndim);
+    }
 }
 
 void TightBinding::GenInitialValue(complex *_dmstore, std::array<double, Ndim> _kpoint)
@@ -243,7 +278,7 @@ void TightBinding::GenInitialValue(complex *_dmstore, std::array<double, Ndim> _
     MatrixMult(_dmstore, tempUmat, tempMatrix, Nband);
 }
 
-void TightBinding::GenHamiltonian(complex *_hstore, std::array<double, Ndim> _kpoint)
+void TightBinding::GenHamiltonianPrimitive(complex *_hstore, std::array<double, Ndim> _kpoint)
 {
     fill(_hstore, _hstore + Nband*Nband, 0.);
     if (isDipoleZero)
@@ -273,7 +308,7 @@ void TightBinding::GenHamiltonian(complex *_hstore, std::array<double, Ndim> _kp
         }
     }
 }
-void TightBinding::GenDipole(complex **_dstore, std::array<double, Ndim> _kpoint)
+void TightBinding::GenDipolePrimitive(complex **_dstore, std::array<double, Ndim> _kpoint)
 {
     for (int i = 0; i < Ndim; ++i)
         fill(_dstore[i], _dstore[i] + Nband*Nband, 0.);
@@ -295,7 +330,7 @@ void TightBinding::GenDipole(complex **_dstore, std::array<double, Ndim> _kpoint
     }
 }
 
-void TightBinding::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint)
+void TightBinding::GenJMatrixPrimitive(complex **_jstore, std::array<double, Ndim> _kpoint)
 {
     double temp;
     for (int i = 0; i < Ndim; ++i)
@@ -366,6 +401,89 @@ void TightBinding::GenUMatrix(complex *_ustore, std::array<double, Ndim> _kpoint
     }
 }
 
+void TightBinding::GenHamiltonian(complex *_hstore, std::array<double, Ndim> _kpoint)
+{
+    auto [kindex, _dkp] = GetNearestK(_kpoint);
+    for (int m = 0; m < Nband; ++m)
+    {
+        for (int n = 0; n < Nband; ++n)
+        {
+            _hstore[m*Nband + n] = pre_ham[kindex][m*Nband + n];
+        }
+    }
+
+    // 1st - order
+    for (int m = 0; m < Nband; ++m)
+    {
+        for (int n = 0; n < Nband; ++n)
+        {
+            for (int i = 0; i < Ndim; ++i)
+            {
+                _hstore[m*Nband + n] += pre_d1ham[kindex][m*Nband + n][i] * _dkp[i];
+            }
+        }
+    }
+}
+
+void TightBinding::GenDipole(complex **_dstore, std::array<double, Ndim> _kpoint)
+{
+    auto [kindex, _dkp] = GetNearestK(_kpoint);
+    for (int i = 0; i < Ndim; ++i)
+    {
+        for (int m = 0; m < Nband; ++m)
+        {
+            for (int n = 0; n < Nband; ++n)
+            {
+                _dstore[i][m*Nband + n] = pre_pos[kindex][i][m*Nband + n];
+            }
+        }
+    }
+
+    // 1st - order
+    for (int i = 0; i < Ndim; ++i)
+    {
+        for (int m = 0; m < Nband; ++m)
+        {
+            for (int n = 0; n < Nband; ++n)
+            {
+                for (int j = 0; j < Ndim; ++j)
+                {
+                    _dstore[i][m*Nband + n] += pre_d1pos[kindex][i][m*Nband + n][j] * _dkp[j];
+                }
+            }
+        }
+    }
+}
+
+void TightBinding::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint)
+{
+    auto [kindex, _dkp] = GetNearestK(_kpoint);
+    for (int i = 0; i < Ndim; ++i)
+    {
+        for (int m = 0; m < Nband; ++m)
+        {
+            for (int n = 0; n < Nband; ++n)
+            {
+                _jstore[i][m*Nband + n] = pre_jmat[kindex][i][m*Nband + n];
+            }
+        }
+    }
+
+    // 1st - order
+    for (int i = 0; i < Ndim; ++i)
+    {
+        for (int m = 0; m < Nband; ++m)
+        {
+            for (int n = 0; n < Nband; ++n)
+            {
+                for (int j = 0; j < Ndim; ++j)
+                {
+                    _jstore[i][m*Nband + n] += pre_d1jmat[kindex][i][m*Nband + n][j] * _dkp[j];
+                }
+            }
+        }
+    }
+}
 std::tuple<std::array<double, Ndim*Ndim>, std::array<double, Ndim> > TightBinding::GenBrillouinzone(  )
 {
     return std::make_tuple(BZaxis, BZorigin );
@@ -391,4 +509,81 @@ void TightBinding::PrintMaterialInformation()
     cout << "============================================\n";
     cout << "Wannier90 data \n";
     cout << "============================================\n";
+}
+
+void TightBinding::CalculateKMesh(momaxis *_kmesh)
+{
+    kmesh = _kmesh;
+
+    // pre-calculated Hamiltonian and dipole 
+    pre_ham = Create2D<complex>(kmesh->Ntotal, Nband*Nband);
+    pre_pos = Create3D<complex>(kmesh->Ntotal, Ndim, Nband*Nband);
+    pre_jmat = Create3D<complex>(kmesh->Ntotal, Ndim, Nband*Nband);
+
+    for (int kindex = 0; kindex < kmesh->Ntotal; ++kindex)
+    {
+        GenHamiltonianPrimitive(pre_ham[kindex], kmesh->kgrid[kindex]);
+        GenDipolePrimitive(pre_pos[kindex], kmesh->kgrid[kindex]);
+        GenJMatrixPrimitive(pre_jmat[kindex], kmesh->kgrid[kindex]);
+    }
+    
+    // taylor of Hamiltonian, dipole and current - first order
+    pre_d1ham = Create3D<complex>(kmesh->Ntotal, Nband*Nband, Ndim);
+    pre_d1pos = Create4D<complex>(kmesh->Ntotal, Ndim, Nband*Nband, Ndim);
+    pre_d1jmat = Create4D<complex>(kmesh->Ntotal, Ndim, Nband*Nband, Ndim);
+
+    for (int kindex = 0; kindex < kmesh->Ntotal; ++kindex)
+    {
+        for (int m = 0; m < Nband; ++m)
+        {
+            for (int n = 0; n < Nband; ++n)
+            {
+                for (int irpt = 0; irpt < Nrpts; ++irpt)
+                {
+                    for (int iaxis = 0; iaxis < Ndim; ++iaxis)
+                    {
+                        //pre_d1ham[kindex][m*Nband + n][iaxis] += ham_w[irpt][m][n] * Rvec[irpt][iaxis];
+                        pre_d1ham[kindex][m*Nband + n][iaxis] += ham_w[irpt][m][n]  * (indexRvec[irpt][iaxis]*2*pi);
+                        for (int jaxis = 0; jaxis < Ndim; ++jaxis)
+                        {
+                            //pre_d1pos[kindex][iaxis][m*Nband + n][jaxis] += pos_w[irpt][m][n][iaxis] * Rvec[irpt][jaxis];
+                            pre_d1pos[kindex][iaxis][m*Nband + n][jaxis] += pos_w[irpt][m][n][iaxis] * (indexRvec[irpt][jaxis]*2*pi);
+                            //pre_d1jmat[kindex][iaxis][m*Nband + n][jaxis] -= I* Rvec[irpt][iaxis] * Rvec[irpt][jaxis] * ham_w[irpt][m][n];
+                            pre_d1jmat[kindex][iaxis][m*Nband + n][jaxis] -= I* Rvec[irpt][iaxis] * (indexRvec[irpt][jaxis]*2*pi) * ham_w[irpt][m][n];
+                        }
+                    }
+                }
+            }
+        }
+    }
+    isMeshAllocated = true; 
+}
+
+std::tuple<int, std::array<double, Ndim> > TightBinding::GetNearestK(std::array<double, Ndim> _kpoint)
+{
+    array<double, Ndim> bcoeff;
+    fill(bcoeff.begin(), bcoeff.end(), 0.0);
+    for (int i = 0; i < Ndim; ++i)
+    {
+        for (int j =0; j < Ndim; ++j)
+        {
+            bcoeff[i] += vec_lattice[i][j] * _kpoint[j];
+        }
+        bcoeff[i] /= (2*pi);
+    }
+    for (int i = 0; i < Ndim; ++i)
+    {
+        // range 0<= < 1
+        if (bcoeff[i] < 0 || bcoeff[i] >= 1)
+            bcoeff[i] -= floor(bcoeff[i]);
+        bcoeff[i] *= kmesh->N[i];
+    }
+    array<int, Ndim> indexArr = { int(round(bcoeff[0])),  int(round(bcoeff[1])), int(round(bcoeff[2]))};
+    for (int i = 0; i < Ndim; ++i)
+    {
+        bcoeff[i] -= indexArr[i];
+        bcoeff[i] /= kmesh->N[i];
+    }
+    for (int i = 0; i < Ndim; ++i) indexArr[i] = indexArr[i]%kmesh->N[i];
+    return std::make_tuple(kmesh->index(indexArr),  bcoeff);
 }
