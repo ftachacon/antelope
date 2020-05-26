@@ -148,7 +148,7 @@ TightBinding::TightBinding( const libconfig::Setting *params )
                 for (int m = 0; m < Nband*Nband; ++m)
                 {
                     w90_data >> jtemp >> itemp >> ftemp1 >> ftemp2;
-                    ham_w[irpt][jtemp-1][itemp-1] = (ftemp1 * I*ftemp2)/au_eV;
+                    ham_w[irpt][jtemp-1][itemp-1] = (ftemp1 + I*ftemp2)/au_eV;
                 }
             }
             // Read position matrix elements
@@ -323,7 +323,7 @@ void TightBinding::GenDipolePrimitive(complex **_dstore, std::array<double, Ndim
                 {
                     for (int irpt = 0; irpt < Nrpts; ++irpt)
                     {
-                        _dstore[i][m*Nband + n] += weight[irpt]*pos_w[irpt][m][n][i] * exp( I* std::inner_product(_kpoint.begin(), _kpoint.end(), rvec[irpt][m][n], 0.) );
+                        _dstore[i][m*Nband + n] += weight[irpt]*pos_w[irpt][m][n][i] * exp( I* std::inner_product(_kpoint.begin(), _kpoint.end(), Rvec[irpt], 0.) );
                     }
                 }
             }
@@ -544,13 +544,13 @@ void TightBinding::CalculateKMesh(momaxis *_kmesh)
                     for (int iaxis = 0; iaxis < Ndim; ++iaxis)
                     {
                         //pre_d1ham[kindex][m*Nband + n][iaxis] += ham_w[irpt][m][n] * Rvec[irpt][iaxis];
-                        pre_d1ham[kindex][m*Nband + n][iaxis] += ham_w[irpt][m][n]  * (indexRvec[irpt][iaxis]*2*pi);
+                        pre_d1ham[kindex][m*Nband + n][iaxis] += weight[irpt]* ham_w[irpt][m][n]  * (indexRvec[irpt][iaxis]*2*pi);
                         for (int jaxis = 0; jaxis < Ndim; ++jaxis)
                         {
                             //pre_d1pos[kindex][iaxis][m*Nband + n][jaxis] += pos_w[irpt][m][n][iaxis] * Rvec[irpt][jaxis];
-                            pre_d1pos[kindex][iaxis][m*Nband + n][jaxis] += pos_w[irpt][m][n][iaxis] * (indexRvec[irpt][jaxis]*2*pi);
+                            pre_d1pos[kindex][iaxis][m*Nband + n][jaxis] += weight[irpt]* pos_w[irpt][m][n][iaxis] * (indexRvec[irpt][jaxis]*2*pi);
                             //pre_d1jmat[kindex][iaxis][m*Nband + n][jaxis] -= I* Rvec[irpt][iaxis] * Rvec[irpt][jaxis] * ham_w[irpt][m][n];
-                            pre_d1jmat[kindex][iaxis][m*Nband + n][jaxis] -= I* Rvec[irpt][iaxis] * (indexRvec[irpt][jaxis]*2*pi) * ham_w[irpt][m][n];
+                            pre_d1jmat[kindex][iaxis][m*Nband + n][jaxis] -= weight[irpt]* I* Rvec[irpt][iaxis] * (indexRvec[irpt][jaxis]*2*pi) * ham_w[irpt][m][n];
                         }
                     }
                 }
