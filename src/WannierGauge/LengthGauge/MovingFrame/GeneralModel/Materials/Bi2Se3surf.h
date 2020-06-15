@@ -1,8 +1,7 @@
-/// Hamiltonian and dipole generator for Haldane model
+/// Hamiltonian and dipole generator for Bi2Se3 surface states
 /**
- * Some contents of this file comes from 'solidstructure.h' written by Alexis Chacon
+ * Equation for this class comes from PhysRevB.84.115413 and Paper of Denitsa (add refer after publihsed)
  * This class assumes system is pure 2d - no slant plane
- * @todo Fix GenInitialValue function behavior when \f$|\textmf{B}| = 0$\f. 
  * @author Dasol Kim
  * @author Alexis Agustín  Chacón Salazar
 */
@@ -91,8 +90,8 @@ BieSe3surf::BieSe3surf( const libconfig::Setting *params )
     // same with Haldane notation (sqrt(3.)*a0 --> a0)
     //double kxMax = pi/sqrt(3.)/a0;  double kyMax = 2.*pi/3./a0;
     double kxMax = pi/a0;  double kyMax = 2.*pi/sqrt(3.)/a0;
-    BZaxis = { 2*kxMax,       0,         0,
-                  0,       2*kyMax,      0,
+    BZaxis = { 4*kxMax,       0,         0,
+                  0,       4*kyMax,      0,
                   0,          0,         0};
     BZorigin = {0, 0, 0};
 
@@ -177,15 +176,15 @@ void BieSe3surf::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint)
         cosBvecSum += cos(angle_b0[i]);
         sinBvecSum += sin(angle_b0[i]);
 
-        derxcosAvecSum += vec_a[i][0] * cos(angle_a0[i]);
-        derxsinAvecSum += vec_a[i][0] * sin(angle_a0[i]);
-        derxcosBvecSum += vec_b[i][0] * cos(angle_b0[i]);
-        derxsinBvecSum += vec_b[i][0] * sin(angle_b0[i]);
+        derxcosAvecSum -= vec_a[i][0] * sin(angle_a0[i]);
+        derxsinAvecSum += vec_a[i][0] * cos(angle_a0[i]);
+        derxcosBvecSum -= vec_b[i][0] * sin(angle_b0[i]);
+        derxsinBvecSum += vec_b[i][0] * cos(angle_b0[i]);
 
-        derycosAvecSum += vec_a[i][1] * cos(angle_a0[i]);
-        derysinAvecSum += vec_a[i][1] * sin(angle_a0[i]);
-        derycosBvecSum += vec_b[i][1] * cos(angle_b0[i]);
-        derysinBvecSum += vec_b[i][1] * sin(angle_b0[i]);
+        derycosAvecSum -= vec_a[i][1] * sin(angle_a0[i]);
+        derysinAvecSum += vec_a[i][1] * cos(angle_a0[i]);
+        derycosBvecSum -= vec_b[i][1] * sin(angle_b0[i]);
+        derysinBvecSum += vec_b[i][1] * cos(angle_b0[i]);
     }
 
     double w = -2*pi/3;
