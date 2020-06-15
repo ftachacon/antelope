@@ -99,7 +99,7 @@ void Haldane::GenUMatrix(complex *_ustore, std::array<double, Ndim> _kpoint)
     GenBcomp(_kpoint);
     double Bnorm = sqrt( Bcomp[1]*Bcomp[1] + Bcomp[2]*Bcomp[2] + Bcomp[3]*Bcomp[3] );
     double waveNorm = sqrt( 2.*Bnorm* (Bnorm + Bcomp[3]) );
-    if (Bnorm > eps)
+    if (waveNorm > eps)
     {
         _ustore[0] = (Bcomp[3] + Bnorm)/waveNorm;            _ustore[1] = -(Bcomp[1] - I*Bcomp[2])/waveNorm;
         _ustore[2] = (Bcomp[1] + I*Bcomp[2])/waveNorm;       _ustore[3] = (Bcomp[3] + Bnorm)/waveNorm;

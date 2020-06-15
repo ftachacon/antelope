@@ -299,13 +299,22 @@ void momaxis::set_brillouin_zone_grid()
     int kindex;
     for (int i = 0; i < N[0]; ++i)
     {
-        ifrac = static_cast<double>(i)/N[0] - 0.5;
+        if (N[0] == 1)
+            ifrac = 0.;
+        else
+            ifrac = static_cast<double>(i)/N[0] - 0.5;
         for (int j = 0; j < N[1]; ++j)
         {
-            jfrac = static_cast<double>(j)/N[1] - 0.5;
+            if (N[1] == 1)
+                jfrac = 0.;
+            else
+                jfrac = static_cast<double>(j)/N[1] - 0.5;
             for (int k = 0; k < N[2]; ++k)
             {
-                kfrac = static_cast<double>(k)/N[2] - 0.5;
+                if (N[2] == 1)
+                    kfrac = 0.;
+                else
+                    kfrac = static_cast<double>(k)/N[2] - 0.5;
                 kindex = index(i, j, k);
                 kgrid[kindex] = {BzOrigin[0] + ifrac*BzAxes[0*Ndim + 0] + jfrac*BzAxes[1*Ndim + 0] + kfrac*BzAxes[2*Ndim + 0], 
                                     BzOrigin[1] + ifrac*BzAxes[0*Ndim + 1] + jfrac*BzAxes[1*Ndim + 1] + kfrac*BzAxes[2*Ndim + 1], 

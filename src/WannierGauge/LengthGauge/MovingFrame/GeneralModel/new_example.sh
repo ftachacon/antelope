@@ -19,7 +19,7 @@ dirname=$1 # Pass a simple name to this scrip
 ##########################################
 ## You can modify the No. of MPI tasks
 
-N_MPI_TASKs=23 #2   #No. of MPI task or cores for parallelization
+N_MPI_TASKs=23   #No. of MPI task or cores for parallelization
 
 
 
@@ -47,7 +47,7 @@ cp exec_hhg_mpi ./${dirname}/
 cp AlsisPythonShort/An* ./${dirname}/
 cp AlsisPythonShort/drawSnapshots.py ./${dirname}/
 
-cp inputParam.cfg ./${dirname}/
+cp *.cfg ./${dirname}/
 cp *.dat ./${dirname}/
 
 

@@ -3,7 +3,7 @@
 #MKLROOT=/opt/intel
 #COMPOSERLIB=$(MKLROOT)
 
-CXXFLAGS= -O2 -std=c++14
+CXXFLAGS= -O2 -std=c++14 -Wall
 LIBS= -lconfig++ -llapacke -llapack -lblas -lm
 #INTEL= icpc
 MPI= /usr/bin/mpicxx
@@ -19,15 +19,8 @@ Materials=${MyPath}/Materials
 ProgramMPI=antelope_wannier.cpp
 
 exnamempi=exec_hhg_mpi
-exname=exec_hhg
 
-comp: compileMPI 
-#comp: compileSq compileMPI 
-
-
-compileSq: ${Program0} 
-	$(MPI)  ${Program0} -w -I${OWN_LIB} -o ${exname}
-
+all: compileMPI 
 
 compileMPI: ${ProgramMPI}
 	${MPI} ${CXXFLAGS} ${ProgramMPI} -w -I${OWN_LIB} -I${Materials} -o ${exnamempi} ${LIBS}

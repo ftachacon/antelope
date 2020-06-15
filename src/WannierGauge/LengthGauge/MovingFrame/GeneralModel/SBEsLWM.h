@@ -44,8 +44,8 @@ public:
 
     int Nband;
 
-    bool isWannier90;       ///< if true, it means target material is written by wannier90 input.
-    std::array<std::array<double, Ndim>, Ndim> vec_lattice; // only for wannier90 case, to project on reciprocal vectors
+    //bool isWannier90;       ///< if true, it means target material is written by wannier90 input.
+    //std::array<std::array<double, Ndim>, Ndim> vec_lattice; // only for wannier90 case, to project on reciprocal vectors
 
     //array<double, Ndim*Ndim> BzAxes;
     //array<double, Ndim> BzOrigin;
@@ -106,7 +106,7 @@ SBEsLWM::SBEsLWM(const libconfig::Setting * _cfg)
     // cout << "Target :  " << targetMaterial << endl;
 
     // Initialize specific material
-    isWannier90 = false;
+    //isWannier90 = false;
     if (targetMaterial == "Haldane")
     {
         material = new Haldane( &(cfg[targetMaterial.c_str()]) );
@@ -115,12 +115,18 @@ SBEsLWM::SBEsLWM(const libconfig::Setting * _cfg)
     {
         material = new WilsonMass( &(cfg[targetMaterial.c_str()]) );
     }
+    else if (targetMaterial == "Bi2Se3surf")
+    {
+        material = new BieSe3surf( &cfg );
+    }
     else
     {
-        material = new TightBinding( &(cfg[targetMaterial.c_str()]) );
-        isDipoleZero = dynamic_cast<TightBinding*>(material)->isDipoleZero;
-        vec_lattice = dynamic_cast<TightBinding*>(material)->vec_lattice;
-        isWannier90 = true;
+        cerr << "Undefined Material\n";
+        exit(EXIT_FAILURE);
+        //material = new TightBinding( &(cfg[targetMaterial.c_str()]) );
+        //isDipoleZero = dynamic_cast<TightBinding*>(material)->isDipoleZero;
+        //vec_lattice = dynamic_cast<TightBinding*>(material)->vec_lattice;
+        //isWannier90 = true;
     }
     
     Nband = material->Nband;
@@ -130,10 +136,10 @@ SBEsLWM::SBEsLWM(const libconfig::Setting * _cfg)
     // generate k-grid
     kmesh = new momaxis( Nk, bzaxes, bzori );
 
-    if (isWannier90)
+    /*if (isWannier90)
     {
         dynamic_cast<TightBinding*>(material)->CalculateKMesh(kmesh);
-    }
+    }*/
     
 
     dmatrix = Create2D<complex>(this->kmesh->Ntotal, Nband*Nband);

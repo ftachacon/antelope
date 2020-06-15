@@ -14,6 +14,8 @@
 #include <fstream>
 #include <numeric>
 
+#include <omp.h>
+
 // To prevnet include <complex.h> --> which undef complex
 // As you see re-define keyword is very dangerous
 #undef complex
@@ -53,11 +55,14 @@ public:
     complex ***pre_jmat;
 
     // calculated differential of dipole and Hamiltonian
+    // \sum_R f(R) e^ikR = f0
+    // \sum_R f(R) e^i(k+dk)R = f0 + \sum_i dk_i * f_1,i + \sum_i,j dk_i*dk_j * f_1,i, j
     complex ***pre_d1ham;           ///< 1st order talyor for Hamiltonian, pre_d1ham[kindex][m*Nband+n][i] = \sum_R Hmn(R)*R_i
     complex ****pre_d1pos;          ///< 1st order talyor for dipole, pre_d1pos[kindex][i][m*Nband+n][j] = \sum_R <0m|r_i|Rn>*R_j
     complex ****pre_d1jmat;         ///< 1st order talyor for derivative of Hamiltonian, pre_d1jmat[kindex][i][m*Nband+n][j] = -im *sum_R R_i*R_j*Hmn(R)
-    //complex ****pre_d2ham;
-    //complex ****pre_d2pos;
+    complex ****pre_d2ham;           ///< 2nd order talyor for Hamiltonian
+    complex *****pre_d2pos;          ///< 2nd order talyor for dipole,
+    complex *****pre_d2jmat;         ///< 2nd order talyor for derivative of Hamiltonian
 
     int Nval;                               ///< Number of valence band 
     double FermiE;                          ///< Fermi energy in atomic unit
@@ -71,11 +76,11 @@ public:
 
     // temporary matrix used in internal storage
     // size = Nband * Nband
-    complex *tempHamiltonian, *tempUmat, *tempctransUmat;
-    complex *tempMatrix;
+    complex **tempHamiltonian, **tempUmat, **tempctransUmat;
+    complex **tempMatrix;
 
-    double *tempEigval;     // size = Nband
-    int *isuppz;                         // size = Nband*2
+    double **tempEigval;     // size = Nband
+    int **isuppz;                         // size = Nband*2
     
 
     TightBinding( const libconfig::Setting *params );
@@ -172,6 +177,7 @@ TightBinding::TightBinding( const libconfig::Setting *params )
         }
 
         // construct r vectors
+        #pragma omp parallel for collapse(4)
         for (int m = 0; m < Nband; ++m)
         {
             for (int n = 0; n < Nband; ++n)
@@ -188,6 +194,7 @@ TightBinding::TightBinding( const libconfig::Setting *params )
         }
 
         // construct R vectors
+        #pragma omp parallel for collapse(2)
         for (int irpt = 0; irpt < Nrpts; ++irpt)
         {
             for (int iaxis = 0; iaxis < Ndim; ++iaxis)
@@ -219,12 +226,13 @@ void TightBinding::Allocate()
     ham_w = Create3D<complex>(Nrpts, Nband, Nband);
     pos_w = Create4D<complex>(Nrpts, Nband, Nband, Ndim);
 
-    tempHamiltonian = new complex[Nband*Nband];
-    tempUmat = new complex[Nband*Nband];
-    tempctransUmat = new complex[Nband*Nband];
-    tempMatrix = new complex[Nband*Nband];
-    tempEigval = new double[Nband];
-    isuppz = new int[2*Nband];
+    int threadnum = omp_get_max_threads();
+    tempHamiltonian = Create2D<complex>(threadnum, Nband*Nband);
+    tempUmat = Create2D<complex>(threadnum, Nband*Nband);
+    tempctransUmat = Create2D<complex>(threadnum, Nband*Nband);
+    tempMatrix = Create2D<complex>(threadnum, Nband*Nband);
+    tempEigval = Create2D<double>(threadnum, Nband);
+    isuppz = Create2D<int>(threadnum, 2*Nband);
 }
 TightBinding::~TightBinding()
 {
@@ -235,7 +243,13 @@ TightBinding::~TightBinding()
     Delete3D(ham_w, Nrpts, Nband, Nband);
     Delete4D(pos_w, Nrpts, Nband, Nband, Ndim);
 
-    delete[] tempHamiltonian, tempUmat, tempctransUmat, tempMatrix, tempEigval, isuppz;
+    int threadnum = omp_get_max_threads();
+    Delete2D(tempHamiltonian, threadnum, Nband*Nband);
+    Delete2D(tempUmat, threadnum, Nband*Nband);
+    Delete2D(tempctransUmat, threadnum, Nband*Nband);
+    Delete2D(tempMatrix, threadnum, Nband*Nband);
+    Delete2D(tempEigval, threadnum, Nband*Nband);
+    Delete2D(isuppz, threadnum, Nband*Nband);
 
     if (isMeshAllocated)
     {
@@ -250,13 +264,14 @@ TightBinding::~TightBinding()
 
 void TightBinding::GenInitialValue(complex *_dmstore, std::array<double, Ndim> _kpoint)
 {
+    int ithread = omp_get_thread_num();
     fill(_dmstore, _dmstore + Nband*Nband, 0.);
-    GenUMatrix(tempUmat, _kpoint);
+    GenUMatrix(tempUmat[ithread], _kpoint);
     for (int m = 0; m < Nband; ++m)
     {
         for (int n = 0; n < Nband; ++n)
         {
-            tempctransUmat[m*Nband + n] = conj( tempUmat[n*Nband + m] );
+            tempctransUmat[ithread][m*Nband + n] = conj( tempUmat[ithread][n*Nband + m] );
         }
     }
 
@@ -267,7 +282,7 @@ void TightBinding::GenInitialValue(complex *_dmstore, std::array<double, Ndim> _
     {
         if (isFermiEUsed)
         {
-            _dmstore[m*Nband + m] = 1.0 / ( exp( (tempEigval[m] - FermiE) / thermalE ) + 1.0 );
+            _dmstore[m*Nband + m] = 1.0 / ( exp( (tempEigval[ithread][m] - FermiE) / thermalE ) + 1.0 );
         }
         else
         {
@@ -275,8 +290,8 @@ void TightBinding::GenInitialValue(complex *_dmstore, std::array<double, Ndim> _
                 _dmstore[m*Nband + m] = 1.;
         }
     }
-    MatrixMult(tempMatrix, _dmstore, tempctransUmat, Nband);
-    MatrixMult(_dmstore, tempUmat, tempMatrix, Nband);
+    MatrixMult(tempMatrix[ithread], _dmstore, tempctransUmat[ithread], Nband);
+    MatrixMult(_dmstore, tempUmat[ithread], tempMatrix[ithread], Nband);
 }
 
 void TightBinding::GenHamiltonianPrimitive(complex *_hstore, std::array<double, Ndim> _kpoint)
@@ -333,7 +348,6 @@ void TightBinding::GenDipolePrimitive(complex **_dstore, std::array<double, Ndim
 
 void TightBinding::GenJMatrixPrimitive(complex **_jstore, std::array<double, Ndim> _kpoint)
 {
-    double temp;
     for (int i = 0; i < Ndim; ++i)
         fill(_jstore[i], _jstore[i] + Nband*Nband, 0.);
     if (isDipoleZero)
@@ -374,28 +388,29 @@ void TightBinding::GenJMatrixPrimitive(complex **_jstore, std::array<double, Ndi
 
 void TightBinding::GenUMatrix(complex *_ustore, std::array<double, Ndim> _kpoint)
 {
-    GenHamiltonian(tempHamiltonian, _kpoint);
+    int ithread = omp_get_thread_num();
+    GenHamiltonian(tempHamiltonian[ithread], _kpoint);
     //lapack_int LAPACKE_zheevr( int matrix_layout, char jobz, char range, char uplo, 
     //    lapack_int n, lapack_complex_double* a, lapack_int lda, double vl, double vu, lapack_int il, lapack_int iu, 
     //    double abstol, lapack_int* m, double* w, lapack_complex_double* z, lapack_int ldz, lapack_int* isuppz );
     int num_of_eig; 
     int info = LAPACKE_zheevr( LAPACK_ROW_MAJOR, 'V', 'A', 'U',
-                                Nband, tempHamiltonian, Nband, 0., 0., 0., 0., 
-                                eps, &num_of_eig, tempEigval, _ustore, Nband, isuppz );
+                                Nband, tempHamiltonian[ithread], Nband, 0., 0., 0., 0., 
+                                eps, &num_of_eig, tempEigval[ithread], _ustore, Nband, isuppz[ithread] );
     if (info != 0)
     {
-        std::cerr << "Problem in lapack, info = " << info << std::endl;
+        std::cerr << "Problem in lapack, info = " << info << "at thread " << ithread <<  std::endl;
         for (int m = 0; m < Nband; ++m)
         {
             for (int n = 0; n < Nband; ++ n)
             {
-                std::cout << tempHamiltonian[m*Nband + n] << "     ";
+                std::cout << tempHamiltonian[ithread][m*Nband + n] << "     ";
             }
             std::cout << endl;
         }
         for (int m = 0; m < Nband; ++m)
         {
-            std::cout << tempEigval[m] << "      ";
+            std::cout << tempEigval[ithread][m] << "      ";
         }
         std::cout << endl;
         exit(1);
@@ -499,7 +514,7 @@ void TightBinding::SetReciprocalBasis()
     vec_reciprocal[0] = CrossProduct(vec_lattice[1], vec_lattice[2]);
     vec_reciprocal[1] = CrossProduct(vec_lattice[2], vec_lattice[0]);
     vec_reciprocal[2] = CrossProduct(vec_lattice[0], vec_lattice[1]);
-    for (int i = 0; i < Ndim; ++i) for (int j = 0; j < Ndim; ++j) vec_reciprocal[i][j] /= Volume;
+    for (int i = 0; i < Ndim; ++i) for (int j = 0; j < Ndim; ++j) vec_reciprocal[i][j] *= (2*pi)/Volume;
 
     BZorigin[0] = 0.;   BZorigin[1] = 0.;   BZorigin[2] = 0.;
     for (int i = 0; i < Ndim; ++i) for (int j = 0; j < Ndim; ++j) BZaxis[i*Ndim + j] = vec_reciprocal[i][j];
@@ -544,19 +559,51 @@ void TightBinding::CalculateKMesh(momaxis *_kmesh)
                     for (int iaxis = 0; iaxis < Ndim; ++iaxis)
                     {
                         //pre_d1ham[kindex][m*Nband + n][iaxis] += ham_w[irpt][m][n] * Rvec[irpt][iaxis];
-                        pre_d1ham[kindex][m*Nband + n][iaxis] += weight[irpt]* ham_w[irpt][m][n]  * (indexRvec[irpt][iaxis]*2*pi);
+                        pre_d1ham[kindex][m*Nband + n][iaxis] +=  I * (2*pi*indexRvec[irpt][iaxis]) * weight[irpt]* ham_w[irpt][m][n];
                         for (int jaxis = 0; jaxis < Ndim; ++jaxis)
                         {
                             //pre_d1pos[kindex][iaxis][m*Nband + n][jaxis] += pos_w[irpt][m][n][iaxis] * Rvec[irpt][jaxis];
-                            pre_d1pos[kindex][iaxis][m*Nband + n][jaxis] += weight[irpt]* pos_w[irpt][m][n][iaxis] * (indexRvec[irpt][jaxis]*2*pi);
+                            pre_d1pos[kindex][iaxis][m*Nband + n][jaxis] +=  I * (2*pi*indexRvec[irpt][jaxis]) * weight[irpt]* pos_w[irpt][m][n][iaxis];
                             //pre_d1jmat[kindex][iaxis][m*Nband + n][jaxis] -= I* Rvec[irpt][iaxis] * Rvec[irpt][jaxis] * ham_w[irpt][m][n];
-                            pre_d1jmat[kindex][iaxis][m*Nband + n][jaxis] -= weight[irpt]* I* Rvec[irpt][iaxis] * (indexRvec[irpt][jaxis]*2*pi) * ham_w[irpt][m][n];
+                            pre_d1jmat[kindex][iaxis][m*Nband + n][jaxis] += (2*pi*indexRvec[irpt][jaxis]) * weight[irpt] * Rvec[irpt][iaxis] * ham_w[irpt][m][n];
                         }
                     }
                 }
             }
         }
     }
+
+    // taylor of Hamiltonian, dipole and current - second order
+    /*pre_d2ham = Create4D<complex>(kmesh->Ntotal, Nband*Nband, Ndim, Ndim);
+    pre_d2pos = Create5D<complex>(kmesh->Ntotal, Ndim, Nband*Nband, Ndim, Ndim);
+    pre_d2jmat = Create5D<complex>(kmesh->Ntotal, Ndim, Nband*Nband, Ndim, Ndim);
+
+    for (int kindex = 0; kindex < kmesh->Ntotal; ++kindex)
+    {
+        for (int m = 0; m < Nband; ++m)
+        {
+            for (int n = 0; n < Nband; ++n)
+            {
+                for (int irpt = 0; irpt < Nrpts; ++irpt)
+                {
+                    for (int iaxis = 0; iaxis < Ndim; ++iaxis)
+                    {
+                        for (int jaxis = 0; jaxis < Ndim; ++jaxis)
+                        {
+                            pre_d2ham[kindex][m*Nband + n][iaxis][jaxis] += weight[irpt]* ham_w[irpt][m][n]  * (indexRvec[irpt][iaxis]*2*pi);
+                            for (int i = 0; i < Ndim; ++i)
+                            {
+                                //pre_d1pos[kindex][iaxis][m*Nband + n][jaxis] += pos_w[irpt][m][n][iaxis] * Rvec[irpt][jaxis];
+                                pre_d1pos[kindex][iaxis][m*Nband + n][jaxis] += weight[irpt]* pos_w[irpt][m][n][iaxis] * (indexRvec[irpt][jaxis]*2*pi);
+                                //pre_d1jmat[kindex][iaxis][m*Nband + n][jaxis] -= I* Rvec[irpt][iaxis] * Rvec[irpt][jaxis] * ham_w[irpt][m][n];
+                                pre_d1jmat[kindex][iaxis][m*Nband + n][jaxis] -= weight[irpt]* I* Rvec[irpt][iaxis] * (indexRvec[irpt][jaxis]*2*pi) * ham_w[irpt][m][n];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }*/
     isMeshAllocated = true; 
 }
 

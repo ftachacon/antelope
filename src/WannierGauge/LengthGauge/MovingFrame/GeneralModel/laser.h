@@ -265,7 +265,7 @@ void laser::Print_LaserInfo()
     cout << "\nNtime = " << Nt << endl;
     for (int i = 0; i < pulses.size(); ++i)
     {
-        cout << "Pulse " << i << endl;
+        cout << "Pulse " << i+1 << endl;
         pulses[i].Print_PulseInfo();
     }
     cout << "=========================================== \n\n";
