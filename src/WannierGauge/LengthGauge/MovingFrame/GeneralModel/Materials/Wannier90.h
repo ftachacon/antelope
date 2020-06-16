@@ -24,7 +24,7 @@
 #include <lapacke.h>
 #define complex complex<double>
 
-class TightBinding : public WannierMaterial
+class Wannier90 : public WannierMaterial
 {
 public:
     /// Bravais lattice vector and Reciprocal lattice vectors
@@ -83,8 +83,8 @@ public:
     int **isuppz;                         // size = Nband*2
     
 
-    TightBinding( const libconfig::Setting *params );
-    ~TightBinding();
+    Wannier90( const libconfig::Setting *params );
+    ~Wannier90();
     void Allocate();
     void SetReciprocalBasis();
     void GenInitialValue(complex *_dmstore, std::array<double, Ndim> _kpoint) override;
@@ -104,7 +104,7 @@ public:
     std::tuple<int, std::array<double, Ndim> > GetNearestK(std::array<double, Ndim> _kpoint);
 };
 
-TightBinding::TightBinding( const libconfig::Setting *params )
+Wannier90::Wannier90( const libconfig::Setting *params )
 {
     isMeshAllocated = false;
     try
@@ -217,7 +217,7 @@ TightBinding::TightBinding( const libconfig::Setting *params )
     SetReciprocalBasis();
 }
 
-void TightBinding::Allocate()
+void Wannier90::Allocate()
 {
     weight = new double[Nrpts];
     indexRvec = Create2D<int>(Nrpts, Ndim);
@@ -234,7 +234,7 @@ void TightBinding::Allocate()
     tempEigval = Create2D<double>(threadnum, Nband);
     isuppz = Create2D<int>(threadnum, 2*Nband);
 }
-TightBinding::~TightBinding()
+Wannier90::~Wannier90()
 {
     delete[] weight;
     Delete2D(indexRvec, Nrpts, Ndim);
@@ -262,7 +262,7 @@ TightBinding::~TightBinding()
     }
 }
 
-void TightBinding::GenInitialValue(complex *_dmstore, std::array<double, Ndim> _kpoint)
+void Wannier90::GenInitialValue(complex *_dmstore, std::array<double, Ndim> _kpoint)
 {
     int ithread = omp_get_thread_num();
     fill(_dmstore, _dmstore + Nband*Nband, 0.);
@@ -294,7 +294,7 @@ void TightBinding::GenInitialValue(complex *_dmstore, std::array<double, Ndim> _
     MatrixMult(_dmstore, tempUmat[ithread], tempMatrix[ithread], Nband);
 }
 
-void TightBinding::GenHamiltonianPrimitive(complex *_hstore, std::array<double, Ndim> _kpoint)
+void Wannier90::GenHamiltonianPrimitive(complex *_hstore, std::array<double, Ndim> _kpoint)
 {
     fill(_hstore, _hstore + Nband*Nband, 0.);
     if (isDipoleZero)
@@ -324,7 +324,7 @@ void TightBinding::GenHamiltonianPrimitive(complex *_hstore, std::array<double, 
         }
     }
 }
-void TightBinding::GenDipolePrimitive(complex **_dstore, std::array<double, Ndim> _kpoint)
+void Wannier90::GenDipolePrimitive(complex **_dstore, std::array<double, Ndim> _kpoint)
 {
     for (int i = 0; i < Ndim; ++i)
         fill(_dstore[i], _dstore[i] + Nband*Nband, 0.);
@@ -346,7 +346,7 @@ void TightBinding::GenDipolePrimitive(complex **_dstore, std::array<double, Ndim
     }
 }
 
-void TightBinding::GenJMatrixPrimitive(complex **_jstore, std::array<double, Ndim> _kpoint)
+void Wannier90::GenJMatrixPrimitive(complex **_jstore, std::array<double, Ndim> _kpoint)
 {
     for (int i = 0; i < Ndim; ++i)
         fill(_jstore[i], _jstore[i] + Nband*Nband, 0.);
@@ -386,7 +386,7 @@ void TightBinding::GenJMatrixPrimitive(complex **_jstore, std::array<double, Ndi
     }
 }
 
-void TightBinding::GenUMatrix(complex *_ustore, std::array<double, Ndim> _kpoint)
+void Wannier90::GenUMatrix(complex *_ustore, std::array<double, Ndim> _kpoint)
 {
     int ithread = omp_get_thread_num();
     GenHamiltonian(tempHamiltonian[ithread], _kpoint);
@@ -417,7 +417,7 @@ void TightBinding::GenUMatrix(complex *_ustore, std::array<double, Ndim> _kpoint
     }
 }
 
-void TightBinding::GenHamiltonian(complex *_hstore, std::array<double, Ndim> _kpoint)
+void Wannier90::GenHamiltonian(complex *_hstore, std::array<double, Ndim> _kpoint)
 {
     auto [kindex, _dkp] = GetNearestK(_kpoint);
     for (int m = 0; m < Nband; ++m)
@@ -441,7 +441,7 @@ void TightBinding::GenHamiltonian(complex *_hstore, std::array<double, Ndim> _kp
     }
 }
 
-void TightBinding::GenDipole(complex **_dstore, std::array<double, Ndim> _kpoint)
+void Wannier90::GenDipole(complex **_dstore, std::array<double, Ndim> _kpoint)
 {
     auto [kindex, _dkp] = GetNearestK(_kpoint);
     for (int i = 0; i < Ndim; ++i)
@@ -471,7 +471,7 @@ void TightBinding::GenDipole(complex **_dstore, std::array<double, Ndim> _kpoint
     }
 }
 
-void TightBinding::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint)
+void Wannier90::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint)
 {
     auto [kindex, _dkp] = GetNearestK(_kpoint);
     for (int i = 0; i < Ndim; ++i)
@@ -500,12 +500,12 @@ void TightBinding::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoin
         }
     }
 }
-std::tuple<std::array<double, Ndim*Ndim>, std::array<double, Ndim> > TightBinding::GenBrillouinzone(  )
+std::tuple<std::array<double, Ndim*Ndim>, std::array<double, Ndim> > Wannier90::GenBrillouinzone(  )
 {
     return std::make_tuple(BZaxis, BZorigin );
 }
 
-void TightBinding::SetReciprocalBasis()
+void Wannier90::SetReciprocalBasis()
 {
     Volume = 0.;
     Volume += vec_lattice[0][0] * (vec_lattice[1][1]*vec_lattice[2][2] - vec_lattice[1][2]*vec_lattice[2][1])
@@ -520,14 +520,14 @@ void TightBinding::SetReciprocalBasis()
     for (int i = 0; i < Ndim; ++i) for (int j = 0; j < Ndim; ++j) BZaxis[i*Ndim + j] = vec_reciprocal[i][j];
 }
 
-void TightBinding::PrintMaterialInformation()
+void Wannier90::PrintMaterialInformation()
 {
     cout << "============================================\n";
     cout << "Wannier90 data \n";
     cout << "============================================\n";
 }
 
-void TightBinding::CalculateKMesh(momaxis *_kmesh)
+void Wannier90::CalculateKMesh(momaxis *_kmesh)
 {
     kmesh = _kmesh;
 
@@ -607,7 +607,7 @@ void TightBinding::CalculateKMesh(momaxis *_kmesh)
     isMeshAllocated = true; 
 }
 
-std::tuple<int, std::array<double, Ndim> > TightBinding::GetNearestK(std::array<double, Ndim> _kpoint)
+std::tuple<int, std::array<double, Ndim> > Wannier90::GetNearestK(std::array<double, Ndim> _kpoint)
 {
     array<double, Ndim> bcoeff;
     fill(bcoeff.begin(), bcoeff.end(), 0.0);

@@ -123,9 +123,9 @@ SBEsLWM::SBEsLWM(const libconfig::Setting * _cfg)
     {
         cerr << "Undefined Material\n";
         exit(EXIT_FAILURE);
-        //material = new TightBinding( &(cfg[targetMaterial.c_str()]) );
-        //isDipoleZero = dynamic_cast<TightBinding*>(material)->isDipoleZero;
-        //vec_lattice = dynamic_cast<TightBinding*>(material)->vec_lattice;
+        //material = new Wannier90( &(cfg[targetMaterial.c_str()]) );
+        //isDipoleZero = dynamic_cast<Wannier90*>(material)->isDipoleZero;
+        //vec_lattice = dynamic_cast<Wannier90*>(material)->vec_lattice;
         //isWannier90 = true;
     }
     
@@ -138,7 +138,7 @@ SBEsLWM::SBEsLWM(const libconfig::Setting * _cfg)
 
     /*if (isWannier90)
     {
-        dynamic_cast<TightBinding*>(material)->CalculateKMesh(kmesh);
+        dynamic_cast<Wannier90*>(material)->CalculateKMesh(kmesh);
     }*/
     
 
