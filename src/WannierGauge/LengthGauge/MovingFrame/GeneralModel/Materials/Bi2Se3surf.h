@@ -190,23 +190,23 @@ void BieSe3surf::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint)
     double w = -2*pi/3;
 
     xderHcomp[0] = 2*acomp[0] * derxcosAvecSum + 2*bcomp[0] * derxcosBvecSum;
-    xderHcomp[1] = -2*acomp[3] * w*(vec_a[1][0]*cos(angle_a0[1]) - vec_a[2][0]*cos(angle_a0[2])) * cos( w*(sin(angle_a0[1]) - sin(angle_a0[2])) )
+    xderHcomp[1] = -2*acomp[3] * sin(w)*(vec_a[1][0]*cos(angle_a0[1]) - vec_a[2][0]*cos(angle_a0[2]))
                     + 2*bcomp[3] * (vec_b[0][0]*cos(angle_b0[0]) 
-                    - w*(vec_b[1][0]*cos(angle_b0[1]) - vec_b[2][0]*cos(angle_b0[2])) * sin( w*(sin(angle_b0[1]) - sin(angle_b0[2])) ) );
-    xderHcomp[2] = -2*bcomp[3] * w*(vec_b[1][0]*cos(angle_b0[1]) - vec_b[2][0]*cos(angle_b0[2])) * cos( w*(sin(angle_b0[1]) - sin(angle_b0[2])) )
+                    + cos(w)*(vec_b[1][0]*cos(angle_b0[1]) - vec_b[2][0]*cos(angle_b0[2])) );
+    xderHcomp[2] = -2*bcomp[3] * sin(w)*(vec_b[1][0]*cos(angle_b0[1]) - vec_b[2][0]*cos(angle_b0[2]))
                     - 2*acomp[3] * (vec_a[0][0]*cos(angle_a0[0]) 
-                    - w*(vec_a[1][0]*cos(angle_a0[1]) - vec_a[2][0]*cos(angle_a0[2])) * sin( w*(sin(angle_a0[1]) - sin(angle_a0[2])) ) );
+                    + cos(w)*(vec_a[1][0]*cos(angle_a0[1]) - vec_a[2][0]*cos(angle_a0[2])) );
     xderHcomp[3] = 2*acomp[2] * derxsinAvecSum;
     xderHcomp[4] = -2*bcomp[2] * derxsinBvecSum;
     xderHcomp[5] = 2*acomp[1] * derxcosAvecSum + 2*bcomp[1] * derxcosBvecSum;
 
     yderHcomp[0] = 2*acomp[0] * derycosAvecSum + 2*bcomp[0] * derycosBvecSum;
-    yderHcomp[1] = -2*acomp[3] * w*(vec_a[1][1]*cos(angle_a0[1]) - vec_a[2][1]*cos(angle_a0[2])) * cos( w*(sin(angle_a0[1]) - sin(angle_a0[2])) )
+    yderHcomp[1] = -2*acomp[3] * sin(w)*(vec_a[1][1]*cos(angle_a0[1]) - vec_a[2][1]*cos(angle_a0[2]))
                     + 2*bcomp[3] * (vec_b[0][1]*cos(angle_b0[0]) 
-                    - w*(vec_b[1][1]*cos(angle_b0[1]) - vec_b[2][1]*cos(angle_b0[2])) * sin( w*(sin(angle_b0[1]) - sin(angle_b0[2])) ) );
-    yderHcomp[2] = -2*bcomp[3] * w*(vec_b[1][1]*cos(angle_b0[1]) - vec_b[2][1]*cos(angle_b0[2])) * cos( w*(sin(angle_b0[1]) - sin(angle_b0[2])) )
+                    + cos(w)*(vec_b[1][1]*cos(angle_b0[1]) - vec_b[2][1]*cos(angle_b0[2])) );
+    yderHcomp[2] = -2*bcomp[3] * sin(w)*(vec_b[1][1]*cos(angle_b0[1]) - vec_b[2][1]*cos(angle_b0[2]))
                     - 2*acomp[3] * (vec_a[0][1]*cos(angle_a0[0]) 
-                    - w*(vec_a[1][1]*cos(angle_a0[1]) - vec_a[2][1]*cos(angle_a0[2])) * sin( w*(sin(angle_a0[1]) - sin(angle_a0[2])) ) );
+                    - cos(w)*(vec_a[1][1]*cos(angle_a0[1]) - vec_a[2][1]*cos(angle_a0[2])) );
     yderHcomp[3] = 2*acomp[2] * derysinAvecSum;
     yderHcomp[4] = -2*bcomp[2] * derysinBvecSum;
     yderHcomp[5] = 2*acomp[1] * derycosAvecSum + 2*bcomp[1] * derycosBvecSum;
@@ -290,10 +290,10 @@ void BieSe3surf::GenBcomp(std::array<double, Ndim> _kpoint)
     double w = -2*pi/3;
     
     hcomp[0] = 2*acomp[0] * cosAvecSum + 2*bcomp[0] * cosBvecSum;
-    hcomp[1] = -2*acomp[3] * sin( w*(sin(angle_a0[1]) - sin(angle_a0[2])) ) 
-                + 2*bcomp[3] * ( sin(angle_b0[0]) + cos( w*(sin(angle_b0[1]) - sin(angle_b0[2])) ) );
-    hcomp[2] = -2*bcomp[3] * sin( w*(sin(angle_b0[1]) - sin(angle_b0[2])) )
-                -2*acomp[3] * (sin(angle_a0[0]) + cos( w*(sin(angle_a0[1]) + sin(angle_a0[2])) ) );
+    hcomp[1] = -2*acomp[3] * sin(w)*(sin(angle_a0[1]) - sin(angle_a0[2]))  
+                + 2*bcomp[3] * (sin(angle_b0[0]) + cos(w)*(sin(angle_b0[1]) - sin(angle_b0[2])) );
+    hcomp[2] = -2*bcomp[3] * sin(w)*(sin(angle_b0[1]) - sin(angle_b0[2])) 
+                - 2*acomp[3] * (sin(angle_a0[0]) + cos(w)*(sin(angle_a0[1]) + sin(angle_a0[2])) );
     hcomp[3] = 2*acomp[2] * sinAvecSum;
     hcomp[4] = -2*bcomp[2] * sinBvecSum;
     hcomp[5] = 2*acomp[1] * cosAvecSum + 2*bcomp[1] * cosBvecSum + m11;
