@@ -7,7 +7,7 @@
 */
 #pragma once
 
-#include "../wannier_system.h"
+#include "../WannierMaterial.h"
 #include "../utility.h"
 
 #include <string>
