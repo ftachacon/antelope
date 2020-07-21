@@ -88,7 +88,29 @@ int main( int argc, char *argv[] )
     double dV = sbew->kmesh->dV;
     int Nband = sbew->Nband;
 
-	MPI_Barrier( MPI_COMM_WORLD );		
+	MPI_Barrier( MPI_COMM_WORLD );	
+
+    // if (rank == MASTER)
+    // {
+    //     ofstream tempInit, currentInitx, currentInity;
+    //     tempInit.open("InitWannier.dat");
+    //     currentInitx.open("InitCurrentx.dat");
+    //     currentInity.open("InitCurrenty.dat");
+    //     array<double, Ndim> tempCurrent;
+    //     for (int i = 0; i < sbew->kmesh->N[0]; ++i)
+    //     {
+    //         for (int j = 0; j < sbew->kmesh->N[1]; ++j)
+    //         {
+    //             tempInit << sbew->dmatrix[sbew->kmesh->index(i, j, 0)][0] << "   ";
+    //             tempCurrent = sbew->GenCurrent(sbew->kmesh->index(i, j, 0), sbew->fpulses->atmin);
+    //             currentInitx << tempCurrent[0] << "   " ;
+    //             currentInity << tempCurrent[1] << "   " ;
+    //         }
+    //         tempInit << endl;
+    //         currentInitx << endl;
+    //         currentInity << endl;
+    //     }
+    // }	
 
 
     //###############################

@@ -14,6 +14,14 @@
 #include <iostream>
 #include <fstream>
 
+// To prevnet include <complex.h> --> which undef complex
+// As you see re-define keyword is very dangerous
+#undef complex
+#define lapack_complex_float std::complex<float>
+#define lapack_complex_double std::complex<double>
+#include <lapacke.h>
+#define complex complex<double>
+
 class BieSe3surf : public WannierMaterial
 {
 public:
@@ -100,22 +108,88 @@ BieSe3surf::BieSe3surf( const libconfig::Setting *params )
 
 void BieSe3surf::GenInitialValue(complex *_dmstore, std::array<double, Ndim> _kpoint)
 {
+    fill(_dmstore, _dmstore + Nband*Nband, 0.);
     GenBcomp(_kpoint);
 
-    double Bnorm = sqrt( Bcomp[1]*Bcomp[1] + Bcomp[2]*Bcomp[2] + Bcomp[3]*Bcomp[3] );
-    if (Bnorm > eps)
+    // double Bnorm = sqrt( Bcomp[1]*Bcomp[1] + Bcomp[2]*Bcomp[2] + Bcomp[3]*Bcomp[3] );
+    // if (Bnorm > eps)
+    // {
+    //     _dmstore[0] = 0.5 - Bcomp[3]/(2.*Bnorm);        _dmstore[1] = -(Bcomp[1] - I*Bcomp[2])/(2.*Bnorm);
+    //     _dmstore[2] = conj(_dmstore[1]);                _dmstore[3] = 1.0 - _dmstore[0];
+    // }
+    // else
+    // {
+    //     // B1, B2 --> 0, B3 < 0 case
+    //     // _dmstore[0] = 0.5 - Bcomp[3]/(2.*Bnorm);        _dmstore[1] = -(Bcomp[1] - I*Bcomp[2])/(2.*Bnorm);
+    //     // _dmstore[2] = conj(_dmstore[1]);                _dmstore[3] = 1.0 - _dmstore[0];
+    //     _dmstore[0] = 1.0;        _dmstore[1] = 0.0;
+    //     _dmstore[2] = 0.0;        _dmstore[3] = 1.0;
+    // }
+    complex *tempUmat = new complex[Nband*Nband];
+    complex *tempctransUmat = new complex[Nband*Nband];
+    complex *tempHmat = new complex[Nband*Nband];
+    double *tempEval = new double[Nband];
+    int *tempIsuppz = new int[2*Nband];
+    GenHamiltonian(tempHmat, _kpoint);
+    //lapack_int LAPACKE_zheevr( int matrix_layout, char jobz, char range, char uplo, 
+    //    lapack_int n, lapack_complex_double* a, lapack_int lda, double vl, double vu, lapack_int il, lapack_int iu, 
+    //    double abstol, lapack_int* m, double* w, lapack_complex_double* z, lapack_int ldz, lapack_int* isuppz );
+    int num_of_eig; 
+    int info = LAPACKE_zheevr( LAPACK_ROW_MAJOR, 'V', 'A', 'U',
+                                Nband, tempHmat, Nband, 0., 0., 0., 0., 
+                                eps, &num_of_eig, tempEval, tempUmat, Nband, tempIsuppz );
+    if (info != 0)
     {
-        _dmstore[0] = 0.5 - Bcomp[3]/(2.*Bnorm);        _dmstore[1] = -(Bcomp[1] - I*Bcomp[2])/(2.*Bnorm);
-        _dmstore[2] = conj(_dmstore[1]);                _dmstore[3] = 1.0 - _dmstore[0];
+        std::cerr << "Problem in lapack, info = " << info << std::endl;
+        for (int m = 0; m < Nband; ++m)
+        {
+            for (int n = 0; n < Nband; ++ n)
+            {
+                std::cout << tempHmat[m*Nband + n] << "     ";
+            }
+            std::cout << endl;
+        }
+        for (int m = 0; m < Nband; ++m)
+        {
+            std::cout << tempEval[m] << "      ";
+        }
+        std::cout << endl;
+        exit(1);
     }
-    else
+    GenUMatrix(tempUmat, _kpoint);
+    for (int m = 0; m < Nband; ++m)
     {
-        // B1, B2 --> 0, B3 < 0 case
-        // _dmstore[0] = 0.5 - Bcomp[3]/(2.*Bnorm);        _dmstore[1] = -(Bcomp[1] - I*Bcomp[2])/(2.*Bnorm);
-        // _dmstore[2] = conj(_dmstore[1]);                _dmstore[3] = 1.0 - _dmstore[0];
-        _dmstore[0] = 1.0;        _dmstore[1] = 0.0;
-        _dmstore[2] = 0.0;        _dmstore[3] = 1.0;
+        for (int n = 0; n < Nband; ++n)
+        {
+            tempctransUmat[m*Nband + n] = conj( tempUmat[n*Nband + m] );
+        }
     }
+
+    
+    double FermiE = 0.0 / au_eV;
+    double thermalE = 300.;
+    thermalE /= 3.15775024804e5;     // hartree energy (4.3597447222071×10−18) / Boltzman constant(1.380649×10−23)
+
+    // set valence = 1., conduction = 0. initial condition
+    // Fermi-Dirac distribution is used when FermiE is applied
+    // tempEigval is calculated inside the GenUMatrix, be careful about order or sideeffects.
+    for (int m = 0; m < Nband; ++m)
+    {
+        //if (isFermiEUsed)
+        {
+            _dmstore[m*Nband + m] = 1.0 / ( exp( (tempEval[m] - FermiE) / thermalE ) + 1.0 );
+        }
+        // else
+        // {
+        //     if (m < Nval)
+        //         _dmstore[m*Nband + m] = 1.;
+        // }
+    }
+    // tempHmat is used as temporary matrix for below
+    MatrixMult(tempHmat, _dmstore, tempctransUmat, Nband);
+    MatrixMult(_dmstore, tempUmat, tempHmat, Nband);
+    
+    delete[] tempUmat, tempctransUmat, tempHmat, tempEval, tempIsuppz;
     
 }
 
