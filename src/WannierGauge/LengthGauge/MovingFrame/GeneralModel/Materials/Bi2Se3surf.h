@@ -62,7 +62,7 @@ public:
 
 BieSe3surf::BieSe3surf( const libconfig::Setting *params )
 {
-    Nband = 2;
+    Nband = 2;  Nval = 1;
     /*if (params->lookupValue("t1", t1)
         && params->lookupValue("t2", t2)
         && params->lookupValue("Mt2", M0)

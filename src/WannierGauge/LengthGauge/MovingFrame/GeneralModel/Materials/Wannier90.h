@@ -64,7 +64,7 @@ public:
     complex *****pre_d2pos;          ///< 2nd order talyor for dipole,
     complex *****pre_d2jmat;         ///< 2nd order talyor for derivative of Hamiltonian
 
-    int Nval;                               ///< Number of valence band 
+    //int Nval;                               ///< Number of valence band 
     double FermiE;                          ///< Fermi energy in atomic unit
     bool isFermiEUsed;                      ///< if true Fermi energy is used to generate initial value. if false valence band number is used.
     double thermalE;                        ///< temperature in atomic unit (300K is defalut)

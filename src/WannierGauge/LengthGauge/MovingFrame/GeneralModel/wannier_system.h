@@ -16,6 +16,8 @@ class WannierMaterial
 public:
     /// Number of bands
     int Nband;
+    /// Number of valence bands - only used for indicating which band is lowest conduction band
+    int Nval;
     /// virtual desctructor is used to prevent memory leak
     virtual ~WannierMaterial() {};
     /// Generate initial value of density matrix
