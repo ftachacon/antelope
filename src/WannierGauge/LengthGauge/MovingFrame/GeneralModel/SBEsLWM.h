@@ -119,9 +119,9 @@ SBEsLWM::SBEsLWM(const libconfig::Setting * _cfg)
     {
         material = new BieSe3surf( &cfg );
     }
-    else if (targetMaterial == "TMDC")
+    else if (targetMaterial == "TMDCs")
     {
-        material = new TMDC( &cfg[targetMaterial.c_str()] );
+        material = new TMDCs( &cfg[targetMaterial.c_str()] );
     }
     else
     {

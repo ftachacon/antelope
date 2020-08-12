@@ -242,7 +242,10 @@ int main( int argc, char *argv[] )
     }
 
     ktemp = 0;
-    double currenttime;
+    double currenttime, currentcycle;
+    complex *temp_density_matrix_integrated = new complex[Nband*Nband];
+    double occup_temp = 0;
+    double maxcycles = 2*sbew->fpulses->pulses[0].twidth / sbew->fpulses->pulses[0].period0;
     //#####################################
     //#####################################
     //Time integration loop
@@ -272,15 +275,56 @@ int main( int argc, char *argv[] )
 
             //##############################################
 
-        } //End of Loop on x-direction
-        if (rank == MASTER && ktime % 200 == 0)
+        } 
+        if (ktime % 200 == 0)
         {
-            cout << ktime << " / " << sbew->fpulses->Nt << ", n = " << density_matrix_integrated[ktime][0] << endl;
+            for (int ij = 0; ij < Nband * Nband; ++ij)
+            {
+                temp_density_matrix_integrated[ij] = density_matrix_integrated[ktime][ij];
+            }
+            MPI_Barrier(MPI_COMM_WORLD);
+            if (rank == MASTER)
+            {
+                MPI_Reduce(MPI_IN_PLACE, &temp_density_matrix_integrated[0], Nband*Nband, 
+                    MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
+            }
+            else
+            {
+                MPI_Reduce(&temp_density_matrix_integrated[0], &temp_density_matrix_integrated[0], Nband*Nband, 
+                    MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
+            }
+            if (rank == MASTER)
+            {
+                currentcycle = currenttime - (sbew->fpulses->pulses[0].t0 - sbew->fpulses->pulses[0].twidth);
+                if (currentcycle < 0) 
+                {
+                    currentcycle = 0.;
+                }
+                else
+                {
+                    currentcycle /= sbew->fpulses->pulses[0].period0;
+                }
+                
+                if (currentcycle > maxcycles)
+                {
+                    currentcycle = maxcycles;
+                }
+                occup_temp = 0;
+                for (int m = 0; m < Nband; ++m)
+                {
+                    occup_temp += real(temp_density_matrix_integrated[m*Nband + m]);
+                }
+                occup_temp /= Npoints;
+                cout << ktime << " / " << sbew->fpulses->Nt << ", " << currentcycle << " / " << maxcycles;
+                cout << ", nc = " << temp_density_matrix_integrated[sbew->material->Nval*Nband + sbew->material->Nval] / static_cast<double>(Npoints);
+                cout << ", ntotal = " << occup_temp << endl;
+            }
         }
         if (shotNumber > 0)
             MPI_Barrier(MPI_COMM_WORLD);
 
     } //End of Time integration loop
+    delete[] temp_density_matrix_integrated;
 
     //##############################################
     // inter, intrabnad currents, occupation, cohereneces are integrated through every sub-grids (all-processors)
@@ -317,7 +361,6 @@ int main( int argc, char *argv[] )
     }
     MPI_Barrier( MPI_COMM_WORLD );
     
-    double occup_temp = 0;
     if (rank == MASTER)
     {
         cout << "\n\nWriting output-data\n\n";
@@ -417,3 +460,6 @@ void My_MPI_CLX_SUM( complex *in, complex *inout, int *len, MPI_Datatype *dptr )
 		inout++;
 	}
 }
+
+// Plot 2d
+// void Plot2D( string _filename, int skip0 = 1, int skip1 = 1, int skip2 = 1 )
