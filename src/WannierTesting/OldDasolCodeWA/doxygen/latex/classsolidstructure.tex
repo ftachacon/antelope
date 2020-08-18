@@ -1,0 +1,371 @@
+\hypertarget{classsolidstructure}{}\doxysection{solidstructure Class Reference}
+\label{classsolidstructure}\index{solidstructure@{solidstructure}}
+
+
+Collaboration diagram for solidstructure\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=155pt]{classsolidstructure__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a638224d778509e7d0526969dc994a5e8}\label{classsolidstructure_a638224d778509e7d0526969dc994a5e8}} 
+{\bfseries solidstructure} (const \mbox{\hyperlink{classmomaxis}{momaxis}} $\ast$\+\_\+g, const double $\ast$\+\_\+a0, const double $\ast$\+\_\+dephasing, const double $\ast$\+\_\+dephasing2)
+\item 
+\mbox{\Hypertarget{classsolidstructure_a1fb85690e85c17ebcd39f427c7807156}\label{classsolidstructure_a1fb85690e85c17ebcd39f427c7807156}} 
+void {\bfseries set\+\_\+memory} ()
+\item 
+\mbox{\Hypertarget{classsolidstructure_a69a222f7694f074c327b502ca02bb246}\label{classsolidstructure_a69a222f7694f074c327b502ca02bb246}} 
+void {\bfseries haldane\+\_\+model\+\_\+params} (double const $\ast$\+\_\+t1, double const $\ast$\+\_\+t2, double const $\ast$\+\_\+phi0, double const $\ast$\+\_\+\+M0, int const \+\_\+gauge)
+\item 
+\mbox{\Hypertarget{classsolidstructure_a0af4eef40ba7dd4f7744006116eb1cad}\label{classsolidstructure_a0af4eef40ba7dd4f7744006116eb1cad}} 
+void {\bfseries bases\+\_\+vectors} ()
+\item 
+\mbox{\Hypertarget{classsolidstructure_a6e5d2358df94d8243cf86fe8585de177}\label{classsolidstructure_a6e5d2358df94d8243cf86fe8585de177}} 
+void {\bfseries Set\+\_\+\+Of\+\_\+\+B\+\_\+\+B\+Grad} (double const $\ast$kx, double const $\ast$ky)
+\item 
+\mbox{\Hypertarget{classsolidstructure_af0e9f9b4deda6fef21f489a4a4daefaf}\label{classsolidstructure_af0e9f9b4deda6fef21f489a4a4daefaf}} 
+void {\bfseries Ec} ()
+\item 
+\mbox{\Hypertarget{classsolidstructure_a749544e9b33c8dbf7d89119c8ffb4e6d}\label{classsolidstructure_a749544e9b33c8dbf7d89119c8ffb4e6d}} 
+void {\bfseries Ev} ()
+\item 
+\mbox{\Hypertarget{classsolidstructure_a8c2b3607331877c396bfbe2399dcf057}\label{classsolidstructure_a8c2b3607331877c396bfbe2399dcf057}} 
+void {\bfseries Eg} ()
+\item 
+\mbox{\Hypertarget{classsolidstructure_ad93c55ce67503c1c6ee62442107fe537}\label{classsolidstructure_ad93c55ce67503c1c6ee62442107fe537}} 
+void {\bfseries Berry\+Connection\+CV} ()
+\item 
+\mbox{\Hypertarget{classsolidstructure_a95d60d36f1303236002d1e5de841081d}\label{classsolidstructure_a95d60d36f1303236002d1e5de841081d}} 
+void {\bfseries dipole\+CV} ()
+\item 
+\mbox{\Hypertarget{classsolidstructure_a341622ecc3eefc025cf7229be3c7528f}\label{classsolidstructure_a341622ecc3eefc025cf7229be3c7528f}} 
+void {\bfseries z\+Berry\+Curva\+CV} ()
+\item 
+\mbox{\Hypertarget{classsolidstructure_ac5c81c34bceee9c99d1b3fed220954aa}\label{classsolidstructure_ac5c81c34bceee9c99d1b3fed220954aa}} 
+void {\bfseries group\+\_\+vel\+CV} ()
+\item 
+\mbox{\Hypertarget{classsolidstructure_ad9de8b99d76ba61889a33e98df239239}\label{classsolidstructure_ad9de8b99d76ba61889a33e98df239239}} 
+double {\bfseries min} (double $\ast$v, int Nsize)
+\item 
+\mbox{\Hypertarget{classsolidstructure_adc4228fa56a5f5f1eee9f01149b92000}\label{classsolidstructure_adc4228fa56a5f5f1eee9f01149b92000}} 
+double {\bfseries max} (double $\ast$v, int Nsize)
+\item 
+\mbox{\Hypertarget{classsolidstructure_a138f0f600870a14b7069d0f1908e0f14}\label{classsolidstructure_a138f0f600870a14b7069d0f1908e0f14}} 
+double {\bfseries my\+Regularization} (double const $\ast$kx, double const $\ast$ky, double $\ast$skx, double $\ast$sky)
+\item 
+\mbox{\Hypertarget{classsolidstructure_abc59ba0f6a253b8910377c3e2d3624ef}\label{classsolidstructure_abc59ba0f6a253b8910377c3e2d3624ef}} 
+void {\bfseries lattice\+\_\+structure} ()
+\item 
+\mbox{\Hypertarget{classsolidstructure_a7bb841240adb9dc96bcd02c9a967449c}\label{classsolidstructure_a7bb841240adb9dc96bcd02c9a967449c}} 
+void {\bfseries anomalous\+\_\+vel\+CV} (complex const efield, double const z\+Berry\+Curvature)
+\item 
+\mbox{\Hypertarget{classsolidstructure_a5a402bc1099a56fcf38414670414ce63}\label{classsolidstructure_a5a402bc1099a56fcf38414670414ce63}} 
+void {\bfseries cdot} (const complex $\ast$v1, const complex $\ast$v2, const int Nv, complex $\ast$res)
+\item 
+\mbox{\Hypertarget{classsolidstructure_a739d8fabf271885f20701cb851c57544}\label{classsolidstructure_a739d8fabf271885f20701cb851c57544}} 
+double {\bfseries Chern\+Number} ()
+\item 
+\mbox{\Hypertarget{classsolidstructure_a74202960a4fe88a2bd9e77004ccc7295}\label{classsolidstructure_a74202960a4fe88a2bd9e77004ccc7295}} 
+void {\bfseries energy\+\_\+vc\+\_\+output} (F\+I\+LE $\ast$output, int skip0, int skip1, int skip2)
+\item 
+\mbox{\Hypertarget{classsolidstructure_a674b9f607917dd1e314c2c9e874ab45b}\label{classsolidstructure_a674b9f607917dd1e314c2c9e874ab45b}} 
+void {\bfseries dipole\+\_\+cv\+\_\+output} (F\+I\+LE $\ast$output, int skip0, int skip1, int skip2)
+\item 
+\mbox{\Hypertarget{classsolidstructure_a3afe3a667acdbf454392056b7fd66abe}\label{classsolidstructure_a3afe3a667acdbf454392056b7fd66abe}} 
+void {\bfseries connection\+\_\+c\+\_\+output} (F\+I\+LE $\ast$output, int skip0, int skip1, int skip2)
+\item 
+\mbox{\Hypertarget{classsolidstructure_aba33be747f93f95742ce6e60475f49f0}\label{classsolidstructure_aba33be747f93f95742ce6e60475f49f0}} 
+void {\bfseries curvature\+\_\+c\+\_\+output} (F\+I\+LE $\ast$output, int skip0, int skip1, int skip2)
+\item 
+\mbox{\Hypertarget{classsolidstructure_a2919a5d44b239f13aeaaed7c69b084be}\label{classsolidstructure_a2919a5d44b239f13aeaaed7c69b084be}} 
+void {\bfseries group\+\_\+vel\+\_\+vc\+\_\+output} (F\+I\+LE $\ast$output, int skip0, int skip1, int skip2)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classsolidstructure_ad65be23fe20398cd43cc0cfe7bedd0b8}\label{classsolidstructure_ad65be23fe20398cd43cc0cfe7bedd0b8}} 
+int {\bfseries rflag}
+\item 
+\mbox{\Hypertarget{classsolidstructure_afd13f4456c153c534ca3774151503eae}\label{classsolidstructure_afd13f4456c153c534ca3774151503eae}} 
+double {\bfseries t1}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a9935bef87fc036a700a845bab35ac8fc}\label{classsolidstructure_a9935bef87fc036a700a845bab35ac8fc}} 
+double {\bfseries t2}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a6d4f421c0d0ec4a61a404c1bf4d076e2}\label{classsolidstructure_a6d4f421c0d0ec4a61a404c1bf4d076e2}} 
+double {\bfseries phi0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_ac4b539344ba09d978c6724e21b6978e7}\label{classsolidstructure_ac4b539344ba09d978c6724e21b6978e7}} 
+double {\bfseries M0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a152ec73da9300476610c1eb671650659}\label{classsolidstructure_a152ec73da9300476610c1eb671650659}} 
+\mbox{\hyperlink{classmomaxis}{momaxis}} $\ast$ {\bfseries g}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a0bd277e20f3713657f5ffba8bf52a17d}\label{classsolidstructure_a0bd277e20f3713657f5ffba8bf52a17d}} 
+double $\ast$ {\bfseries energy\+\_\+gap}
+\item 
+\mbox{\Hypertarget{classsolidstructure_aae61b11a247b193525a5feb22c8685d8}\label{classsolidstructure_aae61b11a247b193525a5feb22c8685d8}} 
+double {\bfseries ks00} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a48e3f8a70246f55c6c405485e2379e33}\label{classsolidstructure_a48e3f8a70246f55c6c405485e2379e33}} 
+double {\bfseries ks01} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a38e98a0e1e7d6e40721bed794a10a679}\label{classsolidstructure_a38e98a0e1e7d6e40721bed794a10a679}} 
+double {\bfseries ks10} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_aa0680375baec74e172a55e0f1ca93d5f}\label{classsolidstructure_aa0680375baec74e172a55e0f1ca93d5f}} 
+double {\bfseries ks11} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_ad4277fa33cdf5942b68d85e9d5431052}\label{classsolidstructure_ad4277fa33cdf5942b68d85e9d5431052}} 
+double {\bfseries ks12} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a3528d1c7b1c36060f434701a33caccac}\label{classsolidstructure_a3528d1c7b1c36060f434701a33caccac}} 
+double {\bfseries ks13} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_abefdf067b9f4f9ef09bbd1586ea2fba5}\label{classsolidstructure_abefdf067b9f4f9ef09bbd1586ea2fba5}} 
+double {\bfseries ks20} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_ae8a20fc0588a9078cfcff5b7feadec1e}\label{classsolidstructure_ae8a20fc0588a9078cfcff5b7feadec1e}} 
+double {\bfseries ks21} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a72d7f3e2210fd2ae9256da40de4caa67}\label{classsolidstructure_a72d7f3e2210fd2ae9256da40de4caa67}} 
+double {\bfseries ks22} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a19daf821026ed17e21a0e7c9c6c7db0f}\label{classsolidstructure_a19daf821026ed17e21a0e7c9c6c7db0f}} 
+double {\bfseries ks23} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_ac887278f34deb47e1a7deba71301170d}\label{classsolidstructure_ac887278f34deb47e1a7deba71301170d}} 
+double $\ast$ {\bfseries chi\+\_\+gap} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_ace71c4f3737858667c3cf124eda77ab4}\label{classsolidstructure_ace71c4f3737858667c3cf124eda77ab4}} 
+double $\ast$ {\bfseries groupvel\+\_\+c} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a61c090c07ddda25f55129a4bd681a2e7}\label{classsolidstructure_a61c090c07ddda25f55129a4bd681a2e7}} 
+double $\ast$ {\bfseries groupvel\+\_\+v} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_add1505f4d3f02ee9dbea7b808014c823}\label{classsolidstructure_add1505f4d3f02ee9dbea7b808014c823}} 
+double $\ast$ {\bfseries zbcurva\+\_\+v}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a455f8364c92f1d986dca2f4b0d76e945}\label{classsolidstructure_a455f8364c92f1d986dca2f4b0d76e945}} 
+double $\ast$ {\bfseries zbcurva\+\_\+c}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a9ed5dc17a64a84abbc34a487616d47e7}\label{classsolidstructure_a9ed5dc17a64a84abbc34a487616d47e7}} 
+double {\bfseries T1}
+\item 
+\mbox{\Hypertarget{classsolidstructure_ada2661133bcfd6ab85c26dd869e5ab85}\label{classsolidstructure_ada2661133bcfd6ab85c26dd869e5ab85}} 
+double {\bfseries T2}
+\item 
+\mbox{\Hypertarget{classsolidstructure_aec59167186f14263c784a3bef8027f0c}\label{classsolidstructure_aec59167186f14263c784a3bef8027f0c}} 
+double {\bfseries vec\+\_\+a} \mbox{[}Ngrad\mbox{]}\mbox{[}Nvects\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a2e85147d1613dc704112b41716db547f}\label{classsolidstructure_a2e85147d1613dc704112b41716db547f}} 
+double {\bfseries vec\+\_\+b} \mbox{[}Ngrad\mbox{]}\mbox{[}Nvects\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_adb588c3629c6e6fe9a9b4344721505e7}\label{classsolidstructure_adb588c3629c6e6fe9a9b4344721505e7}} 
+double {\bfseries b0res0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_aa898473d89a8500b27ea9a6b43ce5967}\label{classsolidstructure_aa898473d89a8500b27ea9a6b43ce5967}} 
+double {\bfseries b1res0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a9de49473d11f301f77835ae5c397cc6d}\label{classsolidstructure_a9de49473d11f301f77835ae5c397cc6d}} 
+double {\bfseries b2res0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a98d1cec90a7208cec7fc9c8e9e962402}\label{classsolidstructure_a98d1cec90a7208cec7fc9c8e9e962402}} 
+double {\bfseries b3res0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a161a322bbf9877dfca2d3b04eef939fa}\label{classsolidstructure_a161a322bbf9877dfca2d3b04eef939fa}} 
+double {\bfseries bnorm}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a59ce44b0c5664c6e0c08259942cb8597}\label{classsolidstructure_a59ce44b0c5664c6e0c08259942cb8597}} 
+double {\bfseries xb0der0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_af9a24471f8ea331242ee80bb5a797717}\label{classsolidstructure_af9a24471f8ea331242ee80bb5a797717}} 
+double {\bfseries xb1der0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_aeba351859b149ce98b0ce244680cc4fb}\label{classsolidstructure_aeba351859b149ce98b0ce244680cc4fb}} 
+double {\bfseries xb2der0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a3961a69e3bd14649e96c9c32c1966ed4}\label{classsolidstructure_a3961a69e3bd14649e96c9c32c1966ed4}} 
+double {\bfseries xb3der0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_ac217db4795d8ddfdaaa81bb2adc9cac2}\label{classsolidstructure_ac217db4795d8ddfdaaa81bb2adc9cac2}} 
+double {\bfseries xbnorm0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_aa5f43ed1a9c06a8490fb6ca03c3f6210}\label{classsolidstructure_aa5f43ed1a9c06a8490fb6ca03c3f6210}} 
+double {\bfseries yb0der0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_ab8f94fbd8cd497abe269ddea8508d5dc}\label{classsolidstructure_ab8f94fbd8cd497abe269ddea8508d5dc}} 
+double {\bfseries yb1der0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_af84b99bfeeef2a05603bae66df7d3c21}\label{classsolidstructure_af84b99bfeeef2a05603bae66df7d3c21}} 
+double {\bfseries yb2der0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a57b268c55b07b8ae383f31db52e66e2f}\label{classsolidstructure_a57b268c55b07b8ae383f31db52e66e2f}} 
+double {\bfseries yb3der0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a0a5b3a820258fae192113dabd0715747}\label{classsolidstructure_a0a5b3a820258fae192113dabd0715747}} 
+double {\bfseries ybnorm0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_afe7bd0c7be95cebaa7d77645523b1ea0}\label{classsolidstructure_afe7bd0c7be95cebaa7d77645523b1ea0}} 
+int {\bfseries gauge}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a4728f6b14e07c0ec303a250b328549e5}\label{classsolidstructure_a4728f6b14e07c0ec303a250b328549e5}} 
+double {\bfseries wave\+\_\+norm}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a02f71baa64292f9f97d091d60692cc15}\label{classsolidstructure_a02f71baa64292f9f97d091d60692cc15}} 
+double {\bfseries wave\+\_\+norm2}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a46d17ef49fd5f88b29c35e213b40ea6b}\label{classsolidstructure_a46d17ef49fd5f88b29c35e213b40ea6b}} 
+double {\bfseries gauge\+\_\+b\+\_\+set} \mbox{[}Nvects\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_aa4313d42e276440128681b95a450d5b0}\label{classsolidstructure_aa4313d42e276440128681b95a450d5b0}} 
+double {\bfseries gauge\+\_\+b\+\_\+set\+\_\+grad} \mbox{[}Ngrad\mbox{]}\mbox{[}Nvects\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_af860bb39fffc4762c2c99b2d91774444}\label{classsolidstructure_af860bb39fffc4762c2c99b2d91774444}} 
+double {\bfseries w\+\_\+norm\+\_\+grad} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a79324fc36478fa78ef42db6c7bfe6c7b}\label{classsolidstructure_a79324fc36478fa78ef42db6c7bfe6c7b}} 
+double {\bfseries grad\+\_\+bnorm} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a79c89f903c93acf58c6f8370d1b86126}\label{classsolidstructure_a79c89f903c93acf58c6f8370d1b86126}} 
+double {\bfseries xtemp} \mbox{[}Ngrad $\ast$2\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_afd2d4e5590977a478ecb09bdbd47e178}\label{classsolidstructure_afd2d4e5590977a478ecb09bdbd47e178}} 
+double {\bfseries ytemp} \mbox{[}Ngrad $\ast$2\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_ad357ab808b8755cdd2e0e2c72f362c70}\label{classsolidstructure_ad357ab808b8755cdd2e0e2c72f362c70}} 
+double {\bfseries energyv0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a9282d77d097eef5e053a49691bd029fb}\label{classsolidstructure_a9282d77d097eef5e053a49691bd029fb}} 
+double {\bfseries energyc0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_af85205fb70226553b08cc64ffe174969}\label{classsolidstructure_af85205fb70226553b08cc64ffe174969}} 
+double {\bfseries energyg0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_ac83a2ff7163c3d186af5a6de5e3b2fff}\label{classsolidstructure_ac83a2ff7163c3d186af5a6de5e3b2fff}} 
+double {\bfseries eg0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a5189d0d27397e01241a7d12feb715b22}\label{classsolidstructure_a5189d0d27397e01241a7d12feb715b22}} 
+double {\bfseries z\+Bcurva\+\_\+c0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a6d7628d8a0b2ce1d30a24f9fb12dc85a}\label{classsolidstructure_a6d7628d8a0b2ce1d30a24f9fb12dc85a}} 
+double {\bfseries z\+Bcurva\+\_\+v0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a7ae42ba45cdc977df3d628a2af338a2f}\label{classsolidstructure_a7ae42ba45cdc977df3d628a2af338a2f}} 
+double {\bfseries xcberryconn0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a0eff5d262c12300304b090f7df28ffbf}\label{classsolidstructure_a0eff5d262c12300304b090f7df28ffbf}} 
+double {\bfseries xvberryconn0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a7df9078481fae5d596be52a20a0223aa}\label{classsolidstructure_a7df9078481fae5d596be52a20a0223aa}} 
+double {\bfseries xchig0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a7e0872ff48d924ef36c90f8f5bf7d4de}\label{classsolidstructure_a7e0872ff48d924ef36c90f8f5bf7d4de}} 
+double {\bfseries ycberryconn0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_ada59a3c2d49c7a1f31c329cb7aa5ec6c}\label{classsolidstructure_ada59a3c2d49c7a1f31c329cb7aa5ec6c}} 
+double {\bfseries yvberryconn0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_afecc8ada7d925e44735c08177110394a}\label{classsolidstructure_afecc8ada7d925e44735c08177110394a}} 
+double {\bfseries ychig0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a8d4f924e51cb80168373e9cc96084402}\label{classsolidstructure_a8d4f924e51cb80168373e9cc96084402}} 
+double {\bfseries chig0} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_ac6421a34d0f120ff60f81bad453500d4}\label{classsolidstructure_ac6421a34d0f120ff60f81bad453500d4}} 
+double {\bfseries Min\+E\+Gap}
+\item 
+\mbox{\Hypertarget{classsolidstructure_af06fd2df6459286be8ec48029a0e7ae9}\label{classsolidstructure_af06fd2df6459286be8ec48029a0e7ae9}} 
+double {\bfseries Max\+E\+Gap}
+\item 
+\mbox{\Hypertarget{classsolidstructure_aa394de5b9a5f47ce48600802aabd50bc}\label{classsolidstructure_aa394de5b9a5f47ce48600802aabd50bc}} 
+double {\bfseries re\+\_\+width}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a3b1d3e6472cd4999a0017dfe84a6d3bf}\label{classsolidstructure_a3b1d3e6472cd4999a0017dfe84a6d3bf}} 
+double {\bfseries reg0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a8e04618d7fd5c0ad1dae7ac8c8cbc45e}\label{classsolidstructure_a8e04618d7fd5c0ad1dae7ac8c8cbc45e}} 
+double {\bfseries xanomalous\+\_\+v0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a2635561e225c5182309e4eb962927c5d}\label{classsolidstructure_a2635561e225c5182309e4eb962927c5d}} 
+double {\bfseries yanomalous\+\_\+v0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a405b7561540d309010873e954d9b14f9}\label{classsolidstructure_a405b7561540d309010873e954d9b14f9}} 
+double {\bfseries xanomalous\+\_\+c0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a8142bc1c120df5887a852356d3872f68}\label{classsolidstructure_a8142bc1c120df5887a852356d3872f68}} 
+double {\bfseries yanomalous\+\_\+c0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_afbf72808192d6fd36bbe356c42c31b9b}\label{classsolidstructure_afbf72808192d6fd36bbe356c42c31b9b}} 
+double {\bfseries group\+\_\+v0} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a7ead0c032a68e4d9639e56396bf0531c}\label{classsolidstructure_a7ead0c032a68e4d9639e56396bf0531c}} 
+double {\bfseries group\+\_\+c0} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a016204ef12789f18de46f0a2462e8b46}\label{classsolidstructure_a016204ef12789f18de46f0a2462e8b46}} 
+complex {\bfseries curvatemp1}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a8ce5aade72d28c2ed8aeabf9060b912a}\label{classsolidstructure_a8ce5aade72d28c2ed8aeabf9060b912a}} 
+complex {\bfseries curvatemp2}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a5c5bd92caba2cea027ccfd926206bbd5}\label{classsolidstructure_a5c5bd92caba2cea027ccfd926206bbd5}} 
+complex {\bfseries wv\+\_\+grad0} \mbox{[}Ngrad\mbox{]}\mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a1809be1426ccdfc7e87c2ec47a0799b9}\label{classsolidstructure_a1809be1426ccdfc7e87c2ec47a0799b9}} 
+complex {\bfseries wc\+\_\+grad0} \mbox{[}Ngrad\mbox{]}\mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a2571bf9de509928eec75ff03e313689b}\label{classsolidstructure_a2571bf9de509928eec75ff03e313689b}} 
+complex {\bfseries velocity\+\_\+cv0} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a25c310379f7d1e1d2a798c5955b98743}\label{classsolidstructure_a25c310379f7d1e1d2a798c5955b98743}} 
+complex {\bfseries dip\+\_\+cv0} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a3d6b1c726618532783328487f2d83d33}\label{classsolidstructure_a3d6b1c726618532783328487f2d83d33}} 
+complex {\bfseries tempc} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_aff1d894f29774464f3642a7a04eaa97d}\label{classsolidstructure_aff1d894f29774464f3642a7a04eaa97d}} 
+complex $\ast$ {\bfseries dipole\+\_\+cv} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_abbe19abe6eeb8e742989333597876528}\label{classsolidstructure_abbe19abe6eeb8e742989333597876528}} 
+double {\bfseries chi\+\_\+c0} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a5417c4a3de864b2d896a0dadea2cf1f7}\label{classsolidstructure_a5417c4a3de864b2d896a0dadea2cf1f7}} 
+double {\bfseries chi\+\_\+v0} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a0a9c955d422d69f4e08b0a7ecb10945d}\label{classsolidstructure_a0a9c955d422d69f4e08b0a7ecb10945d}} 
+double {\bfseries eps\+\_\+phi0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a7c805fc528bd5c31b056765b29b81434}\label{classsolidstructure_a7c805fc528bd5c31b056765b29b81434}} 
+double {\bfseries K} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a6d1cc228bbb1807194f04eecb4557416}\label{classsolidstructure_a6d1cc228bbb1807194f04eecb4557416}} 
+double {\bfseries Kprime} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a03a09bbf3d3dbcdf669b72790c5b33da}\label{classsolidstructure_a03a09bbf3d3dbcdf669b72790c5b33da}} 
+double {\bfseries honeycomb\+\_\+lattice\+\_\+kmax} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a9685b451e5ff03c3e68edb01157c114b}\label{classsolidstructure_a9685b451e5ff03c3e68edb01157c114b}} 
+double {\bfseries flag}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a88c013f1bf0e8d7510bacf91ed834e06}\label{classsolidstructure_a88c013f1bf0e8d7510bacf91ed834e06}} 
+double {\bfseries angle\+\_\+a0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a0099c1817dd97ed9faa810241d728c7b}\label{classsolidstructure_a0099c1817dd97ed9faa810241d728c7b}} 
+double {\bfseries angle\+\_\+b0}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a9dd9f23df72c3b15f5be272796406c1f}\label{classsolidstructure_a9dd9f23df72c3b15f5be272796406c1f}} 
+complex {\bfseries uwave\+\_\+val0} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classsolidstructure_a76526bf65a6a2d2865ca97ea4297897c}\label{classsolidstructure_a76526bf65a6a2d2865ca97ea4297897c}} 
+complex {\bfseries uwave\+\_\+cond0} \mbox{[}Ngrad\mbox{]}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+solidstructure.\+h\end{DoxyCompactItemize}

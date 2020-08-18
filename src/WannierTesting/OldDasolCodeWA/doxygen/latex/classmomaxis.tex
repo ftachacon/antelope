@@ -1,0 +1,70 @@
+\hypertarget{classmomaxis}{}\doxysection{momaxis Class Reference}
+\label{classmomaxis}\index{momaxis@{momaxis}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmomaxis_aabdf2088e2f6a43f2adfbe1f67ef770e}\label{classmomaxis_aabdf2088e2f6a43f2adfbe1f67ef770e}} 
+{\bfseries momaxis} (array$<$ int, Ndim $>$ \+\_\+N, array$<$ double, Ndim $\ast$Ndim $>$ \+\_\+axisvec, array$<$ double, Ndim $>$ \+\_\+origink)
+\item 
+\mbox{\Hypertarget{classmomaxis_a98048ed63ec60acb2d0511264edf6d75}\label{classmomaxis_a98048ed63ec60acb2d0511264edf6d75}} 
+void {\bfseries basic\+\_\+mem} ()
+\item 
+\mbox{\Hypertarget{classmomaxis_a067c8b673d96801a827640a83312b74e}\label{classmomaxis_a067c8b673d96801a827640a83312b74e}} 
+void {\bfseries steps\+\_\+sizes} (array$<$ int, Ndim $>$ \+\_\+N, array$<$ double, Ndim $\ast$Ndim $>$ \+\_\+axisvec, array$<$ double, Ndim $>$ \+\_\+origink)
+\item 
+\mbox{\Hypertarget{classmomaxis_aff806e37efb279844766cd0dde1639c9}\label{classmomaxis_aff806e37efb279844766cd0dde1639c9}} 
+void {\bfseries set\+\_\+brillouin\+\_\+zone\+\_\+grid} ()
+\item 
+\mbox{\Hypertarget{classmomaxis_a23d4f5a89d9532507ceee0b2bea2a6c9}\label{classmomaxis_a23d4f5a89d9532507ceee0b2bea2a6c9}} 
+void {\bfseries mom\+\_\+outputs} (F\+I\+LE $\ast$output, int skip0, int skip1, int skip2)
+\item 
+\mbox{\Hypertarget{classmomaxis_ab4359bf19ad44343de9b7d2b9602bc70}\label{classmomaxis_ab4359bf19ad44343de9b7d2b9602bc70}} 
+int {\bfseries index} (const int i, const int j, const int k)
+\item 
+\mbox{\Hypertarget{classmomaxis_a9b77a19a63f8152809160e257079fac3}\label{classmomaxis_a9b77a19a63f8152809160e257079fac3}} 
+int {\bfseries index} (const array$<$ int, Ndim $>$ \+\_\+index\+Arr)
+\item 
+\mbox{\Hypertarget{classmomaxis_a0a54661ea0a09b3e462c255cfd1ac8be}\label{classmomaxis_a0a54661ea0a09b3e462c255cfd1ac8be}} 
+array$<$ int, Ndim $>$ {\bfseries index} (int \+\_\+kindex)
+\item 
+\mbox{\Hypertarget{classmomaxis_a70e02a2137add759360a03d575141402}\label{classmomaxis_a70e02a2137add759360a03d575141402}} 
+void {\bfseries checker} ()
+\item 
+\mbox{\Hypertarget{classmomaxis_acadd663eec4644f31fa7033926bb6d99}\label{classmomaxis_acadd663eec4644f31fa7033926bb6d99}} 
+void {\bfseries print\+\_\+info} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmomaxis_a18f4ea4e4fafe0feb09eb19b15309f33}\label{classmomaxis_a18f4ea4e4fafe0feb09eb19b15309f33}} 
+array$<$ double, Ndim $>$ $\ast$ {\bfseries kgrid}
+\item 
+\mbox{\Hypertarget{classmomaxis_a72f11dd7097b1eb33c9fc80fb062afc8}\label{classmomaxis_a72f11dd7097b1eb33c9fc80fb062afc8}} 
+array$<$ double, Ndim $\ast$Ndim $>$ {\bfseries Bz\+Axes}
+\item 
+\mbox{\Hypertarget{classmomaxis_a1a8320eee0a87e85b43bda5e6aebf5c0}\label{classmomaxis_a1a8320eee0a87e85b43bda5e6aebf5c0}} 
+array$<$ double, Ndim $>$ {\bfseries Bz\+Origin}
+\item 
+\mbox{\Hypertarget{classmomaxis_a3348a2ba4583b6ac1151a7338fde04b8}\label{classmomaxis_a3348a2ba4583b6ac1151a7338fde04b8}} 
+double $\ast$ {\bfseries weight}
+\item 
+\mbox{\Hypertarget{classmomaxis_a3003cd2745d7d6da227bea6cdec035a2}\label{classmomaxis_a3003cd2745d7d6da227bea6cdec035a2}} 
+array$<$ int, Ndim $>$ {\bfseries N}
+\item 
+\mbox{\Hypertarget{classmomaxis_a99d4e9acdf1edc641eb36a591c78919f}\label{classmomaxis_a99d4e9acdf1edc641eb36a591c78919f}} 
+int {\bfseries Ntotal}
+\item 
+\mbox{\Hypertarget{classmomaxis_a5422b1ea0af8d2d6b30e7224da44e8e5}\label{classmomaxis_a5422b1ea0af8d2d6b30e7224da44e8e5}} 
+double {\bfseries Volume}
+\item 
+\mbox{\Hypertarget{classmomaxis_a94c45825f808e813f0eaa971c2dc9f78}\label{classmomaxis_a94c45825f808e813f0eaa971c2dc9f78}} 
+double {\bfseries dV}
+\item 
+\mbox{\Hypertarget{classmomaxis_ae1cb1bc0c29d74ef6a0ff16d34c8a554}\label{classmomaxis_ae1cb1bc0c29d74ef6a0ff16d34c8a554}} 
+string {\bfseries imethod}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+momaxis.\+h\end{DoxyCompactItemize}

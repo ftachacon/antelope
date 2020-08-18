@@ -1,0 +1,128 @@
+\hypertarget{class_s_b_es_l_w_m}{}\doxysection{S\+B\+Es\+L\+WM Class Reference}
+\label{class_s_b_es_l_w_m}\index{SBEsLWM@{SBEsLWM}}
+
+
+Collaboration diagram for S\+B\+Es\+L\+WM\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=298pt]{class_s_b_es_l_w_m__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a202d57437ea16963c02602245e9dc7ce}\label{class_s_b_es_l_w_m_a202d57437ea16963c02602245e9dc7ce}} 
+{\bfseries S\+B\+Es\+L\+WM} (const libconfig\+::\+Setting $\ast$\+\_\+cfg)
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a3c5f81301ff1d5501276b4639507b184}\label{class_s_b_es_l_w_m_a3c5f81301ff1d5501276b4639507b184}} 
+void {\bfseries Run\+S\+B\+Es} (int \+\_\+kindex, double \+\_\+time)
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a3361efbc61c77184eabb9052702afdc5}\label{class_s_b_es_l_w_m_a3361efbc61c77184eabb9052702afdc5}} 
+array$<$ double, Ndim $>$ {\bfseries Gen\+Current} (int \+\_\+kindex, double \+\_\+time)
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a176ea9f33a8bcbda2c3a2cee664eb6ee}\label{class_s_b_es_l_w_m_a176ea9f33a8bcbda2c3a2cee664eb6ee}} 
+void {\bfseries Gen\+Differential\+DM} (complex $\ast$out, complex $\ast$input, int \+\_\+kindex, double \+\_\+time)
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a61ff0bb0410d43305a870af59748c1be}\label{class_s_b_es_l_w_m_a61ff0bb0410d43305a870af59748c1be}} 
+void \mbox{\hyperlink{class_s_b_es_l_w_m_a61ff0bb0410d43305a870af59748c1be}{Initialize\+General}} (const libconfig\+::\+Setting $\ast$\+\_\+calc)
+\begin{DoxyCompactList}\small\item\em Initialize general stuff inside constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_aa39b4799f8c90c8da3e532ae25ceb3fb}\label{class_s_b_es_l_w_m_aa39b4799f8c90c8da3e532ae25ceb3fb}} 
+void \mbox{\hyperlink{class_s_b_es_l_w_m_aa39b4799f8c90c8da3e532ae25ceb3fb}{Initialize\+Laser}} (const libconfig\+::\+Setting $\ast$\+\_\+laser)
+\begin{DoxyCompactList}\small\item\em Initialize laser inside constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a2b6a94d7ad9ff2801017b4e16cff0064}\label{class_s_b_es_l_w_m_a2b6a94d7ad9ff2801017b4e16cff0064}} 
+complex $\ast$$\ast$ {\bfseries dmatrix}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a8cd14cff82a858636db78456921c5c95}\label{class_s_b_es_l_w_m_a8cd14cff82a858636db78456921c5c95}} 
+\mbox{\hyperlink{class_wannier_material}{Wannier\+Material}} $\ast$ {\bfseries material}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a3379a983800b78ab42ac81844f1ea397}\label{class_s_b_es_l_w_m_a3379a983800b78ab42ac81844f1ea397}} 
+complex $\ast$ \mbox{\hyperlink{class_s_b_es_l_w_m_a3379a983800b78ab42ac81844f1ea397}{hamiltonian}}
+\begin{DoxyCompactList}\small\item\em dipole\&Hamiltonian generator \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a8aad9e26d4f89c4b471c27f0706919dc}\label{class_s_b_es_l_w_m_a8aad9e26d4f89c4b471c27f0706919dc}} 
+complex $\ast$$\ast$ {\bfseries dipole\+Matrix}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a58f5a282708082ee0a36e3c8053b60ae}\label{class_s_b_es_l_w_m_a58f5a282708082ee0a36e3c8053b60ae}} 
+complex $\ast$$\ast$ {\bfseries j\+Matrix}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_acc2812c7639b5f07826f73c62b718e34}\label{class_s_b_es_l_w_m_acc2812c7639b5f07826f73c62b718e34}} 
+complex $\ast$ {\bfseries newd\+Matrix}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a5a7f8b5e2f779c686130d4d084411d42}\label{class_s_b_es_l_w_m_a5a7f8b5e2f779c686130d4d084411d42}} 
+complex $\ast$ {\bfseries temp1\+Matrix}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_aa80e883b84a1dfcdf8eabc54322ab9ea}\label{class_s_b_es_l_w_m_aa80e883b84a1dfcdf8eabc54322ab9ea}} 
+complex $\ast$ {\bfseries temp2\+Matrix}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a6cca2b0d560eac037208eb444ef54bf5}\label{class_s_b_es_l_w_m_a6cca2b0d560eac037208eb444ef54bf5}} 
+complex $\ast$$\ast$ {\bfseries rk\+Matrix}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a7c40108de663075ecca86eaffa0a3667}\label{class_s_b_es_l_w_m_a7c40108de663075ecca86eaffa0a3667}} 
+complex $\ast$ {\bfseries u\+Matrix}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a10a3ee6479a6090ff8bd59822863ca03}\label{class_s_b_es_l_w_m_a10a3ee6479a6090ff8bd59822863ca03}} 
+complex $\ast$ {\bfseries ctransu\+Matrix}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a274e4072fb88a39b4f5fe0dac7321507}\label{class_s_b_es_l_w_m_a274e4072fb88a39b4f5fe0dac7321507}} 
+double $\ast$ {\bfseries dephasing\+Matrix}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a72d4a1ff6ac8e7df7e55ee7d8f7b3cf2}\label{class_s_b_es_l_w_m_a72d4a1ff6ac8e7df7e55ee7d8f7b3cf2}} 
+\mbox{\hyperlink{classlaser}{laser}} $\ast$ {\bfseries fpulses}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a51ac6e757b95dfc8435ef6790a3a7066}\label{class_s_b_es_l_w_m_a51ac6e757b95dfc8435ef6790a3a7066}} 
+int {\bfseries Nband}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a72b34e4d77712aba2718a3f6b73e821f}\label{class_s_b_es_l_w_m_a72b34e4d77712aba2718a3f6b73e821f}} 
+int {\bfseries R\+Korder}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a70ab343dc5cf9546a293f6b299a7bbbe}\label{class_s_b_es_l_w_m_a70ab343dc5cf9546a293f6b299a7bbbe}} 
+int {\bfseries Num\+RK}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a2f266067a2754b44bf21a9ec2e35360a}\label{class_s_b_es_l_w_m_a2f266067a2754b44bf21a9ec2e35360a}} 
+double $\ast$ {\bfseries t\+RK}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_afebdb7178bada08208d1f5a3f5236386}\label{class_s_b_es_l_w_m_afebdb7178bada08208d1f5a3f5236386}} 
+double $\ast$ {\bfseries b\+RK}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_ae03c0a3177a9ed5286771512510e8a61}\label{class_s_b_es_l_w_m_ae03c0a3177a9ed5286771512510e8a61}} 
+double $\ast$$\ast$ {\bfseries a\+RK}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a541b4d035817536b04d6e7449b90c5c0}\label{class_s_b_es_l_w_m_a541b4d035817536b04d6e7449b90c5c0}} 
+\mbox{\hyperlink{classmomaxis}{momaxis}} $\ast$ {\bfseries kmesh}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a3fd8a3fa870a97f8ec3aae0ebd846f61}\label{class_s_b_es_l_w_m_a3fd8a3fa870a97f8ec3aae0ebd846f61}} 
+string {\bfseries target\+Material}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a66ff50ee561ac2819c37cfb59fe09761}\label{class_s_b_es_l_w_m_a66ff50ee561ac2819c37cfb59fe09761}} 
+array$<$ double, Ndim $>$ {\bfseries ksfactor}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a5b3d6dd52b607dd8163d51af4c768060}\label{class_s_b_es_l_w_m_a5b3d6dd52b607dd8163d51af4c768060}} 
+int {\bfseries shot\+Number}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a74be6cf850188849837a4672a3b89f67}\label{class_s_b_es_l_w_m_a74be6cf850188849837a4672a3b89f67}} 
+int {\bfseries diagnostic}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_ac9cab6b310bf1cf7198e2cfaaf1b50c6}\label{class_s_b_es_l_w_m_ac9cab6b310bf1cf7198e2cfaaf1b50c6}} 
+double {\bfseries dephasing\+\_\+time\+\_\+inter}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a5324aa6f0c7082331098267ca042c00a}\label{class_s_b_es_l_w_m_a5324aa6f0c7082331098267ca042c00a}} 
+double {\bfseries dephasing\+\_\+time\+\_\+intra}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a56a011083cde4913b48243ab83bfd864}\label{class_s_b_es_l_w_m_a56a011083cde4913b48243ab83bfd864}} 
+double {\bfseries dephasing\+\_\+factor\+\_\+inter}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_aacd6b6e1c79918e5eab0d1c4d84af677}\label{class_s_b_es_l_w_m_aacd6b6e1c79918e5eab0d1c4d84af677}} 
+double {\bfseries dephasing\+\_\+factor\+\_\+intra}
+\item 
+\mbox{\Hypertarget{class_s_b_es_l_w_m_a587b0fc0d250d37fdb5d4a8aeca1b76c}\label{class_s_b_es_l_w_m_a587b0fc0d250d37fdb5d4a8aeca1b76c}} 
+bool \mbox{\hyperlink{class_s_b_es_l_w_m_a587b0fc0d250d37fdb5d4a8aeca1b76c}{is\+Dipole\+Nonzero}}
+\begin{DoxyCompactList}\small\item\em default is false. Wannier dipole is non-\/zero in very rare cases. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+S\+B\+Es\+L\+W\+M.\+h\end{DoxyCompactItemize}

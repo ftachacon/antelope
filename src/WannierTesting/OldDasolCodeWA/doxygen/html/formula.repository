@@ -1,0 +1,3 @@
+\_form#0=10x13:$\AA$
+\_form#1=175x14:$ (\sin\theta_{z}\cos\phi_{z}, \sin\theta_{z}\sin\phi_{z}, \cos\theta_{z})$
+\_form#2=130x23:$ - \frac{\partial H(\textbf{k})}{\partial \textbf{k}} + i [\textbf{D}(\textbf{k}), H(\textbf{k})] $

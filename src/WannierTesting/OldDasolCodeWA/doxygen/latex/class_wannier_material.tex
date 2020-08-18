@@ -1,0 +1,190 @@
+\hypertarget{class_wannier_material}{}\doxysection{Wannier\+Material Class Reference}
+\label{class_wannier_material}\index{WannierMaterial@{WannierMaterial}}
+
+
+Ancestor class of every material Hamiltonian generator.  
+
+
+
+
+{\ttfamily \#include $<$wannier\+\_\+system.\+h$>$}
+
+
+
+Inheritance diagram for Wannier\+Material\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{class_wannier_material__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_wannier_material_aec1a2077bb9c951142046b50b3cf8dc4}\label{class_wannier_material_aec1a2077bb9c951142046b50b3cf8dc4}} 
+virtual \mbox{\hyperlink{class_wannier_material_aec1a2077bb9c951142046b50b3cf8dc4}{$\sim$\+Wannier\+Material}} ()
+\begin{DoxyCompactList}\small\item\em virtual desctructor is used to prevent memory leak \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_wannier_material_a04a8b16ca66443aa57f4fc95237ea24c}{Gen\+Initial\+Value}} (complex $\ast$\+\_\+dmstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint)=0
+\begin{DoxyCompactList}\small\item\em Generate initial value of density matrix. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_wannier_material_a883aa9e556d92fea6e4a5247554cc83c}{Gen\+U\+Matrix}} (complex $\ast$\+\_\+ustore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint)=0
+\begin{DoxyCompactList}\small\item\em Generate unitary transformation matrix between Wannier and Hamiltonian gauge (eigenvector matrix) \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_wannier_material_a449df8004573530c272fb8db16ff6bfe}{Gen\+Hamiltonian}} (complex $\ast$\+\_\+hstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint)=0
+\begin{DoxyCompactList}\small\item\em Generate Hamiltonian matrix -\/ tight binding matrix. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_wannier_material_a9a5087fbcae395f007d77968f9d00d46}{Gen\+Dipole}} (complex $\ast$$\ast$\+\_\+dstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint)=0
+\begin{DoxyCompactList}\small\item\em Generate dipole matrix in Wannier basis. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_wannier_material_adb5733fe97f1519e9da5f4d35120ef0d}{Gen\+J\+Matrix}} (complex $\ast$$\ast$\+\_\+jstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint)=0
+\begin{DoxyCompactList}\small\item\em Generate interband and intraband current matrix. \end{DoxyCompactList}\item 
+virtual std\+::tuple$<$ std\+::array$<$ double, Ndim $\ast$Ndim $>$, std\+::array$<$ double, Ndim $>$ $>$ \mbox{\hyperlink{class_wannier_material_af261bdc2dcb97e0b8c3a8d22d52d000a}{Gen\+Brillouinzone}} ()=0
+\begin{DoxyCompactList}\small\item\em Generate Brillouin zone information. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier_material_ab7419def0a3ed838acce0b27836f6318}\label{class_wannier_material_ab7419def0a3ed838acce0b27836f6318}} 
+virtual void {\bfseries Print\+Material\+Information} ()=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_wannier_material_a8302b0f691436b225cec5b35eedad102}\label{class_wannier_material_a8302b0f691436b225cec5b35eedad102}} 
+int \mbox{\hyperlink{class_wannier_material_a8302b0f691436b225cec5b35eedad102}{Nband}}
+\begin{DoxyCompactList}\small\item\em Number of bands. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Ancestor class of every material Hamiltonian generator. 
+
+Note that virtual function has litte cost $\sim$ switch \begin{DoxyAuthor}{Author}
+Dasol Kim 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_wannier_material_af261bdc2dcb97e0b8c3a8d22d52d000a}\label{class_wannier_material_af261bdc2dcb97e0b8c3a8d22d52d000a}} 
+\index{WannierMaterial@{WannierMaterial}!GenBrillouinzone@{GenBrillouinzone}}
+\index{GenBrillouinzone@{GenBrillouinzone}!WannierMaterial@{WannierMaterial}}
+\doxysubsubsection{\texorpdfstring{GenBrillouinzone()}{GenBrillouinzone()}}
+{\footnotesize\ttfamily virtual std\+::tuple$<$std\+::array$<$double, Ndim$\ast$Ndim$>$, std\+::array$<$double, Ndim$>$ $>$ Wannier\+Material\+::\+Gen\+Brillouinzone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Generate Brillouin zone information. 
+
+To use this function, see below example.
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} [axes, origin] = \mbox{\hyperlink{class_wannier_material_af261bdc2dcb97e0b8c3a8d22d52d000a}{GenBrillouinzone}}(); }
+\end{DoxyCode}
+ \begin{DoxyReturn}{Returns}
+Brillouin zone axes and origin points are returned as a tuple 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_tight_binding_a81458687424088fd6e549b861dc42ae4}{Tight\+Binding}}, and \mbox{\hyperlink{class_wilson_mass_a234ce32e40498a5516e48bd0ce315b4f}{Wilson\+Mass}}.
+
+\mbox{\Hypertarget{class_wannier_material_a9a5087fbcae395f007d77968f9d00d46}\label{class_wannier_material_a9a5087fbcae395f007d77968f9d00d46}} 
+\index{WannierMaterial@{WannierMaterial}!GenDipole@{GenDipole}}
+\index{GenDipole@{GenDipole}!WannierMaterial@{WannierMaterial}}
+\doxysubsubsection{\texorpdfstring{GenDipole()}{GenDipole()}}
+{\footnotesize\ttfamily virtual void Wannier\+Material\+::\+Gen\+Dipole (\begin{DoxyParamCaption}\item[{complex $\ast$$\ast$}]{\+\_\+dstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Generate dipole matrix in Wannier basis. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+dstore} & dipole matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_tight_binding_a35d001bd21173065f9f3b2de595b5af6}{Tight\+Binding}}, and \mbox{\hyperlink{class_wilson_mass_a5eccf814c7eb68f0b453a14c6b45fa01}{Wilson\+Mass}}.
+
+\mbox{\Hypertarget{class_wannier_material_a449df8004573530c272fb8db16ff6bfe}\label{class_wannier_material_a449df8004573530c272fb8db16ff6bfe}} 
+\index{WannierMaterial@{WannierMaterial}!GenHamiltonian@{GenHamiltonian}}
+\index{GenHamiltonian@{GenHamiltonian}!WannierMaterial@{WannierMaterial}}
+\doxysubsubsection{\texorpdfstring{GenHamiltonian()}{GenHamiltonian()}}
+{\footnotesize\ttfamily virtual void Wannier\+Material\+::\+Gen\+Hamiltonian (\begin{DoxyParamCaption}\item[{complex $\ast$}]{\+\_\+hstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Generate Hamiltonian matrix -\/ tight binding matrix. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+hstore} & Hamiltonian matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_tight_binding_a228397138efbc49a23a1e528b22505d8}{Tight\+Binding}}, and \mbox{\hyperlink{class_wilson_mass_aed4048bb4a06169ffc8010852fd46262}{Wilson\+Mass}}.
+
+\mbox{\Hypertarget{class_wannier_material_a04a8b16ca66443aa57f4fc95237ea24c}\label{class_wannier_material_a04a8b16ca66443aa57f4fc95237ea24c}} 
+\index{WannierMaterial@{WannierMaterial}!GenInitialValue@{GenInitialValue}}
+\index{GenInitialValue@{GenInitialValue}!WannierMaterial@{WannierMaterial}}
+\doxysubsubsection{\texorpdfstring{GenInitialValue()}{GenInitialValue()}}
+{\footnotesize\ttfamily virtual void Wannier\+Material\+::\+Gen\+Initial\+Value (\begin{DoxyParamCaption}\item[{complex $\ast$}]{\+\_\+dmstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Generate initial value of density matrix. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+dmstore} & Initial value of density matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_tight_binding_a4436babed177035ec217d9bedb8dfbf9}{Tight\+Binding}}, and \mbox{\hyperlink{class_wilson_mass_a3e0cf41addd8c0f1e87952de6527d431}{Wilson\+Mass}}.
+
+\mbox{\Hypertarget{class_wannier_material_adb5733fe97f1519e9da5f4d35120ef0d}\label{class_wannier_material_adb5733fe97f1519e9da5f4d35120ef0d}} 
+\index{WannierMaterial@{WannierMaterial}!GenJMatrix@{GenJMatrix}}
+\index{GenJMatrix@{GenJMatrix}!WannierMaterial@{WannierMaterial}}
+\doxysubsubsection{\texorpdfstring{GenJMatrix()}{GenJMatrix()}}
+{\footnotesize\ttfamily virtual void Wannier\+Material\+::\+Gen\+J\+Matrix (\begin{DoxyParamCaption}\item[{complex $\ast$$\ast$}]{\+\_\+jstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Generate interband and intraband current matrix. 
+
+Remember 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+jstore} & store $ - \frac{\partial H(\textbf{k})}{\partial \textbf{k}} + i [\textbf{D}(\textbf{k}), H(\textbf{k})] $ \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_tight_binding_a6344b139ca89723d7b71b6efd9c834d9}{Tight\+Binding}}, and \mbox{\hyperlink{class_wilson_mass_a41a3114da6dd600adbc08aa2ed024141}{Wilson\+Mass}}.
+
+\mbox{\Hypertarget{class_wannier_material_a883aa9e556d92fea6e4a5247554cc83c}\label{class_wannier_material_a883aa9e556d92fea6e4a5247554cc83c}} 
+\index{WannierMaterial@{WannierMaterial}!GenUMatrix@{GenUMatrix}}
+\index{GenUMatrix@{GenUMatrix}!WannierMaterial@{WannierMaterial}}
+\doxysubsubsection{\texorpdfstring{GenUMatrix()}{GenUMatrix()}}
+{\footnotesize\ttfamily virtual void Wannier\+Material\+::\+Gen\+U\+Matrix (\begin{DoxyParamCaption}\item[{complex $\ast$}]{\+\_\+ustore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Generate unitary transformation matrix between Wannier and Hamiltonian gauge (eigenvector matrix) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+ustore} & unitary transformation matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_tight_binding_a4bbc4705b8a3d3c45b1474740ec3c93b}{Tight\+Binding}}, and \mbox{\hyperlink{class_wilson_mass_ac10f78215eb9ec326fa983a20c8f0c33}{Wilson\+Mass}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+wannier\+\_\+system.\+h\end{DoxyCompactItemize}

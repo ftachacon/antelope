@@ -1,0 +1,252 @@
+\hypertarget{class_tight_binding}{}\doxysection{Tight\+Binding Class Reference}
+\label{class_tight_binding}\index{TightBinding@{TightBinding}}
+
+
+Inheritance diagram for Tight\+Binding\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=168pt]{class_tight_binding__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Tight\+Binding\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=168pt]{class_tight_binding__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_tight_binding_a6eb970de6a693dddfc4f5c1f2abbcc03}\label{class_tight_binding_a6eb970de6a693dddfc4f5c1f2abbcc03}} 
+{\bfseries Tight\+Binding} (const libconfig\+::\+Setting $\ast$params)
+\item 
+\mbox{\Hypertarget{class_tight_binding_a1de589a66766bdf3daccb58ca39496de}\label{class_tight_binding_a1de589a66766bdf3daccb58ca39496de}} 
+void {\bfseries Allocate} ()
+\item 
+\mbox{\Hypertarget{class_tight_binding_a257241a67747950e8c5842f02c614fd8}\label{class_tight_binding_a257241a67747950e8c5842f02c614fd8}} 
+void {\bfseries Set\+Reciprocal\+Basis} ()
+\item 
+void \mbox{\hyperlink{class_tight_binding_a4436babed177035ec217d9bedb8dfbf9}{Gen\+Initial\+Value}} (complex $\ast$\+\_\+dmstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\begin{DoxyCompactList}\small\item\em Generate initial value of density matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tight_binding_a228397138efbc49a23a1e528b22505d8}{Gen\+Hamiltonian}} (complex $\ast$\+\_\+hstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\begin{DoxyCompactList}\small\item\em Generate Hamiltonian matrix -\/ tight binding matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tight_binding_a35d001bd21173065f9f3b2de595b5af6}{Gen\+Dipole}} (complex $\ast$$\ast$\+\_\+dstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\begin{DoxyCompactList}\small\item\em Generate dipole matrix in Wannier basis. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tight_binding_a6344b139ca89723d7b71b6efd9c834d9}{Gen\+J\+Matrix}} (complex $\ast$$\ast$\+\_\+jstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\begin{DoxyCompactList}\small\item\em Generate interband and intraband current matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tight_binding_a4bbc4705b8a3d3c45b1474740ec3c93b}{Gen\+U\+Matrix}} (complex $\ast$\+\_\+ustore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\begin{DoxyCompactList}\small\item\em Generate unitary transformation matrix between Wannier and Hamiltonian gauge (eigenvector matrix) \end{DoxyCompactList}\item 
+std\+::tuple$<$ std\+::array$<$ double, Ndim $\ast$Ndim $>$, std\+::array$<$ double, Ndim $>$ $>$ \mbox{\hyperlink{class_tight_binding_a81458687424088fd6e549b861dc42ae4}{Gen\+Brillouinzone}} () override
+\begin{DoxyCompactList}\small\item\em Generate Brillouin zone information. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tight_binding_a48f82a1903b63a1f6c5deb71a4af285f}\label{class_tight_binding_a48f82a1903b63a1f6c5deb71a4af285f}} 
+void {\bfseries Print\+Material\+Information} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_tight_binding_a6be74f2d16bf604fbbe4f8a430dd7d55}\label{class_tight_binding_a6be74f2d16bf604fbbe4f8a430dd7d55}} 
+std\+::array$<$ std\+::array$<$ double, Ndim $>$, Ndim $>$ \mbox{\hyperlink{class_tight_binding_a6be74f2d16bf604fbbe4f8a430dd7d55}{vec\+\_\+lattice}}
+\begin{DoxyCompactList}\small\item\em Bravais lattice vector and Reciprocal lattice vectors. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tight_binding_a8d1e54ade0e3fa577dc8c1328ec05851}\label{class_tight_binding_a8d1e54ade0e3fa577dc8c1328ec05851}} 
+std\+::array$<$ std\+::array$<$ double, Ndim $>$, Ndim $>$ {\bfseries vec\+\_\+reciprocal}
+\item 
+\mbox{\Hypertarget{class_tight_binding_a2f6929cc0179ceb946c40081fcc34583}\label{class_tight_binding_a2f6929cc0179ceb946c40081fcc34583}} 
+int \mbox{\hyperlink{class_tight_binding_a2f6929cc0179ceb946c40081fcc34583}{Nband}}
+\begin{DoxyCompactList}\small\item\em Number of Wannier function per unit cell = Number of bands. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tight_binding_a19258a99dd6a1790aca58ec9338626a4}\label{class_tight_binding_a19258a99dd6a1790aca58ec9338626a4}} 
+int \mbox{\hyperlink{class_tight_binding_a19258a99dd6a1790aca58ec9338626a4}{Nrpts}}
+\begin{DoxyCompactList}\small\item\em Number of Bravais lattice vector used in system. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tight_binding_ad570545ed28e5ab8132bb392bbee99c4}\label{class_tight_binding_ad570545ed28e5ab8132bb392bbee99c4}} 
+double $\ast$ \mbox{\hyperlink{class_tight_binding_ad570545ed28e5ab8132bb392bbee99c4}{weight}}
+\begin{DoxyCompactList}\small\item\em Weight of unit cell. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tight_binding_a7c5965d0460f81a924c6609037bdbf7e}\label{class_tight_binding_a7c5965d0460f81a924c6609037bdbf7e}} 
+int $\ast$$\ast$ \mbox{\hyperlink{class_tight_binding_a7c5965d0460f81a924c6609037bdbf7e}{index\+Rvec}}
+\begin{DoxyCompactList}\small\item\em index of lattice vectors (R = n1 a1 + n2 a2 + n3 a3 ), index\+Rvec\mbox{[}irpt, 0\mbox{]} = n1 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tight_binding_a9ae97b6a246049e9eb6e2c11db670610}\label{class_tight_binding_a9ae97b6a246049e9eb6e2c11db670610}} 
+int \mbox{\hyperlink{class_tight_binding_a9ae97b6a246049e9eb6e2c11db670610}{index\+Rorigin}}
+\begin{DoxyCompactList}\small\item\em index which R = 0 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tight_binding_a3b1718e23c4c5ff91fba3c7833d806c1}\label{class_tight_binding_a3b1718e23c4c5ff91fba3c7833d806c1}} 
+bool \mbox{\hyperlink{class_tight_binding_a3b1718e23c4c5ff91fba3c7833d806c1}{is\+Dipole\+Nonzero}}
+\begin{DoxyCompactList}\small\item\em make Wannier dipole zero if false (there is same variable in \mbox{\hyperlink{class_s_b_es_l_w_m}{S\+B\+Es\+L\+WM}} and it\textquotesingle{}s dangerous... fix it later) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tight_binding_ade2306ba962c15402350118f3f2a1efd}\label{class_tight_binding_ade2306ba962c15402350118f3f2a1efd}} 
+complex $\ast$$\ast$$\ast$ \mbox{\hyperlink{class_tight_binding_ade2306ba962c15402350118f3f2a1efd}{ham\+\_\+w}}
+\begin{DoxyCompactList}\small\item\em Hamiltonian components in Wannier basis, ham\+\_\+w\mbox{[}irpt\mbox{]}\mbox{[}i\mbox{]}\mbox{[}j\mbox{]} = $<$0i$\vert$\+H$\vert$\+Rj$>$ (Wannier90 order) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tight_binding_ada856e2cb95ca3f99a3009e3fb3858b3}\label{class_tight_binding_ada856e2cb95ca3f99a3009e3fb3858b3}} 
+complex $\ast$$\ast$$\ast$$\ast$ \mbox{\hyperlink{class_tight_binding_ada856e2cb95ca3f99a3009e3fb3858b3}{pos\+\_\+w}}
+\begin{DoxyCompactList}\small\item\em Position operator in Wannier basis, pos\+\_\+w\mbox{[}irpt\mbox{]}\mbox{[}i\mbox{]}\mbox{[}j\mbox{]}\mbox{[}0\mbox{]} = $<$0i$\vert$x$\vert$\+Rj$>$ (1 -\/ y, 2 -\/ z) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tight_binding_a834005c8cb7ab21b4b6ec0d324b73142}\label{class_tight_binding_a834005c8cb7ab21b4b6ec0d324b73142}} 
+double $\ast$$\ast$$\ast$$\ast$ \mbox{\hyperlink{class_tight_binding_a834005c8cb7ab21b4b6ec0d324b73142}{rvec}}
+\begin{DoxyCompactList}\small\item\em value of r vector ( r = R + tn -\/ tm ), rvec\mbox{[}irpt\mbox{]}\mbox{[}m\mbox{]}\mbox{[}n\mbox{]}\mbox{[}0\mbox{]} = (R+tn-\/tm).x \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tight_binding_a32b413162a5b49aecec59867a531a417}\label{class_tight_binding_a32b413162a5b49aecec59867a531a417}} 
+double \mbox{\hyperlink{class_tight_binding_a32b413162a5b49aecec59867a531a417}{Volume}}
+\begin{DoxyCompactList}\small\item\em volume of unit cell \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tight_binding_a51237a9dd92fade443866bb0705b0dc2}\label{class_tight_binding_a51237a9dd92fade443866bb0705b0dc2}} 
+int \mbox{\hyperlink{class_tight_binding_a51237a9dd92fade443866bb0705b0dc2}{Nval}}
+\begin{DoxyCompactList}\small\item\em Number of valence band (changing to fermi energy expression later?) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tight_binding_a7bf81742449b6b9aac4b884ee094d129}\label{class_tight_binding_a7bf81742449b6b9aac4b884ee094d129}} 
+double \mbox{\hyperlink{class_tight_binding_a7bf81742449b6b9aac4b884ee094d129}{eps}}
+\begin{DoxyCompactList}\small\item\em error epsilon used in this class \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tight_binding_a7a02226cd552a65fe842cf4f921d2f59}\label{class_tight_binding_a7a02226cd552a65fe842cf4f921d2f59}} 
+std\+::array$<$ double, 9 $>$ {\bfseries B\+Zaxis}
+\item 
+\mbox{\Hypertarget{class_tight_binding_add0327b9c4db10beb87eebb5aa718bd7}\label{class_tight_binding_add0327b9c4db10beb87eebb5aa718bd7}} 
+std\+::array$<$ double, 3 $>$ {\bfseries B\+Zorigin}
+\item 
+\mbox{\Hypertarget{class_tight_binding_a7a5c217e51ccc4165214630b929da7b1}\label{class_tight_binding_a7a5c217e51ccc4165214630b929da7b1}} 
+complex $\ast$ {\bfseries temp\+Hamiltonian}
+\item 
+\mbox{\Hypertarget{class_tight_binding_a29ac3f434e3309ece32a3e8f287ebe03}\label{class_tight_binding_a29ac3f434e3309ece32a3e8f287ebe03}} 
+complex $\ast$ {\bfseries temp\+Umat}
+\item 
+\mbox{\Hypertarget{class_tight_binding_aabbcd80da9db392e50e48a2b0b175617}\label{class_tight_binding_aabbcd80da9db392e50e48a2b0b175617}} 
+complex $\ast$ {\bfseries tempctrans\+Umat}
+\item 
+\mbox{\Hypertarget{class_tight_binding_a3b51387b185bfbe33ab6f2f0699ed824}\label{class_tight_binding_a3b51387b185bfbe33ab6f2f0699ed824}} 
+complex $\ast$ {\bfseries temp\+Matrix}
+\item 
+\mbox{\Hypertarget{class_tight_binding_aaf46eb081d1981de017d45c46b5ce965}\label{class_tight_binding_aaf46eb081d1981de017d45c46b5ce965}} 
+double $\ast$ {\bfseries temp\+Eigval}
+\item 
+\mbox{\Hypertarget{class_tight_binding_a6e69f286fe3073d17d63b8af0bfb400f}\label{class_tight_binding_a6e69f286fe3073d17d63b8af0bfb400f}} 
+int $\ast$ {\bfseries isuppz}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_tight_binding_a81458687424088fd6e549b861dc42ae4}\label{class_tight_binding_a81458687424088fd6e549b861dc42ae4}} 
+\index{TightBinding@{TightBinding}!GenBrillouinzone@{GenBrillouinzone}}
+\index{GenBrillouinzone@{GenBrillouinzone}!TightBinding@{TightBinding}}
+\doxysubsubsection{\texorpdfstring{GenBrillouinzone()}{GenBrillouinzone()}}
+{\footnotesize\ttfamily std\+::tuple$<$ std\+::array$<$ double, Ndim $\ast$Ndim $>$, std\+::array$<$ double, Ndim $>$ $>$ Tight\+Binding\+::\+Gen\+Brillouinzone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Generate Brillouin zone information. 
+
+To use this function, see below example.
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} [axes, origin] = \mbox{\hyperlink{class_tight_binding_a81458687424088fd6e549b861dc42ae4}{GenBrillouinzone}}(); }
+\end{DoxyCode}
+ \begin{DoxyReturn}{Returns}
+Brillouin zone axes and origin points are returned as a tuple 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_wannier_material_af261bdc2dcb97e0b8c3a8d22d52d000a}{Wannier\+Material}}.
+
+\mbox{\Hypertarget{class_tight_binding_a35d001bd21173065f9f3b2de595b5af6}\label{class_tight_binding_a35d001bd21173065f9f3b2de595b5af6}} 
+\index{TightBinding@{TightBinding}!GenDipole@{GenDipole}}
+\index{GenDipole@{GenDipole}!TightBinding@{TightBinding}}
+\doxysubsubsection{\texorpdfstring{GenDipole()}{GenDipole()}}
+{\footnotesize\ttfamily void Tight\+Binding\+::\+Gen\+Dipole (\begin{DoxyParamCaption}\item[{complex $\ast$$\ast$}]{\+\_\+dstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Generate dipole matrix in Wannier basis. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+dstore} & dipole matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_wannier_material_a9a5087fbcae395f007d77968f9d00d46}{Wannier\+Material}}.
+
+\mbox{\Hypertarget{class_tight_binding_a228397138efbc49a23a1e528b22505d8}\label{class_tight_binding_a228397138efbc49a23a1e528b22505d8}} 
+\index{TightBinding@{TightBinding}!GenHamiltonian@{GenHamiltonian}}
+\index{GenHamiltonian@{GenHamiltonian}!TightBinding@{TightBinding}}
+\doxysubsubsection{\texorpdfstring{GenHamiltonian()}{GenHamiltonian()}}
+{\footnotesize\ttfamily void Tight\+Binding\+::\+Gen\+Hamiltonian (\begin{DoxyParamCaption}\item[{complex $\ast$}]{\+\_\+hstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Generate Hamiltonian matrix -\/ tight binding matrix. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+hstore} & Hamiltonian matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_wannier_material_a449df8004573530c272fb8db16ff6bfe}{Wannier\+Material}}.
+
+\mbox{\Hypertarget{class_tight_binding_a4436babed177035ec217d9bedb8dfbf9}\label{class_tight_binding_a4436babed177035ec217d9bedb8dfbf9}} 
+\index{TightBinding@{TightBinding}!GenInitialValue@{GenInitialValue}}
+\index{GenInitialValue@{GenInitialValue}!TightBinding@{TightBinding}}
+\doxysubsubsection{\texorpdfstring{GenInitialValue()}{GenInitialValue()}}
+{\footnotesize\ttfamily void Tight\+Binding\+::\+Gen\+Initial\+Value (\begin{DoxyParamCaption}\item[{complex $\ast$}]{\+\_\+dmstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Generate initial value of density matrix. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+dmstore} & Initial value of density matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_wannier_material_a04a8b16ca66443aa57f4fc95237ea24c}{Wannier\+Material}}.
+
+\mbox{\Hypertarget{class_tight_binding_a6344b139ca89723d7b71b6efd9c834d9}\label{class_tight_binding_a6344b139ca89723d7b71b6efd9c834d9}} 
+\index{TightBinding@{TightBinding}!GenJMatrix@{GenJMatrix}}
+\index{GenJMatrix@{GenJMatrix}!TightBinding@{TightBinding}}
+\doxysubsubsection{\texorpdfstring{GenJMatrix()}{GenJMatrix()}}
+{\footnotesize\ttfamily void Tight\+Binding\+::\+Gen\+J\+Matrix (\begin{DoxyParamCaption}\item[{complex $\ast$$\ast$}]{\+\_\+jstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Generate interband and intraband current matrix. 
+
+Remember 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+jstore} & store $ - \frac{\partial H(\textbf{k})}{\partial \textbf{k}} + i [\textbf{D}(\textbf{k}), H(\textbf{k})] $ \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_wannier_material_adb5733fe97f1519e9da5f4d35120ef0d}{Wannier\+Material}}.
+
+\mbox{\Hypertarget{class_tight_binding_a4bbc4705b8a3d3c45b1474740ec3c93b}\label{class_tight_binding_a4bbc4705b8a3d3c45b1474740ec3c93b}} 
+\index{TightBinding@{TightBinding}!GenUMatrix@{GenUMatrix}}
+\index{GenUMatrix@{GenUMatrix}!TightBinding@{TightBinding}}
+\doxysubsubsection{\texorpdfstring{GenUMatrix()}{GenUMatrix()}}
+{\footnotesize\ttfamily void Tight\+Binding\+::\+Gen\+U\+Matrix (\begin{DoxyParamCaption}\item[{complex $\ast$}]{\+\_\+ustore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Generate unitary transformation matrix between Wannier and Hamiltonian gauge (eigenvector matrix) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+ustore} & unitary transformation matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_wannier_material_a883aa9e556d92fea6e4a5247554cc83c}{Wannier\+Material}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Materials/Tight\+Binding.\+h\end{DoxyCompactItemize}
