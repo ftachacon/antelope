@@ -98,8 +98,8 @@ BieSe3surf::BieSe3surf( const libconfig::Setting *params )
     // same with Haldane notation (sqrt(3.)*a0 --> a0)
     //double kxMax = pi/sqrt(3.)/a0;  double kyMax = 2.*pi/3./a0;
     double kxMax = pi/a0;  double kyMax = 2.*pi/sqrt(3.)/a0;
-    BZaxis = { 4*kxMax,       0,         0,
-                  0,       4*kyMax,      0,
+    BZaxis = { 2*kxMax,       0,         0,
+                  0,       2*kyMax,      0,
                   0,          0,         0};
     BZorigin = {0, 0, 0};
 
@@ -173,18 +173,23 @@ void BieSe3surf::GenInitialValue(complex *_dmstore, std::array<double, Ndim> _kp
     // set valence = 1., conduction = 0. initial condition
     // Fermi-Dirac distribution is used when FermiE is applied
     // tempEigval is calculated inside the GenUMatrix, be careful about order or sideeffects.
-    for (int m = 0; m < Nband; ++m)
+    bool isFermiEUsed = false;
+    if (isFermiEUsed)
     {
-        //if (isFermiEUsed)
+        for (int m = 0; m < Nband; ++m)
         {
             _dmstore[m*Nband + m] = 1.0 / ( exp( (tempEval[m] - FermiE) / thermalE ) + 1.0 );
         }
-        // else
-        // {
-        //     if (m < Nval)
-        //         _dmstore[m*Nband + m] = 1.;
-        // }
     }
+    else
+    {
+        for (int m = 0; m < Nband; ++m)
+        {
+            if (m < Nval)
+                _dmstore[m*Nband + m] = 1.;
+        }
+    }
+    
     // tempHmat is used as temporary matrix for below
     MatrixMult(tempHmat, _dmstore, tempctransUmat, Nband);
     MatrixMult(_dmstore, tempUmat, tempHmat, Nband);
@@ -266,10 +271,10 @@ void BieSe3surf::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint)
     xderHcomp[0] = 2*acomp[0] * derxcosAvecSum + 2*bcomp[0] * derxcosBvecSum;
     xderHcomp[1] = -2*acomp[3] * sin(w)*(vec_a[1][0]*cos(angle_a0[1]) - vec_a[2][0]*cos(angle_a0[2]))
                     + 2*bcomp[3] * (vec_b[0][0]*cos(angle_b0[0]) 
-                    + cos(w)*(vec_b[1][0]*cos(angle_b0[1]) - vec_b[2][0]*cos(angle_b0[2])) );
+                    + cos(w)*(vec_b[1][0]*cos(angle_b0[1]) + vec_b[2][0]*cos(angle_b0[2])) );
     xderHcomp[2] = -2*bcomp[3] * sin(w)*(vec_b[1][0]*cos(angle_b0[1]) - vec_b[2][0]*cos(angle_b0[2]))
                     - 2*acomp[3] * (vec_a[0][0]*cos(angle_a0[0]) 
-                    + cos(w)*(vec_a[1][0]*cos(angle_a0[1]) - vec_a[2][0]*cos(angle_a0[2])) );
+                    + cos(w)*(vec_a[1][0]*cos(angle_a0[1]) + vec_a[2][0]*cos(angle_a0[2])) );
     xderHcomp[3] = 2*acomp[2] * derxsinAvecSum;
     xderHcomp[4] = -2*bcomp[2] * derxsinBvecSum;
     xderHcomp[5] = 2*acomp[1] * derxcosAvecSum + 2*bcomp[1] * derxcosBvecSum;
@@ -277,10 +282,10 @@ void BieSe3surf::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint)
     yderHcomp[0] = 2*acomp[0] * derycosAvecSum + 2*bcomp[0] * derycosBvecSum;
     yderHcomp[1] = -2*acomp[3] * sin(w)*(vec_a[1][1]*cos(angle_a0[1]) - vec_a[2][1]*cos(angle_a0[2]))
                     + 2*bcomp[3] * (vec_b[0][1]*cos(angle_b0[0]) 
-                    + cos(w)*(vec_b[1][1]*cos(angle_b0[1]) - vec_b[2][1]*cos(angle_b0[2])) );
+                    + cos(w)*(vec_b[1][1]*cos(angle_b0[1]) + vec_b[2][1]*cos(angle_b0[2])) );
     yderHcomp[2] = -2*bcomp[3] * sin(w)*(vec_b[1][1]*cos(angle_b0[1]) - vec_b[2][1]*cos(angle_b0[2]))
                     - 2*acomp[3] * (vec_a[0][1]*cos(angle_a0[0]) 
-                    - cos(w)*(vec_a[1][1]*cos(angle_a0[1]) - vec_a[2][1]*cos(angle_a0[2])) );
+                    + cos(w)*(vec_a[1][1]*cos(angle_a0[1]) + vec_a[2][1]*cos(angle_a0[2])) );
     yderHcomp[3] = 2*acomp[2] * derysinAvecSum;
     yderHcomp[4] = -2*bcomp[2] * derysinBvecSum;
     yderHcomp[5] = 2*acomp[1] * derycosAvecSum + 2*bcomp[1] * derycosBvecSum;
