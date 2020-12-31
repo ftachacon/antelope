@@ -34,6 +34,8 @@ parser.add_argument('datapath', nargs='?', default='', type=str,help='path to fo
 parser.add_argument('nparam', nargs='?', default='', type=str,help='additional name to dat file')
 parser.add_argument('--noshow', dest='isShow', action='store_const', const=False, default=True, help = 'Do not show the plot (default: show)')
 parser.add_argument('--f', dest='forceOverwrite', action='store_const', const=True, default=False, help = 'Force overwrite (default: ask)')
+parser.add_argument('-mn', '--menualname', dest='isNameMenual', action='store_const', const=True, default=False, 
+  help = 'Name of HHg output file is purely determined by nparam argument (default: False)')
 
 args = parser.parse_args()
 
@@ -126,12 +128,15 @@ spectrum_ymax = 1
 xticks0  = np.arange(1,50,4)
 yticks0  = np.arange(-20,6,5)
 
-name_laser_offset = ("w0__" + str("%.3f"%config['laser']['pulses'][refPulse]['w0']) + "__E0__" + str("%.3f"%config['laser']['pulses'][refPulse]['E0']) 
-  + "__e0__" + str("%.3f"%config['laser']['pulses'][refPulse]['ellip']))
+if (args.isNameMenual):
+  name_offset = nparam
+else:
+  name_laser_offset = ("w0__" + str("%.3f"%config['laser']['pulses'][refPulse]['w0']) + "__E0__" + str("%.3f"%config['laser']['pulses'][refPulse]['E0']) 
+    + "__e0__" + str("%.3f"%config['laser']['pulses'][refPulse]['ellip']))
 
-name_material_offset = config['target']
+  name_material_offset = config['target']
 
-name_offset = name_material_offset + '__' + name_laser_offset + "__" + nparam
+  name_offset = name_material_offset + '__' + name_laser_offset + "__" + nparam
 
 print("Reference pulse = ", refPulse)
 print("Period, T0  = ", T0, " a.u.")
@@ -232,7 +237,7 @@ plt.xlim( xaxmin, xaxmax )
 
 plt.tight_layout()
 
-filename0           = FigureDir + '/CurrentOscillations.pdf' 
+filename0           = FigureDir + '/CurrentOscillations.png' 
 fileNamePicture     = ProjPath + filename0  
 plt.savefig( fileNamePicture )
 
@@ -272,7 +277,7 @@ plt.tight_layout()
 
 
 
-filename0           = FigureDir + '/IntraCurrentOscillations.pdf' 
+filename0           = FigureDir + '/IntraCurrentOscillations.png' 
 fileNamePicture     = ProjPath + filename0 
 plt.savefig( fileNamePicture ) 
 
@@ -300,7 +305,7 @@ plt.tight_layout()
 
 #########################################
 ###   Saving picture   ###
-filename0           = FigureDir + '/CurrentOscillationsMF.pdf' 
+filename0           = FigureDir + '/CurrentOscillationsMF.png' 
 fileNamePicture     = ProjPath + filename0  
 plt.savefig( fileNamePicture ) 
 
@@ -415,7 +420,7 @@ plt.grid(True)
 plt.xlim(spectrum_xmin, spectrum_xmax)
 plt.ylim(spectrum_ymin, spectrum_ymax)
 
-fname='/LinearHarmonicSpectrum__'+ name_offset + '.pdf'
+fname='/LinearHarmonicSpectrum__'+ name_offset + '.png'
 
 
 filename1           = FigureDir + fname
@@ -455,7 +460,7 @@ plt.ylim(spectrum_ymin, spectrum_ymax)
 
 plt.grid(True)
 
-fname='/InterIntraHarmonicSpectrum__'+ name_offset + '.pdf'
+fname='/InterIntraHarmonicSpectrum__'+ name_offset + '.png'
 
 
 filename1           = FigureDir + fname 
@@ -498,7 +503,7 @@ plt.xlim(spectrum_xmin, spectrum_xmax)
 plt.ylim(spectrum_ymin, spectrum_ymax)
 
 
-fname='/CircularHarmonicSpectrum__' + name_offset + '.pdf'
+fname='/CircularHarmonicSpectrum__' + name_offset + '.png'
 
 
 filename1           = FigureDir + fname 
