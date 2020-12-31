@@ -16,7 +16,7 @@ OWN_LIB=${MyPath}/include
 
 Materials=${MyPath}/Materials
 
-ProgramMPI=antelope_wannier.cpp
+ProgramMPI=antelope.cpp
 
 exnamempi=exec_hhg_mpi
 

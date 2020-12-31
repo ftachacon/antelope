@@ -24,7 +24,7 @@
 #include "constant.h"
 #include "laser.h"
 #include "momaxis.h"
-#include "SBEsLWM.h"
+#include "SBEs.h"
 #include "utility.h"
 
 #define MASTER 0    /* task id of master task or node */
@@ -82,11 +82,34 @@ int main( int argc, char *argv[] )
         return(EXIT_FAILURE);
     }
 
-    
-    SBEsLWM *sbew = new SBEsLWM(&cfg.getRoot());
+    // Read gauge from config
+    string gaugeString; GaugeType tempGauge;
+    cfg.lookupValue("gauge", gaugeString);
+    if (gaugeString == "Wannier" || gaugeString == "LengthWannier")
+    {
+        if (rank == MASTER) cout << "Gauge: LengthWannier\n";
+        tempGauge = GaugeType::LengthWannier;
+    }
+    else if (gaugeString == "Hamiltonian" || gaugeString == "LengthHamiltonian")
+    {
+        if (rank == MASTER) cout << "Gauge: LengthHamiltonian\n";
+        tempGauge = GaugeType::LengthHamiltonian;
+    }
+    else if (gaugeString == "Velocity" || gaugeString == "VelocityHamiltonian")
+    {
+        if (rank == MASTER) cout << "Gauge: VelocityHamiltonian\n";
+        tempGauge = GaugeType::VelocityHamiltonian;
+    }
+    else
+    {
+        if (rank == MASTER) cout << "No gauge type is specified. Choose LengthWannier for default gauge.\n";
+        tempGauge = GaugeType::LengthWannier;
+    }
 
-    double dV = sbew->kmesh->dV;
-    int Nband = sbew->Nband;
+    SBEs *sbe = new SBEs(&cfg.getRoot(), tempGauge);
+
+    double dV = sbe->kmesh->dV;
+    int Nband = sbe->Nband;
 
 	MPI_Barrier( MPI_COMM_WORLD );	
 
@@ -157,8 +180,8 @@ int main( int argc, char *argv[] )
 
     if (rank == MASTER)
     {
-        sbew->material->PrintMaterialInformation();
-        sbew->fpulses->Print_LaserInfo();
+        sbe->material->PrintMaterialInformation();
+        sbe->fpulses->Print_LaserInfo();
     }
 
     //##########################
@@ -167,12 +190,12 @@ int main( int argc, char *argv[] )
     for (int itemp=0; itemp<Ngrad; itemp++ )
     {        
         
-        setting_complex_memory( &inter_rad[itemp], sbew->fpulses->Nt );
-        setting_complex_memory( &intra_rad[itemp], sbew->fpulses->Nt );
+        setting_complex_memory( &inter_rad[itemp], sbe->fpulses->Nt );
+        setting_complex_memory( &intra_rad[itemp], sbe->fpulses->Nt );
         
         
         
-        for (int jtemp=0; jtemp<sbew->fpulses->Nt; jtemp++)
+        for (int jtemp=0; jtemp<sbe->fpulses->Nt; jtemp++)
         {
             
             inter_rad[itemp][jtemp]=0.;
@@ -183,7 +206,7 @@ int main( int argc, char *argv[] )
         
     }
 
-    density_matrix_integrated = Create2D<complex>(sbew->fpulses->Nt, Nband*Nband);
+    density_matrix_integrated = Create2D<complex>(sbe->fpulses->Nt, Nband*Nband);
 
     
     if (rank == MASTER)
@@ -191,12 +214,12 @@ int main( int argc, char *argv[] )
         //###############################
         //Saving or Output of laser
         array<double, Ndim> Etemp, Atemp;
-        for (int n = 0; n < sbew->fpulses->Nt; n++)
+        for (int n = 0; n < sbe->fpulses->Nt; n++)
         {
-            at = sbew->fpulses->atmin + sbew->fpulses->dt*n;
+            at = sbe->fpulses->atmin + sbe->fpulses->dt*n;
 
-            Etemp = sbew->fpulses->elaser(  at );
-            Atemp = sbew->fpulses->avlaser( at );
+            Etemp = sbe->fpulses->elaser(  at );
+            Atemp = sbe->fpulses->avlaser( at );
                 
             fprintf( laserout,"%e    %e    %e    %e    %e    %e    %e\n", at, Etemp[0], Etemp[1], Etemp[2], Atemp[0], Atemp[1], Atemp[2] );
 
@@ -212,7 +235,7 @@ int main( int argc, char *argv[] )
     blockcounts = new int[Nprocessors];
     displs = new int[Nprocessors];
 
-    int Npoints = sbew->kmesh->Ntotal;
+    int Npoints = sbe->kmesh->Ntotal;
     for (int itemp = 0; itemp < Nprocessors; ++itemp)
     {
         ParaRange(Npoints, 0, Nprocessors, itemp, &jstart, &jend);
@@ -245,37 +268,39 @@ int main( int argc, char *argv[] )
     double currenttime, currentcycle;
     complex *temp_density_matrix_integrated = new complex[Nband*Nband];
     double occup_temp = 0;
-    double maxcycles = 2*sbew->fpulses->pulses[0].twidth / sbew->fpulses->pulses[0].period0;
+    double maxcycles = 2*sbe->fpulses->pulses[0].twidth / sbe->fpulses->pulses[0].period0;
     //#####################################
     //#####################################
     //Time integration loop
-    for(int ktime = 0; ktime<sbew->fpulses->Nt; ktime++ )
+    for(int ktime = 0; ktime<sbe->fpulses->Nt; ktime++ )
     { 
-        currenttime = sbew->fpulses->atmin + sbew->fpulses->dt * ktime;
+        currenttime = sbe->fpulses->atmin + sbe->fpulses->dt * ktime;
         //###############################
         //Momentum and time integration
         for(int jtemp = jstart; jtemp < jend; jtemp++ )
         {
             kindex = jtemp;
 
-            tempCurrent = sbew->GenCurrent(kindex, currenttime);
+            tempCurrent = sbe->GenCurrent(kindex, currenttime);
 
-            inter_rad[0][ktime] += tempCurrent[0] * sbew->kmesh->weight[ kindex ] ;
-            inter_rad[1][ktime] += tempCurrent[1] * sbew->kmesh->weight[ kindex ] ;
+            inter_rad[0][ktime] += tempCurrent[0] * sbe->kmesh->weight[ kindex ] ;
+            inter_rad[1][ktime] += tempCurrent[1] * sbe->kmesh->weight[ kindex ] ;
 
             for (int m = 0; m < Nband; ++m)
             {
                 for (int n = 0; n < Nband; ++n)
                 {
                     //if (m > n) continue;
-                    density_matrix_integrated[ktime][m*Nband + n] += sbew->dmatrix[kindex][m*Nband + n] * sbew->kmesh->weight[ kindex ];
+                    density_matrix_integrated[ktime][m*Nband + n] += sbe->dmatrix[kindex][m*Nband + n] * sbe->kmesh->weight[ kindex ];
                 }
             }
-            sbew->RunSBEs(kindex, currenttime);
+            sbe->RunSBEs(kindex, currenttime);
 
             //##############################################
 
-        } 
+        }
+        // Snapshots - including diagnostics and density plots 
+        // if (shotNumber > 0 && ktime % shotNumber == 0)
         if (ktime % 200 == 0)
         {
             for (int ij = 0; ij < Nband * Nband; ++ij)
@@ -295,14 +320,14 @@ int main( int argc, char *argv[] )
             }
             if (rank == MASTER)
             {
-                currentcycle = currenttime - (sbew->fpulses->pulses[0].t0 - sbew->fpulses->pulses[0].twidth);
+                currentcycle = currenttime - (sbe->fpulses->pulses[0].t0 - sbe->fpulses->pulses[0].twidth);
                 if (currentcycle < 0) 
                 {
                     currentcycle = 0.;
                 }
                 else
                 {
-                    currentcycle /= sbew->fpulses->pulses[0].period0;
+                    currentcycle /= sbe->fpulses->pulses[0].period0;
                 }
                 
                 if (currentcycle > maxcycles)
@@ -315,13 +340,11 @@ int main( int argc, char *argv[] )
                     occup_temp += real(temp_density_matrix_integrated[m*Nband + m]);
                 }
                 occup_temp /= Npoints;
-                cout << ktime << " / " << sbew->fpulses->Nt << ", " << currentcycle << " / " << maxcycles;
-                cout << ", nc = " << temp_density_matrix_integrated[sbew->material->Nval*Nband + sbew->material->Nval] / static_cast<double>(Npoints);
+                cout << ktime << " / " << sbe->fpulses->Nt << ", " << currentcycle << " / " << maxcycles;
+                cout << ", nc = " << temp_density_matrix_integrated[sbe->material->Nval*Nband + sbe->material->Nval] / static_cast<double>(Npoints);
                 cout << ", ntotal = " << occup_temp << endl;
             }
         }
-        if (shotNumber > 0)
-            MPI_Barrier(MPI_COMM_WORLD);
 
     } //End of Time integration loop
     delete[] temp_density_matrix_integrated;
@@ -334,30 +357,30 @@ int main( int argc, char *argv[] )
     {
         if (rank == MASTER)
         {
-            MPI_Reduce(MPI_IN_PLACE, inter_rad[i], sbew->fpulses->Nt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
+            MPI_Reduce(MPI_IN_PLACE, inter_rad[i], sbe->fpulses->Nt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
         }
         else
         {
-            MPI_Reduce(inter_rad[i], inter_rad[i], sbew->fpulses->Nt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
+            MPI_Reduce(inter_rad[i], inter_rad[i], sbe->fpulses->Nt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
         }
         MPI_Barrier( MPI_COMM_WORLD );
         if (rank == MASTER)
         {
-            MPI_Reduce(MPI_IN_PLACE, intra_rad[i], sbew->fpulses->Nt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
+            MPI_Reduce(MPI_IN_PLACE, intra_rad[i], sbe->fpulses->Nt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
         }
         else
         {
-            MPI_Reduce(intra_rad[i], intra_rad[i], sbew->fpulses->Nt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
+            MPI_Reduce(intra_rad[i], intra_rad[i], sbe->fpulses->Nt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
         }
         MPI_Barrier( MPI_COMM_WORLD );
     }
     if (rank == MASTER)
     {
-        MPI_Reduce(MPI_IN_PLACE, &density_matrix_integrated[0][0], sbew->fpulses->Nt * Nband*Nband, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
+        MPI_Reduce(MPI_IN_PLACE, &density_matrix_integrated[0][0], sbe->fpulses->Nt * Nband*Nband, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
     }
     else
     {
-        MPI_Reduce(&density_matrix_integrated[0][0], &density_matrix_integrated[0][0], sbew->fpulses->Nt * Nband*Nband, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
+        MPI_Reduce(&density_matrix_integrated[0][0], &density_matrix_integrated[0][0], sbe->fpulses->Nt * Nband*Nband, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
     }
     MPI_Barrier( MPI_COMM_WORLD );
     
@@ -365,7 +388,7 @@ int main( int argc, char *argv[] )
     {
         cout << "\n\nWriting output-data\n\n";
 
-        for (int ktime = 0; ktime < sbew->fpulses->Nt; ++ktime)
+        for (int ktime = 0; ktime < sbe->fpulses->Nt; ++ktime)
         {
             fprintf(interj_out, "%.16e    %.16e\n", real(inter_rad[0][ktime]) * dV, real(inter_rad[1][ktime]) * dV);
             fprintf(intraj_out, "%.16e    %.16e\n", real(intra_rad[0][ktime]) * dV, real(intra_rad[1][ktime]) * dV);
@@ -404,7 +427,7 @@ int main( int argc, char *argv[] )
     delete[] blockcounts;
     delete[] displs;
 
-    Delete2D<complex>(density_matrix_integrated, Nband*Nband, sbew->fpulses->Nt);
+    Delete2D<complex>(density_matrix_integrated, Nband*Nband, sbe->fpulses->Nt);
     
     
     //fclose(simulation_out);

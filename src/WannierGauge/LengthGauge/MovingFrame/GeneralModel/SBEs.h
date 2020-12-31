@@ -23,10 +23,12 @@
 
 using namespace std;
 
-class SBEsLWM
+class SBEs
 {
 public:
-    complex **dmatrix; 
+    const GaugeType gauge;
+    complex **dmatrix;
+    complex **initMatrix; 
 
     WannierMaterial *material;  ///< dipole&Hamiltonian generator
 
@@ -39,6 +41,9 @@ public:
 
     complex *uMatrix, *ctransuMatrix;
     double *dephasingMatrix;
+
+    complex ***pMatrix;
+    double **edispersion;
 
     laser *fpulses;
 
@@ -71,8 +76,8 @@ public:
 
     bool isDipoleZero;                                  ///< default is true. Wannier dipole is non-zero in very rare cases.
 
-    SBEsLWM(const libconfig::Setting * _cfg);
-    ~SBEsLWM();
+    SBEs(const libconfig::Setting * _cfg, GaugeType _gauge);
+    ~SBEs();
     
     void RunSBEs(int _kindex, double _time);
 
@@ -87,7 +92,7 @@ public:
 
 };
 
-SBEsLWM::SBEsLWM(const libconfig::Setting * _cfg)
+SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
 {
     const libconfig::Setting &cfg = (*_cfg);
     InitializeGeneral( &cfg["calc"]);
@@ -147,6 +152,7 @@ SBEsLWM::SBEsLWM(const libconfig::Setting * _cfg)
     
 
     dmatrix = Create2D<complex>(this->kmesh->Ntotal, Nband*Nband);
+    initMatrix = Create2D<complex>(this->kmesh->Ntotal, Nband*Nband);
 
     hamiltonian = new complex[Nband * Nband];
     temp1Matrix = new complex[Nband * Nband];
@@ -159,10 +165,87 @@ SBEsLWM::SBEsLWM(const libconfig::Setting * _cfg)
     ctransuMatrix = new complex[Nband * Nband];
     dephasingMatrix = new double[Nband * Nband];
 
+    pMatrix = Create3D<complex>(this->kmesh->Ntotal, Ndim, Nband*Nband);
+    edispersion = Create2D<double>(this->kmesh->Ntotal, Nband);
+
     for (int k = 0; k < this->kmesh->Ntotal; ++k)
     {
         material->GenInitialValue(&dmatrix[k][0], kmesh->kgrid[k]);
+
+        // Temporary solution. FIX AS SOON AS POSSIBLE!!!!!!!!!!!!!
+        // ========================================================
+        if (gauge == GaugeType::VelocityHamiltonian || gauge == GaugeType::LengthHamiltonian)
+        {
+            material->GenUMatrix(uMatrix, kmesh->kgrid[k]);
+            for (int m = 0; m < Nband; ++m)
+            {
+                for (int n = 0; n < Nband; ++n)
+                {
+                    ctransuMatrix[m*Nband + n] = conj( uMatrix[n*Nband + m] );
+                }
+            }
+            MatrixMult(temp1Matrix, &dmatrix[k][0], uMatrix, Nband);
+            MatrixMult(&dmatrix[k][0], ctransuMatrix, temp1Matrix, Nband);
+        }
+
+        for (int m = 0; m < Nband; ++m)
+        {
+            for (int n = 0; n < Nband; ++n)
+            {
+                initMatrix[k][m*Nband + n] = dmatrix[k][m*Nband + n];
+            }
+        }
     }
+
+    // pmatrix generation
+    for (int k = 0; k < this->kmesh->Ntotal; ++k)
+    {
+        material->GenUMatrix(uMatrix, kmesh->kgrid[k]);
+        for (int m = 0; m < Nband; ++m)
+        {
+            for (int n = 0; n < Nband; ++n)
+            {
+                ctransuMatrix[m*Nband + n] = conj( uMatrix[n*Nband + m] );
+            }
+        }
+        material->GenJMatrix(jMatrix, kmesh->kgrid[k]);
+        for (int iaxis = 0; iaxis < Ndim; ++iaxis)
+        {
+            MatrixMult(temp1Matrix, jMatrix[iaxis], uMatrix, Nband);
+            MatrixMult(pMatrix[k][iaxis], ctransuMatrix, temp1Matrix, Nband);
+        }
+    }
+
+    // edispersion generation
+    int *tempIsuppz = new int[Nband];
+    double eps = 1.0e-18;
+    for (int k = 0; k < kmesh->Ntotal; ++k)
+    {
+        int num_of_eig;
+        material->GenHamiltonian(hamiltonian, kmesh->kgrid[k]);
+        int info = LAPACKE_zheevr( LAPACK_ROW_MAJOR, 'V', 'A', 'U',
+                                Nband, hamiltonian, Nband, 0., 0., 0., 0., 
+                                eps, &num_of_eig, edispersion[k], uMatrix, Nband, tempIsuppz );
+        if (info != 0)
+        {
+            std::cerr << "Problem in lapack, info = " << info <<  std::endl;
+            for (int m = 0; m < Nband; ++m)
+            {
+                for (int n = 0; n < Nband; ++ n)
+                {
+                    std::cout << hamiltonian[m*Nband + n] << "     ";
+                }
+                std::cout << endl;
+            }
+            for (int m = 0; m < Nband; ++m)
+            {
+                std::cout << edispersion[k][m] << "      ";
+            }
+            std::cout << endl;
+            exit(1);
+        }
+    }
+    delete[] tempIsuppz;
 
     // allocation for rk realted variables
     tRK = new double[NumRK-1];
@@ -211,15 +294,15 @@ SBEsLWM::SBEsLWM(const libconfig::Setting * _cfg)
         for (int j = 0; j < Nband; ++j)
         {
             if (i == j)
-                //dephasingMatrix[i*Nband + j] = dephasing_factor_intra;
-                dephasingMatrix[i*Nband + j] = 0.;
+                dephasingMatrix[i*Nband + j] = dephasing_factor_intra;
+                //dephasingMatrix[i*Nband + j] = 0.;
             else
                 dephasingMatrix[i*Nband + j] = dephasing_factor_inter;
         }
     }
 }
 
-void SBEsLWM::InitializeGeneral(const libconfig::Setting *_calc)
+void SBEs::InitializeGeneral(const libconfig::Setting *_calc)
 {
     // default values of parameters
     isDipoleZero = true;
@@ -292,7 +375,7 @@ void SBEsLWM::InitializeGeneral(const libconfig::Setting *_calc)
     }
 }
 
-void SBEsLWM::InitializeLaser(const libconfig::Setting *_laser)
+void SBEs::InitializeLaser(const libconfig::Setting *_laser)
 {
     const libconfig::Setting &laserCfg = (*_laser);
 
@@ -340,9 +423,10 @@ void SBEsLWM::InitializeLaser(const libconfig::Setting *_laser)
     fpulses->Initialize(dt, offset_before, offset_after);
 }
 
-SBEsLWM::~SBEsLWM()
+SBEs::~SBEs()
 {
     Delete2D<complex>(dmatrix, this->kmesh->Ntotal, Nband*Nband);
+    Delete2D<complex>(initMatrix, this->kmesh->Ntotal, Nband*Nband);
 
     delete[] hamiltonian;
     delete[] newdMatrix;
@@ -352,6 +436,9 @@ SBEsLWM::~SBEsLWM()
     Delete2D<complex>(rkMatrix, NumRK, Nband*Nband);
     Delete2D<complex>(jMatrix, Ndim, Nband*Nband);
     Delete2D<complex>(dipoleMatrix, Ndim, Nband*Nband);
+
+    Delete3D<complex>(pMatrix, this->kmesh->Ntotal, Ndim, Nband*Nband);
+    Delete2D<double>(edispersion, this->kmesh->Ntotal, Nband);
 
     delete[] tRK;
     delete[] bRK;
@@ -367,7 +454,7 @@ SBEsLWM::~SBEsLWM()
     delete kmesh;
 }
 
-void SBEsLWM::RunSBEs(int _kindex, double  _time)
+void SBEs::RunSBEs(int _kindex, double  _time)
 {
     GenDifferentialDM( rkMatrix[0], dmatrix[_kindex], _kindex, _time);
     for (int irk = 0; irk < NumRK-1; ++irk)
@@ -396,47 +483,82 @@ void SBEsLWM::RunSBEs(int _kindex, double  _time)
         }
     }
 }
-array<double, Ndim> SBEsLWM::GenCurrent(int _kindex, double _time)
-{
-    auto _tkp = GenKpulsA(kmesh->kgrid[_kindex], _time);
-    material->GenJMatrix(jMatrix, _tkp);
 
-    // J = Tr{densitymatrix j}
+array<double, Ndim> SBEs::GenCurrent(int _kindex, double _time)
+{
     array<double, Ndim> outCurrent;
     fill(outCurrent.begin(), outCurrent.end(), 0.);
-    for (int iaxis = 0; iaxis < Ndim; ++iaxis)
+    if (gauge == GaugeType::LengthWannier)
     {
-        for (int i = 0; i < Nband; ++i)
+        auto _tkp = GenKpulsA(kmesh->kgrid[_kindex], _time);
+        material->GenJMatrix(jMatrix, _tkp);
+
+        // J = Tr{densitymatrix j}
+        for (int iaxis = 0; iaxis < Ndim; ++iaxis)
         {
-            for (int j = 0; j < Nband; ++j)
+            for (int i = 0; i < Nband; ++i)
             {
-                outCurrent[iaxis] += real( dmatrix[_kindex][Nband*i + j] * jMatrix[iaxis][Nband*j + i] );
+                for (int j = 0; j < Nband; ++j)
+                {
+                    outCurrent[iaxis] += real( dmatrix[_kindex][Nband*i + j] * jMatrix[iaxis][Nband*j + i] );
+                }
             }
         }
     }
+    else
+    {
+        for (int iaxis = 0; iaxis < Ndim; ++iaxis)
+        {
+            for (int i = 0; i < Nband; ++i)
+            {
+                for (int j = 0; j < Nband; ++j)
+                {
+                    outCurrent[iaxis] += real( dmatrix[_kindex][Nband*i + j] * pMatrix[_kindex][iaxis][Nband*j + i] );
+                }
+            }
+        }
+    }
+    
     return outCurrent;
 }
 
-
-void SBEsLWM::GenDifferentialDM(complex *out, complex *input, int _kindex, double _time)
+void SBEs::GenDifferentialDM(complex *out, complex *input, int _kindex, double _time)
 {
     array<double, Ndim> evector = fpulses->elaser(_time);
+    auto avector = fpulses->avlaser(_time);
     auto _tkp = GenKpulsA(kmesh->kgrid[_kindex], _time);
-    material->GenHamiltonian(hamiltonian, _tkp);
 
-    //fill(out, out+Nband*Nband, 0.);
-    MatrixMult(out, hamiltonian, input, Nband);
-    /*for (int m = 0; m < Nband; ++m)
+    if (gauge == GaugeType::LengthWannier)
     {
-        for (int n = 0; n < Nband; ++n)
+        material->GenHamiltonian(hamiltonian, _tkp);
+        MatrixMult(out, hamiltonian, input, Nband);
+    }
+    else if (gauge == GaugeType::VelocityHamiltonian)
+    {
+        fill(temp1Matrix, temp1Matrix+Nband*Nband, 0.);
+        for (int m = 0; m < Nband; ++m)
         {
-            for (int l = 0; l < Nband; ++l)
+            for (int n = 0; n < Nband; ++n)
             {
-                out[m*Nband + n] += hamiltonian[m*Nband + l] * input[l*Nband + n];
+                for (int iaxis = 0; iaxis < Ndim; ++iaxis)
+                {
+                    temp1Matrix[m*Nband + n] += avector[iaxis] * pMatrix[_kindex][iaxis][m*Nband + n];
+                }
             }
         }
-    }*/
-    if (!isDipoleZero)
+        for (int m = 0; m < Nband; ++m)
+        {
+            temp1Matrix[m*Nband + m] += edispersion[_kindex][m];
+        }
+        MatrixMult(out, temp1Matrix, input, Nband);
+    }
+    else if (gauge == GaugeType::LengthHamiltonian)
+    {
+        cout << "Not implemeted yet";
+    }
+
+
+    /*if (!isDipoleZero)
     {
         material->GenDipole(dipoleMatrix, _tkp);
         for (int m = 0; m < Nband; ++m)
@@ -451,7 +573,7 @@ void SBEsLWM::GenDifferentialDM(complex *out, complex *input, int _kindex, doubl
                 }
             }
         }
-    }
+    }*/
     for (int m = 0; m < Nband; ++m)
     {
         for (int n = 0; n < Nband; ++n)
@@ -468,37 +590,50 @@ void SBEsLWM::GenDifferentialDM(complex *out, complex *input, int _kindex, doubl
         }
     }
     // Add dephainsg process here!
-    material->GenUMatrix(uMatrix, _tkp);
-    for (int m = 0; m < Nband; ++m)
+    if (gauge == GaugeType::LengthWannier)
     {
-        for (int n = 0; n < Nband; ++n)
+        material->GenUMatrix(uMatrix, _tkp);
+        for (int m = 0; m < Nband; ++m)
         {
-            ctransuMatrix[m*Nband + n] = conj(uMatrix[n*Nband + m]);
+            for (int n = 0; n < Nband; ++n)
+            {
+                ctransuMatrix[m*Nband + n] = conj(uMatrix[n*Nband + m]);
+            }
+        }
+        MatrixMult(temp1Matrix, input, uMatrix, Nband);
+        MatrixMult(temp2Matrix, ctransuMatrix, temp1Matrix, Nband);
+
+        for (int m = 0; m < Nband; ++m)
+        {
+            for (int n = 0; n < Nband; ++n)
+            {
+                temp2Matrix[m*Nband + n] *= dephasingMatrix[m*Nband + n];
+            }
+        }
+
+        MatrixMult(temp1Matrix, uMatrix, temp2Matrix, Nband);
+        MatrixMult(temp2Matrix, temp1Matrix, ctransuMatrix, Nband);
+        for (int m = 0; m < Nband; ++m)
+        {
+            for (int n = 0; n < Nband; ++n)
+            {
+                out[m*Nband + n] -= temp2Matrix[m*Nband + n];
+            }
         }
     }
-    MatrixMult(temp1Matrix, input, uMatrix, Nband);
-    MatrixMult(temp2Matrix, ctransuMatrix, temp1Matrix, Nband);
-
-    for (int m = 0; m < Nband; ++m)
+    else
     {
-        for (int n = 0; n < Nband; ++n)
+        for (int m = 0; m < Nband; ++m)
         {
-            temp2Matrix[m*Nband + n] *= dephasingMatrix[m*Nband + n];
-        }
-    }
-
-    MatrixMult(temp1Matrix, uMatrix, temp2Matrix, Nband);
-    MatrixMult(temp2Matrix, temp1Matrix, ctransuMatrix, Nband);
-    for (int m = 0; m < Nband; ++m)
-    {
-        for (int n = 0; n < Nband; ++n)
-        {
-            out[m*Nband + n] -= temp2Matrix[m*Nband + n];
+            for (int n = 0; n < Nband; ++n)
+            {
+                out[m*Nband + n] -= (input[m*Nband + n] - initMatrix[_kindex][m*Nband + n]) * dephasingMatrix[m*Nband + n];
+            }
         }
     }
 }
 
-array<double, Ndim> SBEsLWM::GenKpulsA(array<double, Ndim> _kpoint, double time)
+array<double, Ndim> SBEs::GenKpulsA(array<double, Ndim> _kpoint, double time)
 {
     auto avector = fpulses->avlaser(time);
     array<double, Ndim> tkp = {_kpoint[0]+avector[0], _kpoint[1]+avector[1], _kpoint[2]+avector[2]};

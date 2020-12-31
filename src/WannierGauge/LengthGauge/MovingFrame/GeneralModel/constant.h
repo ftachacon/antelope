@@ -40,7 +40,12 @@ constexpr int Ndim      = 3;
 //const int Nvects    = 3; //Number of basis vectors of HoneyComb lattice
 const int Ngrad     = 2;
 
-enum gauge_t { lengthgauge, velocitygauge, othergauge }; 
+enum class GaugeType
+{
+    LengthWannier,
+    LengthHamiltonian,
+    VelocityHamiltonian
+};
 
 
 #endif  /* CONSTANT_H */
