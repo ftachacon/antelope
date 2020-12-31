@@ -176,9 +176,11 @@ void  momaxis::steps_sizes( array<int, Ndim> _N ,array<double, Ndim*Ndim> _axisv
         tempArray = CrossProduct( axesList[0], axesList[1] );
         Volume = sqrt( inner_product(tempArray.begin(), tempArray.end(), axesList[2].begin(), 0.0) );
         break;
-    default:
-        cerr << "Something is wrong while calculating Brillouin zone volume\n";
-        exit(EXIT_FAILURE);
+    default: // single point
+        // cerr << "Something is wrong while calculating Brillouin zone volume\n";
+        // exit(EXIT_FAILURE);
+        cerr << "Warning: You are using single point condition.";
+        Volume = 1.;
         break;
     }
     
