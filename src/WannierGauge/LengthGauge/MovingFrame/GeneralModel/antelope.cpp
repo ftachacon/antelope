@@ -87,22 +87,19 @@ int main( int argc, char *argv[] )
     cfg.lookupValue("gauge", gaugeString);
     if (gaugeString == "Wannier" || gaugeString == "LengthWannier")
     {
-        if (rank == MASTER) cout << "Gauge: LengthWannier\n";
         tempGauge = GaugeType::LengthWannier;
     }
     else if (gaugeString == "Hamiltonian" || gaugeString == "LengthHamiltonian")
     {
-        if (rank == MASTER) cout << "Gauge: LengthHamiltonian\n";
         tempGauge = GaugeType::LengthHamiltonian;
     }
     else if (gaugeString == "Velocity" || gaugeString == "VelocityHamiltonian")
     {
-        if (rank == MASTER) cout << "Gauge: VelocityHamiltonian\n";
         tempGauge = GaugeType::VelocityHamiltonian;
     }
     else
     {
-        if (rank == MASTER) cout << "No gauge type is specified. Choose LengthWannier for default gauge.\n";
+        if (rank == MASTER) cout << "Warning: No gauge type is specified. Choose LengthWannier for default gauge.\n";
         tempGauge = GaugeType::LengthWannier;
     }
 
@@ -180,8 +177,7 @@ int main( int argc, char *argv[] )
 
     if (rank == MASTER)
     {
-        sbe->material->PrintMaterialInformation();
-        sbe->fpulses->Print_LaserInfo();
+        sbe->PrintInfo();
     }
 
     //##########################
@@ -193,15 +189,10 @@ int main( int argc, char *argv[] )
         setting_complex_memory( &inter_rad[itemp], sbe->fpulses->Nt );
         setting_complex_memory( &intra_rad[itemp], sbe->fpulses->Nt );
         
-        
-        
         for (int jtemp=0; jtemp<sbe->fpulses->Nt; jtemp++)
         {
-            
             inter_rad[itemp][jtemp]=0.;
             intra_rad[itemp][jtemp]=0.;
-            
-            
         }
         
     }

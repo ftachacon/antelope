@@ -27,10 +27,12 @@ class SBEs
 {
 public:
     const GaugeType gauge;
+    InitialValueType initType;
+
     complex **dmatrix;
     complex **initMatrix; 
 
-    WannierMaterial *material;  ///< dipole&Hamiltonian generator
+    BaseMaterial *material;  ///< dipole&Hamiltonian generator
 
     // allocated memory with no value - to reduce costs for making temporoary variables
     complex *hamiltonian;
@@ -48,6 +50,9 @@ public:
     laser *fpulses;
 
     int Nband;
+
+    double Ef;          ///< Fermi energy
+    double thermalE;    ///< Thermal energy (kT) in a.u.
 
     //bool isWannier90;       ///< if true, it means target material is written by wannier90 input.
     //std::array<std::array<double, Ndim>, Ndim> vec_lattice; // only for wannier90 case, to project on reciprocal vectors
@@ -70,6 +75,14 @@ private:
     double dt;
     array<int, Ndim> Nk;
 
+    // used for lapack routines
+    int num_of_eig;
+    complex *tempHmat;
+    double *tempEval;
+    int *tempIsuppz;
+    double eps;
+
+
 public:
     double dephasing_time_inter, dephasing_time_intra;          // dephasing time, intrabnad dephasing has to be changed later
     double dephasing_factor_inter, dephasing_factor_intra;      // dephasing factor(1/dephasing time), to avoid expensive float division operation and remove if statement
@@ -88,7 +101,11 @@ public:
     void InitializeGeneral(const libconfig::Setting *_calc);     ///< Initialize general stuff inside constructor
     void InitializeLaser(const libconfig::Setting *_laser);     ///< Initialize laser inside constructor
 
+    void GenUMatrix(complex *_ustore, std::array<double, Ndim> _kpoint);    ///< Generate U matrix
+
     array<double, Ndim> GenKpulsA(array<double, Ndim> _kpoint, double time);
+
+    void PrintInfo();   ///< Print calculation information
 
 };
 
@@ -108,7 +125,22 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
         cerr << "No 'target' in inputParam.cfg or no 'Nband' parameter" << endl; 
         exit(EXIT_FAILURE);
     }
-    // cout << "Target :  " << targetMaterial << endl;
+    //cout << "Target :  " << targetMaterial << endl;
+
+    bool usingCustomInitial = false;
+    cfg[targetMaterial.c_str()].lookupValue("UsingCustomInitial", usingCustomInitial);
+    if ( usingCustomInitial )
+    {
+        initType = InitialValueType::Custom;
+    }
+    else if ( cfg[targetMaterial.c_str()].lookupValue("Ef", Ef) )
+    {
+        initType = InitialValueType::FermiDirac;
+    }
+    else
+    {
+        initType = InitialValueType::UniformValence;
+    }
 
     // Initialize specific material
     //isWannier90 = false;
@@ -168,59 +200,24 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
     pMatrix = Create3D<complex>(this->kmesh->Ntotal, Ndim, Nband*Nband);
     edispersion = Create2D<double>(this->kmesh->Ntotal, Nband);
 
-    for (int k = 0; k < this->kmesh->Ntotal; ++k)
-    {
-        material->GenInitialValue(&dmatrix[k][0], kmesh->kgrid[k]);
+    tempIsuppz = new int[Nband];
+    tempEval = new double[Nband];
+    tempHmat = new complex[Nband*Nband];
 
-        // Temporary solution. FIX AS SOON AS POSSIBLE!!!!!!!!!!!!!
-        // ========================================================
-        if (gauge == GaugeType::VelocityHamiltonian || gauge == GaugeType::LengthHamiltonian)
-        {
-            material->GenUMatrix(uMatrix, kmesh->kgrid[k]);
-            for (int m = 0; m < Nband; ++m)
-            {
-                for (int n = 0; n < Nband; ++n)
-                {
-                    ctransuMatrix[m*Nband + n] = conj( uMatrix[n*Nband + m] );
-                }
-            }
-            MatrixMult(temp1Matrix, &dmatrix[k][0], uMatrix, Nband);
-            MatrixMult(&dmatrix[k][0], ctransuMatrix, temp1Matrix, Nband);
-        }
+    thermalE = 300.;
+    thermalE /= 3.15775024804e5;     // hartree energy (4.3597447222071×10−18) / Boltzman constant(1.380649×10−23)
 
-        for (int m = 0; m < Nband; ++m)
-        {
-            for (int n = 0; n < Nband; ++n)
-            {
-                initMatrix[k][m*Nband + n] = dmatrix[k][m*Nband + n];
-            }
-        }
-    }
+    eps = 1.0e-18;
 
-    // pmatrix generation
-    for (int k = 0; k < this->kmesh->Ntotal; ++k)
-    {
-        material->GenUMatrix(uMatrix, kmesh->kgrid[k]);
-        for (int m = 0; m < Nband; ++m)
-        {
-            for (int n = 0; n < Nband; ++n)
-            {
-                ctransuMatrix[m*Nband + n] = conj( uMatrix[n*Nband + m] );
-            }
-        }
-        material->GenJMatrix(jMatrix, kmesh->kgrid[k]);
-        for (int iaxis = 0; iaxis < Ndim; ++iaxis)
-        {
-            MatrixMult(temp1Matrix, jMatrix[iaxis], uMatrix, Nband);
-            MatrixMult(pMatrix[k][iaxis], ctransuMatrix, temp1Matrix, Nband);
-        }
-    }
+    // Temporary variables 
+    double *tempInitVal = new double[Nband];
+    double tempInitSum = 0;
 
-    // edispersion generation
-    int *tempIsuppz = new int[Nband];
-    double eps = 1.0e-18;
+    fill(&dmatrix[0][0], &dmatrix[0][0] + kmesh->Ntotal*Nband*Nband, 0.);
+
     for (int k = 0; k < kmesh->Ntotal; ++k)
     {
+        // edispersion generation & temporary umatrix generation
         int num_of_eig;
         material->GenHamiltonian(hamiltonian, kmesh->kgrid[k]);
         int info = LAPACKE_zheevr( LAPACK_ROW_MAJOR, 'V', 'A', 'U',
@@ -242,10 +239,74 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
                 std::cout << edispersion[k][m] << "      ";
             }
             std::cout << endl;
-            exit(1);
+            exit(EXIT_FAILURE);
+        }
+        for (int m = 0; m < Nband; ++m)
+        {
+            for (int n = 0; n < Nband; ++n)
+            {
+                ctransuMatrix[m*Nband + n] = conj( uMatrix[n*Nband + m] );
+            }
+        }
+
+        // Generate intial value in Hamiltonian gauge
+        switch (initType)
+        {
+        case InitialValueType::UniformValence:
+            for (int m = 0; m < Nband; ++m)
+            {
+                if (m < material->Nval)
+                    dmatrix[k][m*Nband + m] = 1.0;
+            }
+            break;
+
+        case InitialValueType::FermiDirac:
+            tempInitSum = 0;
+            for (int m = 0; m < Nband; ++m)
+            {
+                tempInitVal[m] = 1.0 / ( exp( (edispersion[k][m] - Ef) / thermalE ) + 1.0 );
+                tempInitSum += tempInitVal[m];
+            }
+            for (int m = 0; m < Nband; ++m)
+            {
+                dmatrix[k][m*Nband + m] = tempInitVal[m] / tempInitSum;
+            }
+            break;
+
+        case InitialValueType::Custom:
+            material->GenInitialValue(&dmatrix[k][0], kmesh->kgrid[k]);
+            break;
+        
+        default:
+            cerr<<"Undefined Initial type\n";
+            exit(EXIT_FAILURE);
+            break;
+        }
+
+        if (gauge == GaugeType::LengthWannier)
+        {
+            MatrixMult(temp1Matrix, &dmatrix[k][0], ctransuMatrix, Nband);
+            MatrixMult(&dmatrix[k][0], uMatrix, temp1Matrix, Nband);
+        }
+
+        for (int m = 0; m < Nband; ++m)
+        {
+            for (int n = 0; n < Nband; ++n)
+            {
+                initMatrix[k][m*Nband + n] = dmatrix[k][m*Nband + n];
+            }
+        }
+
+        // pmatrix generation
+        material->GenJMatrix(jMatrix, kmesh->kgrid[k]);
+        for (int iaxis = 0; iaxis < Ndim; ++iaxis)
+        {
+            MatrixMult(temp1Matrix, jMatrix[iaxis], uMatrix, Nband);
+            MatrixMult(pMatrix[k][iaxis], ctransuMatrix, temp1Matrix, Nband);
         }
     }
-    delete[] tempIsuppz;
+
+    delete[] tempInitVal;
 
     // allocation for rk realted variables
     tRK = new double[NumRK-1];
@@ -369,8 +430,8 @@ void SBEs::InitializeGeneral(const libconfig::Setting *_calc)
             NumRK = 6;
             break;
         default:
-            cout << "Not-implemented RK order: " << RKorder << "\n";
-            exit(1);
+            cerr << "Not-implemented RK order: " << RKorder << "\n";
+            exit(EXIT_FAILURE);
             break;
     }
 }
@@ -452,6 +513,8 @@ SBEs::~SBEs()
     delete fpulses;
 
     delete kmesh;
+
+    delete[] tempIsuppz, tempEval, tempHmat;
 }
 
 void SBEs::RunSBEs(int _kindex, double  _time)
@@ -592,7 +655,7 @@ void SBEs::GenDifferentialDM(complex *out, complex *input, int _kindex, double _
     // Add dephainsg process here!
     if (gauge == GaugeType::LengthWannier)
     {
-        material->GenUMatrix(uMatrix, _tkp);
+        GenUMatrix(uMatrix, _tkp);
         for (int m = 0; m < Nband; ++m)
         {
             for (int n = 0; n < Nband; ++n)
@@ -633,6 +696,32 @@ void SBEs::GenDifferentialDM(complex *out, complex *input, int _kindex, double _
     }
 }
 
+void SBEs::GenUMatrix(complex *_ustore, std::array<double, Ndim> _kpoint)
+{
+    material->GenHamiltonian(tempHmat, _kpoint); 
+    int info = LAPACKE_zheevr( LAPACK_ROW_MAJOR, 'V', 'A', 'U',
+                                Nband, tempHmat, Nband, 0., 0., 0., 0., 
+                                eps, &num_of_eig, tempEval, _ustore, Nband, tempIsuppz );
+    if (info != 0)
+    {
+        std::cerr << "Problem in lapack, info = " << info <<  std::endl;
+        for (int m = 0; m < Nband; ++m)
+        {
+            for (int n = 0; n < Nband; ++ n)
+            {
+                std::cout << tempHmat[m*Nband + n] << "     ";
+            }
+            std::cout << endl;
+        }
+        for (int m = 0; m < Nband; ++m)
+        {
+            std::cout << tempEval[m] << "      ";
+        }
+        std::cout << endl;
+        exit(EXIT_FAILURE);
+    }
+}
+
 array<double, Ndim> SBEs::GenKpulsA(array<double, Ndim> _kpoint, double time)
 {
     auto avector = fpulses->avlaser(time);
@@ -658,4 +747,51 @@ array<double, Ndim> SBEs::GenKpulsA(array<double, Ndim> _kpoint, double time)
         return tkp;
     }*/
     return tkp;
+}
+
+void SBEs::PrintInfo()
+{
+    cout << "===============================================\n";
+    cout << "Target: " <<targetMaterial << endl;
+    cout << "===============================================\n";
+
+    material->PrintMaterialInformation();
+    fpulses->Print_LaserInfo();
+
+    cout << "===============================================\n";
+    cout << "Current gauge: ";
+    switch (gauge)
+    {
+    case GaugeType::LengthWannier:
+        cout << "LengthWannier\n";
+        break;
+    case GaugeType::LengthHamiltonian:
+        cout << "LengthHamiltonian\n";
+        break;
+    case GaugeType::VelocityHamiltonian:
+        cout << "VelocityHamiltonian\n";
+        break;
+    
+    default:
+        cerr << "Undefined gauge??\n";
+        exit(EXIT_FAILURE);
+        break;
+    }
+
+    cout << "Inital value type: ";
+    switch (initType)
+    {
+    case InitialValueType::UniformValence:
+        cout << "UniformValence, Nval = " << material->Nval << std::endl;
+        break;
+    case InitialValueType::FermiDirac:
+        cout << "FermiDirac, Ef = " << Ef << std::endl;
+        break;
+    case InitialValueType::Custom:
+        cout << "Custom, make sure that you have implemented GenInitialValue " << std::endl;
+        break;
+
+    default:
+        break;
+    }
 }

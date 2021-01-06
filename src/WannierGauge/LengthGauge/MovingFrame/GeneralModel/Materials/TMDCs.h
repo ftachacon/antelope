@@ -6,7 +6,7 @@
 */
 #pragma once
 
-#include "../WannierMaterial.h"
+#include "../BaseMaterial.h"
 #include "../utility.h"
 
 #include <string>
@@ -19,7 +19,7 @@
 #include <lapacke.h>
 #define complex complex<double>
 
-class TMDCs : public WannierMaterial
+class TMDCs : public BaseMaterial
 {
 public:
     // TB parameters
@@ -46,9 +46,6 @@ public:
 
     TMDCs( const libconfig::Setting *params );
     ~TMDCs();
-    //void SetBasis();
-    void GenInitialValue(complex *_dmstore, std::array<double, Ndim> _kpoint) override;
-    void GenUMatrix(complex *_ustore, std::array<double, Ndim> _kpoint) override;
     void GenHamiltonian(complex *_hstore, std::array<double, Ndim> _kpoint) override;
     void GenDipole(complex **_dstore, std::array<double, Ndim> _kpoint) override {};    // Do nothing!
     void GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint) override;
@@ -171,94 +168,6 @@ TMDCs::TMDCs( const libconfig::Setting *params )
 TMDCs::~TMDCs()
 {
     delete[] tempUmat, tempHmat, tempEval, tempIsuppz, tempctransUmat;
-}
-
-void TMDCs::GenInitialValue(complex *_dmstore, std::array<double, Ndim> _kpoint)
-{
-    fill(_dmstore, _dmstore + Nband*Nband, 0.);
-    // GenHamiltonian(tempHmat, _kpoint);
-
-    // int num_of_eig; 
-    // int info = LAPACKE_zheevr( LAPACK_ROW_MAJOR, 'V', 'A', 'U',
-    //                             Nband, tempHmat, Nband, 0., 0., 0., 0., 
-    //                             eps, &num_of_eig, tempEval, tempUmat, Nband, tempIsuppz );
-    // if (info != 0)
-    // {
-    //     std::cerr << "Problem in lapack, info = " << info << std::endl;
-    //     for (int m = 0; m < Nband; ++m)
-    //     {
-    //         for (int n = 0; n < Nband; ++ n)
-    //         {
-    //             std::cout << tempHmat[m*Nband + n] << "     ";
-    //         }
-    //         std::cout << endl;
-    //     }
-    //     for (int m = 0; m < Nband; ++m)
-    //     {
-    //         std::cout << tempEval[m] << "      ";
-    //     }
-    //     std::cout << endl;
-    //     exit(1);
-    // }
-    GenUMatrix(tempUmat, _kpoint);
-    for (int m = 0; m < Nband; ++m)
-    {
-        for (int n = 0; n < Nband; ++n)
-        {
-            tempctransUmat[m*Nband + n] = conj( tempUmat[n*Nband + m] );
-        }
-    }
-
-    
-    // double FermiE = 0.0 / au_eV;
-    // double thermalE = 300.;
-    // thermalE /= 3.15775024804e5;     // hartree energy (4.3597447222071×10−18) / Boltzman constant(1.380649×10−23)
-
-    // set valence = 1., conduction = 0. initial condition
-    // Fermi-Dirac distribution is used when FermiE is applied
-    // tempEigval is calculated inside the GenUMatrix, be careful about order or sideeffects.
-    for (int m = 0; m < Nband; ++m)
-    {
-        //if (isFermiEUsed)
-        // {
-        //     _dmstore[m*Nband + m] = 1.0 / ( exp( (tempEval[m] - FermiE) / thermalE ) + 1.0 );
-        // }
-        // else
-        // {
-            if (m < Nval)
-                _dmstore[m*Nband + m] = 1.;
-        // }
-    }
-    // tempHmat is used as temporary matrix for below
-    MatrixMult(tempHmat, _dmstore, tempctransUmat, Nband);
-    MatrixMult(_dmstore, tempUmat, tempHmat, Nband);
-}
-
-void TMDCs::GenUMatrix(complex *_ustore, std::array<double, Ndim> _kpoint)
-{
-    int num_of_eig;
-    GenHamiltonian(tempHmat, _kpoint); 
-    int info = LAPACKE_zheevr( LAPACK_ROW_MAJOR, 'V', 'A', 'U',
-                                Nband, tempHmat, Nband, 0., 0., 0., 0., 
-                                eps, &num_of_eig, tempEval, _ustore, Nband, tempIsuppz );
-    if (info != 0)
-    {
-        std::cerr << "Problem in lapack, info = " << info <<  std::endl;
-        for (int m = 0; m < Nband; ++m)
-        {
-            for (int n = 0; n < Nband; ++ n)
-            {
-                std::cout << tempHmat[m*Nband + n] << "     ";
-            }
-            std::cout << endl;
-        }
-        for (int m = 0; m < Nband; ++m)
-        {
-            std::cout << tempEval[m] << "      ";
-        }
-        std::cout << endl;
-        exit(1);
-    }
 }
 
 void TMDCs::GenHamiltonian(complex *_hstore, std::array<double, Ndim> _kpoint)
