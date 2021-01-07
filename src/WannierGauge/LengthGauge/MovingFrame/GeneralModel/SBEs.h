@@ -117,7 +117,13 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
     // Check target, get Nband
     try
     {
-        targetMaterial = cfg.lookup("target").c_str();
+        //targetMaterial = cfg.lookup("target").c_str();
+        if (!cfg.lookupValue("target", targetMaterial))
+        {
+            cerr << "No 'target' in input file\n";
+            exit(EXIT_FAILURE);
+        }
+        
         //Nband = cfg[targetMaterial.c_str()].lookup("Nband");
     }
     catch(const libconfig::SettingNotFoundException &nfex)
@@ -382,7 +388,9 @@ void SBEs::InitializeGeneral(const libconfig::Setting *_calc)
         {
             Nk[i] = npoints_setting[i];
         }
-        dt = calc.lookup("dt");
+        //dt = calc.lookup("dt");
+        dt = 0.1;
+        calc.lookupValue("dt", dt);
 
         // read parameters which have default values - no error when they are omitted
         calc.lookupValue("T1", dephasing_time_intra );

@@ -68,8 +68,9 @@ TMDCs::TMDCs( const libconfig::Setting *params )
         Nband = 3;  Nval = 1;
     }
     
-    string tempmaterial = params->lookup("Material");
-    material = tempmaterial;
+    //string tempmaterial = params->lookup("Material");
+    //material = tempmaterial;
+    params->lookupValue("Material", material);
     // hard-coded paramter - GGA
     double gga_params[6][19] = {0.683, 1.707, -0.146, -0.114, 0.506, 0.085, 0.162, 0.073, 0.060, -0.236,
                                 0.067, 0.016, 0.087, -0.038, 0.046, 0.001, 0.266, -0.176, -0.150,
