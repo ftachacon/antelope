@@ -134,7 +134,8 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
     //cout << "Target :  " << targetMaterial << endl;
 
     bool usingCustomInitial = false;
-    cfg[targetMaterial.c_str()].lookupValue("UsingCustomInitial", usingCustomInitial);
+    if (cfg.exists(targetMaterial))
+        cfg[targetMaterial.c_str()].lookupValue("UsingCustomInitial", usingCustomInitial);
     if ( usingCustomInitial )
     {
         initType = InitialValueType::Custom;

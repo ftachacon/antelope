@@ -6,7 +6,7 @@
 CXXFLAGS= -O2 -std=c++14 -Wall
 LIBS= -lconfig++ -llapacke -llapack -lblas -lm
 #INTEL= icpc
-MPI= /usr/bin/mpicxx
+MPI= mpicxx
 #LIBS= -lpthread -lm -ldl -liomp5 -lmkl_rt
 
 
