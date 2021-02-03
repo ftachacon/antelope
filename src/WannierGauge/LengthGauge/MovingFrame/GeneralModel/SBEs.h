@@ -140,7 +140,7 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
     {
         initType = InitialValueType::Custom;
     }
-    else if ( cfg[targetMaterial.c_str()].lookupValue("Ef", Ef) )
+    else if ( cfg.exists(targetMaterial) && cfg[targetMaterial.c_str()].lookupValue("Ef", Ef) )
     {
         initType = InitialValueType::FermiDirac;
     }
