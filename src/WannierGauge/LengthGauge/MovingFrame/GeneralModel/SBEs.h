@@ -590,6 +590,14 @@ array<double, Ndim> SBEs::GenCurrent(int _kindex, double _time)
             }
         }
     }
+    if (gauge == GaugeType::VelocityHamiltonian)
+    {
+        auto avector = fpulses->avlaser(_time);
+        for (int iaxis = 0; iaxis < Ndim; ++iaxis)
+        {
+            outCurrent[iaxis] += material->Nval * avector[iaxis];
+        }
+    }
     
     return outCurrent;
 }
