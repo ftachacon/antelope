@@ -50,6 +50,7 @@ public:
     laser *fpulses;
 
     int Nband;
+    array<int, Ndim> Nk;
 
     double Ef;          ///< Fermi energy
     double thermalE;    ///< Thermal energy (kT) in a.u.
@@ -73,7 +74,6 @@ public:
     int diagnostic;
 private:
     double dt;
-    array<int, Ndim> Nk;
 
     // used for lapack routines
     int num_of_eig;
@@ -104,6 +104,8 @@ public:
     void GenUMatrix(complex *_ustore, std::array<double, Ndim> _kpoint);    ///< Generate U matrix
 
     array<double, Ndim> GenKpulsA(array<double, Ndim> _kpoint, double time);
+
+    void WannierToHamiltonian(complex *out, complex *input, int _kindex, double _time); ///< Convert Wannier representation to Hamiltonian representation
 
     void PrintInfo();   ///< Print calculation information
 
@@ -180,6 +182,11 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
     Nband = material->Nband;
 
     auto [bzaxes, bzori] = material->GenBrillouinzone();
+
+    // apply ksfactor
+    bzaxes[0] *= ksfactor[0];   bzaxes[1] *= ksfactor[0];   bzaxes[2] *= ksfactor[0];
+    bzaxes[3] *= ksfactor[1];   bzaxes[4] *= ksfactor[1];   bzaxes[5] *= ksfactor[1];
+    bzaxes[6] *= ksfactor[2];   bzaxes[7] *= ksfactor[2];   bzaxes[8] *= ksfactor[2];
 
     // generate k-grid
     kmesh = new momaxis( Nk, bzaxes, bzori );
@@ -764,6 +771,22 @@ array<double, Ndim> SBEs::GenKpulsA(array<double, Ndim> _kpoint, double time)
         return tkp;
     }*/
     return tkp;
+}
+
+void SBEs::WannierToHamiltonian(complex *out, complex *input, int _kindex, double _time)
+{
+    auto _tkp = GenKpulsA(kmesh->kgrid[_kindex], _time);
+    GenUMatrix(uMatrix, _tkp);
+    for (int m = 0; m < Nband; ++m)
+    {
+        for (int n = 0; n < Nband; ++n)
+        {
+            ctransuMatrix[m*Nband + n] = conj( uMatrix[n*Nband + m] );
+        }
+    }
+
+    MatrixMult(temp1Matrix, input, uMatrix, Nband);
+    MatrixMult(out, ctransuMatrix, temp1Matrix, Nband);
 }
 
 void SBEs::PrintInfo()
