@@ -1,11 +1,14 @@
-//---------------
-//  testing.cpp
-//...
-//
-//  Created by Alexis Agustín  Chacón Salazar on 3/20/19.
-//
-
-//#include "testing.hpp"
+/**
+ * @file hhg_rk5_hm_mpi_full_vel_nc.cpp
+ * @author Dasol Kim
+ * @author Alexis Agustín  Chacón Salazar
+ * @brief 
+ * @version 0.1
+ * @date 2020-12-06
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
 
 
 // Standar C/C++ headers

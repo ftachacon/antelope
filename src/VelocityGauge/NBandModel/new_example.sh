@@ -19,7 +19,7 @@ dirname=$1 # Pass a simple name to this scrip
 ##########################################
 ## You can modify the No. of MPI tasks
 
-N_MPI_TASKs=1 #23 #2   #No. of MPI task or cores for parallelization
+N_MPI_TASKs=23 #2   #No. of MPI task or cores for parallelization
 
 
 

@@ -66,7 +66,7 @@ void My_MPI_CLX_SUM( complex *in, complex *inout, int *len, MPI_Datatype *dptr )
 int ncyparam    = 3;
 int nxparam     = 1;
 int nyparam     = 1;
-int tgauge2     = 0.;
+int tgauge2     = 1.;
 int  trflag     = 0;
 int  fbz_shift  = 0;
 
@@ -313,7 +313,7 @@ int main( int argc, char *argv[] )
     
     //Wavefunction Bloch Gauge choice
     int gauge1   = 1;
-    int gauge2   = tgauge2 ;
+	int gauge2   = tgauge2 ;
     
     
      //Controlling momentum gauge variation window
@@ -663,10 +663,8 @@ int main( int argc, char *argv[] )
         cs.connection_c_output( conout,   1,  1,  1 );
         cs.curvature_c_output(  curvaout, 1,  1,  1 );
         cs.group_vel_vc_output( gvelout,  1,  1,  1 );
-        
      
     }//*/
-    
     
     
     if (rank == MASTER)
