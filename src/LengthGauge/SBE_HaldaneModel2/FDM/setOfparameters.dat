@@ -1,0 +1,19 @@
+
+#Laser-Parameters,  E0,          I0,              w0,             Ncycles,           CEP,     No.-time-steps,  Time-step-dt 
+          5.000000e-03      8.750000e+11      1.400000e-02      5.000000e+00      0.000000e+00      433153      2.200000e-02      
+
+
+
+#Momentum Grid and Haldane Parameters, dkx (a.u.),  dky (a.u.),  Nx,  Ny, a0 (a.u.),  t1(a.u.),  t2 
+          6.505084e-02      6.331057e-02      60      36      1.890359e+00      7.500000e-02      2.500000e-02      
+
+
+
+#Haldane Parameters, phi0 (rad.),  M0 (a.u.),   Min-eg(a.u.),        Max-eg,          Chern No.,        T2 (a.u.),    gauge 
+          0.000000e+00      6.350000e-02      1.273275e-01      4.675778e-01      -6.030894e-18      2.200000e+02      1      
+
+
+
+#Parameters,   No.cores,  ellipticity,          regularization,      reg.-width,       ---,     ---  ,    gauge2 
+              2          1.000000e+00         1.000000e-01        2.000000e-01      0.000000e+00      0.000000e+00      1      
+

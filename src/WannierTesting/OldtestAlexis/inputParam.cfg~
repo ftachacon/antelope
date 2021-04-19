@@ -1,0 +1,85 @@
+# This file is for setting paramters
+# The file is loaded by libconfig
+
+target = "Haldane";
+
+# store all laser paramters here
+laser = 
+{
+    offset = [1000.0, 1000.0];    // time offset before and after laser pulse trains (a.u.)
+    pulses = 
+    (
+        {
+            E0 = 0.0045;                 // electric field strength in a.u.
+            w0 = 0.014;                 // frequency in a.u.
+            ncycles = 14.0;              // time duration for pulses in (FWHM for gaussian envelope)
+            ellip = 1.0;                // ellipticity of pulse
+            cep = 0.0;                  // carrier-envelope phase (rad)
+            t0 = 0.0;                   // middle point of the pulse
+            phix = 0.;           // angle between x-axis and semi-major axis in laser ellipse (degree)
+            env_name = "gauss";   // name of envelope - "cos4", "gauss"  ("cos2" is eliminated due to numerical problem)
+
+            thetaz = 0.;      // polar angle of propagation direction (degree)
+            phiz = 0.;        // azimuthal angle of propagation direction (degree)
+        }
+    );
+};
+
+# store all calculation options here 
+calc = 
+{
+    Npoints = [301, 301];           // Number of points, 1d ~ 3d
+    dt = 0.1;                       // timestep (a.u.)
+
+    T1 = -1.;                       // dephasing time of occupation (a.u.) set -1(=default value) to disable this. (infinite dephasing time)
+    T2 = 220.;                       // dephasing time of coherence (a.u.) set -1(=default value) to disable this. (infinite dephasing time)
+    # below parameters can be omitted
+    ksfactor = [1.0, 1.0, 1.0];     // ksfactor = [xfac, yfac, zfac] --> xfac*axis_x, yfac*axis_y, zfac*axis_z
+    shotNumber = 0;                 // Number of shots of density (for analyze).    (default = 0)
+    diagnostic = 0;                 // level of diagnostic.        (default = 0)
+};
+
+# Standard Haldane parameters 
+Haldane = 
+{
+    # below two paramter must be included in every different material group
+    #Nband = 2;          // Number of total bands
+    a0 = 1.0;           // lattice constant in "Angstroms"
+
+    t1 = 0.075;         // NN hopping parameters in a.u.
+    t2 = 0.025;         // NNN hopping paramters in a.u.
+    Mt2 = 2.54;         // On site potential ratio to t2, i.e. M/t2
+    phi0 = 1.16;        // Magnetic flux in rad
+
+    
+    #Nvalence = 1;       // Number of valence bands
+    # I disable below configuration paramter and make BZ hard coded in Haldane.h 
+    # Remember that BZ region is calculated in material generator, not general solver or main file
+    # [1./2./sqrt(3.), 1./3.]
+    #BZboundary = [0.28867513459, 0.3333333333333];  // Brillouin zone 
+};
+
+# Wilson mass term in square lattice
+WilsonMass=
+{
+    # topologcial case
+	#t = 0.034452489539676556;
+	#mu = 0.08268597489522374;
+	#delta = 0.07235022803332077;
+
+    # trivial case
+    t= 0.02067149372380593; 
+    mu=  0.1378099581587062;
+    delta=  0.04341013681999246;
+
+    a0= 3.27310166024207;
+};
+
+# 
+hBN = 
+{
+    # If data type is wannier90, the every information is stored in single file
+    #dataType = "Wannier90";     // Read the data from Wannier90 (or equivalent format), see hamiltonian_write_tb or menual in Wannier90
+    # Assume every input has w90-like format. no dataType parameter
+    dataName = "wan_SnF_tb.dat";   // Remember that original output from Wannier90 has file extension *.dat. Change this because we have used *.dat for output of our program...
+};
