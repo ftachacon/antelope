@@ -258,8 +258,16 @@ int main( int argc, char *argv[] )
     ktemp = 0;
     double currenttime, currentcycle;
     complex *temp_density_matrix_integrated = new complex[Nband*Nband];
+    complex *temp_1d_integrated_occupation = new complex[sbe->Nk[0]];
+    FILE *dm1dout;
+    if (rank == MASTER)
+    {
+        dm1dout = fopen("occupation_1d_integration.dat", "w");
+    }
     double occup_temp = 0;
     double maxcycles = 2*sbe->fpulses->pulses[0].twidth / sbe->fpulses->pulses[0].period0;
+
+    int shotFrequency = int(sbe->fpulses->pulses[0].period0/10/sbe->fpulses->dt);
     //#####################################
     //#####################################
     //Time integration loop
@@ -292,8 +300,47 @@ int main( int argc, char *argv[] )
         }
         // Snapshots - including diagnostics and density plots 
         // if (shotNumber > 0 && ktime % shotNumber == 0)
-        if (ktime % 200 == 0)
+        if (ktime % shotFrequency == 0)
         {
+            // temporary routine - integrating occupation
+            for (int m = 0; m < sbe->Nk[0]; ++m)
+            {
+                temp_1d_integrated_occupation[m] = 0.;
+            }
+            for(int jtemp = jstart; jtemp < jend; jtemp++ )
+            {
+                auto ki = sbe->kmesh->index(jtemp);
+                if (sbe->gauge == GaugeType::LengthWannier)
+                {
+                    sbe->WannierToHamiltonian(sbe->newdMatrix, sbe->dmatrix[jtemp], jtemp, currenttime);
+                    temp_1d_integrated_occupation[ki[0]] += sbe->newdMatrix[sbe->material->Nval*Nband + sbe->material->Nval] * sbe->kmesh->weight[ jtemp ];
+                }
+                else
+                {
+                    temp_1d_integrated_occupation[ki[0]] += sbe->dmatrix[jtemp][sbe->material->Nval*Nband + sbe->material->Nval] * sbe->kmesh->weight[ jtemp ];
+                }
+            }
+            MPI_Barrier(MPI_COMM_WORLD);
+            if (rank == MASTER)
+            {
+                MPI_Reduce(MPI_IN_PLACE, &temp_1d_integrated_occupation[0], sbe->Nk[0], 
+                    MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
+            }
+            else
+            {
+                MPI_Reduce(&temp_1d_integrated_occupation[0], &temp_1d_integrated_occupation[0], sbe->Nk[0], 
+                    MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
+            }
+            if (rank == MASTER)
+            {
+                for (int m = 0; m < sbe->Nk[0]; ++m)
+                {
+                    fprintf(dm1dout, "%16e    ", real(temp_1d_integrated_occupation[m]) / static_cast<double>(sbe->Nk[1]) );
+                }
+                fprintf(dm1dout, "\n");
+            }
+            // -----------
+
             for (int ij = 0; ij < Nband * Nband; ++ij)
             {
                 temp_density_matrix_integrated[ij] = density_matrix_integrated[ktime][ij];
@@ -339,6 +386,7 @@ int main( int argc, char *argv[] )
 
     } //End of Time integration loop
     delete[] temp_density_matrix_integrated;
+    delete[] temp_1d_integrated_occupation; 
 
     //##############################################
     // inter, intrabnad currents, occupation, cohereneces are integrated through every sub-grids (all-processors)
@@ -403,6 +451,7 @@ int main( int argc, char *argv[] )
         fclose( interj_out );
         fclose( intraj_out );
         fclose( occup_out);
+        fclose( dm1dout );
         
     }   
     
