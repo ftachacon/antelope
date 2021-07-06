@@ -14,14 +14,6 @@
 #include <iostream>
 #include <fstream>
 
-// To prevnet include <complex.h> --> which undef complex
-// As you see re-define keyword is very dangerous
-#undef complex
-#define lapack_complex_float std::complex<float>
-#define lapack_complex_double std::complex<double>
-#include <lapacke.h>
-#define complex complex<double>
-
 class BieSe3surf : public BaseMaterial
 {
 public:

@@ -8,6 +8,7 @@
 #include "Materials/WilsonMass.h"
 #include "Materials/Bi2Se3surf.h"
 #include "Materials/TMDCs.h"
+#include "Materials/KaneMele.h"
 
 //#include "Materials/Wannier90.h"
 

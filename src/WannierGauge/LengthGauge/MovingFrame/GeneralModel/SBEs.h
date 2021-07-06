@@ -14,6 +14,14 @@
 
 #include <libconfig.h++>
 
+// To prevnet include <complex.h> --> which undef complex
+// As you see re-define keyword is very dangerous
+#undef complex
+#define lapack_complex_float std::complex<float>
+#define lapack_complex_double std::complex<double>
+#include <lapacke.h>
+#define complex complex<double>
+
 #include "momaxis.h"
 #include "laser.h"
 #include "constant.h"
@@ -157,6 +165,10 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
     {
         material = new Haldane( &(cfg[targetMaterial.c_str()]) );
     }
+    else if (targetMaterial == "KaneMele")
+    {
+        material = new KaneMele( &(cfg[targetMaterial.c_str()]) );
+    }
     else if (targetMaterial == "WilsonMass")
     {
         material = new WilsonMass( &(cfg[targetMaterial.c_str()]) );
@@ -235,7 +247,7 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
         int num_of_eig;
         material->GenHamiltonian(hamiltonian, kmesh->kgrid[k]);
         int info = LAPACKE_zheevr( LAPACK_ROW_MAJOR, 'V', 'A', 'U',
-                                Nband, hamiltonian, Nband, 0., 0., 0., 0., 
+                                Nband, hamiltonian, Nband, 0., 0., 0, 0, 
                                 eps, &num_of_eig, edispersion[k], uMatrix, Nband, tempIsuppz );
         if (info != 0)
         {
@@ -724,7 +736,7 @@ void SBEs::GenUMatrix(complex *_ustore, std::array<double, Ndim> _kpoint)
 {
     material->GenHamiltonian(tempHmat, _kpoint); 
     int info = LAPACKE_zheevr( LAPACK_ROW_MAJOR, 'V', 'A', 'U',
-                                Nband, tempHmat, Nband, 0., 0., 0., 0., 
+                                Nband, tempHmat, Nband, 0., 0., 0, 0, 
                                 eps, &num_of_eig, tempEval, _ustore, Nband, tempIsuppz );
     if (info != 0)
     {
