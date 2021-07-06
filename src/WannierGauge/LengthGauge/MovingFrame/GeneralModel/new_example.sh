@@ -48,7 +48,7 @@ cp AlsisPythonShort/An* ./${dirname}/
 cp AlsisPythonShort/drawSnapshots.py ./${dirname}/
 
 cp *.cfg ./${dirname}/
-cp *.dat ./${dirname}/
+#cp *.dat ./${dirname}/
 
 
 ###################################
