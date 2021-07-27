@@ -179,7 +179,7 @@ void  momaxis::steps_sizes( array<int, Ndim> _N ,array<double, Ndim*Ndim> _axisv
     default: // single point
         // cerr << "Something is wrong while calculating Brillouin zone volume\n";
         // exit(EXIT_FAILURE);
-        cerr << "Warning: You are using single point condition.";
+        cerr << "Warning: You are using single point condition.\n";
         Volume = 1.;
         break;
     }

@@ -200,6 +200,23 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
     bzaxes[3] *= ksfactor[1];   bzaxes[4] *= ksfactor[1];   bzaxes[5] *= ksfactor[1];
     bzaxes[6] *= ksfactor[2];   bzaxes[7] *= ksfactor[2];   bzaxes[8] *= ksfactor[2];
 
+    if (cfg["calc"].exists("BZaxes"))
+    {
+        const libconfig::Setting &bzaxes_setting = cfg["calc"]["BZaxes"];
+        for (int i = 0; i < bzaxes_setting.getLength(); ++i)
+        {
+            bzaxes[i] = bzaxes_setting[i];
+        }
+    }
+    if (cfg["calc"].exists("BZorigin"))
+    {
+        const libconfig::Setting &bzorigin_setting = cfg["calc"]["BZorigin"];
+        for (int i = 0; i < bzorigin_setting.getLength(); ++i)
+        {
+            bzori[i] = bzorigin_setting[i];
+        }
+    }
+
     // generate k-grid
     kmesh = new momaxis( Nk, bzaxes, bzori );
 
