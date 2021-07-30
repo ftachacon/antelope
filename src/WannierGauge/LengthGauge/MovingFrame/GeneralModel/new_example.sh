@@ -58,7 +58,7 @@ cd ./${dirname}
 
 date
 ls -lh exe*
-time -p mpirun -n ${N_MPI_TASKs} exec_hhg_mpi
+time -p mpirun -n ${N_MPI_TASKs} exec_hhg_mpi | tee stdout.log
 
 date 
 
