@@ -96,6 +96,7 @@ public:
     double dephasing_factor_inter, dephasing_factor_intra;      // dephasing factor(1/dephasing time), to avoid expensive float division operation and remove if statement
 
     bool isDipoleZero;                                  ///< default is true. Wannier dipole is non-zero in very rare cases.
+    bool isInterIntra;                                  ///< default is true. Separate inter/intra when this is true. Total current is in inter when false.
 
     SBEs(const libconfig::Setting * _cfg, GaugeType _gauge);
     ~SBEs();
@@ -103,6 +104,7 @@ public:
     void RunSBEs(int _kindex, double _time);
 
     array<double, Ndim> GenCurrent(int _kindex, double _time);
+    std::tuple<array<double, Ndim>, array<double, Ndim> > GenInterIntraCurrent(int _kindex, double _time);
 
     void GenDifferentialDM(complex *out, complex *input, int _kindex, double _time);
 
@@ -410,6 +412,7 @@ void SBEs::InitializeGeneral(const libconfig::Setting *_calc)
 {
     // default values of parameters
     isDipoleZero = true;
+    isInterIntra = true;
     fill(ksfactor.begin(), ksfactor.end(), 1.0);
     RKorder = 5;
     dephasing_time_inter = -1.;
@@ -435,6 +438,7 @@ void SBEs::InitializeGeneral(const libconfig::Setting *_calc)
         calc.lookupValue("shotNumber", shotNumber);
         calc.lookupValue("diagnostic", diagnostic);
         calc.lookupValue("RKorder", RKorder);
+        calc.lookupValue("InterIntra", isInterIntra );
         // ksfactor - value & array
         const libconfig::Setting &ksfactor_setting = calc["ksfactor"];
         for (int i = 0; i < ksfactor_setting.getLength(); ++i)
@@ -596,11 +600,22 @@ array<double, Ndim> SBEs::GenCurrent(int _kindex, double _time)
 {
     array<double, Ndim> outCurrent;
     fill(outCurrent.begin(), outCurrent.end(), 0.);
+    array<double, Ndim> _tkp;
+
+    // K+A(t) for LG and k for VG
+    if (gauge == GaugeType::LengthWannier || gauge == GaugeType::LengthHamiltonian)
+    {
+        _tkp = GenKpulsA(kmesh->kgrid[_kindex], _time);
+    }
+    else if (gauge == GaugeType::VelocityHamiltonian)
+    {
+        _tkp = kmesh->kgrid[_kindex];
+    }
+    material->GenJMatrix(jMatrix, _tkp);
+
+    // Wannier ues jMatrix
     if (gauge == GaugeType::LengthWannier)
     {
-        auto _tkp = GenKpulsA(kmesh->kgrid[_kindex], _time);
-        material->GenJMatrix(jMatrix, _tkp);
-
         // J = Tr{densitymatrix j}
         for (int iaxis = 0; iaxis < Ndim; ++iaxis)
         {
@@ -613,19 +628,31 @@ array<double, Ndim> SBEs::GenCurrent(int _kindex, double _time)
             }
         }
     }
-    else
+    else // both LengthHamiltonian and VelocityHamiltonian uses momentum matrix element
     {
+        GenUMatrix(uMatrix, _tkp);
+        for (int m = 0; m < Nband; ++m)
+        {
+            for (int n = 0; n < Nband; ++n)
+            {
+                ctransuMatrix[m*Nband + n] = conj(uMatrix[n*Nband + m]);
+            }
+        }
         for (int iaxis = 0; iaxis < Ndim; ++iaxis)
         {
+            // jMatrix --> -pMatrix (generate momentum matrix element from jMaxtirx, -1 from electric charge)
+            MatrixMult(temp1Matrix, jMatrix[iaxis], uMatrix, Nband);
+            MatrixMult(temp2Matrix, ctransuMatrix, temp1Matrix, Nband);
             for (int i = 0; i < Nband; ++i)
             {
                 for (int j = 0; j < Nband; ++j)
                 {
-                    outCurrent[iaxis] += real( dmatrix[_kindex][Nband*i + j] * pMatrix[_kindex][iaxis][Nband*j + i] );
+                    outCurrent[iaxis] += real( dmatrix[_kindex][Nband*i + j] * temp2Matrix[Nband*j + i] );
                 }
             }
         }
     }
+    // for VG, j = -(p + A(t)), additional A(t) component added
     if (gauge == GaugeType::VelocityHamiltonian)
     {
         auto avector = fpulses->avlaser(_time);
@@ -636,6 +663,73 @@ array<double, Ndim> SBEs::GenCurrent(int _kindex, double _time)
     }
     
     return outCurrent;
+}
+std::tuple<array<double, Ndim>, array<double, Ndim> > SBEs::GenInterIntraCurrent(int _kindex, double _time)
+{
+    array<double, Ndim> interCurrent, intraCurrent;
+    fill(interCurrent.begin(), interCurrent.end(), 0.);
+    fill(intraCurrent.begin(), intraCurrent.end(), 0.);
+    array<double, Ndim> _tkp;
+
+    // K+A(t) for LG and k for VG
+    if (gauge == GaugeType::LengthWannier || gauge == GaugeType::LengthHamiltonian)
+    {
+        _tkp = GenKpulsA(kmesh->kgrid[_kindex], _time);
+    }
+    else if (gauge == GaugeType::VelocityHamiltonian)
+    {
+        _tkp = kmesh->kgrid[_kindex];
+    }
+    material->GenJMatrix(jMatrix, _tkp);
+
+    // U and U^dagger
+    GenUMatrix(uMatrix, _tkp);
+    for (int m = 0; m < Nband; ++m)
+    {
+        for (int n = 0; n < Nband; ++n)
+        {
+            ctransuMatrix[m*Nband + n] = conj(uMatrix[n*Nband + m]);
+        }
+    }
+
+    // Wannier-->Hamiltonian: U^dagger * rho * U = rho^{H}
+    if (gauge == GaugeType::LengthWannier)
+    {
+        MatrixMult(temp1Matrix, dmatrix[_kindex], uMatrix, Nband);
+        MatrixMult(newdMatrix, ctransuMatrix, temp1Matrix, Nband);
+    }
+    else
+    {
+        copy(dmatrix[_kindex], dmatrix[_kindex]+Nband*Nband, newdMatrix);
+    }
+        
+    for (int iaxis = 0; iaxis < Ndim; ++iaxis)
+    {
+        // jMatrix --> -pMatrix (generate momentum matrix element from jMaxtirx, -1 from electric charge)
+        MatrixMult(temp1Matrix, jMatrix[iaxis], uMatrix, Nband);
+        MatrixMult(temp2Matrix, ctransuMatrix, temp1Matrix, Nband);
+        for (int i = 0; i < Nband; ++i)
+        {
+            for (int j = 0; j < Nband; ++j)
+            {
+                if (i == j)
+                    intraCurrent[iaxis] += real( newdMatrix[Nband*i + j] * temp2Matrix[Nband*j + i] );
+                else
+                    interCurrent[iaxis] += real( newdMatrix[Nband*i + j] * temp2Matrix[Nband*j + i] );
+            }
+        }
+    }
+    // for VG, j = -(p + A(t)), additional A(t) component added
+    if (gauge == GaugeType::VelocityHamiltonian)
+    {
+        auto avector = fpulses->avlaser(_time);
+        for (int iaxis = 0; iaxis < Ndim; ++iaxis)
+        {
+            intraCurrent[iaxis] += material->Nval * avector[iaxis];
+        }
+    }
+    
+    return make_tuple(interCurrent, intraCurrent);
 }
 
 void SBEs::GenDifferentialDM(complex *out, complex *input, int _kindex, double _time)

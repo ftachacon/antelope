@@ -329,8 +329,8 @@ for i in range(Dim):
 
   FullRadiation[i, :] = FFT_InterC[i, :] + FFT_IntraC[i, :]
 
-Sinter = FFT_InterC[0, :] + FFT_InterC[1, :] #+ FFT_InterC[2, :]
-Sintra = FFT_IntraC[0, :] + FFT_IntraC[1, :] #+ FFT_IntraC[2, :]
+Sinter = np.log10( abs(FFT_InterC[0, :])**2 + abs(FFT_InterC[1, :])**2 + hzero) #+ FFT_InterC[2, :]
+Sintra = np.log10( abs(FFT_IntraC[0, :])**2 + abs(FFT_IntraC[1, :])**2 + hzero) #+ FFT_IntraC[2, :]
 # rotate Rz(phiz)Ry(thetaz)
 thetaz = config['laser']['pulses'][refPulse]['thetaz']
 phiz = config['laser']['pulses'][refPulse]['phiz']

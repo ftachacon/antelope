@@ -153,7 +153,7 @@ int main( int argc, char *argv[] )
 
     int kindex;
 
-    array<double, Ndim> tempCurrent;
+    array<double, Ndim> tempCurrent_inter, tempCurrent_intra;
     
     //######################################
     //Opening output files!
@@ -280,10 +280,20 @@ int main( int argc, char *argv[] )
         {
             kindex = jtemp;
 
-            tempCurrent = sbe->GenCurrent(kindex, currenttime);
+            if (sbe->isInterIntra)
+            {
+                tie(tempCurrent_inter, tempCurrent_intra) = sbe->GenInterIntraCurrent(kindex, currenttime);
 
-            inter_rad[0][ktime] += tempCurrent[0] * sbe->kmesh->weight[ kindex ] ;
-            inter_rad[1][ktime] += tempCurrent[1] * sbe->kmesh->weight[ kindex ] ;
+                intra_rad[0][ktime] += tempCurrent_intra[0] * sbe->kmesh->weight[ kindex ];
+                intra_rad[1][ktime] += tempCurrent_intra[1] * sbe->kmesh->weight[ kindex ];
+            }
+            else
+            {
+                tempCurrent_inter = sbe->GenCurrent(kindex, currenttime);
+            }
+
+            inter_rad[0][ktime] += tempCurrent_inter[0] * sbe->kmesh->weight[ kindex ] ;
+            inter_rad[1][ktime] += tempCurrent_inter[1] * sbe->kmesh->weight[ kindex ] ;
 
             for (int m = 0; m < Nband; ++m)
             {
