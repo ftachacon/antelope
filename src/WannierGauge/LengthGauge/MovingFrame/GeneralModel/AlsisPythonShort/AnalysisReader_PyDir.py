@@ -329,8 +329,8 @@ for i in range(Dim):
 
   FullRadiation[i, :] = FFT_InterC[i, :] + FFT_IntraC[i, :]
 
-Sinter = np.log10( abs(FFT_InterC[0, :])**2 + abs(FFT_InterC[1, :])**2 + hzero) #+ FFT_InterC[2, :]
-Sintra = np.log10( abs(FFT_IntraC[0, :])**2 + abs(FFT_IntraC[1, :])**2 + hzero) #+ FFT_IntraC[2, :]
+Sinter = ( abs(FFT_InterC[0, :])**2 + abs(FFT_InterC[1, :])**2 + hzero) #+ FFT_InterC[2, :]
+Sintra = ( abs(FFT_IntraC[0, :])**2 + abs(FFT_IntraC[1, :])**2 + hzero) #+ FFT_IntraC[2, :]
 # rotate Rz(phiz)Ry(thetaz)
 thetaz = config['laser']['pulses'][refPulse]['thetaz']
 phiz = config['laser']['pulses'][refPulse]['phiz']
@@ -441,8 +441,8 @@ fig = plt.figure(figsize=(width,hight) )
 ax1 = fig.add_axes([0.2, 0.15, 0.75, 0.75])
 
 
-p11, = plt.plot( w[Nthalf:Nt-1]/w0, Sinter[Nthalf:Nt-1], 'b',  lw = 1.2, label='$J_{er}$' ) 
-p22, = plt.plot( w[Nthalf:Nt-1]/w0, Sintra[Nthalf:Nt-1], 'r',  lw = 1.2, label='$J_{ra}$' ) 
+p11, = plt.plot( w[Nthalf:Nt-1]/w0, np.log10(Sinter[Nthalf:Nt-1]), 'b',  lw = 1.2, label='$J_{er}$' ) 
+p22, = plt.plot( w[Nthalf:Nt-1]/w0, np.log10(Sintra[Nthalf:Nt-1]), 'r',  lw = 1.2, label='$J_{ra}$' ) 
 
 plt.legend([p11, p22], [ '$J_{er}$', '$J_{ra}$'],fontsize=18)
 
