@@ -1,0 +1,104 @@
+\hypertarget{class_wilson_mass}{}\doxysection{Wilson\+Mass Class Reference}
+\label{class_wilson_mass}\index{WilsonMass@{WilsonMass}}
+
+
+Hamiltonian and dipole generator for 2-\/band square lattice including Wilson mass term.  
+
+
+
+
+{\ttfamily \#include $<$Wilson\+Mass.\+h$>$}
+
+
+
+Inheritance diagram for Wilson\+Mass\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=178pt]{class_wilson_mass__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Wilson\+Mass\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=178pt]{class_wilson_mass__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_wilson_mass_ae3a377c8b1c21cb0997c3281f72ea147}\label{class_wilson_mass_ae3a377c8b1c21cb0997c3281f72ea147}} 
+{\bfseries Wilson\+Mass} (const libconfig\+::\+Setting $\ast$params)
+\item 
+\mbox{\Hypertarget{class_wilson_mass_a3e0cf41addd8c0f1e87952de6527d431}\label{class_wilson_mass_a3e0cf41addd8c0f1e87952de6527d431}} 
+void {\bfseries Gen\+Initial\+Value} (complex $\ast$\+\_\+dmstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\item 
+\mbox{\Hypertarget{class_wilson_mass_ac10f78215eb9ec326fa983a20c8f0c33}\label{class_wilson_mass_ac10f78215eb9ec326fa983a20c8f0c33}} 
+void {\bfseries Gen\+U\+Matrix} (complex $\ast$\+\_\+ustore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\item 
+\mbox{\Hypertarget{class_wilson_mass_aed4048bb4a06169ffc8010852fd46262}\label{class_wilson_mass_aed4048bb4a06169ffc8010852fd46262}} 
+void {\bfseries Gen\+Hamiltonian} (complex $\ast$\+\_\+hstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\item 
+\mbox{\Hypertarget{class_wilson_mass_a5eccf814c7eb68f0b453a14c6b45fa01}\label{class_wilson_mass_a5eccf814c7eb68f0b453a14c6b45fa01}} 
+void {\bfseries Gen\+Dipole} (complex $\ast$$\ast$\+\_\+dstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\item 
+\mbox{\Hypertarget{class_wilson_mass_a41a3114da6dd600adbc08aa2ed024141}\label{class_wilson_mass_a41a3114da6dd600adbc08aa2ed024141}} 
+void {\bfseries Gen\+J\+Matrix} (complex $\ast$$\ast$\+\_\+jstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\item 
+\mbox{\Hypertarget{class_wilson_mass_a234ce32e40498a5516e48bd0ce315b4f}\label{class_wilson_mass_a234ce32e40498a5516e48bd0ce315b4f}} 
+std\+::tuple$<$ std\+::array$<$ double, Ndim $\ast$Ndim $>$, std\+::array$<$ double, Ndim $>$ $>$ {\bfseries Gen\+Brillouinzone} () override
+\item 
+\mbox{\Hypertarget{class_wilson_mass_a1a201f0e9dadfc2bb84f4292506fb65a}\label{class_wilson_mass_a1a201f0e9dadfc2bb84f4292506fb65a}} 
+void {\bfseries Print\+Material\+Information} () override
+\item 
+\mbox{\Hypertarget{class_wilson_mass_a82047f782ebbcdfb9fcfbfaadba1b464}\label{class_wilson_mass_a82047f782ebbcdfb9fcfbfaadba1b464}} 
+void {\bfseries Gen\+Bcomp} (std\+::array$<$ double, Ndim $>$ \+\_\+kpoint)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_wilson_mass_ae30118caf85f75262a3545e3d32f28ab}\label{class_wilson_mass_ae30118caf85f75262a3545e3d32f28ab}} 
+double {\bfseries t}
+\item 
+\mbox{\Hypertarget{class_wilson_mass_a6fb249099e2f0dbc1e34e07ddd98cd78}\label{class_wilson_mass_a6fb249099e2f0dbc1e34e07ddd98cd78}} 
+double {\bfseries delta}
+\item 
+\mbox{\Hypertarget{class_wilson_mass_ae15f770b1156956f902330aabe2326fe}\label{class_wilson_mass_ae15f770b1156956f902330aabe2326fe}} 
+double {\bfseries mu}
+\item 
+\mbox{\Hypertarget{class_wilson_mass_a16af45b5abd7c89da5f5a0456c6a3c54}\label{class_wilson_mass_a16af45b5abd7c89da5f5a0456c6a3c54}} 
+double {\bfseries a0}
+\item 
+\mbox{\Hypertarget{class_wilson_mass_afa15b9b4f4822b8b37a4054cd358c13b}\label{class_wilson_mass_afa15b9b4f4822b8b37a4054cd358c13b}} 
+double {\bfseries a1}
+\item 
+\mbox{\Hypertarget{class_wilson_mass_ab29b78d11706949b09b8f569b79c5f80}\label{class_wilson_mass_ab29b78d11706949b09b8f569b79c5f80}} 
+double \mbox{\hyperlink{class_wilson_mass_ab29b78d11706949b09b8f569b79c5f80}{eps}}
+\begin{DoxyCompactList}\small\item\em to avoid singular norm \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wilson_mass_a1f9b642854f43453d13655bf97903171}\label{class_wilson_mass_a1f9b642854f43453d13655bf97903171}} 
+double {\bfseries Bcomp} \mbox{[}4\mbox{]}
+\item 
+\mbox{\Hypertarget{class_wilson_mass_aad755700c27f7f7307359cb6b1614cb0}\label{class_wilson_mass_aad755700c27f7f7307359cb6b1614cb0}} 
+std\+::array$<$ double, 9 $>$ {\bfseries B\+Zaxis}
+\item 
+\mbox{\Hypertarget{class_wilson_mass_a4b69bf201f9167ba7cfe5d5d8071f0e9}\label{class_wilson_mass_a4b69bf201f9167ba7cfe5d5d8071f0e9}} 
+std\+::array$<$ double, 3 $>$ {\bfseries B\+Zorigin}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Hamiltonian and dipole generator for 2-\/band square lattice including Wilson mass term. 
+
+This class assumes system is pure 2d -\/ no slant plane \begin{DoxyAuthor}{Author}
+Dasol Kim 
+\end{DoxyAuthor}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Materials/Wilson\+Mass.\+h\end{DoxyCompactItemize}

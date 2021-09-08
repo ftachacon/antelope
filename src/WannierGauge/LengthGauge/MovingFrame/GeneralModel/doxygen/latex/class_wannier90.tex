@@ -1,0 +1,183 @@
+\hypertarget{class_wannier90}{}\doxysection{Wannier90 Class Reference}
+\label{class_wannier90}\index{Wannier90@{Wannier90}}
+
+
+Inheritance diagram for Wannier90\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=178pt]{class_wannier90__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Wannier90\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{class_wannier90__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_wannier90_aefd7c34665d823692f7b3ef84d517fbd}\label{class_wannier90_aefd7c34665d823692f7b3ef84d517fbd}} 
+{\bfseries Wannier90} (const libconfig\+::\+Setting $\ast$params)
+\item 
+\mbox{\Hypertarget{class_wannier90_ad499a7b24d6f7c52d8ab2760cab076b7}\label{class_wannier90_ad499a7b24d6f7c52d8ab2760cab076b7}} 
+void {\bfseries Allocate} ()
+\item 
+\mbox{\Hypertarget{class_wannier90_a37fb1eefda5576ded2903ba4da0f194e}\label{class_wannier90_a37fb1eefda5576ded2903ba4da0f194e}} 
+void {\bfseries Set\+Reciprocal\+Basis} ()
+\item 
+\mbox{\Hypertarget{class_wannier90_a16e10274c6d2a3c67e04ac1372216bbb}\label{class_wannier90_a16e10274c6d2a3c67e04ac1372216bbb}} 
+void {\bfseries Gen\+Initial\+Value} (complex $\ast$\+\_\+dmstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\item 
+\mbox{\Hypertarget{class_wannier90_afd359c1a747709516dd58aaf6d4804c9}\label{class_wannier90_afd359c1a747709516dd58aaf6d4804c9}} 
+void {\bfseries Gen\+Hamiltonian} (complex $\ast$\+\_\+hstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\item 
+\mbox{\Hypertarget{class_wannier90_a58af1f4549535098f7b0f4d93c74162b}\label{class_wannier90_a58af1f4549535098f7b0f4d93c74162b}} 
+void {\bfseries Gen\+Dipole} (complex $\ast$$\ast$\+\_\+dstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\item 
+\mbox{\Hypertarget{class_wannier90_a3b96ecd8f5b8910889e50e8af4eaff7f}\label{class_wannier90_a3b96ecd8f5b8910889e50e8af4eaff7f}} 
+void {\bfseries Gen\+J\+Matrix} (complex $\ast$$\ast$\+\_\+jstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\item 
+\mbox{\Hypertarget{class_wannier90_af74aa1a7b44fd91c2f3949f16b300dc5}\label{class_wannier90_af74aa1a7b44fd91c2f3949f16b300dc5}} 
+void {\bfseries Gen\+U\+Matrix} (complex $\ast$\+\_\+ustore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\item 
+\mbox{\Hypertarget{class_wannier90_ac39ac75975f8eccc0833f57dd52c6ddc}\label{class_wannier90_ac39ac75975f8eccc0833f57dd52c6ddc}} 
+std\+::tuple$<$ std\+::array$<$ double, Ndim $\ast$Ndim $>$, std\+::array$<$ double, Ndim $>$ $>$ {\bfseries Gen\+Brillouinzone} () override
+\item 
+\mbox{\Hypertarget{class_wannier90_a457c061366e8cd975f55dbdb1460ddba}\label{class_wannier90_a457c061366e8cd975f55dbdb1460ddba}} 
+void {\bfseries Gen\+Hamiltonian\+Primitive} (complex $\ast$\+\_\+hstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint)
+\item 
+\mbox{\Hypertarget{class_wannier90_a97c8e7ea2f295e8b71e89f1e380df509}\label{class_wannier90_a97c8e7ea2f295e8b71e89f1e380df509}} 
+void {\bfseries Gen\+Dipole\+Primitive} (complex $\ast$$\ast$\+\_\+dstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint)
+\item 
+\mbox{\Hypertarget{class_wannier90_a614a85b4248437ee2eb2084b109e5bdf}\label{class_wannier90_a614a85b4248437ee2eb2084b109e5bdf}} 
+void {\bfseries Gen\+J\+Matrix\+Primitive} (complex $\ast$$\ast$\+\_\+jstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint)
+\item 
+\mbox{\Hypertarget{class_wannier90_a014e75165925536ecfa096769ee3538d}\label{class_wannier90_a014e75165925536ecfa096769ee3538d}} 
+void {\bfseries Print\+Material\+Information} () override
+\item 
+\mbox{\Hypertarget{class_wannier90_a484a9e8dbf8d4ac7c8e47cabc3ca898d}\label{class_wannier90_a484a9e8dbf8d4ac7c8e47cabc3ca898d}} 
+void {\bfseries Calculate\+K\+Mesh} (\mbox{\hyperlink{classmomaxis}{momaxis}} $\ast$\+\_\+kmesh)
+\item 
+\mbox{\Hypertarget{class_wannier90_ab7651389b3245db995b6a2f63704d73c}\label{class_wannier90_ab7651389b3245db995b6a2f63704d73c}} 
+std\+::tuple$<$ int, std\+::array$<$ double, Ndim $>$ $>$ {\bfseries Get\+NearestK} (std\+::array$<$ double, Ndim $>$ \+\_\+kpoint)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_wannier90_ad49969e19fe2541416f82ddab2818f22}\label{class_wannier90_ad49969e19fe2541416f82ddab2818f22}} 
+std\+::array$<$ std\+::array$<$ double, Ndim $>$, Ndim $>$ \mbox{\hyperlink{class_wannier90_ad49969e19fe2541416f82ddab2818f22}{vec\+\_\+lattice}}
+\begin{DoxyCompactList}\small\item\em Bravais lattice vector and Reciprocal lattice vectors. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_a1ceeadba7200710b11ba2078b5bbe860}\label{class_wannier90_a1ceeadba7200710b11ba2078b5bbe860}} 
+std\+::array$<$ std\+::array$<$ double, Ndim $>$, Ndim $>$ {\bfseries vec\+\_\+reciprocal}
+\item 
+\mbox{\Hypertarget{class_wannier90_a5298bf1db805f496d23eaa01324ddf4e}\label{class_wannier90_a5298bf1db805f496d23eaa01324ddf4e}} 
+int \mbox{\hyperlink{class_wannier90_a5298bf1db805f496d23eaa01324ddf4e}{Nrpts}}
+\begin{DoxyCompactList}\small\item\em Number of Bravais lattice vector used in system. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_a634e0f214ac58fbbbd0d0b46f8eb78d2}\label{class_wannier90_a634e0f214ac58fbbbd0d0b46f8eb78d2}} 
+double $\ast$ \mbox{\hyperlink{class_wannier90_a634e0f214ac58fbbbd0d0b46f8eb78d2}{weight}}
+\begin{DoxyCompactList}\small\item\em Weight of unit cell. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_ae9e52a341f727fe5ac115b283c1bdbf4}\label{class_wannier90_ae9e52a341f727fe5ac115b283c1bdbf4}} 
+int $\ast$$\ast$ \mbox{\hyperlink{class_wannier90_ae9e52a341f727fe5ac115b283c1bdbf4}{index\+Rvec}}
+\begin{DoxyCompactList}\small\item\em index of lattice vectors (R = n1 a1 + n2 a2 + n3 a3 ), index\+Rvec\mbox{[}irpt\mbox{]}\mbox{[}0\mbox{]} = n1 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_aa41014c8ddb052f99805604410cea928}\label{class_wannier90_aa41014c8ddb052f99805604410cea928}} 
+int \mbox{\hyperlink{class_wannier90_aa41014c8ddb052f99805604410cea928}{index\+Rorigin}}
+\begin{DoxyCompactList}\small\item\em index which R = 0 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_a9113354aca59d2cc4ce39c16867703e5}\label{class_wannier90_a9113354aca59d2cc4ce39c16867703e5}} 
+bool \mbox{\hyperlink{class_wannier90_a9113354aca59d2cc4ce39c16867703e5}{is\+Dipole\+Zero}}
+\begin{DoxyCompactList}\small\item\em if true choose e$^\wedge$ik(R+t) basis and make Wannier dipole zero \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_a5346b8948c154b1b6b60d08656a7a084}\label{class_wannier90_a5346b8948c154b1b6b60d08656a7a084}} 
+complex $\ast$$\ast$$\ast$ \mbox{\hyperlink{class_wannier90_a5346b8948c154b1b6b60d08656a7a084}{ham\+\_\+w}}
+\begin{DoxyCompactList}\small\item\em Hamiltonian components in Wannier basis, ham\+\_\+w\mbox{[}irpt\mbox{]}\mbox{[}i\mbox{]}\mbox{[}j\mbox{]} = $<$0i$\vert$\+H$\vert$\+Rj$>$ (\mbox{\hyperlink{class_wannier90}{Wannier90}} order) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_aa63063e99920085353146dfb26fd7902}\label{class_wannier90_aa63063e99920085353146dfb26fd7902}} 
+complex $\ast$$\ast$$\ast$$\ast$ \mbox{\hyperlink{class_wannier90_aa63063e99920085353146dfb26fd7902}{pos\+\_\+w}}
+\begin{DoxyCompactList}\small\item\em Position operator in Wannier basis, pos\+\_\+w\mbox{[}irpt\mbox{]}\mbox{[}i\mbox{]}\mbox{[}j\mbox{]}\mbox{[}0\mbox{]} = $<$0i$\vert$x$\vert$\+Rj$>$ (1 -\/ y, 2 -\/ z) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_a8cc006b34c078723ac184ae2d6bdd94d}\label{class_wannier90_a8cc006b34c078723ac184ae2d6bdd94d}} 
+double $\ast$$\ast$$\ast$$\ast$ \mbox{\hyperlink{class_wannier90_a8cc006b34c078723ac184ae2d6bdd94d}{rvec}}
+\begin{DoxyCompactList}\small\item\em value of r vector ( r = R + tn -\/ tm ), rvec\mbox{[}irpt\mbox{]}\mbox{[}m\mbox{]}\mbox{[}n\mbox{]}\mbox{[}0\mbox{]} = (R+tn-\/tm).x \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_aa9927eabc2f66056516cc7dc93f4bd7e}\label{class_wannier90_aa9927eabc2f66056516cc7dc93f4bd7e}} 
+double $\ast$$\ast$ \mbox{\hyperlink{class_wannier90_aa9927eabc2f66056516cc7dc93f4bd7e}{Rvec}}
+\begin{DoxyCompactList}\small\item\em value of R vector, Rvec\mbox{[}irpt\mbox{]}\mbox{[}0\mbox{]} = Rx \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_a72961dd4515d1281deb21c16a2b01386}\label{class_wannier90_a72961dd4515d1281deb21c16a2b01386}} 
+double \mbox{\hyperlink{class_wannier90_a72961dd4515d1281deb21c16a2b01386}{Volume}}
+\begin{DoxyCompactList}\small\item\em volume of unit cell \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_a4dfa8bd1849b74100b0d509a6b9b5ae5}\label{class_wannier90_a4dfa8bd1849b74100b0d509a6b9b5ae5}} 
+\mbox{\hyperlink{classmomaxis}{momaxis}} $\ast$ \mbox{\hyperlink{class_wannier90_a4dfa8bd1849b74100b0d509a6b9b5ae5}{kmesh}}
+\begin{DoxyCompactList}\small\item\em momentum axis used in calculation \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_a6721aa58b6a7262f847daf05e76bd9e2}\label{class_wannier90_a6721aa58b6a7262f847daf05e76bd9e2}} 
+bool \mbox{\hyperlink{class_wannier90_a6721aa58b6a7262f847daf05e76bd9e2}{is\+Mesh\+Allocated}}
+\begin{DoxyCompactList}\small\item\em check pre-\/calculated matrices are allocated or not \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_ae1c7fc0c93cca3a676ed59d20e36bdf6}\label{class_wannier90_ae1c7fc0c93cca3a676ed59d20e36bdf6}} 
+complex $\ast$$\ast$ {\bfseries pre\+\_\+ham}
+\item 
+\mbox{\Hypertarget{class_wannier90_a8f8723b9cf9f7b0a307a9637f394e46b}\label{class_wannier90_a8f8723b9cf9f7b0a307a9637f394e46b}} 
+complex $\ast$$\ast$$\ast$ {\bfseries pre\+\_\+pos}
+\item 
+\mbox{\Hypertarget{class_wannier90_aefba864a735b4499c15fe8a3c66a9f75}\label{class_wannier90_aefba864a735b4499c15fe8a3c66a9f75}} 
+complex $\ast$$\ast$$\ast$ {\bfseries pre\+\_\+jmat}
+\item 
+\mbox{\Hypertarget{class_wannier90_a535ad9a3fdf08760fa6db1dcb00af5c3}\label{class_wannier90_a535ad9a3fdf08760fa6db1dcb00af5c3}} 
+complex $\ast$$\ast$$\ast$ \mbox{\hyperlink{class_wannier90_a535ad9a3fdf08760fa6db1dcb00af5c3}{pre\+\_\+d1ham}}
+\begin{DoxyCompactList}\small\item\em 1st order talyor for Hamiltonian, pre\+\_\+d1ham\mbox{[}kindex\mbox{]}\mbox{[}m$\ast$\+Nband+n\mbox{]}\mbox{[}i\mbox{]} = \textbackslash{}sum\+\_\+R Hmn(\+R)$\ast$\+R\+\_\+i \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_a18493c14c377fa55d81abb8d59a4a21b}\label{class_wannier90_a18493c14c377fa55d81abb8d59a4a21b}} 
+complex $\ast$$\ast$$\ast$$\ast$ \mbox{\hyperlink{class_wannier90_a18493c14c377fa55d81abb8d59a4a21b}{pre\+\_\+d1pos}}
+\begin{DoxyCompactList}\small\item\em 1st order talyor for dipole, pre\+\_\+d1pos\mbox{[}kindex\mbox{]}\mbox{[}i\mbox{]}\mbox{[}m$\ast$\+Nband+n\mbox{]}\mbox{[}j\mbox{]} = \textbackslash{}sum\+\_\+R $<$0m$\vert$r\+\_\+i$\vert$\+Rn$>$$\ast$\+R\+\_\+j \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_ae9615862c82b9ce07f0ad51acb2a4c13}\label{class_wannier90_ae9615862c82b9ce07f0ad51acb2a4c13}} 
+complex $\ast$$\ast$$\ast$$\ast$ \mbox{\hyperlink{class_wannier90_ae9615862c82b9ce07f0ad51acb2a4c13}{pre\+\_\+d1jmat}}
+\begin{DoxyCompactList}\small\item\em 1st order talyor for derivative of Hamiltonian, pre\+\_\+d1jmat\mbox{[}kindex\mbox{]}\mbox{[}i\mbox{]}\mbox{[}m$\ast$\+Nband+n\mbox{]}\mbox{[}j\mbox{]} = -\/im $\ast$sum\+\_\+R R\+\_\+i$\ast$\+R\+\_\+j$\ast$\+Hmn(R) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_a86acd8be8d41db489111ed538ab31b0d}\label{class_wannier90_a86acd8be8d41db489111ed538ab31b0d}} 
+complex $\ast$$\ast$$\ast$$\ast$ \mbox{\hyperlink{class_wannier90_a86acd8be8d41db489111ed538ab31b0d}{pre\+\_\+d2ham}}
+\begin{DoxyCompactList}\small\item\em 2nd order talyor for Hamiltonian \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_ab945fa8f1245cd1ae7e170adc6f83565}\label{class_wannier90_ab945fa8f1245cd1ae7e170adc6f83565}} 
+complex $\ast$$\ast$$\ast$$\ast$$\ast$ \mbox{\hyperlink{class_wannier90_ab945fa8f1245cd1ae7e170adc6f83565}{pre\+\_\+d2pos}}
+\begin{DoxyCompactList}\small\item\em 2nd order talyor for dipole, \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_adbed12f071583474312c9bdc153923ae}\label{class_wannier90_adbed12f071583474312c9bdc153923ae}} 
+complex $\ast$$\ast$$\ast$$\ast$$\ast$ \mbox{\hyperlink{class_wannier90_adbed12f071583474312c9bdc153923ae}{pre\+\_\+d2jmat}}
+\begin{DoxyCompactList}\small\item\em 2nd order talyor for derivative of Hamiltonian \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_a7b3bbfa4d00d539f4fd302d147e8c26c}\label{class_wannier90_a7b3bbfa4d00d539f4fd302d147e8c26c}} 
+double \mbox{\hyperlink{class_wannier90_a7b3bbfa4d00d539f4fd302d147e8c26c}{FermiE}}
+\begin{DoxyCompactList}\small\item\em Fermi energy in atomic unit. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_af545a709d0ef2bbc40cabed208cdbb52}\label{class_wannier90_af545a709d0ef2bbc40cabed208cdbb52}} 
+bool \mbox{\hyperlink{class_wannier90_af545a709d0ef2bbc40cabed208cdbb52}{is\+Fermi\+E\+Used}}
+\begin{DoxyCompactList}\small\item\em if true Fermi energy is used to generate initial value. if false valence band number is used. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_a63622fe5c5309c56f00d8e9966fd6e7c}\label{class_wannier90_a63622fe5c5309c56f00d8e9966fd6e7c}} 
+double \mbox{\hyperlink{class_wannier90_a63622fe5c5309c56f00d8e9966fd6e7c}{thermalE}}
+\begin{DoxyCompactList}\small\item\em temperature in atomic unit (300K is defalut) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_a532136972476d071a3b2bc41694ee18c}\label{class_wannier90_a532136972476d071a3b2bc41694ee18c}} 
+double \mbox{\hyperlink{class_wannier90_a532136972476d071a3b2bc41694ee18c}{eps}}
+\begin{DoxyCompactList}\small\item\em error epsilon used in this class \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_wannier90_a60fe622844ba05a7c5a66008f128c001}\label{class_wannier90_a60fe622844ba05a7c5a66008f128c001}} 
+std\+::array$<$ double, 9 $>$ {\bfseries B\+Zaxis}
+\item 
+\mbox{\Hypertarget{class_wannier90_a9e87a2f38762951d30aca7001a9a9d4a}\label{class_wannier90_a9e87a2f38762951d30aca7001a9a9d4a}} 
+std\+::array$<$ double, 3 $>$ {\bfseries B\+Zorigin}
+\item 
+\mbox{\Hypertarget{class_wannier90_a7f0a7f4d3f100e791f27e21b0459f9c5}\label{class_wannier90_a7f0a7f4d3f100e791f27e21b0459f9c5}} 
+complex $\ast$$\ast$ {\bfseries temp\+Hamiltonian}
+\item 
+\mbox{\Hypertarget{class_wannier90_a7a9cac45f5db66f56ea0ae3aa8c1f83f}\label{class_wannier90_a7a9cac45f5db66f56ea0ae3aa8c1f83f}} 
+complex $\ast$$\ast$ {\bfseries temp\+Umat}
+\item 
+\mbox{\Hypertarget{class_wannier90_af498b64b4b54806cf2866f086ebe85ef}\label{class_wannier90_af498b64b4b54806cf2866f086ebe85ef}} 
+complex $\ast$$\ast$ {\bfseries tempctrans\+Umat}
+\item 
+\mbox{\Hypertarget{class_wannier90_a6d82aa12a880021c87b9bddcdf4ad692}\label{class_wannier90_a6d82aa12a880021c87b9bddcdf4ad692}} 
+complex $\ast$$\ast$ {\bfseries temp\+Matrix}
+\item 
+\mbox{\Hypertarget{class_wannier90_ac7664ca73a1b75644b3dee9f74849d39}\label{class_wannier90_ac7664ca73a1b75644b3dee9f74849d39}} 
+double $\ast$$\ast$ {\bfseries temp\+Eigval}
+\item 
+\mbox{\Hypertarget{class_wannier90_a3fa1646b6c2b6074366b7822314a4ce2}\label{class_wannier90_a3fa1646b6c2b6074366b7822314a4ce2}} 
+int $\ast$$\ast$ {\bfseries isuppz}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Materials/Wannier90.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,119 @@
+\hypertarget{class_base_material}{}\doxysection{Base\+Material Class Reference}
+\label{class_base_material}\index{BaseMaterial@{BaseMaterial}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_base_material_a90dd928adc8fff78b06a3e19bc133f49}\label{class_base_material_a90dd928adc8fff78b06a3e19bc133f49}} 
+virtual \mbox{\hyperlink{class_base_material_a90dd928adc8fff78b06a3e19bc133f49}{$\sim$\+Base\+Material}} ()
+\begin{DoxyCompactList}\small\item\em virtual desctructor is used to prevent memory leak \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_base_material_ad2630d3b55e2a642d21fa6d3d8c867ed}{Gen\+Initial\+Value}} (complex $\ast$\+\_\+dmstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint)
+\item 
+virtual void \mbox{\hyperlink{class_base_material_a4090b0669eefbd99b3bf824e0ef65810}{Gen\+Hamiltonian}} (complex $\ast$\+\_\+hstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint)=0
+\begin{DoxyCompactList}\small\item\em Generate Hamiltonian matrix -\/ tight binding matrix. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_base_material_af8a9f23ac1ddcb07afd9657582377af7}{Gen\+Dipole}} (complex $\ast$$\ast$\+\_\+dstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint)=0
+\begin{DoxyCompactList}\small\item\em Generate dipole matrix in Wannier basis. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_base_material_af40f6eb595ac0437cea9bb94f4bf036b}{Gen\+J\+Matrix}} (complex $\ast$$\ast$\+\_\+jstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint)=0
+\begin{DoxyCompactList}\small\item\em Generate interband and intraband current matrix. \end{DoxyCompactList}\item 
+virtual std\+::tuple$<$ std\+::array$<$ double, Ndim $\ast$Ndim $>$, std\+::array$<$ double, Ndim $>$ $>$ \mbox{\hyperlink{class_base_material_ad502cd0e3d6c200489a07476bc579f0c}{Gen\+Brillouinzone}} ()=0
+\begin{DoxyCompactList}\small\item\em Generate Brillouin zone information. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_base_material_a17addbe0f1a21e939995a9234c10b42c}\label{class_base_material_a17addbe0f1a21e939995a9234c10b42c}} 
+virtual void {\bfseries Print\+Material\+Information} ()=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_base_material_a450fe898d8f43d6eb075ec92c6a11241}\label{class_base_material_a450fe898d8f43d6eb075ec92c6a11241}} 
+int \mbox{\hyperlink{class_base_material_a450fe898d8f43d6eb075ec92c6a11241}{Nband}}
+\begin{DoxyCompactList}\small\item\em Number of bands. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_base_material_a271a5f25c64e0b7dae8f344d076fb328}\label{class_base_material_a271a5f25c64e0b7dae8f344d076fb328}} 
+int \mbox{\hyperlink{class_base_material_a271a5f25c64e0b7dae8f344d076fb328}{Nval}}
+\begin{DoxyCompactList}\small\item\em Number of valence bands -\/ only used for indicating which band is lowest conduction band. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_base_material_ad502cd0e3d6c200489a07476bc579f0c}\label{class_base_material_ad502cd0e3d6c200489a07476bc579f0c}} 
+\index{BaseMaterial@{BaseMaterial}!GenBrillouinzone@{GenBrillouinzone}}
+\index{GenBrillouinzone@{GenBrillouinzone}!BaseMaterial@{BaseMaterial}}
+\doxysubsubsection{\texorpdfstring{GenBrillouinzone()}{GenBrillouinzone()}}
+{\footnotesize\ttfamily virtual std\+::tuple$<$std\+::array$<$double, Ndim$\ast$Ndim$>$, std\+::array$<$double, Ndim$>$ $>$ Base\+Material\+::\+Gen\+Brillouinzone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Generate Brillouin zone information. 
+
+To use this function, see below example.
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} [axes, origin] = \mbox{\hyperlink{class_base_material_ad502cd0e3d6c200489a07476bc579f0c}{GenBrillouinzone}}(); }
+\end{DoxyCode}
+ \begin{DoxyReturn}{Returns}
+Brillouin zone axes and origin points are returned as a tuple 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_base_material_af8a9f23ac1ddcb07afd9657582377af7}\label{class_base_material_af8a9f23ac1ddcb07afd9657582377af7}} 
+\index{BaseMaterial@{BaseMaterial}!GenDipole@{GenDipole}}
+\index{GenDipole@{GenDipole}!BaseMaterial@{BaseMaterial}}
+\doxysubsubsection{\texorpdfstring{GenDipole()}{GenDipole()}}
+{\footnotesize\ttfamily virtual void Base\+Material\+::\+Gen\+Dipole (\begin{DoxyParamCaption}\item[{complex $\ast$$\ast$}]{\+\_\+dstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Generate dipole matrix in Wannier basis. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+dstore} & dipole matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_base_material_a4090b0669eefbd99b3bf824e0ef65810}\label{class_base_material_a4090b0669eefbd99b3bf824e0ef65810}} 
+\index{BaseMaterial@{BaseMaterial}!GenHamiltonian@{GenHamiltonian}}
+\index{GenHamiltonian@{GenHamiltonian}!BaseMaterial@{BaseMaterial}}
+\doxysubsubsection{\texorpdfstring{GenHamiltonian()}{GenHamiltonian()}}
+{\footnotesize\ttfamily virtual void Base\+Material\+::\+Gen\+Hamiltonian (\begin{DoxyParamCaption}\item[{complex $\ast$}]{\+\_\+hstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Generate Hamiltonian matrix -\/ tight binding matrix. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+hstore} & Hamiltonian matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_base_material_ad2630d3b55e2a642d21fa6d3d8c867ed}\label{class_base_material_ad2630d3b55e2a642d21fa6d3d8c867ed}} 
+\index{BaseMaterial@{BaseMaterial}!GenInitialValue@{GenInitialValue}}
+\index{GenInitialValue@{GenInitialValue}!BaseMaterial@{BaseMaterial}}
+\doxysubsubsection{\texorpdfstring{GenInitialValue()}{GenInitialValue()}}
+{\footnotesize\ttfamily virtual void Base\+Material\+::\+Gen\+Initial\+Value (\begin{DoxyParamCaption}\item[{complex $\ast$}]{\+\_\+dmstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Generate custom initial value of density matrix. Should be used only when you need strange initial value. This is not pure virtual function. One can ignore this when implementing Material class. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+dmstore} & Initial value of density matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_base_material_af40f6eb595ac0437cea9bb94f4bf036b}\label{class_base_material_af40f6eb595ac0437cea9bb94f4bf036b}} 
+\index{BaseMaterial@{BaseMaterial}!GenJMatrix@{GenJMatrix}}
+\index{GenJMatrix@{GenJMatrix}!BaseMaterial@{BaseMaterial}}
+\doxysubsubsection{\texorpdfstring{GenJMatrix()}{GenJMatrix()}}
+{\footnotesize\ttfamily virtual void Base\+Material\+::\+Gen\+J\+Matrix (\begin{DoxyParamCaption}\item[{complex $\ast$$\ast$}]{\+\_\+jstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Generate interband and intraband current matrix. 
+
+Remember 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+jstore} & store  \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Base\+Material.\+h\end{DoxyCompactItemize}

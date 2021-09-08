@@ -1,0 +1,100 @@
+\hypertarget{constant_8h}{}\section{constant.\+h File Reference}
+\label{constant_8h}\index{constant.\+h@{constant.\+h}}
+
+
+collection of constants used in projects  
+
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$iomanip$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$new$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$complex$>$}\newline
+Include dependency graph for constant.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{constant_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{constant_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{constant_8h_a0fa4878c968311979d497ccc322e0b9b}\label{constant_8h_a0fa4878c968311979d497ccc322e0b9b}} 
+\#define {\bfseries complex}~complex$<$double$>$
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{constant_8h_a84766755f1790ca6b1d72ea1e5c0c84d}\label{constant_8h_a84766755f1790ca6b1d72ea1e5c0c84d}} 
+enum {\bfseries gauge\+\_\+t} \{ {\bfseries lengthgauge}, 
+{\bfseries velocitygauge}, 
+{\bfseries othergauge}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{constant_8h_a7585f9c650521ad09bbed8c7369caf87}\label{constant_8h_a7585f9c650521ad09bbed8c7369caf87}} 
+const complex {\bfseries I} =complex(0.,1.)
+\item 
+\mbox{\Hypertarget{constant_8h_ab5f35545b4531bbbca29a040df114df7}\label{constant_8h_ab5f35545b4531bbbca29a040df114df7}} 
+const double {\bfseries light\+C\+\_\+au} = 137.\+036
+\item 
+\mbox{\Hypertarget{constant_8h_a6f8214a667cdc6df19741f0a0af6d522}\label{constant_8h_a6f8214a667cdc6df19741f0a0af6d522}} 
+const double {\bfseries one\+\_\+by\+\_\+light\+C\+\_\+au} = 1./light\+C\+\_\+au
+\item 
+\mbox{\Hypertarget{constant_8h_a43016d873124d39034edb8cd164794db}\label{constant_8h_a43016d873124d39034edb8cd164794db}} 
+const double {\bfseries pi} = 4.\+0$\ast$atan(1.\+0)
+\item 
+\mbox{\Hypertarget{constant_8h_ae11e01cd32d72dedca12d3bce0fad0cf}\label{constant_8h_ae11e01cd32d72dedca12d3bce0fad0cf}} 
+const double {\bfseries dospi} = 2.$\ast$pi
+\item 
+\mbox{\Hypertarget{constant_8h_ac22f468e7d2428a3d207d4289a5829d9}\label{constant_8h_ac22f468e7d2428a3d207d4289a5829d9}} 
+const double {\bfseries charge\+\_\+electron\+\_\+au} = -\/1.
+\item 
+\mbox{\Hypertarget{constant_8h_a2a4c4ca434b322c014aad8044cc5c92f}\label{constant_8h_a2a4c4ca434b322c014aad8044cc5c92f}} 
+const double {\bfseries mass\+\_\+proton\+\_\+au} =1836.
+\item 
+\mbox{\Hypertarget{constant_8h_a2a22537ccd44a91d9f4e451bbcd16c1b}\label{constant_8h_a2a22537ccd44a91d9f4e451bbcd16c1b}} 
+const double {\bfseries Bohr\+Radius} = 5.\+29177211e-\/11
+\item 
+\mbox{\Hypertarget{constant_8h_a9ceb5d44f3112547947447130ffab259}\label{constant_8h_a9ceb5d44f3112547947447130ffab259}} 
+const double {\bfseries time\+\_\+\+SI} = 2.\+418884326505e-\/17
+\item 
+\mbox{\Hypertarget{constant_8h_a09cb48bff5c2713754775fd586e4ce46}\label{constant_8h_a09cb48bff5c2713754775fd586e4ce46}} 
+const double {\bfseries light\+C\+\_\+\+SI} = 2.\+99792458e8
+\item 
+\mbox{\Hypertarget{constant_8h_a96de22898fc50728ad0b992bf10c5013}\label{constant_8h_a96de22898fc50728ad0b992bf10c5013}} 
+const double \hyperlink{constant_8h_a96de22898fc50728ad0b992bf10c5013}{angstrom\+\_\+au} = 0.\+529177210903
+\begin{DoxyCompactList}\small\item\em 1 a.\+u. in $\AA$ \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{constant_8h_a8350e49b084965f39c98af0cd870df44}\label{constant_8h_a8350e49b084965f39c98af0cd870df44}} 
+const double \hyperlink{constant_8h_a8350e49b084965f39c98af0cd870df44}{e\+V\+\_\+au} = 27.\+211386245988
+\begin{DoxyCompactList}\small\item\em 1 a.\+u. in eV \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{constant_8h_aaeefe3df0040a9a6d699b85eb826c3e6}\label{constant_8h_aaeefe3df0040a9a6d699b85eb826c3e6}} 
+const int {\bfseries Ndim} = 3
+\item 
+\mbox{\Hypertarget{constant_8h_a957c4ea902833ed08f112787ca559a21}\label{constant_8h_a957c4ea902833ed08f112787ca559a21}} 
+const int {\bfseries Ngrad} = 2
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+collection of constants used in projects 
+
+\begin{DoxyAuthor}{Author}
+Dasol Kim 
+
+Alexis Agustín Chacón Salazar 
+\end{DoxyAuthor}

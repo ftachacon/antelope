@@ -1,0 +1,162 @@
+\hypertarget{class_t_m_d_cs}{}\doxysection{T\+M\+D\+Cs Class Reference}
+\label{class_t_m_d_cs}\index{TMDCs@{TMDCs}}
+
+
+Inheritance diagram for T\+M\+D\+Cs\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=178pt]{class_t_m_d_cs__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for T\+M\+D\+Cs\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=178pt]{class_t_m_d_cs__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a86192521fdb2fd08765f2410f77df31b}\label{class_t_m_d_cs_a86192521fdb2fd08765f2410f77df31b}} 
+{\bfseries T\+M\+D\+Cs} (const libconfig\+::\+Setting $\ast$params)
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_aadaf41504a0a43c762284b7a8192e018}\label{class_t_m_d_cs_aadaf41504a0a43c762284b7a8192e018}} 
+void {\bfseries Gen\+Initial\+Value} (complex $\ast$\+\_\+dmstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_ae20a64c87b9166c78d3206ef7992d1f8}\label{class_t_m_d_cs_ae20a64c87b9166c78d3206ef7992d1f8}} 
+void {\bfseries Gen\+U\+Matrix} (complex $\ast$\+\_\+ustore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_ab7f79dc7186b28a986e96d4b1418ba3b}\label{class_t_m_d_cs_ab7f79dc7186b28a986e96d4b1418ba3b}} 
+void {\bfseries Gen\+Hamiltonian} (complex $\ast$\+\_\+hstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a0001fc5456a51d1930ebb5807868da1e}\label{class_t_m_d_cs_a0001fc5456a51d1930ebb5807868da1e}} 
+void {\bfseries Gen\+Dipole} (complex $\ast$$\ast$\+\_\+dstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_aaa9120a5ae8a80ec2196615708e6a220}\label{class_t_m_d_cs_aaa9120a5ae8a80ec2196615708e6a220}} 
+void {\bfseries Gen\+J\+Matrix} (complex $\ast$$\ast$\+\_\+jstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a4d32b26b1d107b53932feac418c848b4}\label{class_t_m_d_cs_a4d32b26b1d107b53932feac418c848b4}} 
+std\+::tuple$<$ std\+::array$<$ double, Ndim $\ast$Ndim $>$, std\+::array$<$ double, Ndim $>$ $>$ {\bfseries Gen\+Brillouinzone} () override
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a05d0bd8c486f3a5fa7bf9181d666e46d}\label{class_t_m_d_cs_a05d0bd8c486f3a5fa7bf9181d666e46d}} 
+void {\bfseries Print\+Material\+Information} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a377fc8411bad2f1b937d4fc6c32928ae}\label{class_t_m_d_cs_a377fc8411bad2f1b937d4fc6c32928ae}} 
+double {\bfseries e1}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_abd314eabbb1294d318d0923ad7406d4b}\label{class_t_m_d_cs_abd314eabbb1294d318d0923ad7406d4b}} 
+double {\bfseries e2}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a2999de9a6ebf2b01659c4a2453c5b55e}\label{class_t_m_d_cs_a2999de9a6ebf2b01659c4a2453c5b55e}} 
+double {\bfseries t0}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_ad225a1209c05a1b3652e462b5f1a126f}\label{class_t_m_d_cs_ad225a1209c05a1b3652e462b5f1a126f}} 
+double {\bfseries t1}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a1372d5c3da214de50ad346a6b9f0b2d8}\label{class_t_m_d_cs_a1372d5c3da214de50ad346a6b9f0b2d8}} 
+double {\bfseries t2}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a9a1757323d5698de2a6ca92c538eca8c}\label{class_t_m_d_cs_a9a1757323d5698de2a6ca92c538eca8c}} 
+double {\bfseries t11}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a833b51f28e1b274f8d3ed661c18d02d6}\label{class_t_m_d_cs_a833b51f28e1b274f8d3ed661c18d02d6}} 
+double {\bfseries t12}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_add6b0686cbdae941da3ae196668374da}\label{class_t_m_d_cs_add6b0686cbdae941da3ae196668374da}} 
+double {\bfseries t22}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_ad83ad895d307c6e0c16468177d9d3de9}\label{class_t_m_d_cs_ad83ad895d307c6e0c16468177d9d3de9}} 
+double {\bfseries r0}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_adf14229ddca283fa73cb85d28cf6eafe}\label{class_t_m_d_cs_adf14229ddca283fa73cb85d28cf6eafe}} 
+double {\bfseries r2}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a7502b780078cdaa5a5d9474274ce7eab}\label{class_t_m_d_cs_a7502b780078cdaa5a5d9474274ce7eab}} 
+double {\bfseries r11}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a8cc9b6c9a5a43676887d79f92b2d9df9}\label{class_t_m_d_cs_a8cc9b6c9a5a43676887d79f92b2d9df9}} 
+double {\bfseries r12}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_af904b215a0196b34e180da2f5698ae72}\label{class_t_m_d_cs_af904b215a0196b34e180da2f5698ae72}} 
+double {\bfseries u0}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_af9409d474fd2339ea612b3518cf8392c}\label{class_t_m_d_cs_af9409d474fd2339ea612b3518cf8392c}} 
+double {\bfseries u1}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_ab343cd85a8695f7063404843ab334e16}\label{class_t_m_d_cs_ab343cd85a8695f7063404843ab334e16}} 
+double {\bfseries u2}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a187277417af3af49aa13839fe70c9834}\label{class_t_m_d_cs_a187277417af3af49aa13839fe70c9834}} 
+double {\bfseries u11}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a868be14c0684cf7e80623b6e1c598207}\label{class_t_m_d_cs_a868be14c0684cf7e80623b6e1c598207}} 
+double {\bfseries u12}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a5b0d340a1fb08d02b2f8cf4dae636aba}\label{class_t_m_d_cs_a5b0d340a1fb08d02b2f8cf4dae636aba}} 
+double {\bfseries u22}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_ac34b076443ac928819bd74e53642baef}\label{class_t_m_d_cs_ac34b076443ac928819bd74e53642baef}} 
+double {\bfseries r1}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a249a4b9af6911255bee0d369cb140bed}\label{class_t_m_d_cs_a249a4b9af6911255bee0d369cb140bed}} 
+double {\bfseries a0}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a0c47b7cffbf82313ac899898877a9bca}\label{class_t_m_d_cs_a0c47b7cffbf82313ac899898877a9bca}} 
+double {\bfseries socparam}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_aa506e139a2fb175d0907f1493c831460}\label{class_t_m_d_cs_aa506e139a2fb175d0907f1493c831460}} 
+double \mbox{\hyperlink{class_t_m_d_cs_aa506e139a2fb175d0907f1493c831460}{vec\+\_\+a}} \mbox{[}3\mbox{]}\mbox{[}2\mbox{]}
+\begin{DoxyCompactList}\small\item\em 3 NN vectors (from A to B ) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a3a1153dd66eaf5a3b301a1b06ce57667}\label{class_t_m_d_cs_a3a1153dd66eaf5a3b301a1b06ce57667}} 
+double \mbox{\hyperlink{class_t_m_d_cs_a3a1153dd66eaf5a3b301a1b06ce57667}{vec\+\_\+b}} \mbox{[}3\mbox{]}\mbox{[}2\mbox{]}
+\begin{DoxyCompactList}\small\item\em 3 N\+NN vectors (from A to A, or B to B) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_t_m_d_cs_aa2f004d092adabcc744e061af32db9ce}\label{class_t_m_d_cs_aa2f004d092adabcc744e061af32db9ce}} 
+double \mbox{\hyperlink{class_t_m_d_cs_aa2f004d092adabcc744e061af32db9ce}{eps}}
+\begin{DoxyCompactList}\small\item\em to avoid singular norm \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a9fb59b84db712eac9655335fffbcb5e9}\label{class_t_m_d_cs_a9fb59b84db712eac9655335fffbcb5e9}} 
+bool {\bfseries is\+S\+OC}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a34ba13a84ac8a6411f900cc238888fba}\label{class_t_m_d_cs_a34ba13a84ac8a6411f900cc238888fba}} 
+string {\bfseries material}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a58c8672174ad384c443c0119ff1f840c}\label{class_t_m_d_cs_a58c8672174ad384c443c0119ff1f840c}} 
+double {\bfseries angle\+\_\+a0} \mbox{[}3\mbox{]}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_af07f71f49fdffebc5263d5e9acadd045}\label{class_t_m_d_cs_af07f71f49fdffebc5263d5e9acadd045}} 
+double {\bfseries angle\+\_\+b0} \mbox{[}3\mbox{]}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a94df5225f6d08c1184de8a0fd50b85eb}\label{class_t_m_d_cs_a94df5225f6d08c1184de8a0fd50b85eb}} 
+std\+::array$<$ double, 9 $>$ {\bfseries B\+Zaxis}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a0017976541b7387d4077a82083f2fa0e}\label{class_t_m_d_cs_a0017976541b7387d4077a82083f2fa0e}} 
+std\+::array$<$ double, 3 $>$ {\bfseries B\+Zorigin}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_ae5ca908cc2058e625759aac5d012899f}\label{class_t_m_d_cs_ae5ca908cc2058e625759aac5d012899f}} 
+complex $\ast$ {\bfseries temp\+Umat}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a9bfef108fda2b450f4930bbd6c65524d}\label{class_t_m_d_cs_a9bfef108fda2b450f4930bbd6c65524d}} 
+complex $\ast$ {\bfseries tempctrans\+Umat}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a281f23d6e97f94d222fe359fac975315}\label{class_t_m_d_cs_a281f23d6e97f94d222fe359fac975315}} 
+complex $\ast$ {\bfseries temp\+Hmat}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_afb54047185d0d79932f5a55ad3cf68a2}\label{class_t_m_d_cs_afb54047185d0d79932f5a55ad3cf68a2}} 
+double $\ast$ {\bfseries temp\+Eval}
+\item 
+\mbox{\Hypertarget{class_t_m_d_cs_a53f200d3f59b3de0e023ce04d7fee4ff}\label{class_t_m_d_cs_a53f200d3f59b3de0e023ce04d7fee4ff}} 
+int $\ast$ {\bfseries temp\+Isuppz}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Materials/T\+M\+D\+Cs.\+h\end{DoxyCompactItemize}

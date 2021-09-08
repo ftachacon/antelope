@@ -1,0 +1,151 @@
+\hypertarget{classoperators}{}\section{operators Class Reference}
+\label{classoperators}\index{operators@{operators}}
+
+
+Collaboration diagram for operators\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=137pt]{classoperators__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classoperators_ae7b42c8f5ae3b6b740e5aa47a8e2961a}\label{classoperators_ae7b42c8f5ae3b6b740e5aa47a8e2961a}} 
+{\bfseries operators} (\hyperlink{classmomaxis}{momaxis} $\ast$\+\_\+g)
+\item 
+\mbox{\Hypertarget{classoperators_a9686d933e5ed50f905a19f494ed19b2b}\label{classoperators_a9686d933e5ed50f905a19f494ed19b2b}} 
+{\bfseries $\sim$operators} ()
+\item 
+\mbox{\Hypertarget{classoperators_a3a2e6d036be665d319edfead1b9cc407}\label{classoperators_a3a2e6d036be665d319edfead1b9cc407}} 
+void {\bfseries set\+\_\+memory} ()
+\item 
+\mbox{\Hypertarget{classoperators_a0b9d76317aaa6c2f8fd75f51b86615a4}\label{classoperators_a0b9d76317aaa6c2f8fd75f51b86615a4}} 
+void {\bfseries xdiff} (const complex up\+\_\+y, const complex down\+\_\+y, complex $\ast$res)
+\item 
+\mbox{\Hypertarget{classoperators_ad32ca25bf9ddefd93b0560a0d93f31a1}\label{classoperators_ad32ca25bf9ddefd93b0560a0d93f31a1}} 
+complex {\bfseries xdiff\+\_\+v2} (const complex up\+\_\+y, const complex down\+\_\+y)
+\item 
+\mbox{\Hypertarget{classoperators_afff8b5337888a5bf07c5aa8219ccae26}\label{classoperators_afff8b5337888a5bf07c5aa8219ccae26}} 
+void {\bfseries ydiff} (const complex up\+\_\+y, const complex down\+\_\+y, complex $\ast$res)
+\item 
+\mbox{\Hypertarget{classoperators_a7429f6d7966b0164b1a18c69e76afb6f}\label{classoperators_a7429f6d7966b0164b1a18c69e76afb6f}} 
+void {\bfseries x\+\_\+full\+\_\+der\+\_\+op} (complex alp, complex $\ast$f)
+\item 
+\mbox{\Hypertarget{classoperators_abe6c7b396efa78e76e738e2ea52a2ab8}\label{classoperators_abe6c7b396efa78e76e738e2ea52a2ab8}} 
+void {\bfseries y\+\_\+full\+\_\+der\+\_\+op} (complex alp, complex $\ast$f)
+\item 
+\mbox{\Hypertarget{classoperators_a398a16c8c25659313f3cfd25fc3e607f}\label{classoperators_a398a16c8c25659313f3cfd25fc3e607f}} 
+void {\bfseries x\+\_\+der\+\_\+evaluation} (complex alp, const complex $\ast$f)
+\item 
+\mbox{\Hypertarget{classoperators_a5c9a0945340654bfed9eeef1a3fc3574}\label{classoperators_a5c9a0945340654bfed9eeef1a3fc3574}} 
+void {\bfseries y\+\_\+der\+\_\+evaluation} (complex alp, const complex $\ast$f)
+\item 
+\mbox{\Hypertarget{classoperators_a53d6e5ae956d4adc4577f8ba7c4a3914}\label{classoperators_a53d6e5ae956d4adc4577f8ba7c4a3914}} 
+void {\bfseries pot\+\_\+unitary\+\_\+propagator} (double egap, double xchigap, double ychigap, double T2, complex efield, double dt)
+\item 
+\mbox{\Hypertarget{classoperators_a8260fe680fd217b3fa8291cec2c915a9}\label{classoperators_a8260fe680fd217b3fa8291cec2c915a9}} 
+void {\bfseries xkinetic\+\_\+unitary\+\_\+propagator} (const complex $\ast$f, complex efield, double dt)
+\item 
+\mbox{\Hypertarget{classoperators_a6ddbc5130990c4eecc2e42ddd7b90ebe}\label{classoperators_a6ddbc5130990c4eecc2e42ddd7b90ebe}} 
+void {\bfseries forward\+\_\+prop} (complex $\ast$f, const \hyperlink{classsolidstructure}{solidstructure} $\ast$s, complex efield, double dt, complex beta)
+\item 
+\mbox{\Hypertarget{classoperators_ab7f9622ec6de892c4c41b0af763d2c9d}\label{classoperators_ab7f9622ec6de892c4c41b0af763d2c9d}} 
+void {\bfseries backward\+\_\+prop} (complex $\ast$u, complex $\ast$ra, const \hyperlink{classsolidstructure}{solidstructure} $\ast$s, complex efield, double dt)
+\item 
+\mbox{\Hypertarget{classoperators_abcac33b81e1cdc8b76ef1e58976f101c}\label{classoperators_abcac33b81e1cdc8b76ef1e58976f101c}} 
+void {\bfseries forward\+\_\+prop\+\_\+occup} (complex $\ast$f, complex efield, double dt, complex beta)
+\item 
+\mbox{\Hypertarget{classoperators_ab96c5c6866545f638e4577c1482eea89}\label{classoperators_ab96c5c6866545f638e4577c1482eea89}} 
+void {\bfseries backward\+\_\+prop\+\_\+occup} (complex $\ast$u, complex $\ast$ra, complex efield, double dt)
+\item 
+\mbox{\Hypertarget{classoperators_af1fc95cb65ba7b0ffbd160a13e4dea63}\label{classoperators_af1fc95cb65ba7b0ffbd160a13e4dea63}} 
+void {\bfseries solution} (complex $\ast$fsol, complex $\ast$ug, complex $\ast$homog)
+\item 
+\mbox{\Hypertarget{classoperators_a9314a84077f03d21b56c2fa200e8c22d}\label{classoperators_a9314a84077f03d21b56c2fa200e8c22d}} 
+void {\bfseries copy\+\_\+density\+\_\+matrix} (complex $\ast$dest, const complex $\ast$source)
+\item 
+\mbox{\Hypertarget{classoperators_a770b97be108142e5822f235eb04ca42b}\label{classoperators_a770b97be108142e5822f235eb04ca42b}} 
+void {\bfseries nrerror} (char error\+\_\+text\mbox{[}$\,$\mbox{]})
+\item 
+\mbox{\Hypertarget{classoperators_aa321ce776b8dbe506f2eae1e82705cad}\label{classoperators_aa321ce776b8dbe506f2eae1e82705cad}} 
+void {\bfseries tridag} (complex $\ast$a, complex $\ast$b, complex $\ast$c, complex $\ast$r, complex $\ast$u, complex $\ast$gam1, int $\ast$Nq)
+\item 
+\mbox{\Hypertarget{classoperators_a4a9b84e1102bb00b07346c0fa5e1e814}\label{classoperators_a4a9b84e1102bb00b07346c0fa5e1e814}} 
+void {\bfseries linear\+\_\+interpolation} (complex $\ast$inf, const complex $\ast$f)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classoperators_aab269ba46605e8b3da6bc6f7dab188a6}\label{classoperators_aab269ba46605e8b3da6bc6f7dab188a6}} 
+\hyperlink{classmomaxis}{momaxis} $\ast$ {\bfseries g}
+\item 
+\mbox{\Hypertarget{classoperators_aded8e644b50e611083f3aec8ddc61625}\label{classoperators_aded8e644b50e611083f3aec8ddc61625}} 
+int {\bfseries i}
+\item 
+\mbox{\Hypertarget{classoperators_ad271b8ca6f9254b2668a9f2df5d77324}\label{classoperators_ad271b8ca6f9254b2668a9f2df5d77324}} 
+int {\bfseries j}
+\item 
+\mbox{\Hypertarget{classoperators_a1790a61f04b03469fbb37002b502a26c}\label{classoperators_a1790a61f04b03469fbb37002b502a26c}} 
+int {\bfseries l}
+\item 
+\mbox{\Hypertarget{classoperators_a547c7ddaa520520d2ee6a93bc019167f}\label{classoperators_a547c7ddaa520520d2ee6a93bc019167f}} 
+int {\bfseries n}
+\item 
+\mbox{\Hypertarget{classoperators_a568a8185a3fdaa027e693b2fe3490a34}\label{classoperators_a568a8185a3fdaa027e693b2fe3490a34}} 
+int {\bfseries iint}
+\item 
+\mbox{\Hypertarget{classoperators_ab47a20cc974ff3e53f9698d0bfb7cf7b}\label{classoperators_ab47a20cc974ff3e53f9698d0bfb7cf7b}} 
+int {\bfseries iend}
+\item 
+\mbox{\Hypertarget{classoperators_a7db54ed57e8821319c93f6ba8a4934cf}\label{classoperators_a7db54ed57e8821319c93f6ba8a4934cf}} 
+int {\bfseries jint}
+\item 
+\mbox{\Hypertarget{classoperators_a6957878829f37f8bea420a838f4f0a58}\label{classoperators_a6957878829f37f8bea420a838f4f0a58}} 
+int {\bfseries jend}
+\item 
+\mbox{\Hypertarget{classoperators_a5a50d4056946b823177e37c37ce97b47}\label{classoperators_a5a50d4056946b823177e37c37ce97b47}} 
+complex $\ast$$\ast$ {\bfseries a}
+\item 
+\mbox{\Hypertarget{classoperators_a80f590265a750290233d674f057790ed}\label{classoperators_a80f590265a750290233d674f057790ed}} 
+complex $\ast$$\ast$ {\bfseries b}
+\item 
+\mbox{\Hypertarget{classoperators_a6960fa8a662f50efb2ec9cc5730ab65c}\label{classoperators_a6960fa8a662f50efb2ec9cc5730ab65c}} 
+complex $\ast$$\ast$ {\bfseries c}
+\item 
+\mbox{\Hypertarget{classoperators_aa5bf1f7d0be9eeb596022b522f0ce16e}\label{classoperators_aa5bf1f7d0be9eeb596022b522f0ce16e}} 
+complex $\ast$$\ast$ {\bfseries fder}
+\item 
+\mbox{\Hypertarget{classoperators_ac97668afc7f6096cfe7c581ea0bf6262}\label{classoperators_ac97668afc7f6096cfe7c581ea0bf6262}} 
+complex $\ast$ {\bfseries gam} \mbox{[}Ngrad\mbox{]}
+\item 
+\mbox{\Hypertarget{classoperators_a2d86bf5deb493ba3158b2b0850f420ec}\label{classoperators_a2d86bf5deb493ba3158b2b0850f420ec}} 
+double {\bfseries forward\+\_\+dt}
+\item 
+\mbox{\Hypertarget{classoperators_a5c53a27c335e71a3d8ddde60498d417d}\label{classoperators_a5c53a27c335e71a3d8ddde60498d417d}} 
+double {\bfseries backward\+\_\+dt}
+\item 
+\mbox{\Hypertarget{classoperators_a7a88f5d5eba5ec802807a45ca371dba1}\label{classoperators_a7a88f5d5eba5ec802807a45ca371dba1}} 
+complex {\bfseries unitary\+\_\+pot0}
+\item 
+\mbox{\Hypertarget{classoperators_a5e9d1a951ee12adb7e9e91412ef22953}\label{classoperators_a5e9d1a951ee12adb7e9e91412ef22953}} 
+complex {\bfseries fint}
+\item 
+\mbox{\Hypertarget{classoperators_aebfec83916d0a4a2564dbbca2300b863}\label{classoperators_aebfec83916d0a4a2564dbbca2300b863}} 
+complex {\bfseries fend}
+\item 
+\mbox{\Hypertarget{classoperators_afda9439ffc15f0650243ef5d777c34b6}\label{classoperators_afda9439ffc15f0650243ef5d777c34b6}} 
+complex {\bfseries alpha}
+\item 
+\mbox{\Hypertarget{classoperators_a7b4ebcf5dd3cee8cb423ce19c8759806}\label{classoperators_a7b4ebcf5dd3cee8cb423ce19c8759806}} 
+complex {\bfseries ralpha}
+\item 
+\mbox{\Hypertarget{classoperators_a2358e16304274518b8f157118d5513a0}\label{classoperators_a2358e16304274518b8f157118d5513a0}} 
+complex {\bfseries lalpha}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+operators.\+h\end{DoxyCompactItemize}

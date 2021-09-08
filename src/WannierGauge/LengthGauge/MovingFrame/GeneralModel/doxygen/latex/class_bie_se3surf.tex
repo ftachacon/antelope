@@ -1,0 +1,114 @@
+\hypertarget{class_bie_se3surf}{}\doxysection{Bie\+Se3surf Class Reference}
+\label{class_bie_se3surf}\index{BieSe3surf@{BieSe3surf}}
+
+
+Inheritance diagram for Bie\+Se3surf\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=178pt]{class_bie_se3surf__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Bie\+Se3surf\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=178pt]{class_bie_se3surf__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_bie_se3surf_a8c55e6cbcd85a200fb2886f23158a77e}\label{class_bie_se3surf_a8c55e6cbcd85a200fb2886f23158a77e}} 
+{\bfseries Bie\+Se3surf} (const libconfig\+::\+Setting $\ast$params)
+\item 
+\mbox{\Hypertarget{class_bie_se3surf_a83137c9888f0c6ec62d47df9fcfcc413}\label{class_bie_se3surf_a83137c9888f0c6ec62d47df9fcfcc413}} 
+void {\bfseries Set\+Basis} ()
+\item 
+\mbox{\Hypertarget{class_bie_se3surf_a2abc7382a9b5f9aa4a9af811ee9a0afd}\label{class_bie_se3surf_a2abc7382a9b5f9aa4a9af811ee9a0afd}} 
+void {\bfseries Gen\+Initial\+Value} (complex $\ast$\+\_\+dmstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\item 
+\mbox{\Hypertarget{class_bie_se3surf_a336f32c78cf4005ba709a611acdd7acf}\label{class_bie_se3surf_a336f32c78cf4005ba709a611acdd7acf}} 
+void {\bfseries Gen\+U\+Matrix} (complex $\ast$\+\_\+ustore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\item 
+\mbox{\Hypertarget{class_bie_se3surf_a99c544c2467afc34e3b7b426458d2599}\label{class_bie_se3surf_a99c544c2467afc34e3b7b426458d2599}} 
+void {\bfseries Gen\+Hamiltonian} (complex $\ast$\+\_\+hstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\item 
+\mbox{\Hypertarget{class_bie_se3surf_a84cf299527528174653be41e2e1f681c}\label{class_bie_se3surf_a84cf299527528174653be41e2e1f681c}} 
+void {\bfseries Gen\+Dipole} (complex $\ast$$\ast$\+\_\+dstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\item 
+\mbox{\Hypertarget{class_bie_se3surf_ae5695a3e9cec80b10ab7bbc4a8c6b1ce}\label{class_bie_se3surf_ae5695a3e9cec80b10ab7bbc4a8c6b1ce}} 
+void {\bfseries Gen\+J\+Matrix} (complex $\ast$$\ast$\+\_\+jstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\item 
+\mbox{\Hypertarget{class_bie_se3surf_a4f5bb6b464ce3c4e2fa430d7c16b9189}\label{class_bie_se3surf_a4f5bb6b464ce3c4e2fa430d7c16b9189}} 
+std\+::tuple$<$ std\+::array$<$ double, Ndim $\ast$Ndim $>$, std\+::array$<$ double, Ndim $>$ $>$ {\bfseries Gen\+Brillouinzone} () override
+\item 
+\mbox{\Hypertarget{class_bie_se3surf_a89a1be778ff8b35b121571375e629254}\label{class_bie_se3surf_a89a1be778ff8b35b121571375e629254}} 
+void {\bfseries Print\+Material\+Information} () override
+\item 
+\mbox{\Hypertarget{class_bie_se3surf_a3f0e42541ab1ee053c8b9faf1d5fc7f0}\label{class_bie_se3surf_a3f0e42541ab1ee053c8b9faf1d5fc7f0}} 
+void {\bfseries Gen\+Bcomp} (std\+::array$<$ double, Ndim $>$ \+\_\+kpoint)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_bie_se3surf_a47daf1d4ccb4356c1eaf5b03ebf64d7d}\label{class_bie_se3surf_a47daf1d4ccb4356c1eaf5b03ebf64d7d}} 
+double {\bfseries t1}
+\item 
+\mbox{\Hypertarget{class_bie_se3surf_a4fd35fc08b87e0d6e31db0a5e830b1f0}\label{class_bie_se3surf_a4fd35fc08b87e0d6e31db0a5e830b1f0}} 
+double {\bfseries t2}
+\item 
+\mbox{\Hypertarget{class_bie_se3surf_a7fe76036d616667b246403fcd2827953}\label{class_bie_se3surf_a7fe76036d616667b246403fcd2827953}} 
+double {\bfseries M0}
+\item 
+\mbox{\Hypertarget{class_bie_se3surf_a6126e0c3b65b55a48d217dc0ac1de628}\label{class_bie_se3surf_a6126e0c3b65b55a48d217dc0ac1de628}} 
+double {\bfseries phi0}
+\item 
+\mbox{\Hypertarget{class_bie_se3surf_a931357349c2d668ede60955f635bf20b}\label{class_bie_se3surf_a931357349c2d668ede60955f635bf20b}} 
+double {\bfseries a0}
+\item 
+\mbox{\Hypertarget{class_bie_se3surf_a3cd629638c96725331a1b7c27919c856}\label{class_bie_se3surf_a3cd629638c96725331a1b7c27919c856}} 
+double \mbox{\hyperlink{class_bie_se3surf_a3cd629638c96725331a1b7c27919c856}{vec\+\_\+a}} \mbox{[}3\mbox{]}\mbox{[}2\mbox{]}
+\begin{DoxyCompactList}\small\item\em 3 NN vectors (from A to B ) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_bie_se3surf_a9267449bd85db67ad3e9067429b1d451}\label{class_bie_se3surf_a9267449bd85db67ad3e9067429b1d451}} 
+double \mbox{\hyperlink{class_bie_se3surf_a9267449bd85db67ad3e9067429b1d451}{vec\+\_\+b}} \mbox{[}3\mbox{]}\mbox{[}2\mbox{]}
+\begin{DoxyCompactList}\small\item\em 3 N\+NN vectors (from A to A, or B to B) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_bie_se3surf_a94274f38931d1239bca8a113490a18a0}\label{class_bie_se3surf_a94274f38931d1239bca8a113490a18a0}} 
+double \mbox{\hyperlink{class_bie_se3surf_a94274f38931d1239bca8a113490a18a0}{eps}}
+\begin{DoxyCompactList}\small\item\em to avoid singular norm \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_bie_se3surf_af71aec6d8ac4feca3894f89016242021}\label{class_bie_se3surf_af71aec6d8ac4feca3894f89016242021}} 
+double \mbox{\hyperlink{class_bie_se3surf_af71aec6d8ac4feca3894f89016242021}{Bcomp}} \mbox{[}4\mbox{]}
+\begin{DoxyCompactList}\small\item\em coefficent of pauli matrix \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_bie_se3surf_a2555fab1bcc279d9da8bbde714a409e7}\label{class_bie_se3surf_a2555fab1bcc279d9da8bbde714a409e7}} 
+double {\bfseries hcomp} \mbox{[}6\mbox{]}
+\item 
+\mbox{\Hypertarget{class_bie_se3surf_a2864e2b179cb8319efca2b72d9b45a21}\label{class_bie_se3surf_a2864e2b179cb8319efca2b72d9b45a21}} 
+double \mbox{\hyperlink{class_bie_se3surf_a2864e2b179cb8319efca2b72d9b45a21}{acomp}} \mbox{[}4\mbox{]}
+\begin{DoxyCompactList}\small\item\em A0, A11, A12, A14. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_bie_se3surf_a38f80686f73d6d1cb5e016c4645a9901}\label{class_bie_se3surf_a38f80686f73d6d1cb5e016c4645a9901}} 
+double \mbox{\hyperlink{class_bie_se3surf_a38f80686f73d6d1cb5e016c4645a9901}{bcomp}} \mbox{[}4\mbox{]}
+\begin{DoxyCompactList}\small\item\em B0, B11, B12, B14. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_bie_se3surf_a175dc66a4b7f988ed8f86f13a916e3b8}\label{class_bie_se3surf_a175dc66a4b7f988ed8f86f13a916e3b8}} 
+double {\bfseries m11}
+\item 
+\mbox{\Hypertarget{class_bie_se3surf_a51208d5b36bbb61c81b2415199187e5a}\label{class_bie_se3surf_a51208d5b36bbb61c81b2415199187e5a}} 
+double {\bfseries angle\+\_\+a0} \mbox{[}3\mbox{]}
+\item 
+\mbox{\Hypertarget{class_bie_se3surf_a0b60924b15b78a2ae9e07b8045504d17}\label{class_bie_se3surf_a0b60924b15b78a2ae9e07b8045504d17}} 
+double {\bfseries angle\+\_\+b0} \mbox{[}3\mbox{]}
+\item 
+\mbox{\Hypertarget{class_bie_se3surf_a7058ad475d6b22e4c0a4b16424168f73}\label{class_bie_se3surf_a7058ad475d6b22e4c0a4b16424168f73}} 
+std\+::array$<$ double, 9 $>$ {\bfseries B\+Zaxis}
+\item 
+\mbox{\Hypertarget{class_bie_se3surf_af0053ae8dff6432da8113edc9507029d}\label{class_bie_se3surf_af0053ae8dff6432da8113edc9507029d}} 
+std\+::array$<$ double, 3 $>$ {\bfseries B\+Zorigin}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Materials/Bi2\+Se3surf.\+h\end{DoxyCompactItemize}

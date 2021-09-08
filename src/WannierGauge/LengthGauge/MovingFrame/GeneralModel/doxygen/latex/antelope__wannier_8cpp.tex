@@ -1,0 +1,130 @@
+\hypertarget{antelope__wannier_8cpp}{}\section{antelope\+\_\+wannier.\+cpp File Reference}
+\label{antelope__wannier_8cpp}\index{antelope\+\_\+wannier.\+cpp@{antelope\+\_\+wannier.\+cpp}}
+
+
+main cpp file  
+
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$iomanip$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$complex$>$}\newline
+{\ttfamily \#include \char`\"{}mpi.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$libconfig.\+h++$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}constant.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}timegrid.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}timeobject.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}laser.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}momaxis.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sbes\+V\+G.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utility.\+h\char`\"{}}\newline
+Include dependency graph for antelope\+\_\+wannier.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{antelope__wannier_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_a3fa2d3bf1901157f734a584d47b25d8b}\label{antelope__wannier_8cpp_a3fa2d3bf1901157f734a584d47b25d8b}} 
+\#define {\bfseries M\+A\+S\+T\+ER}~0    /$\ast$ task id of master task or node $\ast$/
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_a2aaa9d470e0f03b989652c518607cddb}\label{antelope__wannier_8cpp_a2aaa9d470e0f03b989652c518607cddb}} 
+void {\bfseries setting\+\_\+complex\+\_\+memory} (complex $\ast$$\ast$\+\_\+\+Temp\+Pointer, long long int \+\_\+\+Ntime)
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_a6327501d0fbac306f9dbafebf60dc42a}\label{antelope__wannier_8cpp_a6327501d0fbac306f9dbafebf60dc42a}} 
+void {\bfseries setting\+\_\+double\+\_\+memory} (double $\ast$$\ast$\+\_\+\+Temp\+Pointer, long long int \+\_\+\+Ntime)
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_a468961dc983f2651499d2c9e7eae72a8}\label{antelope__wannier_8cpp_a468961dc983f2651499d2c9e7eae72a8}} 
+void {\bfseries My\+\_\+\+M\+P\+I\+\_\+\+C\+L\+X\+\_\+\+S\+UM} (complex $\ast$in, complex $\ast$inout, int $\ast$len, M\+P\+I\+\_\+\+Datatype $\ast$dptr)
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\label{antelope__wannier_8cpp_a0ddf1224851353fc92bfbff6f499fa97}} 
+int {\bfseries main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_a01627d8df8867689eda2dbf0f3ac23e5}\label{antelope__wannier_8cpp_a01627d8df8867689eda2dbf0f3ac23e5}} 
+int {\bfseries ncyparam} = 3
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_ab72c900148ac2b30295fbe478e5d62e2}\label{antelope__wannier_8cpp_ab72c900148ac2b30295fbe478e5d62e2}} 
+int {\bfseries nxparam} = 1
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_a759cda804caa60a1a85d1599cc0f9f45}\label{antelope__wannier_8cpp_a759cda804caa60a1a85d1599cc0f9f45}} 
+int {\bfseries nyparam} = 1
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_af9a3a92cc34bd88f859abe8f3c9a1406}\label{antelope__wannier_8cpp_af9a3a92cc34bd88f859abe8f3c9a1406}} 
+int {\bfseries tgauge2} = 0.
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_a7cbd49b2e4c1864d357577aba5876530}\label{antelope__wannier_8cpp_a7cbd49b2e4c1864d357577aba5876530}} 
+int {\bfseries trflag} = 0
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_a3390c7940eeaa742563dc0b1026a9947}\label{antelope__wannier_8cpp_a3390c7940eeaa742563dc0b1026a9947}} 
+int {\bfseries fbz\+\_\+shift} = 0
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_a66890bb66782ec46b91e23e4dbd3bcda}\label{antelope__wannier_8cpp_a66890bb66782ec46b91e23e4dbd3bcda}} 
+double {\bfseries iparam} = 1.
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_a6e716690ea8acc22d82becc1246fbc8c}\label{antelope__wannier_8cpp_a6e716690ea8acc22d82becc1246fbc8c}} 
+double {\bfseries jparam} = 0.
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_a87e02fc89e617a913d7ee1bdd02bc035}\label{antelope__wannier_8cpp_a87e02fc89e617a913d7ee1bdd02bc035}} 
+double {\bfseries kparam} = 0.
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_aabd27329ad0aa0e8a5e1790c46c16065}\label{antelope__wannier_8cpp_aabd27329ad0aa0e8a5e1790c46c16065}} 
+double {\bfseries dtparam} = 1.
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_a4ad608e5fdee998269e19bac2c191ab7}\label{antelope__wannier_8cpp_a4ad608e5fdee998269e19bac2c191ab7}} 
+double {\bfseries dephasing} = 1000.
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_a76da80977849a64f284027a14e8db8df}\label{antelope__wannier_8cpp_a76da80977849a64f284027a14e8db8df}} 
+double {\bfseries ellip} = 0.
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_ad1f540cce05eb81fcf67cb53c39af563}\label{antelope__wannier_8cpp_ad1f540cce05eb81fcf67cb53c39af563}} 
+double {\bfseries treg0} = 0.
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_ac65dfe633a70c76f01b15091f226000c}\label{antelope__wannier_8cpp_ac65dfe633a70c76f01b15091f226000c}} 
+double {\bfseries ky\+\_\+shift\+\_\+down} = 0.
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_aef98e8a64a481cee562a573cd36d4b3e}\label{antelope__wannier_8cpp_aef98e8a64a481cee562a573cd36d4b3e}} 
+double {\bfseries gbox\+\_\+ky\+\_\+down} = 0.
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_af63ea29a1645ede2684dc94f903998c0}\label{antelope__wannier_8cpp_af63ea29a1645ede2684dc94f903998c0}} 
+double {\bfseries gbox\+\_\+ky\+\_\+up} = 0.
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_a8fbcf923b4dbea0e57a88c79eff97440}\label{antelope__wannier_8cpp_a8fbcf923b4dbea0e57a88c79eff97440}} 
+double {\bfseries ksfactor} = 1
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_aff145e7c791920168e4b2f7c797771de}\label{antelope__wannier_8cpp_aff145e7c791920168e4b2f7c797771de}} 
+double {\bfseries flag\+\_\+occ\+\_\+dephasing} = 0.
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_a146861a59787c121aa9aeb88c195db7b}\label{antelope__wannier_8cpp_a146861a59787c121aa9aeb88c195db7b}} 
+double {\bfseries flag\+\_\+t2} = 0.
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_a6f1669eeaa0c3cdb4d6779a77393da5e}\label{antelope__wannier_8cpp_a6f1669eeaa0c3cdb4d6779a77393da5e}} 
+int {\bfseries diagnostic} = 0
+\item 
+\mbox{\Hypertarget{antelope__wannier_8cpp_a3a244f45c96a8b9cfe4cccffff4c0eaa}\label{antelope__wannier_8cpp_a3a244f45c96a8b9cfe4cccffff4c0eaa}} 
+int {\bfseries shot\+Number} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+main cpp file 
+
+\begin{DoxyAuthor}{Author}
+Dasol Kim 
+
+Alexis Agustín Chacón Salazar 
+\end{DoxyAuthor}
