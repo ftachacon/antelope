@@ -167,6 +167,10 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
     {
         material = new Haldane( &(cfg[targetMaterial.c_str()]) );
     }
+    else if (targetMaterial == "Haldane2L")
+    {
+        material = new Haldane2L( &(cfg[targetMaterial.c_str()]) );
+    }
     else if (targetMaterial == "KaneMele")
     {
         material = new KaneMele( &(cfg[targetMaterial.c_str()]) );

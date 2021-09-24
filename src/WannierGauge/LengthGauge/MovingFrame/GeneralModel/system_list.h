@@ -5,6 +5,7 @@
 #pragma once
 
 #include "Materials/Haldane.h"
+#include "Materials/Haldane2L.h"
 #include "Materials/WilsonMass.h"
 #include "Materials/Bi2Se3surf.h"
 #include "Materials/TMDCs.h"
