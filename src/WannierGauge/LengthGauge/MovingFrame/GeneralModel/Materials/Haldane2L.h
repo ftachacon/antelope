@@ -20,7 +20,7 @@ class Haldane2L : public BaseMaterial
 public:
     // Haldnae parameters
     // t11 - interlayer orthogonal param (hopping between directly above and below atoms)
-    double t1, t2, M0, phi0, a0, t11; 
+    double t1, t2, M0, phi0, a0, t11, t11h; 
     double vec_a[3][2];          ///< 3  NN vectors (from A to B )
     double vec_b[3][2];          ///< 3 NNN vectors (from A to A, or B to B)
 
@@ -32,6 +32,9 @@ public:
 
     std::array<double, 9> BZaxis;
     std::array<double, 3> BZorigin;
+
+    // polytype - 2H or 3R
+    string polytype;
 
     Haldane2L( const libconfig::Setting *params );
     void SetBasis();
@@ -53,7 +56,8 @@ Haldane2L::Haldane2L( const libconfig::Setting *params )
         && params->lookupValue("Mt2", M0)
         && params->lookupValue("phi0", phi0)
         && params->lookupValue("a0", a0)
-        && params->lookupValue("t11", t11) )
+        && params->lookupValue("t11", t11)
+        && params->lookupValue("polytype", polytype) )
     {
         a0 /= au_angstrom;
         M0 *= t2; 
@@ -62,6 +66,20 @@ Haldane2L::Haldane2L( const libconfig::Setting *params )
     {
         cerr << "Some Haldane2L paramters are missing" << endl;
         exit(EXIT_FAILURE);
+    }
+
+    if (polytype == "2H")
+    {
+        t11h = t11;
+    }
+    else if (polytype == "3R")
+    {
+        t11h = 0.;
+    }
+    else
+    {
+        cerr << "Undefined polytype" << endl;
+        exit(1);
     }
 
     SetBasis();
@@ -88,10 +106,10 @@ void Haldane2L::GenHamiltonian(complex *_hstore, std::array<double, Ndim> _kpoin
 
     // inter-layer interaction part
     _hstore[2] = 0.;    _hstore[3] = 0.;
-    _hstore[6] = 0.;    _hstore[7] = t11;
+    _hstore[6] = t11;    _hstore[7] = 0.;
 
-    _hstore[8] = 0.;    _hstore[9] = 0.;
-    _hstore[12] = 0.;   _hstore[13] = t11;
+    _hstore[8] = 0.;    _hstore[9] = t11;
+    _hstore[12] = 0.;   _hstore[13] = 0.;
 }
 
 void Haldane2L::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint)
@@ -158,7 +176,9 @@ void Haldane2L::PrintMaterialInformation()
     cout << "t1         = " << t1 << " a.u. \n";
     cout << "t2         = " << t2 << " a.u. \n";
     cout << "M0         = " << M0 << " a.u. \n";
-    cout << "phi0         = " << phi0 << " rad \n";
+    cout << "phi0       = " << phi0 << " rad \n";
+    cout << "t11        = " << t11 << " a.u. \n";
+    cout << "polytype   = " << polytype << " a.u. \n";
     cout << "============================================\n";
 }
 
