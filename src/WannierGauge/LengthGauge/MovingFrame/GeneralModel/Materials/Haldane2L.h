@@ -105,11 +105,11 @@ void Haldane2L::GenHamiltonian(complex *_hstore, std::array<double, Ndim> _kpoin
     _hstore[14] = Bcomp[1] + I*Bcomp[2];   _hstore[15] = Bcomp[0] - Bcomp[3];
 
     // inter-layer interaction part
-    _hstore[2] = 0.;    _hstore[3] = 0.;
+    _hstore[2] = 0.;    _hstore[3] = t11h;
     _hstore[6] = t11;    _hstore[7] = 0.;
 
     _hstore[8] = 0.;    _hstore[9] = t11;
-    _hstore[12] = 0.;   _hstore[13] = 0.;
+    _hstore[12] = t11h;   _hstore[13] = 0.;
 }
 
 void Haldane2L::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint)
