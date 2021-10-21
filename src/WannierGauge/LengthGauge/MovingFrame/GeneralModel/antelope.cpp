@@ -387,7 +387,7 @@ int main( int argc, char *argv[] )
                 {
                     occup_temp += real(temp_density_matrix_integrated[m*Nband + m]);
                 }
-                occup_temp /= Npoints;
+                occup_temp /= sbe->kmesh->total_weight;
                 cout << ktime << " / " << sbe->fpulses->Nt << ", " << currentcycle << " / " << maxcycles;
                 cout << ", nc = " << temp_density_matrix_integrated[sbe->material->Nval*Nband + sbe->material->Nval] / static_cast<double>(Npoints);
                 cout << ", ntotal = " << occup_temp << endl;
