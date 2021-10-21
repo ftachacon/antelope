@@ -20,7 +20,9 @@ class Haldane2L : public BaseMaterial
 public:
     // Haldnae parameters
     // t11 - interlayer orthogonal param (hopping between directly above and below atoms)
-    double t1, t2, M0, phi0, a0, t11, t11h; 
+    double t1, t2, M0, phi0, a0, t11; 
+    complex h_inter[4];
+    double M0change;
     double vec_a[3][2];          ///< 3  NN vectors (from A to B )
     double vec_b[3][2];          ///< 3 NNN vectors (from A to A, or B to B)
 
@@ -53,14 +55,26 @@ Haldane2L::Haldane2L( const libconfig::Setting *params )
     Nband = 4;  Nval = 2;
     if (params->lookupValue("t1", t1)
         && params->lookupValue("t2", t2)
-        && params->lookupValue("Mt2", M0)
+        //&& params->lookupValue("Mt2", M0)
         && params->lookupValue("phi0", phi0)
         && params->lookupValue("a0", a0)
         && params->lookupValue("t11", t11)
         && params->lookupValue("polytype", polytype) )
     {
         a0 /= au_angstrom;
-        M0 *= t2; 
+        a0 /= au_angstrom;
+        if (!params->lookupValue("M0", M0))
+        {
+            if (params->lookupValue("Mt2",M0))
+            {
+                M0 *= t2;
+            }
+            else
+            {
+                cerr << "M0 param missing" << endl;
+                exit(EXIT_FAILURE);
+            }
+        }
     }
     else
     {
@@ -70,11 +84,15 @@ Haldane2L::Haldane2L( const libconfig::Setting *params )
 
     if (polytype == "2H")
     {
-        t11h = t11;
+        h_inter[0] = t11;   h_inter[1] = 0.;
+        h_inter[2] = 0.;    h_inter[3] = t11;
+        M0change = -2*M0;
     }
     else if (polytype == "3R")
     {
-        t11h = 0.;
+        h_inter[0] = 0.;    h_inter[1] = 0;
+        h_inter[2] = t11;   h_inter[3] = 0.;
+        M0change = 0.;
     }
     else
     {
@@ -88,6 +106,12 @@ Haldane2L::Haldane2L( const libconfig::Setting *params )
     BZaxis = { 2*kxMax,       0,         0,
                   0,       2*kyMax,      0,
                   0,          0,         0};
+
+    // using reciprocal vector
+    // corresponding to: (1, 0) *sqrt(3)a0,   (-1/2, sqrt(3)/2) *sqrt(3)a0
+    // BZaxis = { 2*pi/sqrt(3.)/a0,     2*pi/3./a0,        0,
+    //                    0,            4*pi/3./a0,        0,
+    //                    0,               0,              0};
     BZorigin = {0, 0, 0};
 
     eps = 1.0e-18;
@@ -101,15 +125,17 @@ void Haldane2L::GenHamiltonian(complex *_hstore, std::array<double, Ndim> _kpoin
     _hstore[0] = Bcomp[0] + Bcomp[3];     _hstore[1] = Bcomp[1] - I*Bcomp[2];
     _hstore[4] = Bcomp[1] + I*Bcomp[2];   _hstore[5] = Bcomp[0] - Bcomp[3];
 
-    _hstore[10] = Bcomp[0] + Bcomp[3];     _hstore[11] = Bcomp[1] - I*Bcomp[2];
-    _hstore[14] = Bcomp[1] + I*Bcomp[2];   _hstore[15] = Bcomp[0] - Bcomp[3];
+    // M0 --> -M0 for down layer only for 2H
+    _hstore[10] = Bcomp[0] + Bcomp[3] + M0change;     _hstore[11] = Bcomp[1] - I*Bcomp[2];
+    _hstore[14] = Bcomp[1] + I*Bcomp[2];              _hstore[15] = Bcomp[0] - Bcomp[3] - M0change;
 
     // inter-layer interaction part
-    _hstore[2] = 0.;    _hstore[3] = t11h;
-    _hstore[6] = t11;    _hstore[7] = 0.;
+    // add conjugate later if you want to include complex interaction term
+    _hstore[2] = h_inter[0];    _hstore[3] = h_inter[1];
+    _hstore[6] = h_inter[2];    _hstore[7] = h_inter[3];
 
-    _hstore[8] = 0.;    _hstore[9] = t11;
-    _hstore[12] = t11h;   _hstore[13] = 0.;
+    _hstore[8] = h_inter[0];    _hstore[9] = h_inter[2];
+    _hstore[12] = h_inter[1];   _hstore[13] = h_inter[3];
 }
 
 void Haldane2L::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint)
@@ -176,9 +202,10 @@ void Haldane2L::PrintMaterialInformation()
     cout << "t1         = " << t1 << " a.u. \n";
     cout << "t2         = " << t2 << " a.u. \n";
     cout << "M0         = " << M0 << " a.u. \n";
+    cout << "M1         = " << M0 + M0change << " a.u. \n";
     cout << "phi0       = " << phi0 << " rad \n";
     cout << "t11        = " << t11 << " a.u. \n";
-    cout << "polytype   = " << polytype << " a.u. \n";
+    cout << "polytype   = " << polytype << "\n";
     cout << "============================================\n";
 }
 

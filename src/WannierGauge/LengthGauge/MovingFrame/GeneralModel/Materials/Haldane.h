@@ -49,12 +49,23 @@ Haldane::Haldane( const libconfig::Setting *params )
     Nband = 2;  Nval = 1;
     if (params->lookupValue("t1", t1)
         && params->lookupValue("t2", t2)
-        && params->lookupValue("Mt2", M0)
+        //&& params->lookupValue("Mt2", M0)
         && params->lookupValue("phi0", phi0)
         && params->lookupValue("a0", a0) )
     {
         a0 /= au_angstrom;
-        M0 *= t2; 
+        if (!params->lookupValue("M0", M0))
+        {
+            if (params->lookupValue("Mt2",M0))
+            {
+                M0 *= t2;
+            }
+            else
+            {
+                cerr << "M0 param missing" << endl;
+                exit(EXIT_FAILURE);
+            }
+        }
     }
     else
     {
