@@ -22,7 +22,7 @@ public:
     // t11 - interlayer orthogonal param (hopping between directly above and below atoms)
     double t1, t2, M0, phi0, a0, t11; 
     complex h_inter[4];
-    double M0change;
+    double B3sign[2];     // B3 sign for each layer
     double vec_a[3][2];          ///< 3  NN vectors (from A to B )
     double vec_b[3][2];          ///< 3 NNN vectors (from A to A, or B to B)
 
@@ -82,17 +82,47 @@ Haldane2L::Haldane2L( const libconfig::Setting *params )
         exit(EXIT_FAILURE);
     }
 
-    if (polytype == "2H")
+    if (polytype == "AA")
     {
         h_inter[0] = t11;   h_inter[1] = 0.;
         h_inter[2] = 0.;    h_inter[3] = t11;
-        M0change = -2*M0;
+        B3sign[0] = 1.;
+        B3sign[1] = 1.;
     }
-    else if (polytype == "3R")
+    else if (polytype == "AB" || polytype == "AB1")
     {
-        h_inter[0] = 0.;    h_inter[1] = 0;
-        h_inter[2] = t11;   h_inter[3] = 0.;
-        M0change = 0.;
+        h_inter[0] = 0.;    h_inter[1] = t11;
+        h_inter[2] = 0.;    h_inter[3] = 0.;
+        B3sign[0] = 1.;
+        B3sign[1] = 1.;
+    }
+    else if (polytype == "AB2" || polytype == "3R")
+    {
+        h_inter[0] = 0.;    h_inter[1] = 0.;
+        h_inter[2] = t11;    h_inter[3] = 0.;
+        B3sign[0] = 1.;
+        B3sign[1] = 1.;
+    }
+    else if (polytype == "AA'")
+    {
+        h_inter[0] = t11;   h_inter[1] = 0.;
+        h_inter[2] = 0.;    h_inter[3] = t11;
+        B3sign[0] = 1.;
+        B3sign[1] = -1.;
+    }
+    else if (polytype == "A'B")
+    {
+        h_inter[0] = 0.;    h_inter[1] = t11;
+        h_inter[2] = 0.;    h_inter[3] = 0.;
+        B3sign[0] = -1.;
+        B3sign[1] = 1.;
+    }
+    else if (polytype == "AB'")
+    {
+        h_inter[0] = 0.;    h_inter[1] = t11;
+        h_inter[2] = 0.;    h_inter[3] = 0.;
+        B3sign[0] = 1.;
+        B3sign[1] = -1.;
     }
     else
     {
@@ -122,12 +152,11 @@ void Haldane2L::GenHamiltonian(complex *_hstore, std::array<double, Ndim> _kpoin
     GenBcomp(_kpoint);
 
     // block diagonal part (intra-layer part)
-    _hstore[0] = Bcomp[0] + Bcomp[3];     _hstore[1] = Bcomp[1] - I*Bcomp[2];
-    _hstore[4] = Bcomp[1] + I*Bcomp[2];   _hstore[5] = Bcomp[0] - Bcomp[3];
+    _hstore[0] = Bcomp[0] + B3sign[0]*Bcomp[3];     _hstore[1] = Bcomp[1] - I*Bcomp[2];
+    _hstore[4] = Bcomp[1] + I*Bcomp[2];   _hstore[5] = Bcomp[0] - B3sign[0]*Bcomp[3];
 
-    // M0 --> -M0 for down layer only for 2H
-    _hstore[10] = Bcomp[0] + Bcomp[3] + M0change;     _hstore[11] = Bcomp[1] - I*Bcomp[2];
-    _hstore[14] = Bcomp[1] + I*Bcomp[2];              _hstore[15] = Bcomp[0] - Bcomp[3] - M0change;
+    _hstore[10] = Bcomp[0] + B3sign[1]*Bcomp[3];     _hstore[11] = Bcomp[1] - I*Bcomp[2];
+    _hstore[14] = Bcomp[1] + I*Bcomp[2];              _hstore[15] = Bcomp[0] - B3sign[1]*Bcomp[3];
 
     // inter-layer interaction part
     // add conjugate later if you want to include complex interaction term
@@ -165,15 +194,15 @@ void Haldane2L::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint)
     xderBcomp[2] *= t1;                     yderBcomp[2] *= t1;
     xderBcomp[3] *= -2.*t2 * sin(phi0);     yderBcomp[3] *= -2.*t2 * sin(phi0);
 
-    _jstore[0][0] = -(xderBcomp[0] + xderBcomp[3]);      _jstore[1][0] = -(yderBcomp[0] + yderBcomp[3]);
-    _jstore[0][1] = -(xderBcomp[1] - I*xderBcomp[2]);    _jstore[1][1] = -(yderBcomp[1] - I*yderBcomp[2]);
-    _jstore[0][4] = -(xderBcomp[1] + I*xderBcomp[2]);    _jstore[1][4] = -(yderBcomp[1] + I*yderBcomp[2]);
-    _jstore[0][5] = -(xderBcomp[0] - xderBcomp[3]);      _jstore[1][5] = -(yderBcomp[0] - yderBcomp[3]);
+    _jstore[0][0] = -(xderBcomp[0] + B3sign[0]*xderBcomp[3]);      _jstore[1][0] = -(yderBcomp[0] + B3sign[0]*yderBcomp[3]);
+    _jstore[0][1] = -(xderBcomp[1] - I*xderBcomp[2]);              _jstore[1][1] = -(yderBcomp[1] - I*yderBcomp[2]);
+    _jstore[0][4] = -(xderBcomp[1] + I*xderBcomp[2]);              _jstore[1][4] = -(yderBcomp[1] + I*yderBcomp[2]);
+    _jstore[0][5] = -(xderBcomp[0] - B3sign[0]*xderBcomp[3]);      _jstore[1][5] = -(yderBcomp[0] - B3sign[0]*yderBcomp[3]);
 
-    _jstore[0][10] = -(xderBcomp[0] + xderBcomp[3]);      _jstore[1][10] = -(yderBcomp[0] + yderBcomp[3]);
-    _jstore[0][11] = -(xderBcomp[1] - I*xderBcomp[2]);    _jstore[1][11] = -(yderBcomp[1] - I*yderBcomp[2]);
-    _jstore[0][14] = -(xderBcomp[1] + I*xderBcomp[2]);    _jstore[1][14] = -(yderBcomp[1] + I*yderBcomp[2]);
-    _jstore[0][15] = -(xderBcomp[0] - xderBcomp[3]);      _jstore[1][15] = -(yderBcomp[0] - yderBcomp[3]);
+    _jstore[0][10] = -(xderBcomp[0] + B3sign[1]*xderBcomp[3]);      _jstore[1][10] = -(yderBcomp[0] + B3sign[1]*yderBcomp[3]);
+    _jstore[0][11] = -(xderBcomp[1] - I*xderBcomp[2]);              _jstore[1][11] = -(yderBcomp[1] - I*yderBcomp[2]);
+    _jstore[0][14] = -(xderBcomp[1] + I*xderBcomp[2]);              _jstore[1][14] = -(yderBcomp[1] + I*yderBcomp[2]);
+    _jstore[0][15] = -(xderBcomp[0] - B3sign[1]*xderBcomp[3]);      _jstore[1][15] = -(yderBcomp[0] - B3sign[1]*yderBcomp[3]);
     
 
 }
@@ -202,7 +231,7 @@ void Haldane2L::PrintMaterialInformation()
     cout << "t1         = " << t1 << " a.u. \n";
     cout << "t2         = " << t2 << " a.u. \n";
     cout << "M0         = " << M0 << " a.u. \n";
-    cout << "M1         = " << M0 + M0change << " a.u. \n";
+    cout << "B3 sign    = " << B3sign[0] << ", " << B3sign[1] << " \n";
     cout << "phi0       = " << phi0 << " rad \n";
     cout << "t11        = " << t11 << " a.u. \n";
     cout << "polytype   = " << polytype << "\n";
