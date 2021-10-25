@@ -103,7 +103,7 @@ Haldane2L::Haldane2L( const libconfig::Setting *params )
         B3sign[0] = 1.;
         B3sign[1] = 1.;
     }
-    else if (polytype == "AA'")
+    else if (polytype == "AA'" || polytype == "2H")
     {
         h_inter[0] = t11;   h_inter[1] = 0.;
         h_inter[2] = 0.;    h_inter[3] = t11;
