@@ -62,7 +62,6 @@ Haldane2L::Haldane2L( const libconfig::Setting *params )
         && params->lookupValue("polytype", polytype) )
     {
         a0 /= au_angstrom;
-        a0 /= au_angstrom;
         if (!params->lookupValue("M0", M0))
         {
             if (params->lookupValue("Mt2",M0))
