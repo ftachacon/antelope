@@ -381,7 +381,7 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
             MatrixMult(pMatrix[k][iaxis], ctransuMatrix, temp1Matrix, Nband);
         }
     }
-    myfile.close();
+    bands.close();
 
     delete[] tempInitVal;
 

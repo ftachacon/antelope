@@ -327,6 +327,8 @@ int main( int argc, char *argv[] )
             auto ry4 = sbe->ry4;
             auto rz4 = sbe->rz4;
 
+            auto rmax = sbe->rmax;
+
             double rmax2;
 
             double distance_w1, distance_w2,distance_w3, distance_w4;
