@@ -22,11 +22,11 @@
 #include <unistd.h>
 
 // My Own Headers
-#include "/u/geonda/ant_wdsm/src/constant.h"
-#include "/u/geonda/ant_wdsm/src/laser.h"
-#include "/u/geonda/ant_wdsm/src/momaxis.h"
-#include "/u/geonda/ant_wdsm/src/SBEs.h"
-#include "/u/geonda/ant_wdsm/src/utility.h"
+#include "constant.h"
+#include "laser.h"
+#include "momaxis.h"
+#include "SBEs.h"
+#include "utility.h"
 
 #define MASTER 0    /* task id of master task or node */
 

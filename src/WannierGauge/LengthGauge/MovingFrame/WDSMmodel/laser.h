@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 #include <string>
-#include "/u/geonda/ant_wdsm/src/constant.h"
+#include "constant.h"
 #include <vector>
 #include <array>
 #include <algorithm>
@@ -44,21 +44,21 @@ public:
 	double A0x, A0y;	                    //Vector potential component in the x, y-direction
     double twidth;		                    // Time bandwidth per pulse (-twidth <= <= twidth is active region)
 
-    Envelope envtype;               
+    Envelope envtype;
 
     double envfactor;                       // This variable is denfied to reduce the repeated calculation in f_envelope. ex) g(envfactor*t)
     double inverse_w0;                      // = 1/w0. Remember multiplication is faster than division
 
     array<double, Ndim> xdir, ydir;         // direction of laser x-axis and y-axis in real sapce
 public:
-    /// Constructor for pulse, 
+    /// Constructor for pulse,
     /**
-     * Propagation direction is dentermined by two paramter thetaz and phiz. 
+     * Propagation direction is dentermined by two paramter thetaz and phiz.
      * They are just polar and azimuthal angle in spherical coordinatte, so propagation direction is
      * \f$ (\sin\theta_{z}\cos\phi_{z}, \sin\theta_{z}\sin\phi_{z}, \cos\theta_{z})\f$.
      * For the definition of LCP, and RCP I choose view from source. Therefore, for left or right hand rule,
      * direction of thumb is same as propagtion direction (out of source).
-     * To doing standard 2d calculation (x-y plane), set thetaz = 0 and phiz = 0, or just omit them from the constructor. 
+     * To doing standard 2d calculation (x-y plane), set thetaz = 0 and phiz = 0, or just omit them from the constructor.
      */
     Pulse(double _E0, double _w0, double _ellip, double _ncycle, double _cep,  double _t0, double _phix, string _env_name, double _thetaz = 0.0, double _phiz = 0.0 )
         : E0(_E0), w0(_w0), ellip(_ellip), ncycles(_ncycle), cep(_cep), t0(_t0), phix(_phix), envname(_env_name), thetaz(_thetaz), phiz(_phiz)
@@ -66,7 +66,7 @@ public:
         I0 = E0*E0 * 3.5e16;
 
         period0    =  dospi/w0; // laser period or cycle
-        
+
         if (envname == "cos4")  envtype = ENVELOPE_COS4;
         else if (envname == "gauss") envtype = ENVELOPE_GAUSSIAN;
         else
@@ -74,7 +74,7 @@ public:
             cerr << "invalid envelope type\n";
             exit(EXIT_FAILURE);
         }
-        
+
         // laser time duration
         switch (envtype)
         {
@@ -82,14 +82,14 @@ public:
             twidth = gaussian_width_multiply * ncycles*period0;
             envfactor = -gaussian_factor/(twidth*twidth);
             break;
-        
+
         // same for every cos n-square envelope
         default:
             twidth = ncycles*period0/2;
             envfactor = w0/(2*ncycles);
             break;
         }
-        
+
 
         double factor = sqrt( 1.0 / (1.0 + ellip*ellip) );
         E0x = factor * E0;
@@ -105,7 +105,7 @@ public:
         }
 
         // Coordinate transformation
-        // x'_0 = R_z(phiz) R_y(thetaz) x, y'_0 = R_z(phiz) R_y(thetaz) y, z' = R_z(phiz) R_y(thetaz) z 
+        // x'_0 = R_z(phiz) R_y(thetaz) x, y'_0 = R_z(phiz) R_y(thetaz) y, z' = R_z(phiz) R_y(thetaz) z
         // x' = R_z'(phix)  x'_0,   y' = R_z'(phix)  y'_0,
         // --> x' = cos(phix) x'_0 + sin(phix) y'_0, y' = -sin(phix) x'_0 + cos(phix) y'_0,
         array<double, Ndim> trans_x0 = {cos(thetaz)*cos(phiz), cos(thetaz)*sin(phiz), -sin(thetaz)};
@@ -119,7 +119,7 @@ public:
     };
 
     /// generate envelope of pulse
-    /** 
+    /**
      * A(t) = A0 f(t) cos(w0t - cep) = E0/w0 f(t) cos(w0t - cep),
      * E(t) = -dA(t)/dt = - E0/w0 f'(t) cos(w0t - cep) - E0 f(t) sin(w0t - cep).
      * @param _t    time. envelope has maximum value when _t=0. Therefore, t0 has to be subtracted before the function.
@@ -133,7 +133,7 @@ public:
             if (abs(_t) > twidth) return 0;
             if (_isDt) return -4.* envfactor *sin(_t* envfactor) * pow( cos(_t* envfactor ), 3. );
             else return pow( cos(_t *envfactor ), 4. );
-        
+
         // default is gausssian
         default:
             //if (_isDt) return -2*gaussian_factor* _t/(twidth*twidth)*exp( -gaussian_factor* _t*_t/(twidth*twidth) );
@@ -184,33 +184,33 @@ public:
     }
 };
 
-class laser 
+class laser
 {
 
 public:
 
 	vector<Pulse> pulses;       ///< collection of pulses
-    
+
     int Nt;                     ///< number of time steps
 
 
 	double dt;					///< size of time step
 	double blaser;				///< Offset time before of the pulses
 	double alaser;				///< Offset time after of the pulses
-    
+
 	double minus0, major0;		///< minimum and maximum time in pulse active domains
     double atmin, atmax;        ///< minimum and maximum time in total domain (include offset)
     array<double, Ndim> initial_avec, initial_evec;     // store the value at t = atmin
-    
-    
+
+
     void Initialize(double _dt, double _blaser, double _alaser);
-    
+
     array<double, Ndim> avlaser( double _t );
     array<double, Ndim> elaser( double _t );
 
     void Print_LaserInfo();
-    
-    
+
+
 };
 
 void laser::Initialize(double _dt = 0.1, double _blaser = 0., double _alaser = 0.)
@@ -231,7 +231,7 @@ void laser::Initialize(double _dt = 0.1, double _blaser = 0., double _alaser = 0
 
     initial_avec = avlaser( atmin );
     initial_evec = elaser( atmin );
-    
+
     Nt   = floor( (atmax - atmin)/dt );
 }
 

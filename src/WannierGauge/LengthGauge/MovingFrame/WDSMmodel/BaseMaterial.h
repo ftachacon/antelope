@@ -1,5 +1,5 @@
 
-/// Ancestor class of every material Hamiltonian generator 
+/// Ancestor class of every material Hamiltonian generator
 /**
  * Note that virtual function has litte cost ~ switch
  * @author Dasol Kim
@@ -10,7 +10,7 @@
 #include <array>
 #include <tuple>
 #include <libconfig.h++>
-#include "/u/geonda/ant_wdsm/src/constant.h"
+#include "constant.h"
 
 enum class InitialValueType
 {
@@ -29,7 +29,7 @@ public:
 
     /// virtual desctructor is used to prevent memory leak
     virtual ~BaseMaterial() {};
-    
+
     /// Generate custom inital value.
     /**
      * Generate custom initial value of density matrix. Should be used only when you need strange initial value.
@@ -59,7 +59,7 @@ public:
 
     /// Generate interband and intraband current matrix
     /**
-     * Remember 
+     * Remember
      * @param[out] _jstore store \f$ - \frac{\partial H(\textbf{k})}{\partial \textbf{k}} + i [\textbf{D}(\textbf{k}), H(\textbf{k})] \f$
      * @param[in] _kpoint kpoints = {kx, ky, kz}
      */

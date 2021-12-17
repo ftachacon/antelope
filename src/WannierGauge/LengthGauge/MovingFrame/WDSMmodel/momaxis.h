@@ -1,9 +1,9 @@
-/// class for momentum grid 
+/// class for momentum grid
 /**
- * This class get axes and start point of Brillouin zone and generate 
+ * This class get axes and start point of Brillouin zone and generate
  * Axes can be non-orthogonal. K-points are equally spaces.
  * Now first and last point are not same (step is divided by (N), not (N-1) )
- * @todo Fix integration method - simpson, write new momoutput 
+ * @todo Fix integration method - simpson, write new momoutput
  * @author Alexis Agustín  Chacón Salazar
  * @author Dasol Kim
  */
@@ -22,8 +22,8 @@
 #include <complex>
 #include <vector>
 #include <numeric>
-#include "/u/geonda/ant_wdsm/src/constant.h"
-#include "/u/geonda/ant_wdsm/src/utility.h"
+#include "constant.h"
+#include "utility.h"
 
 #define complex complex<double>
 using namespace std;
@@ -31,25 +31,25 @@ using namespace std;
 
 class momaxis
 {
-    
+
 public:
-    
-    array<double, Ndim> *kgrid; 
+
+    array<double, Ndim> *kgrid;
     array<double, Ndim*Ndim> BzAxes;
     array<double, Ndim> BzOrigin;
     //double AxisVec[Ngrad][Ngrad];       // axisvec[i][j] = j th component of i th vector
-    //double StartPoint[Ngrad];  
-    
+    //double StartPoint[Ngrad];
+
     //double *dk;                             //grid or mesh steps
     double *weight;
-    
+
     array<int, Ndim> N;
-    
+
     int Ntotal;
-    
+
     double Volume, dV;
     string imethod;
-    
+
     momaxis( array<int, Ndim> _N ,array<double, Ndim*Ndim> _axisvec, array<double, Ndim> _origink )
         : N(_N), BzAxes(_axisvec), BzOrigin(_origink)
     {
@@ -57,7 +57,7 @@ public:
         set_brillouin_zone_grid( );
         //imethod = "Trapz";
     };
-    
+
     ~momaxis( );                              // Destructor ...
 
     void basic_mem();                        // Setting memory ...
@@ -70,8 +70,8 @@ public:
                      , int skip0
                      , int skip1
                      , int skip2 );          //Momentum output
-    
-    
+
+
     int index( const int i ,const int j ,const int k )
     {
         return N[1]*N[2]*i + N[2]*j + k;
@@ -84,20 +84,20 @@ public:
     {
         return { _kindex/(N[1]*N[2]), (_kindex/N[2])%N[1], _kindex%N[2] };
     };
- 
+
     //void Simpson();
     //void integral_method( const string NMethod );
     void checker( );
 
     void print_info();                       // Printing information of momentum grid
-    
+
 };
 
 
 /*
 void momaxis::integral_method( const string NMethod )
 {
-    
+
     imethod = NMethod;
     if (imethod == "Simpson")
     {
@@ -106,7 +106,7 @@ void momaxis::integral_method( const string NMethod )
     else
     {
         fill(weight, weight + Ntotal, 1.);
-    }  
+    }
 }*/
 
 
@@ -149,11 +149,11 @@ void momaxis::basic_mem()
 void  momaxis::steps_sizes( array<int, Ndim> _N ,array<double, Ndim*Ndim> _axisvec, array<double, Ndim> _origink )
 {
     Ntotal = N[0] * N[1] * N[2];
-    
+
     checker( );
-    
+
     basic_mem( );
-    
+
     vector<array<double, Ndim> > axesList;
     for (int i = 0; i < Ndim; ++i)
     {
@@ -183,83 +183,83 @@ void  momaxis::steps_sizes( array<int, Ndim> _N ,array<double, Ndim*Ndim> _axisv
         Volume = 1.;
         break;
     }
-    
+
     dV = abs(Volume) / Ntotal;
-    
+
 }
 
 /*
 void momaxis::Simpson()
 {
-    
+
     int i_aux, j_aux;
     int ia0 = 0;
     int ie0 = N[0]-1;
-    
+
     int ja0 = 0;
     int je0 = N[1]-1;
-    
+
     int le=0;
-    
+
     weight[ index( &ia0, &ja0, &le) ] = 1./9.;
     weight[ index( &ie0, &ja0, &le) ] = 1./9.;
-    
+
     weight[ index( &ia0, &je0, &le) ] = 1./9.;
     weight[ index( &ie0, &je0, &le) ] = 1./9.;
-    
-    
+
+
     for ( int i = 1; i < int( (N[0]+1)/2.); i++ )
     {
-        
+
 
         i_aux=2*i-1;
-        
+
         weight[ index( &i_aux, &ja0, &le) ] = 4./9.;
         weight[ index( &i_aux, &je0, &le) ] = 4./9.;
-        
+
     }
-    
-    
+
+
     for ( int i=1; i < int( N[0]/2.); i++ )
     {
         i_aux=2*i;
         weight[ index( &i_aux, &ja0, &le) ] = 2./9.;
         weight[ index( &i_aux, &je0, &le) ] = 2./9.;
     }
-    
-    
+
+
     for ( int j = 1; j < int( (N[1]+1) /2. ); j++ )
     {
-        
+
         j_aux = 2*j-1;
         weight[ index( &ia0, &j_aux, &le) ] = 4./9.;
         weight[ index( &ie0, &j_aux, &le) ] = 4./9.;
-        
+
     }
-    
+
     for ( int j = 1; j < int( N[1]/2. ); j++ )
     {
-        
+
         j_aux = 2*j;
         weight[ index( &ia0, &j_aux, &le) ] = 2./9.;
         weight[ index( &ie0, &j_aux, &le) ] = 2./9.;
-        
+
     }
 
-    
-    
-    
+
+
+
     for ( int j=1; j < int( (N[1]+1)/2. ); j++ )
         for ( int i=1; i < int( (N[0]+1)/2. ); i++ )
         {
-            
+
             i_aux=2*i-1;
             j_aux=2*j-1;
-            
+
             weight[ index( &i_aux, &j_aux, &le) ] = 16./9.;
-            
+
         }
-    
+
     for ( int j=1; j < int( N[1]/2. ); j++ )
         for ( int i=1; i < int( (N[0]+1)/2. ); i++ )
         {
@@ -267,7 +267,7 @@ void momaxis::Simpson()
             i_aux=2*i-1;
             weight[ index( &i_aux, &j_aux, &le) ] = 8./9.;
         }
-    
+
     for ( int j=1; j < int( (N[1]+1)/2. ); j++ )
         for ( int i=1; i < int( N[0]/2. ); i++ )
         {
@@ -276,10 +276,10 @@ void momaxis::Simpson()
             j_aux=2*j-1;
             weight[ index( &i_aux, &j_aux, &le) ] = 8./9.;
         }
-    
 
-    
-    
+
+
+
     for ( int j=1; j < int( N[1]/2. ); j++ )
         for ( int i=1; i < int( N[0]/2. ); i++ )
         {
@@ -287,8 +287,8 @@ void momaxis::Simpson()
             j_aux=2*j;
             weight[ index( &i_aux, &j_aux, &le) ] = 4./9.;
         }
-    
-    
+
+
 }*/
 
 
@@ -318,13 +318,13 @@ void momaxis::set_brillouin_zone_grid()
                 else
                     kfrac = static_cast<double>(k)/N[2] - 0.5;
                 kindex = index(i, j, k);
-                kgrid[kindex] = {BzOrigin[0] + ifrac*BzAxes[0*Ndim + 0] + jfrac*BzAxes[1*Ndim + 0] + kfrac*BzAxes[2*Ndim + 0], 
-                                    BzOrigin[1] + ifrac*BzAxes[0*Ndim + 1] + jfrac*BzAxes[1*Ndim + 1] + kfrac*BzAxes[2*Ndim + 1], 
+                kgrid[kindex] = {BzOrigin[0] + ifrac*BzAxes[0*Ndim + 0] + jfrac*BzAxes[1*Ndim + 0] + kfrac*BzAxes[2*Ndim + 0],
+                                    BzOrigin[1] + ifrac*BzAxes[0*Ndim + 1] + jfrac*BzAxes[1*Ndim + 1] + kfrac*BzAxes[2*Ndim + 1],
                                     BzOrigin[2] + ifrac*BzAxes[0*Ndim + 2] + jfrac*BzAxes[1*Ndim + 2] + kfrac*BzAxes[2*Ndim + 2] };
             }
         }
     }
-    
+
 }
 
 

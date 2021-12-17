@@ -4,11 +4,11 @@
 */
 #pragma once
 
-#include "/u/geonda/ant_wdsm/src/Materials/Haldane.h"
-#include "/u/geonda/ant_wdsm/src/Materials/WilsonMass.h"
-#include "/u/geonda/ant_wdsm/src/Materials/Bi2Se3surf.h"
-#include "/u/geonda/ant_wdsm/src/Materials/TMDCs.h"
-#include "/u/geonda/ant_wdsm/src/Materials/WDSM.h"
-#include "/u/geonda/ant_wdsm/src/Materials/WDSM_surface.h"
-#include "/u/geonda/ant_wdsm/src/Materials/WDSM_TaAs.h"
+#include "Materials/Haldane.h"
+#include "Materials/WilsonMass.h"
+#include "Materials/Bi2Se3surf.h"
+#include "Materials/TMDCs.h"
+#include "Materials/WDSM.h"
+#include "Materials/WDSM_surface.h"
+#include "Materials/WDSM_TaAs.h"
 //#include "Materials/Wannier90.h"

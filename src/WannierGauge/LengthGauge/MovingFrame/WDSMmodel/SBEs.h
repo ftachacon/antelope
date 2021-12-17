@@ -17,12 +17,12 @@
 
 #include <libconfig.h++>
 
-#include "/u/geonda/ant_wdsm/src/momaxis.h"
-#include "/u/geonda/ant_wdsm/src/laser.h"
-#include "/u/geonda/ant_wdsm/src/constant.h"
-#include "/u/geonda/ant_wdsm/src/utility.h"
+#include "momaxis.h"
+#include "laser.h"
+#include "constant.h"
+#include "utility.h"
 
-#include "/u/geonda/ant_wdsm/src/system_list.h"
+#include "system_list.h"
 
 using namespace std;
 typedef std::tuple<array<double, Ndim>,  array< array<double, Ndim>,Nband>,  array<array<double, Ndim>, Ndim> > tupleSpinCharge;
