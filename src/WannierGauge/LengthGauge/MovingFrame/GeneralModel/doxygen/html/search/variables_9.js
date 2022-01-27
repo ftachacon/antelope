@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['major0_141',['major0',['../classlaser.html#ac5cbbfabe05635d5248c217ebd9b1be6',1,'laser']]],
-  ['material_142',['material',['../class_s_b_es.html#a8ec3b23f29f4ec37f182a44bb2f59aee',1,'SBEs']]]
+  ['jmatrix_671',['jMatrix',['../class_s_b_es.html#ad1b336e02c4b08c5f73d8b483b772332',1,'SBEs']]]
 ];

@@ -1,0 +1,238 @@
+\hypertarget{utility_8h}{}\doxysection{utility.\+h File Reference}
+\label{utility_8h}\index{utility.h@{utility.h}}
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$array$>$}\newline
+Include dependency graph for utility.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=184pt]{utility_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{utility_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+const std\+::string \mbox{\hyperlink{utility_8h_aed8ff2c38a8f85dbb65430db776210c6}{white\+Spaces}} (\char`\"{} \textbackslash{}f\textbackslash{}n\textbackslash{}r\textbackslash{}t\textbackslash{}v\char`\"{})
+\begin{DoxyCompactList}\small\item\em some support functions \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{utility_8h_abe9a7a913241dd3c7c10556db0c7476c}{trim\+\_\+left}} (std\+::string \&str, const std\+::string \&trim\+Chars=\mbox{\hyperlink{utility_8h_aed8ff2c38a8f85dbb65430db776210c6}{white\+Spaces}})
+\item 
+void \mbox{\hyperlink{utility_8h_a31195fb00e3cfc59f131e4a4d225b7d4}{trim\+\_\+right}} (std\+::string \&str, const std\+::string \&trim\+Chars=\mbox{\hyperlink{utility_8h_aed8ff2c38a8f85dbb65430db776210c6}{white\+Spaces}})
+\item 
+void \mbox{\hyperlink{utility_8h_ae09ff3f9ef4f6ed1e6f8bce21611c350}{trim}} (std\+::string \&str, const std\+::string \&trim\+Chars=\mbox{\hyperlink{utility_8h_aed8ff2c38a8f85dbb65430db776210c6}{white\+Spaces}})
+\item 
+std\+::array$<$ double, 4 $>$ \mbox{\hyperlink{utility_8h_a1c2bef3629c6f92ee4ba07bc81077d85}{Gen2\+D\+Rotation}} (double angle)
+\item 
+std\+::array$<$ double, 9 $>$ \mbox{\hyperlink{utility_8h_a90679df138994d36b4b0667e7e56f063}{Gen3\+D\+Rotation}} (int axis, double angle)
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{utility_8h_a4f5515b138930699e5805a24d770a8d2}{Cross\+Product}} (std\+::array$<$ T, 2 $>$ \+\_\+a, std\+::array$<$ T, 2 $>$ \+\_\+b)
+\begin{DoxyCompactList}\small\item\em cross-\/product \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::array$<$ T, 3 $>$ \mbox{\hyperlink{utility_8h_a3a93b17d6e1b33fb9103aec241c78d5a}{Cross\+Product}} (std\+::array$<$ T, 3 $>$ \+\_\+a, std\+::array$<$ T, 3 $>$ \+\_\+b)
+\begin{DoxyCompactList}\small\item\em Generate Cross\+Product. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{utility_8h_af1b87da66c6f5ebd31d4f7fe68fbc0d7}{Matrix\+Mult}} (T $\ast$out, T $\ast$A, T $\ast$B, int Nrows, int Ncols, int Nmid)
+\begin{DoxyCompactList}\small\item\em Matrix multiplication. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{utility_8h_a1cb6e8f9eb2dcac634a6f444c9caa9a5}{Matrix\+Mult}} (T $\ast$out, T $\ast$A, T $\ast$B, int N)
+\begin{DoxyCompactList}\small\item\em Diagonal version of matrix multiplication, out = A$\ast$B, size=N$\ast$N. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{utility_8h_ae067c253f8dc385a4e354634f7bbe100}{Para\+Range}} (int total\+Length, int offset, int mpi\+\_\+size, int mpi\+\_\+rank, int $\ast$istart, int $\ast$iend)
+\item 
+{\footnotesize template$<$class T $>$ }\\T $\ast$$\ast$ \mbox{\hyperlink{utility_8h_a31cfa458b3efbf0c9bdc34b0848261a4}{Create2D}} (int N1, int N2)
+\item 
+{\footnotesize template$<$class T $>$ }\\void \mbox{\hyperlink{utility_8h_a67a79ee3a70ddabf3690498357090776}{Delete2D}} (T $\ast$$\ast$arr, int N1, int N2)
+\item 
+{\footnotesize template$<$class T $>$ }\\T $\ast$$\ast$$\ast$ \mbox{\hyperlink{utility_8h_a024f4e5a12c417793978c6205b67967e}{Create3D}} (int N1, int N2, int N3)
+\item 
+{\footnotesize template$<$class T $>$ }\\void \mbox{\hyperlink{utility_8h_afb955e442a836fe94572ae45c3509cc0}{Delete3D}} (T $\ast$$\ast$$\ast$arr, int N1, int N2, int N3)
+\item 
+{\footnotesize template$<$class T $>$ }\\T $\ast$$\ast$$\ast$$\ast$ \mbox{\hyperlink{utility_8h_a19ab034025d7c3955b7c2608075dbdc1}{Create4D}} (int N1, int N2, int N3, int N4)
+\item 
+{\footnotesize template$<$class T $>$ }\\void \mbox{\hyperlink{utility_8h_a6dc2125ae3c4a1696e32f7419ee4a4aa}{Delete4D}} (T $\ast$$\ast$$\ast$$\ast$arr, int N1, int N2, int N3, int N4)
+\item 
+{\footnotesize template$<$class T $>$ }\\T $\ast$$\ast$$\ast$$\ast$$\ast$ \mbox{\hyperlink{utility_8h_a92374c299cfd1b76f1d78dd07ba33db3}{Create5D}} (int N1, int N2, int N3, int N4, int N5)
+\item 
+{\footnotesize template$<$class T $>$ }\\void \mbox{\hyperlink{utility_8h_a47b654ed3f88bdcdd904bbfc8916db55}{Delete5D}} (T $\ast$$\ast$$\ast$$\ast$$\ast$arr, int N1, int N2, int N3, int N4, int N5)
+\item 
+{\footnotesize template$<$class T $>$ }\\T $\ast$$\ast$$\ast$$\ast$$\ast$$\ast$ \mbox{\hyperlink{utility_8h_a20fb8bd97daf2a9d7e79ee00e4b298f9}{Create6D}} (int N1, int N2, int N3, int N4, int N5, int N6)
+\item 
+{\footnotesize template$<$class T $>$ }\\void \mbox{\hyperlink{utility_8h_a69939ecbc7811b94703580196b79784b}{Delete6D}} (T $\ast$$\ast$$\ast$$\ast$$\ast$$\ast$arr, int N1, int N2, int N3, int N4, int N5, int N6)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{utility_8h_a31cfa458b3efbf0c9bdc34b0848261a4}\label{utility_8h_a31cfa458b3efbf0c9bdc34b0848261a4}} 
+\index{utility.h@{utility.h}!Create2D@{Create2D}}
+\index{Create2D@{Create2D}!utility.h@{utility.h}}
+\doxysubsubsection{\texorpdfstring{Create2D()}{Create2D()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$$\ast$ Create2D (\begin{DoxyParamCaption}\item[{int}]{N1,  }\item[{int}]{N2 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utility_8h_a024f4e5a12c417793978c6205b67967e}\label{utility_8h_a024f4e5a12c417793978c6205b67967e}} 
+\index{utility.h@{utility.h}!Create3D@{Create3D}}
+\index{Create3D@{Create3D}!utility.h@{utility.h}}
+\doxysubsubsection{\texorpdfstring{Create3D()}{Create3D()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$$\ast$$\ast$ Create3D (\begin{DoxyParamCaption}\item[{int}]{N1,  }\item[{int}]{N2,  }\item[{int}]{N3 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utility_8h_a19ab034025d7c3955b7c2608075dbdc1}\label{utility_8h_a19ab034025d7c3955b7c2608075dbdc1}} 
+\index{utility.h@{utility.h}!Create4D@{Create4D}}
+\index{Create4D@{Create4D}!utility.h@{utility.h}}
+\doxysubsubsection{\texorpdfstring{Create4D()}{Create4D()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$$\ast$$\ast$$\ast$ Create4D (\begin{DoxyParamCaption}\item[{int}]{N1,  }\item[{int}]{N2,  }\item[{int}]{N3,  }\item[{int}]{N4 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utility_8h_a92374c299cfd1b76f1d78dd07ba33db3}\label{utility_8h_a92374c299cfd1b76f1d78dd07ba33db3}} 
+\index{utility.h@{utility.h}!Create5D@{Create5D}}
+\index{Create5D@{Create5D}!utility.h@{utility.h}}
+\doxysubsubsection{\texorpdfstring{Create5D()}{Create5D()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$$\ast$$\ast$$\ast$$\ast$ Create5D (\begin{DoxyParamCaption}\item[{int}]{N1,  }\item[{int}]{N2,  }\item[{int}]{N3,  }\item[{int}]{N4,  }\item[{int}]{N5 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utility_8h_a20fb8bd97daf2a9d7e79ee00e4b298f9}\label{utility_8h_a20fb8bd97daf2a9d7e79ee00e4b298f9}} 
+\index{utility.h@{utility.h}!Create6D@{Create6D}}
+\index{Create6D@{Create6D}!utility.h@{utility.h}}
+\doxysubsubsection{\texorpdfstring{Create6D()}{Create6D()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$$\ast$$\ast$$\ast$$\ast$$\ast$ Create6D (\begin{DoxyParamCaption}\item[{int}]{N1,  }\item[{int}]{N2,  }\item[{int}]{N3,  }\item[{int}]{N4,  }\item[{int}]{N5,  }\item[{int}]{N6 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utility_8h_a4f5515b138930699e5805a24d770a8d2}\label{utility_8h_a4f5515b138930699e5805a24d770a8d2}} 
+\index{utility.h@{utility.h}!CrossProduct@{CrossProduct}}
+\index{CrossProduct@{CrossProduct}!utility.h@{utility.h}}
+\doxysubsubsection{\texorpdfstring{CrossProduct()}{CrossProduct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T Cross\+Product (\begin{DoxyParamCaption}\item[{std\+::array$<$ T, 2 $>$}]{\+\_\+a,  }\item[{std\+::array$<$ T, 2 $>$}]{\+\_\+b }\end{DoxyParamCaption})}
+
+
+
+cross-\/product 
+
+\mbox{\Hypertarget{utility_8h_a3a93b17d6e1b33fb9103aec241c78d5a}\label{utility_8h_a3a93b17d6e1b33fb9103aec241c78d5a}} 
+\index{utility.h@{utility.h}!CrossProduct@{CrossProduct}}
+\index{CrossProduct@{CrossProduct}!utility.h@{utility.h}}
+\doxysubsubsection{\texorpdfstring{CrossProduct()}{CrossProduct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::array$<$T, 3$>$ Cross\+Product (\begin{DoxyParamCaption}\item[{std\+::array$<$ T, 3 $>$}]{\+\_\+a,  }\item[{std\+::array$<$ T, 3 $>$}]{\+\_\+b }\end{DoxyParamCaption})}
+
+
+
+Generate Cross\+Product. 
+
+\mbox{\Hypertarget{utility_8h_a67a79ee3a70ddabf3690498357090776}\label{utility_8h_a67a79ee3a70ddabf3690498357090776}} 
+\index{utility.h@{utility.h}!Delete2D@{Delete2D}}
+\index{Delete2D@{Delete2D}!utility.h@{utility.h}}
+\doxysubsubsection{\texorpdfstring{Delete2D()}{Delete2D()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void Delete2D (\begin{DoxyParamCaption}\item[{T $\ast$$\ast$}]{arr,  }\item[{int}]{N1,  }\item[{int}]{N2 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utility_8h_afb955e442a836fe94572ae45c3509cc0}\label{utility_8h_afb955e442a836fe94572ae45c3509cc0}} 
+\index{utility.h@{utility.h}!Delete3D@{Delete3D}}
+\index{Delete3D@{Delete3D}!utility.h@{utility.h}}
+\doxysubsubsection{\texorpdfstring{Delete3D()}{Delete3D()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void Delete3D (\begin{DoxyParamCaption}\item[{T $\ast$$\ast$$\ast$}]{arr,  }\item[{int}]{N1,  }\item[{int}]{N2,  }\item[{int}]{N3 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utility_8h_a6dc2125ae3c4a1696e32f7419ee4a4aa}\label{utility_8h_a6dc2125ae3c4a1696e32f7419ee4a4aa}} 
+\index{utility.h@{utility.h}!Delete4D@{Delete4D}}
+\index{Delete4D@{Delete4D}!utility.h@{utility.h}}
+\doxysubsubsection{\texorpdfstring{Delete4D()}{Delete4D()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void Delete4D (\begin{DoxyParamCaption}\item[{T $\ast$$\ast$$\ast$$\ast$}]{arr,  }\item[{int}]{N1,  }\item[{int}]{N2,  }\item[{int}]{N3,  }\item[{int}]{N4 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utility_8h_a47b654ed3f88bdcdd904bbfc8916db55}\label{utility_8h_a47b654ed3f88bdcdd904bbfc8916db55}} 
+\index{utility.h@{utility.h}!Delete5D@{Delete5D}}
+\index{Delete5D@{Delete5D}!utility.h@{utility.h}}
+\doxysubsubsection{\texorpdfstring{Delete5D()}{Delete5D()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void Delete5D (\begin{DoxyParamCaption}\item[{T $\ast$$\ast$$\ast$$\ast$$\ast$}]{arr,  }\item[{int}]{N1,  }\item[{int}]{N2,  }\item[{int}]{N3,  }\item[{int}]{N4,  }\item[{int}]{N5 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utility_8h_a69939ecbc7811b94703580196b79784b}\label{utility_8h_a69939ecbc7811b94703580196b79784b}} 
+\index{utility.h@{utility.h}!Delete6D@{Delete6D}}
+\index{Delete6D@{Delete6D}!utility.h@{utility.h}}
+\doxysubsubsection{\texorpdfstring{Delete6D()}{Delete6D()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void Delete6D (\begin{DoxyParamCaption}\item[{T $\ast$$\ast$$\ast$$\ast$$\ast$$\ast$}]{arr,  }\item[{int}]{N1,  }\item[{int}]{N2,  }\item[{int}]{N3,  }\item[{int}]{N4,  }\item[{int}]{N5,  }\item[{int}]{N6 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utility_8h_a1c2bef3629c6f92ee4ba07bc81077d85}\label{utility_8h_a1c2bef3629c6f92ee4ba07bc81077d85}} 
+\index{utility.h@{utility.h}!Gen2DRotation@{Gen2DRotation}}
+\index{Gen2DRotation@{Gen2DRotation}!utility.h@{utility.h}}
+\doxysubsubsection{\texorpdfstring{Gen2DRotation()}{Gen2DRotation()}}
+{\footnotesize\ttfamily std\+::array$<$double, 4$>$ Gen2\+D\+Rotation (\begin{DoxyParamCaption}\item[{double}]{angle }\end{DoxyParamCaption})}
+
+Generate 2D rotation matrix. Return is 1d array because of contigous memory. \mbox{\Hypertarget{utility_8h_a90679df138994d36b4b0667e7e56f063}\label{utility_8h_a90679df138994d36b4b0667e7e56f063}} 
+\index{utility.h@{utility.h}!Gen3DRotation@{Gen3DRotation}}
+\index{Gen3DRotation@{Gen3DRotation}!utility.h@{utility.h}}
+\doxysubsubsection{\texorpdfstring{Gen3DRotation()}{Gen3DRotation()}}
+{\footnotesize\ttfamily std\+::array$<$double, 9$>$ Gen3\+D\+Rotation (\begin{DoxyParamCaption}\item[{int}]{axis,  }\item[{double}]{angle }\end{DoxyParamCaption})}
+
+Generate 3D rotation matrix. Return is 1d array because of contigous memory. \mbox{\Hypertarget{utility_8h_a1cb6e8f9eb2dcac634a6f444c9caa9a5}\label{utility_8h_a1cb6e8f9eb2dcac634a6f444c9caa9a5}} 
+\index{utility.h@{utility.h}!MatrixMult@{MatrixMult}}
+\index{MatrixMult@{MatrixMult}!utility.h@{utility.h}}
+\doxysubsubsection{\texorpdfstring{MatrixMult()}{MatrixMult()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void Matrix\+Mult (\begin{DoxyParamCaption}\item[{T $\ast$}]{out,  }\item[{T $\ast$}]{A,  }\item[{T $\ast$}]{B,  }\item[{int}]{N }\end{DoxyParamCaption})}
+
+
+
+Diagonal version of matrix multiplication, out = A$\ast$B, size=N$\ast$N. 
+
+\mbox{\Hypertarget{utility_8h_af1b87da66c6f5ebd31d4f7fe68fbc0d7}\label{utility_8h_af1b87da66c6f5ebd31d4f7fe68fbc0d7}} 
+\index{utility.h@{utility.h}!MatrixMult@{MatrixMult}}
+\index{MatrixMult@{MatrixMult}!utility.h@{utility.h}}
+\doxysubsubsection{\texorpdfstring{MatrixMult()}{MatrixMult()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void Matrix\+Mult (\begin{DoxyParamCaption}\item[{T $\ast$}]{out,  }\item[{T $\ast$}]{A,  }\item[{T $\ast$}]{B,  }\item[{int}]{Nrows,  }\item[{int}]{Ncols,  }\item[{int}]{Nmid }\end{DoxyParamCaption})}
+
+
+
+Matrix multiplication. 
+
+Calculate matrix multiplication C = A$\ast$B 
+\begin{DoxyParams}{Parameters}
+{\em out\mbox{[}out\mbox{]}} & matrix output(\+C) -\/ size Nrow $\ast$ Ncol \\
+\hline
+{\em a\mbox{[}in\mbox{]}} & matrix A -\/ size = Nrows $\ast$ Nmid \\
+\hline
+{\em b\mbox{[}in\mbox{]}} & matrix B -\/ size = Nmid $\ast$ Ncol \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{utility_8h_ae067c253f8dc385a4e354634f7bbe100}\label{utility_8h_ae067c253f8dc385a4e354634f7bbe100}} 
+\index{utility.h@{utility.h}!ParaRange@{ParaRange}}
+\index{ParaRange@{ParaRange}!utility.h@{utility.h}}
+\doxysubsubsection{\texorpdfstring{ParaRange()}{ParaRange()}}
+{\footnotesize\ttfamily void Para\+Range (\begin{DoxyParamCaption}\item[{int}]{total\+Length,  }\item[{int}]{offset,  }\item[{int}]{mpi\+\_\+size,  }\item[{int}]{mpi\+\_\+rank,  }\item[{int $\ast$}]{istart,  }\item[{int $\ast$}]{iend }\end{DoxyParamCaption})}
+
+Distribute jobs through processors divide domain offset $<$= x $<$ total\+Length + offset Note that if mpi\+\_\+size $>$ total\+Length \&\& mpi\+\_\+rank $>$= total\+Length, then istart = total\+Length, iend = total\+Length \mbox{\Hypertarget{utility_8h_ae09ff3f9ef4f6ed1e6f8bce21611c350}\label{utility_8h_ae09ff3f9ef4f6ed1e6f8bce21611c350}} 
+\index{utility.h@{utility.h}!trim@{trim}}
+\index{trim@{trim}!utility.h@{utility.h}}
+\doxysubsubsection{\texorpdfstring{trim()}{trim()}}
+{\footnotesize\ttfamily void trim (\begin{DoxyParamCaption}\item[{std\+::string \&}]{str,  }\item[{const std\+::string \&}]{trim\+Chars = {\ttfamily \mbox{\hyperlink{utility_8h_aed8ff2c38a8f85dbb65430db776210c6}{white\+Spaces}}} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utility_8h_abe9a7a913241dd3c7c10556db0c7476c}\label{utility_8h_abe9a7a913241dd3c7c10556db0c7476c}} 
+\index{utility.h@{utility.h}!trim\_left@{trim\_left}}
+\index{trim\_left@{trim\_left}!utility.h@{utility.h}}
+\doxysubsubsection{\texorpdfstring{trim\_left()}{trim\_left()}}
+{\footnotesize\ttfamily void trim\+\_\+left (\begin{DoxyParamCaption}\item[{std\+::string \&}]{str,  }\item[{const std\+::string \&}]{trim\+Chars = {\ttfamily \mbox{\hyperlink{utility_8h_aed8ff2c38a8f85dbb65430db776210c6}{white\+Spaces}}} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utility_8h_a31195fb00e3cfc59f131e4a4d225b7d4}\label{utility_8h_a31195fb00e3cfc59f131e4a4d225b7d4}} 
+\index{utility.h@{utility.h}!trim\_right@{trim\_right}}
+\index{trim\_right@{trim\_right}!utility.h@{utility.h}}
+\doxysubsubsection{\texorpdfstring{trim\_right()}{trim\_right()}}
+{\footnotesize\ttfamily void trim\+\_\+right (\begin{DoxyParamCaption}\item[{std\+::string \&}]{str,  }\item[{const std\+::string \&}]{trim\+Chars = {\ttfamily \mbox{\hyperlink{utility_8h_aed8ff2c38a8f85dbb65430db776210c6}{white\+Spaces}}} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utility_8h_aed8ff2c38a8f85dbb65430db776210c6}\label{utility_8h_aed8ff2c38a8f85dbb65430db776210c6}} 
+\index{utility.h@{utility.h}!whiteSpaces@{whiteSpaces}}
+\index{whiteSpaces@{whiteSpaces}!utility.h@{utility.h}}
+\doxysubsubsection{\texorpdfstring{whiteSpaces()}{whiteSpaces()}}
+{\footnotesize\ttfamily const std\+::string white\+Spaces (\begin{DoxyParamCaption}\item[{\char`\"{} \textbackslash{}f\textbackslash{}n\textbackslash{}r\textbackslash{}t\textbackslash{}v\char`\"{}}]{ }\end{DoxyParamCaption})}
+
+
+
+some support functions 
+
+Some functions for string (may be replaced by some standard functions), contigous n-\/dimensional array (boost library has alternative), functions for distributing jobs which M\+PI, \begin{DoxyAuthor}{Author}
+Dasol Kim Utility realted to string boost/algorithm/string/trim.\+hpp has good alternative 
+\end{DoxyAuthor}

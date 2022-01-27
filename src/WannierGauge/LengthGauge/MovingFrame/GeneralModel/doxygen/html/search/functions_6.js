@@ -1,5 +1,22 @@
 var searchData=
 [
-  ['printinfo_111',['PrintInfo',['../class_s_b_es.html#ae78ca5611d9525f89398e15cef609c1c',1,'SBEs']]],
-  ['pulse_112',['Pulse',['../class_pulse.html#af1ab2726f54f1636645a1ce12099bfab',1,'Pulse']]]
+  ['gen2drotation_481',['Gen2DRotation',['../utility_8h.html#a1c2bef3629c6f92ee4ba07bc81077d85',1,'utility.h']]],
+  ['gen3drotation_482',['Gen3DRotation',['../utility_8h.html#a90679df138994d36b4b0667e7e56f063',1,'utility.h']]],
+  ['genbcomp_483',['GenBcomp',['../class_bie_se3surf.html#a3f0e42541ab1ee053c8b9faf1d5fc7f0',1,'BieSe3surf::GenBcomp()'],['../class_wilson_mass.html#a82047f782ebbcdfb9fcfbfaadba1b464',1,'WilsonMass::GenBcomp()']]],
+  ['genbrillouinzone_484',['GenBrillouinzone',['../class_bie_se3surf.html#a4f5bb6b464ce3c4e2fa430d7c16b9189',1,'BieSe3surf::GenBrillouinzone()'],['../class_t_m_d_cs.html#a4d32b26b1d107b53932feac418c848b4',1,'TMDCs::GenBrillouinzone()'],['../class_wannier90.html#ac39ac75975f8eccc0833f57dd52c6ddc',1,'Wannier90::GenBrillouinzone()'],['../class_wilson_mass.html#a234ce32e40498a5516e48bd0ce315b4f',1,'WilsonMass::GenBrillouinzone()'],['../class_base_material.html#ad502cd0e3d6c200489a07476bc579f0c',1,'BaseMaterial::GenBrillouinzone()']]],
+  ['gencurrent_485',['GenCurrent',['../class_s_b_es.html#a45d19265a4f22af79280ac4a9436f7d2',1,'SBEs']]],
+  ['gendifferentialdm_486',['GenDifferentialDM',['../class_s_b_es.html#a9503851579b1a7ea96b7faab98a5881d',1,'SBEs']]],
+  ['gendipole_487',['GenDipole',['../class_bie_se3surf.html#a84cf299527528174653be41e2e1f681c',1,'BieSe3surf::GenDipole()'],['../class_t_m_d_cs.html#a0001fc5456a51d1930ebb5807868da1e',1,'TMDCs::GenDipole()'],['../class_wannier90.html#a58af1f4549535098f7b0f4d93c74162b',1,'Wannier90::GenDipole()'],['../class_wilson_mass.html#a5eccf814c7eb68f0b453a14c6b45fa01',1,'WilsonMass::GenDipole()'],['../class_base_material.html#af8a9f23ac1ddcb07afd9657582377af7',1,'BaseMaterial::GenDipole()']]],
+  ['gendipoleprimitive_488',['GenDipolePrimitive',['../class_wannier90.html#a97c8e7ea2f295e8b71e89f1e380df509',1,'Wannier90']]],
+  ['genhamiltonian_489',['GenHamiltonian',['../class_bie_se3surf.html#a99c544c2467afc34e3b7b426458d2599',1,'BieSe3surf::GenHamiltonian()'],['../class_t_m_d_cs.html#ab7f79dc7186b28a986e96d4b1418ba3b',1,'TMDCs::GenHamiltonian()'],['../class_wannier90.html#afd359c1a747709516dd58aaf6d4804c9',1,'Wannier90::GenHamiltonian()'],['../class_wilson_mass.html#aed4048bb4a06169ffc8010852fd46262',1,'WilsonMass::GenHamiltonian()'],['../class_base_material.html#a4090b0669eefbd99b3bf824e0ef65810',1,'BaseMaterial::GenHamiltonian()']]],
+  ['genhamiltonianprimitive_490',['GenHamiltonianPrimitive',['../class_wannier90.html#a457c061366e8cd975f55dbdb1460ddba',1,'Wannier90']]],
+  ['geninitialvalue_491',['GenInitialValue',['../class_wannier90.html#a16e10274c6d2a3c67e04ac1372216bbb',1,'Wannier90::GenInitialValue()'],['../class_base_material.html#ad2630d3b55e2a642d21fa6d3d8c867ed',1,'BaseMaterial::GenInitialValue()']]],
+  ['geninterintracurrent_492',['GenInterIntraCurrent',['../class_s_b_es.html#acbf52ad95d6063497f09f2d2bb435ea2',1,'SBEs']]],
+  ['genjmatrix_493',['GenJMatrix',['../class_bie_se3surf.html#ae5695a3e9cec80b10ab7bbc4a8c6b1ce',1,'BieSe3surf::GenJMatrix()'],['../class_t_m_d_cs.html#aaa9120a5ae8a80ec2196615708e6a220',1,'TMDCs::GenJMatrix()'],['../class_wannier90.html#a3b96ecd8f5b8910889e50e8af4eaff7f',1,'Wannier90::GenJMatrix()'],['../class_wilson_mass.html#a41a3114da6dd600adbc08aa2ed024141',1,'WilsonMass::GenJMatrix()'],['../class_base_material.html#af40f6eb595ac0437cea9bb94f4bf036b',1,'BaseMaterial::GenJMatrix()']]],
+  ['genjmatrixprimitive_494',['GenJMatrixPrimitive',['../class_wannier90.html#a614a85b4248437ee2eb2084b109e5bdf',1,'Wannier90']]],
+  ['genkpulsa_495',['GenKpulsA',['../class_s_b_es.html#abd50d47954e2d5f4a82618ba7f554b86',1,'SBEs']]],
+  ['genumatrix_496',['GenUMatrix',['../class_wannier90.html#af74aa1a7b44fd91c2f3949f16b300dc5',1,'Wannier90::GenUMatrix()'],['../class_s_b_es.html#a484a32d347e2df92eff0baa327ca4a15',1,'SBEs::GenUMatrix()']]],
+  ['getnearestk_497',['GetNearestK',['../class_wannier90.html#ab7651389b3245db995b6a2f63704d73c',1,'Wannier90']]],
+  ['group_5fvel_5fvc_5foutput_498',['group_vel_vc_output',['../classsolidstructure.html#a2919a5d44b239f13aeaaed7c69b084be',1,'solidstructure']]],
+  ['group_5fvelcv_499',['group_velCV',['../classsolidstructure.html#ac5c81c34bceee9c99d1b3fed220954aa',1,'solidstructure']]]
 ];

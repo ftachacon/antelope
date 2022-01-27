@@ -65,7 +65,7 @@ $(function() {
 <div class="title">utility.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<a href="utility_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// Consider using boost library instead of using this header file.</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#pragma once</span></div>
@@ -75,33 +75,33 @@ $(function() {
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">const</span> std::string whiteSpaces( <span class="stringliteral">&quot; \f\n\r\t\v&quot;</span> );</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">const</span> std::string <a class="code" href="utility_8h.html#aed8ff2c38a8f85dbb65430db776210c6">whiteSpaces</a>( <span class="stringliteral">&quot; \f\n\r\t\v&quot;</span> );</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">void</span> trim_left( std::string&amp; str,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;      <span class="keyword">const</span> std::string&amp; trimChars = whiteSpaces )</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="utility_8h.html#abe9a7a913241dd3c7c10556db0c7476c">   20</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="utility_8h.html#abe9a7a913241dd3c7c10556db0c7476c">trim_left</a>( std::string&amp; <a class="code" href="namespace_plot_material_structure.html#a76c9e6cbcd0c2edf919ecd9620601b95">str</a>,</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;      <span class="keyword">const</span> std::string&amp; trimChars = <a class="code" href="utility_8h.html#aed8ff2c38a8f85dbb65430db776210c6">whiteSpaces</a> )</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;   std::string::size_type pos = str.find_first_not_of( trimChars );</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;   str.erase( 0, pos );</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;   std::string::size_type pos = <a class="code" href="namespace_plot_material_structure.html#a76c9e6cbcd0c2edf919ecd9620601b95">str</a>.find_first_not_of( trimChars );</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;   <a class="code" href="namespace_plot_material_structure.html#a76c9e6cbcd0c2edf919ecd9620601b95">str</a>.erase( 0, pos );</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">void</span> trim_right( std::string&amp; str,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;      <span class="keyword">const</span> std::string&amp; trimChars = whiteSpaces )</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="utility_8h.html#a31195fb00e3cfc59f131e4a4d225b7d4">   27</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="utility_8h.html#a31195fb00e3cfc59f131e4a4d225b7d4">trim_right</a>( std::string&amp; <a class="code" href="namespace_plot_material_structure.html#a76c9e6cbcd0c2edf919ecd9620601b95">str</a>,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;      <span class="keyword">const</span> std::string&amp; trimChars = <a class="code" href="utility_8h.html#aed8ff2c38a8f85dbb65430db776210c6">whiteSpaces</a> )</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;   std::string::size_type pos = str.find_last_not_of( trimChars );</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;   str.erase( pos + 1 );    </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;   std::string::size_type pos = <a class="code" href="namespace_plot_material_structure.html#a76c9e6cbcd0c2edf919ecd9620601b95">str</a>.find_last_not_of( trimChars );</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;   <a class="code" href="namespace_plot_material_structure.html#a76c9e6cbcd0c2edf919ecd9620601b95">str</a>.erase( pos + 1 );    </div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span> trim( std::string&amp; str, <span class="keyword">const</span> std::string&amp; trimChars = whiteSpaces )</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="utility_8h.html#ae09ff3f9ef4f6ed1e6f8bce21611c350">   34</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="utility_8h.html#ae09ff3f9ef4f6ed1e6f8bce21611c350">trim</a>( std::string&amp; <a class="code" href="namespace_plot_material_structure.html#a76c9e6cbcd0c2edf919ecd9620601b95">str</a>, <span class="keyword">const</span> std::string&amp; trimChars = <a class="code" href="utility_8h.html#aed8ff2c38a8f85dbb65430db776210c6">whiteSpaces</a> )</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;   trim_left( str, trimChars );</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;   trim_right( str, trimChars );</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;   <a class="code" href="utility_8h.html#abe9a7a913241dd3c7c10556db0c7476c">trim_left</a>( <a class="code" href="namespace_plot_material_structure.html#a76c9e6cbcd0c2edf919ecd9620601b95">str</a>, trimChars );</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;   <a class="code" href="utility_8h.html#a31195fb00e3cfc59f131e4a4d225b7d4">trim_right</a>( <a class="code" href="namespace_plot_material_structure.html#a76c9e6cbcd0c2edf919ecd9620601b95">str</a>, trimChars );</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;std::array&lt;double, 4&gt; Gen2DRotation(<span class="keywordtype">double</span> angle)</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="utility_8h.html#a1c2bef3629c6f92ee4ba07bc81077d85">   42</a></span>&#160;std::array&lt;double, 4&gt; <a class="code" href="utility_8h.html#a1c2bef3629c6f92ee4ba07bc81077d85">Gen2DRotation</a>(<span class="keywordtype">double</span> angle)</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">return</span> {cos(angle), -sin(angle), sin(angle), cos(angle)};</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;std::array&lt;double, 9&gt; Gen3DRotation(<span class="keywordtype">int</span> axis, <span class="keywordtype">double</span> angle)</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="utility_8h.html#a90679df138994d36b4b0667e7e56f063">   48</a></span>&#160;std::array&lt;double, 9&gt; <a class="code" href="utility_8h.html#a90679df138994d36b4b0667e7e56f063">Gen3DRotation</a>(<span class="keywordtype">int</span> axis, <span class="keywordtype">double</span> angle)</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    std::array&lt;double, 9&gt; outVal;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    outVal[3*axis + axis] = 1.;         outVal[3*axis + (axis+1)%3] = 0.;                   outVal[3*axis + (axis+2)%3] = 0.;</div>
@@ -112,19 +112,19 @@ $(function() {
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;T CrossProduct(std::array&lt;T, 2&gt; _a, std::array&lt;T, 2&gt; _b)</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="utility_8h.html#a4f5515b138930699e5805a24d770a8d2">   60</a></span>&#160;T <a class="code" href="utility_8h.html#a4f5515b138930699e5805a24d770a8d2">CrossProduct</a>(std::array&lt;T, 2&gt; _a, std::array&lt;T, 2&gt; _b)</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;{</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">return</span> (_a[0]*_b[1] - _b[0]*_a[1]);</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;std::array&lt;T, 3&gt; CrossProduct(std::array&lt;T, 3&gt; _a, std::array&lt;T, 3&gt; _b)</div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="utility_8h.html#a3a93b17d6e1b33fb9103aec241c78d5a">   66</a></span>&#160;std::array&lt;T, 3&gt; <a class="code" href="utility_8h.html#a4f5515b138930699e5805a24d770a8d2">CrossProduct</a>(std::array&lt;T, 3&gt; _a, std::array&lt;T, 3&gt; _b)</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;{</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordflow">return</span> {_a[1]*_b[2] - _a[2]*_b[1], _a[2]*_b[0] - _a[0]*_b[2], _a[0]*_b[1] - _b[0]*_a[1]};</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keywordtype">void</span> MatrixMult(T *out, T *A, T *B, <span class="keywordtype">int</span> Nrows, <span class="keywordtype">int</span> Ncols, <span class="keywordtype">int</span> Nmid)</div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="utility_8h.html#af1b87da66c6f5ebd31d4f7fe68fbc0d7">   79</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="utility_8h.html#af1b87da66c6f5ebd31d4f7fe68fbc0d7">MatrixMult</a>(T *out, T *A, T *B, <span class="keywordtype">int</span> Nrows, <span class="keywordtype">int</span> Ncols, <span class="keywordtype">int</span> Nmid)</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;{</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    std::fill(out, out + Nrows*Ncols, 0.);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Nrows; ++i)</div>
@@ -139,12 +139,12 @@ $(function() {
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    }</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;}</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keywordtype">void</span> MatrixMult(T *out, T *A, T *B, <span class="keywordtype">int</span> N)</div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="utility_8h.html#a1cb6e8f9eb2dcac634a6f444c9caa9a5">   95</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="utility_8h.html#af1b87da66c6f5ebd31d4f7fe68fbc0d7">MatrixMult</a>(T *out, T *A, T *B, <span class="keywordtype">int</span> N)</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;{</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    MatrixMult(out, A, B, N, N, N);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <a class="code" href="utility_8h.html#af1b87da66c6f5ebd31d4f7fe68fbc0d7">MatrixMult</a>(out, A, B, N, N, N);</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;}</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keywordtype">void</span> ParaRange(<span class="keywordtype">int</span> totalLength, <span class="keywordtype">int</span> offset, <span class="keywordtype">int</span> mpi_size, <span class="keywordtype">int</span> mpi_rank, <span class="keywordtype">int</span> *istart, <span class="keywordtype">int</span> *iend)</div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="utility_8h.html#ae067c253f8dc385a4e354634f7bbe100">  104</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="utility_8h.html#ae067c253f8dc385a4e354634f7bbe100">ParaRange</a>(<span class="keywordtype">int</span> totalLength, <span class="keywordtype">int</span> offset, <span class="keywordtype">int</span> mpi_size, <span class="keywordtype">int</span> mpi_rank, <span class="keywordtype">int</span> *istart, <span class="keywordtype">int</span> *iend)</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;{</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">int</span> iwork1, iwork2;</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
@@ -159,7 +159,7 @@ $(function() {
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">// Replace below functions with boost multiarray feature later</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; T **Create2D(<span class="keywordtype">int</span> N1, <span class="keywordtype">int</span> N2)</div>
+<div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="utility_8h.html#a31cfa458b3efbf0c9bdc34b0848261a4">  119</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; T **<a class="code" href="utility_8h.html#a31cfa458b3efbf0c9bdc34b0848261a4">Create2D</a>(<span class="keywordtype">int</span> N1, <span class="keywordtype">int</span> N2)</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;{</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    T *arr1d = <span class="keyword">new</span> T[N1*N2];</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; N1*N2; ++i)</div>
@@ -172,12 +172,12 @@ $(function() {
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    }</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordflow">return</span> arr;</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;};</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">void</span> Delete2D(T **arr, <span class="keywordtype">int</span> N1, <span class="keywordtype">int</span> N2)</div>
+<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="utility_8h.html#a67a79ee3a70ddabf3690498357090776">  132</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">void</span> <a class="code" href="utility_8h.html#a67a79ee3a70ddabf3690498357090776">Delete2D</a>(T **arr, <span class="keywordtype">int</span> N1, <span class="keywordtype">int</span> N2)</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;{</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keyword">delete</span>[] &amp;(arr[0][0]);</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keyword">delete</span>[] arr;</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;};</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; T ***Create3D(<span class="keywordtype">int</span> N1, <span class="keywordtype">int</span> N2, <span class="keywordtype">int</span> N3)</div>
+<div class="line"><a name="l00137"></a><span class="lineno"><a class="line" href="utility_8h.html#a024f4e5a12c417793978c6205b67967e">  137</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; T ***<a class="code" href="utility_8h.html#a024f4e5a12c417793978c6205b67967e">Create3D</a>(<span class="keywordtype">int</span> N1, <span class="keywordtype">int</span> N2, <span class="keywordtype">int</span> N3)</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;{</div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    T *arr1d = <span class="keyword">new</span> T[N1*N2*N3];</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; N1*N2*N3; ++i)</div>
@@ -195,7 +195,7 @@ $(function() {
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    }</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordflow">return</span> arr;</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;};</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">void</span> Delete3D(T ***arr, <span class="keywordtype">int</span> N1, <span class="keywordtype">int</span> N2, <span class="keywordtype">int</span> N3)</div>
+<div class="line"><a name="l00155"></a><span class="lineno"><a class="line" href="utility_8h.html#afb955e442a836fe94572ae45c3509cc0">  155</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">void</span> <a class="code" href="utility_8h.html#afb955e442a836fe94572ae45c3509cc0">Delete3D</a>(T ***arr, <span class="keywordtype">int</span> N1, <span class="keywordtype">int</span> N2, <span class="keywordtype">int</span> N3)</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;{</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keyword">delete</span>[] &amp;(arr[0][0][0]);</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; N1; ++i)</div>
@@ -205,7 +205,7 @@ $(function() {
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keyword">delete</span>[] arr;</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;};</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; T ****Create4D(<span class="keywordtype">int</span> N1, <span class="keywordtype">int</span> N2, <span class="keywordtype">int</span> N3, <span class="keywordtype">int</span> N4)</div>
+<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="utility_8h.html#a19ab034025d7c3955b7c2608075dbdc1">  165</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; T ****<a class="code" href="utility_8h.html#a19ab034025d7c3955b7c2608075dbdc1">Create4D</a>(<span class="keywordtype">int</span> N1, <span class="keywordtype">int</span> N2, <span class="keywordtype">int</span> N3, <span class="keywordtype">int</span> N4)</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;{</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    T *arr1d = <span class="keyword">new</span> T[N1*N2*N3*N4];</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; N1*N2*N3*N4; ++i)</div>
@@ -228,7 +228,7 @@ $(function() {
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    }</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keywordflow">return</span> arr;</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;};</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">void</span> Delete4D(T ****arr, <span class="keywordtype">int</span> N1, <span class="keywordtype">int</span> N2, <span class="keywordtype">int</span> N3, <span class="keywordtype">int</span> N4)</div>
+<div class="line"><a name="l00188"></a><span class="lineno"><a class="line" href="utility_8h.html#a6dc2125ae3c4a1696e32f7419ee4a4aa">  188</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">void</span> <a class="code" href="utility_8h.html#a6dc2125ae3c4a1696e32f7419ee4a4aa">Delete4D</a>(T ****arr, <span class="keywordtype">int</span> N1, <span class="keywordtype">int</span> N2, <span class="keywordtype">int</span> N3, <span class="keywordtype">int</span> N4)</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;{</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="keyword">delete</span>[] &amp;(arr[0][0][0][0]);</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; N1; ++i)</div>
@@ -241,7 +241,7 @@ $(function() {
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    }</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keyword">delete</span>[] arr;</div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;};</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; T *****Create5D(<span class="keywordtype">int</span> N1, <span class="keywordtype">int</span> N2, <span class="keywordtype">int</span> N3, <span class="keywordtype">int</span> N4, <span class="keywordtype">int</span> N5)</div>
+<div class="line"><a name="l00201"></a><span class="lineno"><a class="line" href="utility_8h.html#a92374c299cfd1b76f1d78dd07ba33db3">  201</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; T *****<a class="code" href="utility_8h.html#a92374c299cfd1b76f1d78dd07ba33db3">Create5D</a>(<span class="keywordtype">int</span> N1, <span class="keywordtype">int</span> N2, <span class="keywordtype">int</span> N3, <span class="keywordtype">int</span> N4, <span class="keywordtype">int</span> N5)</div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;{</div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    T *arr1d = <span class="keyword">new</span> T[N1*N2*N3*N4*N5];</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; N1*N2*N3*N4*N5; ++i)</div>
@@ -269,7 +269,7 @@ $(function() {
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    }</div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="keywordflow">return</span> arr;</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;};</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">void</span> Delete5D(T *****arr, <span class="keywordtype">int</span> N1, <span class="keywordtype">int</span> N2, <span class="keywordtype">int</span> N3, <span class="keywordtype">int</span> N4, <span class="keywordtype">int</span> N5)</div>
+<div class="line"><a name="l00229"></a><span class="lineno"><a class="line" href="utility_8h.html#a47b654ed3f88bdcdd904bbfc8916db55">  229</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">void</span> <a class="code" href="utility_8h.html#a47b654ed3f88bdcdd904bbfc8916db55">Delete5D</a>(T *****arr, <span class="keywordtype">int</span> N1, <span class="keywordtype">int</span> N2, <span class="keywordtype">int</span> N3, <span class="keywordtype">int</span> N4, <span class="keywordtype">int</span> N5)</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;{</div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keyword">delete</span>[] &amp;(arr[0][0][0][0][0]);</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; N1; ++i)</div>
@@ -286,7 +286,7 @@ $(function() {
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    }</div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keyword">delete</span>[] arr;</div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;};</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; T ******Create6D(<span class="keywordtype">int</span> N1, <span class="keywordtype">int</span> N2, <span class="keywordtype">int</span> N3, <span class="keywordtype">int</span> N4, <span class="keywordtype">int</span> N5, <span class="keywordtype">int</span> N6)</div>
+<div class="line"><a name="l00246"></a><span class="lineno"><a class="line" href="utility_8h.html#a20fb8bd97daf2a9d7e79ee00e4b298f9">  246</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; T ******<a class="code" href="utility_8h.html#a20fb8bd97daf2a9d7e79ee00e4b298f9">Create6D</a>(<span class="keywordtype">int</span> N1, <span class="keywordtype">int</span> N2, <span class="keywordtype">int</span> N3, <span class="keywordtype">int</span> N4, <span class="keywordtype">int</span> N5, <span class="keywordtype">int</span> N6)</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;{</div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    T *arr1d = <span class="keyword">new</span> T[N1*N2*N3*N4*N5*N6];</div>
 <div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; N1*N2*N3*N4*N5*N6; ++i)</div>
@@ -319,7 +319,7 @@ $(function() {
 <div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    }</div>
 <div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="keywordflow">return</span> arr;</div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;};</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">void</span> Delete6D(T ******arr, <span class="keywordtype">int</span> N1, <span class="keywordtype">int</span> N2, <span class="keywordtype">int</span> N3, <span class="keywordtype">int</span> N4, <span class="keywordtype">int</span> N5, <span class="keywordtype">int</span> N6)</div>
+<div class="line"><a name="l00279"></a><span class="lineno"><a class="line" href="utility_8h.html#a69939ecbc7811b94703580196b79784b">  279</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">void</span> <a class="code" href="utility_8h.html#a69939ecbc7811b94703580196b79784b">Delete6D</a>(T ******arr, <span class="keywordtype">int</span> N1, <span class="keywordtype">int</span> N2, <span class="keywordtype">int</span> N3, <span class="keywordtype">int</span> N4, <span class="keywordtype">int</span> N5, <span class="keywordtype">int</span> N6)</div>
 <div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;{</div>
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="keyword">delete</span>[] &amp;(arr[0][0][0][0][0][0]);</div>
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; N1; ++i)</div>
@@ -341,6 +341,26 @@ $(function() {
 <div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="keyword">delete</span>[] arr;</div>
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="autility_8h_html_abe9a7a913241dd3c7c10556db0c7476c"><div class="ttname"><a href="utility_8h.html#abe9a7a913241dd3c7c10556db0c7476c">trim_left</a></div><div class="ttdeci">void trim_left(std::string &amp;str, const std::string &amp;trimChars=whiteSpaces)</div><div class="ttdef"><b>Definition:</b> utility.h:20</div></div>
+<div class="ttc" id="autility_8h_html_a6dc2125ae3c4a1696e32f7419ee4a4aa"><div class="ttname"><a href="utility_8h.html#a6dc2125ae3c4a1696e32f7419ee4a4aa">Delete4D</a></div><div class="ttdeci">void Delete4D(T ****arr, int N1, int N2, int N3, int N4)</div><div class="ttdef"><b>Definition:</b> utility.h:188</div></div>
+<div class="ttc" id="autility_8h_html_a31195fb00e3cfc59f131e4a4d225b7d4"><div class="ttname"><a href="utility_8h.html#a31195fb00e3cfc59f131e4a4d225b7d4">trim_right</a></div><div class="ttdeci">void trim_right(std::string &amp;str, const std::string &amp;trimChars=whiteSpaces)</div><div class="ttdef"><b>Definition:</b> utility.h:27</div></div>
+<div class="ttc" id="autility_8h_html_ae067c253f8dc385a4e354634f7bbe100"><div class="ttname"><a href="utility_8h.html#ae067c253f8dc385a4e354634f7bbe100">ParaRange</a></div><div class="ttdeci">void ParaRange(int totalLength, int offset, int mpi_size, int mpi_rank, int *istart, int *iend)</div><div class="ttdef"><b>Definition:</b> utility.h:104</div></div>
+<div class="ttc" id="autility_8h_html_a20fb8bd97daf2a9d7e79ee00e4b298f9"><div class="ttname"><a href="utility_8h.html#a20fb8bd97daf2a9d7e79ee00e4b298f9">Create6D</a></div><div class="ttdeci">T ****** Create6D(int N1, int N2, int N3, int N4, int N5, int N6)</div><div class="ttdef"><b>Definition:</b> utility.h:246</div></div>
+<div class="ttc" id="autility_8h_html_afb955e442a836fe94572ae45c3509cc0"><div class="ttname"><a href="utility_8h.html#afb955e442a836fe94572ae45c3509cc0">Delete3D</a></div><div class="ttdeci">void Delete3D(T ***arr, int N1, int N2, int N3)</div><div class="ttdef"><b>Definition:</b> utility.h:155</div></div>
+<div class="ttc" id="autility_8h_html_a67a79ee3a70ddabf3690498357090776"><div class="ttname"><a href="utility_8h.html#a67a79ee3a70ddabf3690498357090776">Delete2D</a></div><div class="ttdeci">void Delete2D(T **arr, int N1, int N2)</div><div class="ttdef"><b>Definition:</b> utility.h:132</div></div>
+<div class="ttc" id="autility_8h_html_a90679df138994d36b4b0667e7e56f063"><div class="ttname"><a href="utility_8h.html#a90679df138994d36b4b0667e7e56f063">Gen3DRotation</a></div><div class="ttdeci">std::array&lt; double, 9 &gt; Gen3DRotation(int axis, double angle)</div><div class="ttdef"><b>Definition:</b> utility.h:48</div></div>
+<div class="ttc" id="anamespace_plot_material_structure_html_a76c9e6cbcd0c2edf919ecd9620601b95"><div class="ttname"><a href="namespace_plot_material_structure.html#a76c9e6cbcd0c2edf919ecd9620601b95">PlotMaterialStructure.str</a></div><div class="ttdeci">str</div><div class="ttdef"><b>Definition:</b> PlotMaterialStructure.py:18</div></div>
+<div class="ttc" id="autility_8h_html_a1c2bef3629c6f92ee4ba07bc81077d85"><div class="ttname"><a href="utility_8h.html#a1c2bef3629c6f92ee4ba07bc81077d85">Gen2DRotation</a></div><div class="ttdeci">std::array&lt; double, 4 &gt; Gen2DRotation(double angle)</div><div class="ttdef"><b>Definition:</b> utility.h:42</div></div>
+<div class="ttc" id="autility_8h_html_a92374c299cfd1b76f1d78dd07ba33db3"><div class="ttname"><a href="utility_8h.html#a92374c299cfd1b76f1d78dd07ba33db3">Create5D</a></div><div class="ttdeci">T ***** Create5D(int N1, int N2, int N3, int N4, int N5)</div><div class="ttdef"><b>Definition:</b> utility.h:201</div></div>
+<div class="ttc" id="autility_8h_html_a69939ecbc7811b94703580196b79784b"><div class="ttname"><a href="utility_8h.html#a69939ecbc7811b94703580196b79784b">Delete6D</a></div><div class="ttdeci">void Delete6D(T ******arr, int N1, int N2, int N3, int N4, int N5, int N6)</div><div class="ttdef"><b>Definition:</b> utility.h:279</div></div>
+<div class="ttc" id="autility_8h_html_a19ab034025d7c3955b7c2608075dbdc1"><div class="ttname"><a href="utility_8h.html#a19ab034025d7c3955b7c2608075dbdc1">Create4D</a></div><div class="ttdeci">T **** Create4D(int N1, int N2, int N3, int N4)</div><div class="ttdef"><b>Definition:</b> utility.h:165</div></div>
+<div class="ttc" id="autility_8h_html_aed8ff2c38a8f85dbb65430db776210c6"><div class="ttname"><a href="utility_8h.html#aed8ff2c38a8f85dbb65430db776210c6">whiteSpaces</a></div><div class="ttdeci">const std::string whiteSpaces(&quot; \f\n\r\t\v&quot;)</div><div class="ttdoc">some support functions</div></div>
+<div class="ttc" id="autility_8h_html_a024f4e5a12c417793978c6205b67967e"><div class="ttname"><a href="utility_8h.html#a024f4e5a12c417793978c6205b67967e">Create3D</a></div><div class="ttdeci">T *** Create3D(int N1, int N2, int N3)</div><div class="ttdef"><b>Definition:</b> utility.h:137</div></div>
+<div class="ttc" id="autility_8h_html_a31cfa458b3efbf0c9bdc34b0848261a4"><div class="ttname"><a href="utility_8h.html#a31cfa458b3efbf0c9bdc34b0848261a4">Create2D</a></div><div class="ttdeci">T ** Create2D(int N1, int N2)</div><div class="ttdef"><b>Definition:</b> utility.h:119</div></div>
+<div class="ttc" id="autility_8h_html_af1b87da66c6f5ebd31d4f7fe68fbc0d7"><div class="ttname"><a href="utility_8h.html#af1b87da66c6f5ebd31d4f7fe68fbc0d7">MatrixMult</a></div><div class="ttdeci">void MatrixMult(T *out, T *A, T *B, int Nrows, int Ncols, int Nmid)</div><div class="ttdoc">Matrix multiplication.</div><div class="ttdef"><b>Definition:</b> utility.h:79</div></div>
+<div class="ttc" id="autility_8h_html_a47b654ed3f88bdcdd904bbfc8916db55"><div class="ttname"><a href="utility_8h.html#a47b654ed3f88bdcdd904bbfc8916db55">Delete5D</a></div><div class="ttdeci">void Delete5D(T *****arr, int N1, int N2, int N3, int N4, int N5)</div><div class="ttdef"><b>Definition:</b> utility.h:229</div></div>
+<div class="ttc" id="autility_8h_html_ae09ff3f9ef4f6ed1e6f8bce21611c350"><div class="ttname"><a href="utility_8h.html#ae09ff3f9ef4f6ed1e6f8bce21611c350">trim</a></div><div class="ttdeci">void trim(std::string &amp;str, const std::string &amp;trimChars=whiteSpaces)</div><div class="ttdef"><b>Definition:</b> utility.h:34</div></div>
+<div class="ttc" id="autility_8h_html_a4f5515b138930699e5805a24d770a8d2"><div class="ttname"><a href="utility_8h.html#a4f5515b138930699e5805a24d770a8d2">CrossProduct</a></div><div class="ttdeci">T CrossProduct(std::array&lt; T, 2 &gt; _a, std::array&lt; T, 2 &gt; _b)</div><div class="ttdoc">cross-product</div><div class="ttdef"><b>Definition:</b> utility.h:60</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

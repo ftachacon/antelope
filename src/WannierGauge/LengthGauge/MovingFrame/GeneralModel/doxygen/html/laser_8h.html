@@ -71,7 +71,7 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
-<code>#include &quot;constant.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="constant_8h_source.html">constant.h</a>&quot;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;array&gt;</code><br />
 <code>#include &lt;algorithm&gt;</code><br />
@@ -83,7 +83,7 @@ Include dependency graph for laser.h:</div>
 <area shape="rect" title=" " alt="" coords="383,5,449,32"/>
 <area shape="rect" title=" " alt="" coords="183,80,254,107"/>
 <area shape="rect" title=" " alt="" coords="5,155,64,181"/>
-<area shape="rect" href="constant_8h_source.html" title=" " alt="" coords="329,80,420,107"/>
+<area shape="rect" href="constant_8h.html" title=" " alt="" coords="329,80,420,107"/>
 <area shape="rect" title=" " alt="" coords="657,155,719,181"/>
 <area shape="rect" title=" " alt="" coords="495,80,551,107"/>
 <area shape="rect" title=" " alt="" coords="575,80,660,107"/>
@@ -100,8 +100,9 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="laser_8h__dep__incl.png" border="0" usemap="#laser_8hdep" alt=""/></div>
 <map name="laser_8hdep" id="laser_8hdep">
-<area shape="rect" title=" " alt="" coords="5,5,72,32"/>
-<area shape="rect" href="_s_b_es_8h_source.html" title=" " alt="" coords="5,80,72,107"/>
+<area shape="rect" title=" " alt="" coords="25,5,92,32"/>
+<area shape="rect" href="antelope_8cpp.html" title=" " alt="" coords="5,155,112,181"/>
+<area shape="rect" href="_s_b_es_8h.html" title=" " alt="" coords="61,80,128,107"/>
 </map>
 </div>
 </div>
@@ -117,23 +118,69 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:aa6281b98c82825a898ccefa207ec1636"><td class="memItemLeft" align="right" valign="top"><a id="aa6281b98c82825a898ccefa207ec1636"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>Envelope</b> { <b>ENVELOPE_GAUSSIAN</b>, 
-<b>ENVELOPE_COS4</b>
+<tr class="memitem:aa6281b98c82825a898ccefa207ec1636"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="laser_8h.html#aa6281b98c82825a898ccefa207ec1636">Envelope</a> { <a class="el" href="laser_8h.html#aa6281b98c82825a898ccefa207ec1636a324e00569ed11a340263bc511676497d">ENVELOPE_GAUSSIAN</a>, 
+<a class="el" href="laser_8h.html#aa6281b98c82825a898ccefa207ec1636af7e73bafa1a40cf6707d9d6827ef91ff">ENVELOPE_COS4</a>
  }</td></tr>
 <tr class="separator:aa6281b98c82825a898ccefa207ec1636"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ac7efe692278650eac8d6b8adbb4b36ef"><td class="memItemLeft" align="right" valign="top"><a id="ac7efe692278650eac8d6b8adbb4b36ef"></a>
-const double&#160;</td><td class="memItemRight" valign="bottom"><b>gaussian_width_multiply</b> = 2.0</td></tr>
+<tr class="memitem:ac7efe692278650eac8d6b8adbb4b36ef"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="laser_8h.html#ac7efe692278650eac8d6b8adbb4b36ef">gaussian_width_multiply</a> = 2.0</td></tr>
 <tr class="separator:ac7efe692278650eac8d6b8adbb4b36ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed94d2d51da0830c6e7757f31d929598"><td class="memItemLeft" align="right" valign="top"><a id="aed94d2d51da0830c6e7757f31d929598"></a>
-const double&#160;</td><td class="memItemRight" valign="bottom"><b>gaussian_factor</b> = gaussian_width_multiply*gaussian_width_multiply* 4*log(2)</td></tr>
+<tr class="memitem:aed94d2d51da0830c6e7757f31d929598"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="laser_8h.html#aed94d2d51da0830c6e7757f31d929598">gaussian_factor</a> = <a class="el" href="laser_8h.html#ac7efe692278650eac8d6b8adbb4b36ef">gaussian_width_multiply</a>*<a class="el" href="laser_8h.html#ac7efe692278650eac8d6b8adbb4b36ef">gaussian_width_multiply</a>* 4*log(2)</td></tr>
 <tr class="separator:aed94d2d51da0830c6e7757f31d929598"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Laser-related things are implemented in this head file. </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="aa6281b98c82825a898ccefa207ec1636"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6281b98c82825a898ccefa207ec1636">&#9670;&nbsp;</a></span>Envelope</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="laser_8h.html#aa6281b98c82825a898ccefa207ec1636">Envelope</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa6281b98c82825a898ccefa207ec1636a324e00569ed11a340263bc511676497d"></a>ENVELOPE_GAUSSIAN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa6281b98c82825a898ccefa207ec1636af7e73bafa1a40cf6707d9d6827ef91ff"></a>ENVELOPE_COS4&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="aed94d2d51da0830c6e7757f31d929598"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed94d2d51da0830c6e7757f31d929598">&#9670;&nbsp;</a></span>gaussian_factor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const double gaussian_factor = <a class="el" href="laser_8h.html#ac7efe692278650eac8d6b8adbb4b36ef">gaussian_width_multiply</a>*<a class="el" href="laser_8h.html#ac7efe692278650eac8d6b8adbb4b36ef">gaussian_width_multiply</a>* 4*log(2)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac7efe692278650eac8d6b8adbb4b36ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7efe692278650eac8d6b8adbb4b36ef">&#9670;&nbsp;</a></span>gaussian_width_multiply</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const double gaussian_width_multiply = 2.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

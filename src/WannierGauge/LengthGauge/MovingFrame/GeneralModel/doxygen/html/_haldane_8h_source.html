@@ -69,7 +69,7 @@ $(function() {
 <div class="title">Haldane.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<a href="_haldane_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;../BaseMaterial.h&quot;</span></div>
@@ -98,26 +98,26 @@ $(function() {
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    Haldane( <span class="keyword">const</span> libconfig::Setting *params );</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> SetBasis();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_base_material.html#a4090b0669eefbd99b3bf824e0ef65810">GenHamiltonian</a>(complex *_hstore, std::array&lt;double, Ndim&gt; _kpoint) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_base_material.html#af8a9f23ac1ddcb07afd9657582377af7">GenDipole</a>(complex **_dstore, std::array&lt;double, Ndim&gt; _kpoint)<span class="keyword"> override </span>{};    <span class="comment">// Do nothing!</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_base_material.html#af40f6eb595ac0437cea9bb94f4bf036b">GenJMatrix</a>(complex **_jstore, std::array&lt;double, Ndim&gt; _kpoint) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_base_material.html#a4090b0669eefbd99b3bf824e0ef65810">GenHamiltonian</a>(<a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> *_hstore, std::array&lt;double, Ndim&gt; _kpoint) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_base_material.html#af8a9f23ac1ddcb07afd9657582377af7">GenDipole</a>(<a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> **_dstore, std::array&lt;double, Ndim&gt; _kpoint)<span class="keyword"> override </span>{};    <span class="comment">// Do nothing!</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_base_material.html#af40f6eb595ac0437cea9bb94f4bf036b">GenJMatrix</a>(<a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> **_jstore, std::array&lt;double, Ndim&gt; _kpoint) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    std::tuple&lt;std::array&lt;double, Ndim*Ndim&gt;, std::array&lt;double, Ndim&gt; &gt; <a class="code" href="class_base_material.html#ad502cd0e3d6c200489a07476bc579f0c">GenBrillouinzone</a>(  ) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> PrintMaterialInformation() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_base_material.html#a17addbe0f1a21e939995a9234c10b42c">PrintMaterialInformation</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span> GenBcomp(std::array&lt;double, Ndim&gt; _kpoint);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;Haldane::Haldane( <span class="keyword">const</span> libconfig::Setting *params )</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    Nband = 2;  Nval = 1;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="namespace_plot_material_structure.html#a01ebd01065d9aa929c4eddccfd0d9116">Nband</a> = 2;  Nval = 1;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">if</span> (params-&gt;lookupValue(<span class="stringliteral">&quot;t1&quot;</span>, t1)</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        &amp;&amp; params-&gt;lookupValue(<span class="stringliteral">&quot;t2&quot;</span>, t2)</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="comment">//&amp;&amp; params-&gt;lookupValue(&quot;Mt2&quot;, M0)</span></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        &amp;&amp; params-&gt;lookupValue(<span class="stringliteral">&quot;phi0&quot;</span>, phi0)</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        &amp;&amp; params-&gt;lookupValue(<span class="stringliteral">&quot;a0&quot;</span>, a0) )</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        a0 /= au_angstrom;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        a0 /= <a class="code" href="constant_8h.html#a1df5aeda929a4e910553c3e7a05d39ad">au_angstrom</a>;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">if</span> (!params-&gt;lookupValue(<span class="stringliteral">&quot;M0&quot;</span>, M0))</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        {</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keywordflow">if</span> (params-&gt;lookupValue(<span class="stringliteral">&quot;Mt2&quot;</span>,M0))</div>
@@ -139,7 +139,7 @@ $(function() {
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    SetBasis();</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">double</span> kxMax = pi/sqrt(3.)/a0;  <span class="keywordtype">double</span> kyMax = 2.*pi/3./a0;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">double</span> kxMax = <a class="code" href="constant_8h.html#a43016d873124d39034edb8cd164794db">pi</a>/sqrt(3.)/a0;  <span class="keywordtype">double</span> kyMax = 2.*<a class="code" href="constant_8h.html#a43016d873124d39034edb8cd164794db">pi</a>/3./a0;</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    BZaxis = { 2*kxMax,       0,         0,</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                  0,       2*kyMax,      0,</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                  0,          0,         0};</div>
@@ -148,15 +148,15 @@ $(function() {
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    eps = 1.0e-18;</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keywordtype">void</span> Haldane::GenHamiltonian(complex *_hstore, std::array&lt;double, Ndim&gt; _kpoint)</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keywordtype">void</span> Haldane::GenHamiltonian(<a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> *_hstore, std::array&lt;double, Ndim&gt; _kpoint)</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;{</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    GenBcomp(_kpoint);</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    _hstore[0] = Bcomp[0] + Bcomp[3];     _hstore[1] = Bcomp[1] - I*Bcomp[2];</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    _hstore[2] = Bcomp[1] + I*Bcomp[2];   _hstore[3] = Bcomp[0] - Bcomp[3];</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    _hstore[0] = Bcomp[0] + Bcomp[3];     _hstore[1] = Bcomp[1] - <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a>*Bcomp[2];</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    _hstore[2] = Bcomp[1] + <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a>*Bcomp[2];   _hstore[3] = Bcomp[0] - Bcomp[3];</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;}</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keywordtype">void</span> Haldane::GenJMatrix(complex **_jstore, std::array&lt;double, Ndim&gt; _kpoint)</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keywordtype">void</span> Haldane::GenJMatrix(<a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> **_jstore, std::array&lt;double, Ndim&gt; _kpoint)</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;{</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">double</span> xderBcomp[4];    <span class="keywordtype">double</span> yderBcomp[4];</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    fill(Bcomp, Bcomp+4, 0.);</div>
@@ -184,8 +184,8 @@ $(function() {
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    xderBcomp[3] *= -2.*t2 * sin(phi0);     yderBcomp[3] *= -2.*t2 * sin(phi0);</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    _jstore[0][0] = -(xderBcomp[0] + xderBcomp[3]);      _jstore[1][0] = -(yderBcomp[0] + yderBcomp[3]);</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    _jstore[0][1] = -(xderBcomp[1] - I*xderBcomp[2]);    _jstore[1][1] = -(yderBcomp[1] - I*yderBcomp[2]);</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    _jstore[0][2] = -(xderBcomp[1] + I*xderBcomp[2]);    _jstore[1][2] = -(yderBcomp[1] + I*yderBcomp[2]);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    _jstore[0][1] = -(xderBcomp[1] - <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a>*xderBcomp[2]);    _jstore[1][1] = -(yderBcomp[1] - <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a>*yderBcomp[2]);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    _jstore[0][2] = -(xderBcomp[1] + <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a>*xderBcomp[2]);    _jstore[1][2] = -(yderBcomp[1] + <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a>*yderBcomp[2]);</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    _jstore[0][3] = -(xderBcomp[0] - xderBcomp[3]);      _jstore[1][3] = -(yderBcomp[0] - yderBcomp[3]);</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    </div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
@@ -235,8 +235,14 @@ $(function() {
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclass_base_material_html_a4090b0669eefbd99b3bf824e0ef65810"><div class="ttname"><a href="class_base_material.html#a4090b0669eefbd99b3bf824e0ef65810">BaseMaterial::GenHamiltonian</a></div><div class="ttdeci">virtual void GenHamiltonian(complex *_hstore, std::array&lt; double, Ndim &gt; _kpoint)=0</div><div class="ttdoc">Generate Hamiltonian matrix - tight binding matrix.</div></div>
+<div class="ttc" id="aconstant_8h_html_a7585f9c650521ad09bbed8c7369caf87"><div class="ttname"><a href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a></div><div class="ttdeci">const complex I</div><div class="ttdef"><b>Definition:</b> constant.h:24</div></div>
 <div class="ttc" id="aclass_base_material_html_af40f6eb595ac0437cea9bb94f4bf036b"><div class="ttname"><a href="class_base_material.html#af40f6eb595ac0437cea9bb94f4bf036b">BaseMaterial::GenJMatrix</a></div><div class="ttdeci">virtual void GenJMatrix(complex **_jstore, std::array&lt; double, Ndim &gt; _kpoint)=0</div><div class="ttdoc">Generate interband and intraband current matrix.</div></div>
+<div class="ttc" id="aclass_base_material_html_a17addbe0f1a21e939995a9234c10b42c"><div class="ttname"><a href="class_base_material.html#a17addbe0f1a21e939995a9234c10b42c">BaseMaterial::PrintMaterialInformation</a></div><div class="ttdeci">virtual void PrintMaterialInformation()=0</div></div>
+<div class="ttc" id="aconstant_8h_html_a43016d873124d39034edb8cd164794db"><div class="ttname"><a href="constant_8h.html#a43016d873124d39034edb8cd164794db">pi</a></div><div class="ttdeci">const double pi</div><div class="ttdef"><b>Definition:</b> constant.h:28</div></div>
+<div class="ttc" id="a_t_m_d_cs_8h_html_a0fa4878c968311979d497ccc322e0b9b"><div class="ttname"><a href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a></div><div class="ttdeci">#define complex</div><div class="ttdef"><b>Definition:</b> TMDCs.h:20</div></div>
+<div class="ttc" id="anamespace_plot_material_structure_html_a01ebd01065d9aa929c4eddccfd0d9116"><div class="ttname"><a href="namespace_plot_material_structure.html#a01ebd01065d9aa929c4eddccfd0d9116">PlotMaterialStructure.Nband</a></div><div class="ttdeci">Nband</div><div class="ttdef"><b>Definition:</b> PlotMaterialStructure.py:59</div></div>
 <div class="ttc" id="aclass_base_material_html_ad502cd0e3d6c200489a07476bc579f0c"><div class="ttname"><a href="class_base_material.html#ad502cd0e3d6c200489a07476bc579f0c">BaseMaterial::GenBrillouinzone</a></div><div class="ttdeci">virtual std::tuple&lt; std::array&lt; double, Ndim *Ndim &gt;, std::array&lt; double, Ndim &gt; &gt; GenBrillouinzone()=0</div><div class="ttdoc">Generate Brillouin zone information.</div></div>
+<div class="ttc" id="aconstant_8h_html_a1df5aeda929a4e910553c3e7a05d39ad"><div class="ttname"><a href="constant_8h.html#a1df5aeda929a4e910553c3e7a05d39ad">au_angstrom</a></div><div class="ttdeci">const double au_angstrom</div><div class="ttdoc">1 a.u. in</div><div class="ttdef"><b>Definition:</b> constant.h:36</div></div>
 <div class="ttc" id="aclass_base_material_html_af8a9f23ac1ddcb07afd9657582377af7"><div class="ttname"><a href="class_base_material.html#af8a9f23ac1ddcb07afd9657582377af7">BaseMaterial::GenDipole</a></div><div class="ttdeci">virtual void GenDipole(complex **_dstore, std::array&lt; double, Ndim &gt; _kpoint)=0</div><div class="ttdoc">Generate dipole matrix in Wannier basis.</div></div>
 <div class="ttc" id="aclass_base_material_html"><div class="ttname"><a href="class_base_material.html">BaseMaterial</a></div><div class="ttdef"><b>Definition:</b> BaseMaterial.h:22</div></div>
 <!-- start footer part -->

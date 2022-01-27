@@ -16,87 +16,62 @@ representation of single pulse
 \begin{DoxyCompactList}\small\item\em Constructor for pulse,. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{class_pulse_a9295ac56ddfffde0db6780544e0206c6}{f\+\_\+envelope}} (double \+\_\+t, bool \+\_\+is\+Dt)
 \begin{DoxyCompactList}\small\item\em generate envelope of pulse \end{DoxyCompactList}\item 
-complex \mbox{\hyperlink{class_pulse_ac34733dbc00a1ead8235aba4429edc06}{avlaser\+\_\+2d}} (double \+\_\+t)
+\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} \mbox{\hyperlink{class_pulse_ac34733dbc00a1ead8235aba4429edc06}{avlaser\+\_\+2d}} (double \+\_\+t)
 \item 
-complex \mbox{\hyperlink{class_pulse_a7777e1086b19eac3ea56db32c7ed7ac1}{elaser\+\_\+2d}} (double \+\_\+t)
+\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} \mbox{\hyperlink{class_pulse_a7777e1086b19eac3ea56db32c7ed7ac1}{elaser\+\_\+2d}} (double \+\_\+t)
 \item 
-\mbox{\Hypertarget{class_pulse_ab13e9c379d6628ebb2a46bd79045af89}\label{class_pulse_ab13e9c379d6628ebb2a46bd79045af89}} 
-array$<$ double, Ndim $>$ {\bfseries avlaser} (double \+\_\+t)
+array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \mbox{\hyperlink{class_pulse_ab13e9c379d6628ebb2a46bd79045af89}{avlaser}} (double \+\_\+t)
 \item 
-\mbox{\Hypertarget{class_pulse_aab47ce313cc2519981aa0e3a28523063}\label{class_pulse_aab47ce313cc2519981aa0e3a28523063}} 
-array$<$ double, Ndim $>$ {\bfseries elaser} (double \+\_\+t)
+array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \mbox{\hyperlink{class_pulse_aab47ce313cc2519981aa0e3a28523063}{elaser}} (double \+\_\+t)
 \item 
-\mbox{\Hypertarget{class_pulse_ae6335a983bc9f0c6cd0832ba1943e87e}\label{class_pulse_ae6335a983bc9f0c6cd0832ba1943e87e}} 
-void {\bfseries Print\+\_\+\+Pulse\+Info} ()
+void \mbox{\hyperlink{class_pulse_ae6335a983bc9f0c6cd0832ba1943e87e}{Print\+\_\+\+Pulse\+Info}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_pulse_aa74d4daecd48da4847fa03035a8265be}\label{class_pulse_aa74d4daecd48da4847fa03035a8265be}} 
 double \mbox{\hyperlink{class_pulse_aa74d4daecd48da4847fa03035a8265be}{E0}}
 \begin{DoxyCompactList}\small\item\em Electric Field peak strength (a.\+u.) \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_pulse_aafd026693cc19d4fe963cc22997ee57b}\label{class_pulse_aafd026693cc19d4fe963cc22997ee57b}} 
 double \mbox{\hyperlink{class_pulse_aafd026693cc19d4fe963cc22997ee57b}{w0}}
 \begin{DoxyCompactList}\small\item\em Centrl frequency of pulse (a.\+u.) \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_pulse_a9dea28a837ac91ea61848144ccaef0cf}\label{class_pulse_a9dea28a837ac91ea61848144ccaef0cf}} 
 double \mbox{\hyperlink{class_pulse_a9dea28a837ac91ea61848144ccaef0cf}{ellip}}
 \begin{DoxyCompactList}\small\item\em Ellipticity of pulse (-\/1.\+0 $<$= ellip $<$= 1.\+0). ellip $>$ 0 is right-\/handed polarization. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_pulse_a1c496492efd9218d2c5a94c34d199645}\label{class_pulse_a1c496492efd9218d2c5a94c34d199645}} 
 double \mbox{\hyperlink{class_pulse_a1c496492efd9218d2c5a94c34d199645}{ncycles}}
 \begin{DoxyCompactList}\small\item\em If envelope is gaussian, number of cycles per F\+W\+HM. If envelope is cos-\/n squares, number of cycles per pulse duration. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_pulse_a5fc56b7792aeb6d53a312403cf3323ef}\label{class_pulse_a5fc56b7792aeb6d53a312403cf3323ef}} 
 double \mbox{\hyperlink{class_pulse_a5fc56b7792aeb6d53a312403cf3323ef}{cep}}
 \begin{DoxyCompactList}\small\item\em Carrier envelope phase of pulse (rad) \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_pulse_a8634fadf6b976450df4ca14d450c5242}\label{class_pulse_a8634fadf6b976450df4ca14d450c5242}} 
 double \mbox{\hyperlink{class_pulse_a8634fadf6b976450df4ca14d450c5242}{t0}}
 \begin{DoxyCompactList}\small\item\em Mid-\/time of pulse (a.\+u.) \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_pulse_ad0fbc7664fb6d1c81777966851f9c105}\label{class_pulse_ad0fbc7664fb6d1c81777966851f9c105}} 
 double \mbox{\hyperlink{class_pulse_ad0fbc7664fb6d1c81777966851f9c105}{thetaz}}
 \begin{DoxyCompactList}\small\item\em Polar angle of propagation direction (rad) \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_pulse_a59d8a7ee74b034a3194dd9136fed3387}\label{class_pulse_a59d8a7ee74b034a3194dd9136fed3387}} 
 double \mbox{\hyperlink{class_pulse_a59d8a7ee74b034a3194dd9136fed3387}{phiz}}
 \begin{DoxyCompactList}\small\item\em Azimuthal angle of propagation direction (rad) \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_pulse_a963003240af08c0feb6bb62d38b7e6ec}\label{class_pulse_a963003240af08c0feb6bb62d38b7e6ec}} 
 double \mbox{\hyperlink{class_pulse_a963003240af08c0feb6bb62d38b7e6ec}{phix}}
 \begin{DoxyCompactList}\small\item\em Azimuthal angle of semi-\/major axis in transformed coordinate (rad) \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_pulse_ac358a0ee7a3190a872315b4cfd082879}\label{class_pulse_ac358a0ee7a3190a872315b4cfd082879}} 
 string \mbox{\hyperlink{class_pulse_ac358a0ee7a3190a872315b4cfd082879}{envname}}
 \begin{DoxyCompactList}\small\item\em Name of envelope type used in the pulse (\char`\"{}cos4\char`\"{}, \char`\"{}gauss\char`\"{}) \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_pulse_ae19f8c10af4cb9504162a1120721c203}\label{class_pulse_ae19f8c10af4cb9504162a1120721c203}} 
-double {\bfseries I0}
+double \mbox{\hyperlink{class_pulse_ae19f8c10af4cb9504162a1120721c203}{I0}}
 \item 
-\mbox{\Hypertarget{class_pulse_a3494047b05ee48bc280d2dda9e20be83}\label{class_pulse_a3494047b05ee48bc280d2dda9e20be83}} 
-double {\bfseries period0}
+double \mbox{\hyperlink{class_pulse_a3494047b05ee48bc280d2dda9e20be83}{period0}}
 \item 
-\mbox{\Hypertarget{class_pulse_a2ef363a004d265a04d071120dd96c5e3}\label{class_pulse_a2ef363a004d265a04d071120dd96c5e3}} 
-double {\bfseries E0x}
+double \mbox{\hyperlink{class_pulse_a2ef363a004d265a04d071120dd96c5e3}{E0x}}
 \item 
-\mbox{\Hypertarget{class_pulse_aca9f150a1febdf9eb18e650e9fbe40bb}\label{class_pulse_aca9f150a1febdf9eb18e650e9fbe40bb}} 
-double {\bfseries E0y}
+double \mbox{\hyperlink{class_pulse_aca9f150a1febdf9eb18e650e9fbe40bb}{E0y}}
 \item 
-\mbox{\Hypertarget{class_pulse_ab023b3eda761cc2aab3f6273e28c33aa}\label{class_pulse_ab023b3eda761cc2aab3f6273e28c33aa}} 
-double {\bfseries A0x}
+double \mbox{\hyperlink{class_pulse_ab023b3eda761cc2aab3f6273e28c33aa}{A0x}}
 \item 
-\mbox{\Hypertarget{class_pulse_a1dc79a860e7bdc121391522b79a35925}\label{class_pulse_a1dc79a860e7bdc121391522b79a35925}} 
-double {\bfseries A0y}
+double \mbox{\hyperlink{class_pulse_a1dc79a860e7bdc121391522b79a35925}{A0y}}
 \item 
-\mbox{\Hypertarget{class_pulse_aced275bf0739562d94f9a32d4c6b399b}\label{class_pulse_aced275bf0739562d94f9a32d4c6b399b}} 
-double {\bfseries twidth}
+double \mbox{\hyperlink{class_pulse_aced275bf0739562d94f9a32d4c6b399b}{twidth}}
 \item 
-\mbox{\Hypertarget{class_pulse_ac18751a69772ce15fc700edb517c8427}\label{class_pulse_ac18751a69772ce15fc700edb517c8427}} 
-Envelope {\bfseries envtype}
+\mbox{\hyperlink{laser_8h_aa6281b98c82825a898ccefa207ec1636}{Envelope}} \mbox{\hyperlink{class_pulse_ac18751a69772ce15fc700edb517c8427}{envtype}}
 \item 
-\mbox{\Hypertarget{class_pulse_ae4a7c82ec5600cd88ab285d057155f45}\label{class_pulse_ae4a7c82ec5600cd88ab285d057155f45}} 
-double {\bfseries envfactor}
+double \mbox{\hyperlink{class_pulse_ae4a7c82ec5600cd88ab285d057155f45}{envfactor}}
 \item 
-\mbox{\Hypertarget{class_pulse_aa7944e69834a7f547df2b3c9d9b9d4e4}\label{class_pulse_aa7944e69834a7f547df2b3c9d9b9d4e4}} 
-double {\bfseries inverse\+\_\+w0}
+double \mbox{\hyperlink{class_pulse_aa7944e69834a7f547df2b3c9d9b9d4e4}{inverse\+\_\+w0}}
 \item 
-\mbox{\Hypertarget{class_pulse_ad44cbd3acfd3add71e8821b36ddc2ad4}\label{class_pulse_ad44cbd3acfd3add71e8821b36ddc2ad4}} 
-array$<$ double, Ndim $>$ {\bfseries xdir}
+array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \mbox{\hyperlink{class_pulse_ad44cbd3acfd3add71e8821b36ddc2ad4}{xdir}}
 \item 
-\mbox{\Hypertarget{class_pulse_a1f1a8411d72aa3c1ed82d0ecc8430bae}\label{class_pulse_a1f1a8411d72aa3c1ed82d0ecc8430bae}} 
-array$<$ double, Ndim $>$ {\bfseries ydir}
+array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \mbox{\hyperlink{class_pulse_a1f1a8411d72aa3c1ed82d0ecc8430bae}{ydir}}
 \end{DoxyCompactItemize}
 
 
@@ -117,17 +92,29 @@ Constructor for pulse,.
 Propagation direction is dentermined by two paramter thetaz and phiz. They are just polar and azimuthal angle in spherical coordinatte, so propagation direction is $ (\sin\theta_{z}\cos\phi_{z}, \sin\theta_{z}\sin\phi_{z}, \cos\theta_{z})$. For the definition of L\+CP, and R\+CP I choose view from source. Therefore, for left or right hand rule, direction of thumb is same as propagtion direction (out of source). To doing standard 2d calculation (x-\/y plane), set thetaz = 0 and phiz = 0, or just omit them from the constructor. 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_pulse_ab13e9c379d6628ebb2a46bd79045af89}\label{class_pulse_ab13e9c379d6628ebb2a46bd79045af89}} 
+\index{Pulse@{Pulse}!avlaser@{avlaser}}
+\index{avlaser@{avlaser}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{avlaser()}{avlaser()}}
+{\footnotesize\ttfamily array$<$double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}}$>$ Pulse\+::avlaser (\begin{DoxyParamCaption}\item[{double}]{\+\_\+t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 \mbox{\Hypertarget{class_pulse_ac34733dbc00a1ead8235aba4429edc06}\label{class_pulse_ac34733dbc00a1ead8235aba4429edc06}} 
 \index{Pulse@{Pulse}!avlaser\_2d@{avlaser\_2d}}
 \index{avlaser\_2d@{avlaser\_2d}!Pulse@{Pulse}}
 \doxysubsubsection{\texorpdfstring{avlaser\_2d()}{avlaser\_2d()}}
-{\footnotesize\ttfamily complex Pulse\+::avlaser\+\_\+2d (\begin{DoxyParamCaption}\item[{double}]{\+\_\+t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} Pulse\+::avlaser\+\_\+2d (\begin{DoxyParamCaption}\item[{double}]{\+\_\+t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-generate vector potential in laser 2d-\/plane Ax(t=t0) = 0 when cep = 0 \mbox{\Hypertarget{class_pulse_a7777e1086b19eac3ea56db32c7ed7ac1}\label{class_pulse_a7777e1086b19eac3ea56db32c7ed7ac1}} 
+generate vector potential in laser 2d-\/plane Ax(t=t0) = 0 when cep = 0 \mbox{\Hypertarget{class_pulse_aab47ce313cc2519981aa0e3a28523063}\label{class_pulse_aab47ce313cc2519981aa0e3a28523063}} 
+\index{Pulse@{Pulse}!elaser@{elaser}}
+\index{elaser@{elaser}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{elaser()}{elaser()}}
+{\footnotesize\ttfamily array$<$double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}}$>$ Pulse\+::elaser (\begin{DoxyParamCaption}\item[{double}]{\+\_\+t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_pulse_a7777e1086b19eac3ea56db32c7ed7ac1}\label{class_pulse_a7777e1086b19eac3ea56db32c7ed7ac1}} 
 \index{Pulse@{Pulse}!elaser\_2d@{elaser\_2d}}
 \index{elaser\_2d@{elaser\_2d}!Pulse@{Pulse}}
 \doxysubsubsection{\texorpdfstring{elaser\_2d()}{elaser\_2d()}}
-{\footnotesize\ttfamily complex Pulse\+::elaser\+\_\+2d (\begin{DoxyParamCaption}\item[{double}]{\+\_\+t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} Pulse\+::elaser\+\_\+2d (\begin{DoxyParamCaption}\item[{double}]{\+\_\+t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 generate electric field in laser 2d-\/plane E0x = Ex(t=t0) when cep = 0 \mbox{\Hypertarget{class_pulse_a9295ac56ddfffde0db6780544e0206c6}\label{class_pulse_a9295ac56ddfffde0db6780544e0206c6}} 
 \index{Pulse@{Pulse}!f\_envelope@{f\_envelope}}
@@ -146,6 +133,187 @@ A(t) = A0 f(t) cos(w0t -\/ cep) = E0/w0 f(t) cos(w0t -\/ cep), E(t) = -\/d\+A(t)
 {\em \+\_\+is\+Dt} & if true return time derivative of envelope. if false return envelope \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{class_pulse_ae6335a983bc9f0c6cd0832ba1943e87e}\label{class_pulse_ae6335a983bc9f0c6cd0832ba1943e87e}} 
+\index{Pulse@{Pulse}!Print\_PulseInfo@{Print\_PulseInfo}}
+\index{Print\_PulseInfo@{Print\_PulseInfo}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{Print\_PulseInfo()}{Print\_PulseInfo()}}
+{\footnotesize\ttfamily void Pulse\+::\+Print\+\_\+\+Pulse\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_pulse_ab023b3eda761cc2aab3f6273e28c33aa}\label{class_pulse_ab023b3eda761cc2aab3f6273e28c33aa}} 
+\index{Pulse@{Pulse}!A0x@{A0x}}
+\index{A0x@{A0x}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{A0x}{A0x}}
+{\footnotesize\ttfamily double Pulse\+::\+A0x}
+
+\mbox{\Hypertarget{class_pulse_a1dc79a860e7bdc121391522b79a35925}\label{class_pulse_a1dc79a860e7bdc121391522b79a35925}} 
+\index{Pulse@{Pulse}!A0y@{A0y}}
+\index{A0y@{A0y}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{A0y}{A0y}}
+{\footnotesize\ttfamily double Pulse\+::\+A0y}
+
+\mbox{\Hypertarget{class_pulse_a5fc56b7792aeb6d53a312403cf3323ef}\label{class_pulse_a5fc56b7792aeb6d53a312403cf3323ef}} 
+\index{Pulse@{Pulse}!cep@{cep}}
+\index{cep@{cep}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{cep}{cep}}
+{\footnotesize\ttfamily double Pulse\+::cep}
+
+
+
+Carrier envelope phase of pulse (rad) 
+
+\mbox{\Hypertarget{class_pulse_aa74d4daecd48da4847fa03035a8265be}\label{class_pulse_aa74d4daecd48da4847fa03035a8265be}} 
+\index{Pulse@{Pulse}!E0@{E0}}
+\index{E0@{E0}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{E0}{E0}}
+{\footnotesize\ttfamily double Pulse\+::\+E0}
+
+
+
+Electric Field peak strength (a.\+u.) 
+
+\mbox{\Hypertarget{class_pulse_a2ef363a004d265a04d071120dd96c5e3}\label{class_pulse_a2ef363a004d265a04d071120dd96c5e3}} 
+\index{Pulse@{Pulse}!E0x@{E0x}}
+\index{E0x@{E0x}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{E0x}{E0x}}
+{\footnotesize\ttfamily double Pulse\+::\+E0x}
+
+\mbox{\Hypertarget{class_pulse_aca9f150a1febdf9eb18e650e9fbe40bb}\label{class_pulse_aca9f150a1febdf9eb18e650e9fbe40bb}} 
+\index{Pulse@{Pulse}!E0y@{E0y}}
+\index{E0y@{E0y}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{E0y}{E0y}}
+{\footnotesize\ttfamily double Pulse\+::\+E0y}
+
+\mbox{\Hypertarget{class_pulse_a9dea28a837ac91ea61848144ccaef0cf}\label{class_pulse_a9dea28a837ac91ea61848144ccaef0cf}} 
+\index{Pulse@{Pulse}!ellip@{ellip}}
+\index{ellip@{ellip}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{ellip}{ellip}}
+{\footnotesize\ttfamily double Pulse\+::ellip}
+
+
+
+Ellipticity of pulse (-\/1.\+0 $<$= ellip $<$= 1.\+0). ellip $>$ 0 is right-\/handed polarization. 
+
+\mbox{\Hypertarget{class_pulse_ae4a7c82ec5600cd88ab285d057155f45}\label{class_pulse_ae4a7c82ec5600cd88ab285d057155f45}} 
+\index{Pulse@{Pulse}!envfactor@{envfactor}}
+\index{envfactor@{envfactor}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{envfactor}{envfactor}}
+{\footnotesize\ttfamily double Pulse\+::envfactor}
+
+\mbox{\Hypertarget{class_pulse_ac358a0ee7a3190a872315b4cfd082879}\label{class_pulse_ac358a0ee7a3190a872315b4cfd082879}} 
+\index{Pulse@{Pulse}!envname@{envname}}
+\index{envname@{envname}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{envname}{envname}}
+{\footnotesize\ttfamily string Pulse\+::envname}
+
+
+
+Name of envelope type used in the pulse (\char`\"{}cos4\char`\"{}, \char`\"{}gauss\char`\"{}) 
+
+\mbox{\Hypertarget{class_pulse_ac18751a69772ce15fc700edb517c8427}\label{class_pulse_ac18751a69772ce15fc700edb517c8427}} 
+\index{Pulse@{Pulse}!envtype@{envtype}}
+\index{envtype@{envtype}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{envtype}{envtype}}
+{\footnotesize\ttfamily \mbox{\hyperlink{laser_8h_aa6281b98c82825a898ccefa207ec1636}{Envelope}} Pulse\+::envtype}
+
+\mbox{\Hypertarget{class_pulse_ae19f8c10af4cb9504162a1120721c203}\label{class_pulse_ae19f8c10af4cb9504162a1120721c203}} 
+\index{Pulse@{Pulse}!I0@{I0}}
+\index{I0@{I0}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{I0}{I0}}
+{\footnotesize\ttfamily double Pulse\+::\+I0}
+
+\mbox{\Hypertarget{class_pulse_aa7944e69834a7f547df2b3c9d9b9d4e4}\label{class_pulse_aa7944e69834a7f547df2b3c9d9b9d4e4}} 
+\index{Pulse@{Pulse}!inverse\_w0@{inverse\_w0}}
+\index{inverse\_w0@{inverse\_w0}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{inverse\_w0}{inverse\_w0}}
+{\footnotesize\ttfamily double Pulse\+::inverse\+\_\+w0}
+
+\mbox{\Hypertarget{class_pulse_a1c496492efd9218d2c5a94c34d199645}\label{class_pulse_a1c496492efd9218d2c5a94c34d199645}} 
+\index{Pulse@{Pulse}!ncycles@{ncycles}}
+\index{ncycles@{ncycles}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{ncycles}{ncycles}}
+{\footnotesize\ttfamily double Pulse\+::ncycles}
+
+
+
+If envelope is gaussian, number of cycles per F\+W\+HM. If envelope is cos-\/n squares, number of cycles per pulse duration. 
+
+\mbox{\Hypertarget{class_pulse_a3494047b05ee48bc280d2dda9e20be83}\label{class_pulse_a3494047b05ee48bc280d2dda9e20be83}} 
+\index{Pulse@{Pulse}!period0@{period0}}
+\index{period0@{period0}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{period0}{period0}}
+{\footnotesize\ttfamily double Pulse\+::period0}
+
+\mbox{\Hypertarget{class_pulse_a963003240af08c0feb6bb62d38b7e6ec}\label{class_pulse_a963003240af08c0feb6bb62d38b7e6ec}} 
+\index{Pulse@{Pulse}!phix@{phix}}
+\index{phix@{phix}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{phix}{phix}}
+{\footnotesize\ttfamily double Pulse\+::phix}
+
+
+
+Azimuthal angle of semi-\/major axis in transformed coordinate (rad) 
+
+\mbox{\Hypertarget{class_pulse_a59d8a7ee74b034a3194dd9136fed3387}\label{class_pulse_a59d8a7ee74b034a3194dd9136fed3387}} 
+\index{Pulse@{Pulse}!phiz@{phiz}}
+\index{phiz@{phiz}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{phiz}{phiz}}
+{\footnotesize\ttfamily double Pulse\+::phiz}
+
+
+
+Azimuthal angle of propagation direction (rad) 
+
+\mbox{\Hypertarget{class_pulse_a8634fadf6b976450df4ca14d450c5242}\label{class_pulse_a8634fadf6b976450df4ca14d450c5242}} 
+\index{Pulse@{Pulse}!t0@{t0}}
+\index{t0@{t0}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{t0}{t0}}
+{\footnotesize\ttfamily double Pulse\+::t0}
+
+
+
+Mid-\/time of pulse (a.\+u.) 
+
+\mbox{\Hypertarget{class_pulse_ad0fbc7664fb6d1c81777966851f9c105}\label{class_pulse_ad0fbc7664fb6d1c81777966851f9c105}} 
+\index{Pulse@{Pulse}!thetaz@{thetaz}}
+\index{thetaz@{thetaz}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{thetaz}{thetaz}}
+{\footnotesize\ttfamily double Pulse\+::thetaz}
+
+
+
+Polar angle of propagation direction (rad) 
+
+\mbox{\Hypertarget{class_pulse_aced275bf0739562d94f9a32d4c6b399b}\label{class_pulse_aced275bf0739562d94f9a32d4c6b399b}} 
+\index{Pulse@{Pulse}!twidth@{twidth}}
+\index{twidth@{twidth}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{twidth}{twidth}}
+{\footnotesize\ttfamily double Pulse\+::twidth}
+
+\mbox{\Hypertarget{class_pulse_aafd026693cc19d4fe963cc22997ee57b}\label{class_pulse_aafd026693cc19d4fe963cc22997ee57b}} 
+\index{Pulse@{Pulse}!w0@{w0}}
+\index{w0@{w0}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{w0}{w0}}
+{\footnotesize\ttfamily double Pulse\+::w0}
+
+
+
+Centrl frequency of pulse (a.\+u.) 
+
+\mbox{\Hypertarget{class_pulse_ad44cbd3acfd3add71e8821b36ddc2ad4}\label{class_pulse_ad44cbd3acfd3add71e8821b36ddc2ad4}} 
+\index{Pulse@{Pulse}!xdir@{xdir}}
+\index{xdir@{xdir}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{xdir}{xdir}}
+{\footnotesize\ttfamily array$<$double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}}$>$ Pulse\+::xdir}
+
+\mbox{\Hypertarget{class_pulse_a1f1a8411d72aa3c1ed82d0ecc8430bae}\label{class_pulse_a1f1a8411d72aa3c1ed82d0ecc8430bae}} 
+\index{Pulse@{Pulse}!ydir@{ydir}}
+\index{ydir@{ydir}!Pulse@{Pulse}}
+\doxysubsubsection{\texorpdfstring{ydir}{ydir}}
+{\footnotesize\ttfamily array$<$double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}}$>$ Pulse\+::ydir}
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

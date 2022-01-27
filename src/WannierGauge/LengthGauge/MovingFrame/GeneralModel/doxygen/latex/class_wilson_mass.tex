@@ -11,8 +11,7 @@ Hamiltonian and dipole generator for 2-\/band square lattice including Wilson ma
 
 
 
-Inheritance diagram for Wilson\+Mass\+:
-\nopagebreak
+Inheritance diagram for Wilson\+Mass\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -21,8 +20,7 @@ Inheritance diagram for Wilson\+Mass\+:
 \end{figure}
 
 
-Collaboration diagram for Wilson\+Mass\+:
-\nopagebreak
+Collaboration diagram for Wilson\+Mass\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -32,52 +30,40 @@ Collaboration diagram for Wilson\+Mass\+:
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_wilson_mass_ae3a377c8b1c21cb0997c3281f72ea147}\label{class_wilson_mass_ae3a377c8b1c21cb0997c3281f72ea147}} 
-{\bfseries Wilson\+Mass} (const libconfig\+::\+Setting $\ast$params)
+\mbox{\hyperlink{class_wilson_mass_ae3a377c8b1c21cb0997c3281f72ea147}{Wilson\+Mass}} (const libconfig\+::\+Setting $\ast$params)
 \item 
-void \mbox{\hyperlink{class_wilson_mass_aed4048bb4a06169ffc8010852fd46262}{Gen\+Hamiltonian}} (complex $\ast$\+\_\+hstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+void \mbox{\hyperlink{class_wilson_mass_aed4048bb4a06169ffc8010852fd46262}{Gen\+Hamiltonian}} (\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$\+\_\+hstore, std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \+\_\+kpoint) override
 \begin{DoxyCompactList}\small\item\em Generate Hamiltonian matrix -\/ tight binding matrix. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_wilson_mass_a5eccf814c7eb68f0b453a14c6b45fa01}{Gen\+Dipole}} (complex $\ast$$\ast$\+\_\+dstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+void \mbox{\hyperlink{class_wilson_mass_a5eccf814c7eb68f0b453a14c6b45fa01}{Gen\+Dipole}} (\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$$\ast$\+\_\+dstore, std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \+\_\+kpoint) override
 \begin{DoxyCompactList}\small\item\em Generate dipole matrix in Wannier basis. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_wilson_mass_a41a3114da6dd600adbc08aa2ed024141}{Gen\+J\+Matrix}} (complex $\ast$$\ast$\+\_\+jstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+void \mbox{\hyperlink{class_wilson_mass_a41a3114da6dd600adbc08aa2ed024141}{Gen\+J\+Matrix}} (\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$$\ast$\+\_\+jstore, std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \+\_\+kpoint) override
 \begin{DoxyCompactList}\small\item\em Generate interband and intraband current matrix. \end{DoxyCompactList}\item 
-std\+::tuple$<$ std\+::array$<$ double, Ndim $\ast$Ndim $>$, std\+::array$<$ double, Ndim $>$ $>$ \mbox{\hyperlink{class_wilson_mass_a234ce32e40498a5516e48bd0ce315b4f}{Gen\+Brillouinzone}} () override
+std\+::tuple$<$ std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $\ast$\mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$, std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ $>$ \mbox{\hyperlink{class_wilson_mass_a234ce32e40498a5516e48bd0ce315b4f}{Gen\+Brillouinzone}} () override
 \begin{DoxyCompactList}\small\item\em Generate Brillouin zone information. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_wilson_mass_a1a201f0e9dadfc2bb84f4292506fb65a}\label{class_wilson_mass_a1a201f0e9dadfc2bb84f4292506fb65a}} 
-void {\bfseries Print\+Material\+Information} () override
+void \mbox{\hyperlink{class_wilson_mass_a1a201f0e9dadfc2bb84f4292506fb65a}{Print\+Material\+Information}} () override
 \item 
-\mbox{\Hypertarget{class_wilson_mass_a82047f782ebbcdfb9fcfbfaadba1b464}\label{class_wilson_mass_a82047f782ebbcdfb9fcfbfaadba1b464}} 
-void {\bfseries Gen\+Bcomp} (std\+::array$<$ double, Ndim $>$ \+\_\+kpoint)
+void \mbox{\hyperlink{class_wilson_mass_a82047f782ebbcdfb9fcfbfaadba1b464}{Gen\+Bcomp}} (std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \+\_\+kpoint)
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_wilson_mass_ae30118caf85f75262a3545e3d32f28ab}\label{class_wilson_mass_ae30118caf85f75262a3545e3d32f28ab}} 
-double {\bfseries t}
+double \mbox{\hyperlink{class_wilson_mass_ae30118caf85f75262a3545e3d32f28ab}{t}}
 \item 
-\mbox{\Hypertarget{class_wilson_mass_a6fb249099e2f0dbc1e34e07ddd98cd78}\label{class_wilson_mass_a6fb249099e2f0dbc1e34e07ddd98cd78}} 
-double {\bfseries delta}
+double \mbox{\hyperlink{class_wilson_mass_a6fb249099e2f0dbc1e34e07ddd98cd78}{delta}}
 \item 
-\mbox{\Hypertarget{class_wilson_mass_ae15f770b1156956f902330aabe2326fe}\label{class_wilson_mass_ae15f770b1156956f902330aabe2326fe}} 
-double {\bfseries mu}
+double \mbox{\hyperlink{class_wilson_mass_ae15f770b1156956f902330aabe2326fe}{mu}}
 \item 
-\mbox{\Hypertarget{class_wilson_mass_a16af45b5abd7c89da5f5a0456c6a3c54}\label{class_wilson_mass_a16af45b5abd7c89da5f5a0456c6a3c54}} 
-double {\bfseries a0}
+double \mbox{\hyperlink{class_wilson_mass_a16af45b5abd7c89da5f5a0456c6a3c54}{a0}}
 \item 
-\mbox{\Hypertarget{class_wilson_mass_afa15b9b4f4822b8b37a4054cd358c13b}\label{class_wilson_mass_afa15b9b4f4822b8b37a4054cd358c13b}} 
-double {\bfseries a1}
+double \mbox{\hyperlink{class_wilson_mass_afa15b9b4f4822b8b37a4054cd358c13b}{a1}}
 \item 
-\mbox{\Hypertarget{class_wilson_mass_ab29b78d11706949b09b8f569b79c5f80}\label{class_wilson_mass_ab29b78d11706949b09b8f569b79c5f80}} 
 double \mbox{\hyperlink{class_wilson_mass_ab29b78d11706949b09b8f569b79c5f80}{eps}}
 \begin{DoxyCompactList}\small\item\em to avoid singular norm \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_wilson_mass_a1f9b642854f43453d13655bf97903171}\label{class_wilson_mass_a1f9b642854f43453d13655bf97903171}} 
-double {\bfseries Bcomp} \mbox{[}4\mbox{]}
+double \mbox{\hyperlink{class_wilson_mass_a1f9b642854f43453d13655bf97903171}{Bcomp}} \mbox{[}4\mbox{]}
 \item 
-\mbox{\Hypertarget{class_wilson_mass_aad755700c27f7f7307359cb6b1614cb0}\label{class_wilson_mass_aad755700c27f7f7307359cb6b1614cb0}} 
-std\+::array$<$ double, 9 $>$ {\bfseries B\+Zaxis}
+std\+::array$<$ double, 9 $>$ \mbox{\hyperlink{class_wilson_mass_aad755700c27f7f7307359cb6b1614cb0}{B\+Zaxis}}
 \item 
-\mbox{\Hypertarget{class_wilson_mass_a4b69bf201f9167ba7cfe5d5d8071f0e9}\label{class_wilson_mass_a4b69bf201f9167ba7cfe5d5d8071f0e9}} 
-std\+::array$<$ double, 3 $>$ {\bfseries B\+Zorigin}
+std\+::array$<$ double, 3 $>$ \mbox{\hyperlink{class_wilson_mass_a4b69bf201f9167ba7cfe5d5d8071f0e9}{B\+Zorigin}}
 \end{DoxyCompactItemize}
 
 
@@ -89,12 +75,27 @@ Dasol Kim
 \end{DoxyAuthor}
 
 
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_wilson_mass_ae3a377c8b1c21cb0997c3281f72ea147}\label{class_wilson_mass_ae3a377c8b1c21cb0997c3281f72ea147}} 
+\index{WilsonMass@{WilsonMass}!WilsonMass@{WilsonMass}}
+\index{WilsonMass@{WilsonMass}!WilsonMass@{WilsonMass}}
+\doxysubsubsection{\texorpdfstring{WilsonMass()}{WilsonMass()}}
+{\footnotesize\ttfamily Wilson\+Mass\+::\+Wilson\+Mass (\begin{DoxyParamCaption}\item[{const libconfig\+::\+Setting $\ast$}]{params }\end{DoxyParamCaption})}
+
+
+
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_wilson_mass_a82047f782ebbcdfb9fcfbfaadba1b464}\label{class_wilson_mass_a82047f782ebbcdfb9fcfbfaadba1b464}} 
+\index{WilsonMass@{WilsonMass}!GenBcomp@{GenBcomp}}
+\index{GenBcomp@{GenBcomp}!WilsonMass@{WilsonMass}}
+\doxysubsubsection{\texorpdfstring{GenBcomp()}{GenBcomp()}}
+{\footnotesize\ttfamily void Wilson\+Mass\+::\+Gen\+Bcomp (\begin{DoxyParamCaption}\item[{std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{class_wilson_mass_a234ce32e40498a5516e48bd0ce315b4f}\label{class_wilson_mass_a234ce32e40498a5516e48bd0ce315b4f}} 
 \index{WilsonMass@{WilsonMass}!GenBrillouinzone@{GenBrillouinzone}}
 \index{GenBrillouinzone@{GenBrillouinzone}!WilsonMass@{WilsonMass}}
 \doxysubsubsection{\texorpdfstring{GenBrillouinzone()}{GenBrillouinzone()}}
-{\footnotesize\ttfamily std\+::tuple$<$ std\+::array$<$ double, Ndim $\ast$Ndim $>$, std\+::array$<$ double, Ndim $>$ $>$ Wilson\+Mass\+::\+Gen\+Brillouinzone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily std\+::tuple$<$ std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $\ast$\mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$, std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ $>$ Wilson\+Mass\+::\+Gen\+Brillouinzone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -115,7 +116,7 @@ Implements \mbox{\hyperlink{class_base_material_ad502cd0e3d6c200489a07476bc579f0
 \index{WilsonMass@{WilsonMass}!GenDipole@{GenDipole}}
 \index{GenDipole@{GenDipole}!WilsonMass@{WilsonMass}}
 \doxysubsubsection{\texorpdfstring{GenDipole()}{GenDipole()}}
-{\footnotesize\ttfamily void Wilson\+Mass\+::\+Gen\+Dipole (\begin{DoxyParamCaption}\item[{complex $\ast$$\ast$}]{\+\_\+dstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void Wilson\+Mass\+::\+Gen\+Dipole (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$$\ast$}]{\+\_\+dstore,  }\item[{std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -136,7 +137,7 @@ Implements \mbox{\hyperlink{class_base_material_af8a9f23ac1ddcb07afd9657582377af
 \index{WilsonMass@{WilsonMass}!GenHamiltonian@{GenHamiltonian}}
 \index{GenHamiltonian@{GenHamiltonian}!WilsonMass@{WilsonMass}}
 \doxysubsubsection{\texorpdfstring{GenHamiltonian()}{GenHamiltonian()}}
-{\footnotesize\ttfamily void Wilson\+Mass\+::\+Gen\+Hamiltonian (\begin{DoxyParamCaption}\item[{complex $\ast$}]{\+\_\+hstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void Wilson\+Mass\+::\+Gen\+Hamiltonian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$}]{\+\_\+hstore,  }\item[{std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -157,7 +158,7 @@ Implements \mbox{\hyperlink{class_base_material_a4090b0669eefbd99b3bf824e0ef6581
 \index{WilsonMass@{WilsonMass}!GenJMatrix@{GenJMatrix}}
 \index{GenJMatrix@{GenJMatrix}!WilsonMass@{WilsonMass}}
 \doxysubsubsection{\texorpdfstring{GenJMatrix()}{GenJMatrix()}}
-{\footnotesize\ttfamily void Wilson\+Mass\+::\+Gen\+J\+Matrix (\begin{DoxyParamCaption}\item[{complex $\ast$$\ast$}]{\+\_\+jstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void Wilson\+Mass\+::\+Gen\+J\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$$\ast$}]{\+\_\+jstore,  }\item[{std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -174,8 +175,79 @@ Remember
 
 Implements \mbox{\hyperlink{class_base_material_af40f6eb595ac0437cea9bb94f4bf036b}{Base\+Material}}.
 
+\mbox{\Hypertarget{class_wilson_mass_a1a201f0e9dadfc2bb84f4292506fb65a}\label{class_wilson_mass_a1a201f0e9dadfc2bb84f4292506fb65a}} 
+\index{WilsonMass@{WilsonMass}!PrintMaterialInformation@{PrintMaterialInformation}}
+\index{PrintMaterialInformation@{PrintMaterialInformation}!WilsonMass@{WilsonMass}}
+\doxysubsubsection{\texorpdfstring{PrintMaterialInformation()}{PrintMaterialInformation()}}
+{\footnotesize\ttfamily void Wilson\+Mass\+::\+Print\+Material\+Information (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_base_material_a17addbe0f1a21e939995a9234c10b42c}{Base\+Material}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_wilson_mass_a16af45b5abd7c89da5f5a0456c6a3c54}\label{class_wilson_mass_a16af45b5abd7c89da5f5a0456c6a3c54}} 
+\index{WilsonMass@{WilsonMass}!a0@{a0}}
+\index{a0@{a0}!WilsonMass@{WilsonMass}}
+\doxysubsubsection{\texorpdfstring{a0}{a0}}
+{\footnotesize\ttfamily double Wilson\+Mass\+::a0}
+
+\mbox{\Hypertarget{class_wilson_mass_afa15b9b4f4822b8b37a4054cd358c13b}\label{class_wilson_mass_afa15b9b4f4822b8b37a4054cd358c13b}} 
+\index{WilsonMass@{WilsonMass}!a1@{a1}}
+\index{a1@{a1}!WilsonMass@{WilsonMass}}
+\doxysubsubsection{\texorpdfstring{a1}{a1}}
+{\footnotesize\ttfamily double Wilson\+Mass\+::a1}
+
+\mbox{\Hypertarget{class_wilson_mass_a1f9b642854f43453d13655bf97903171}\label{class_wilson_mass_a1f9b642854f43453d13655bf97903171}} 
+\index{WilsonMass@{WilsonMass}!Bcomp@{Bcomp}}
+\index{Bcomp@{Bcomp}!WilsonMass@{WilsonMass}}
+\doxysubsubsection{\texorpdfstring{Bcomp}{Bcomp}}
+{\footnotesize\ttfamily double Wilson\+Mass\+::\+Bcomp\mbox{[}4\mbox{]}}
+
+\mbox{\Hypertarget{class_wilson_mass_aad755700c27f7f7307359cb6b1614cb0}\label{class_wilson_mass_aad755700c27f7f7307359cb6b1614cb0}} 
+\index{WilsonMass@{WilsonMass}!BZaxis@{BZaxis}}
+\index{BZaxis@{BZaxis}!WilsonMass@{WilsonMass}}
+\doxysubsubsection{\texorpdfstring{BZaxis}{BZaxis}}
+{\footnotesize\ttfamily std\+::array$<$double, 9$>$ Wilson\+Mass\+::\+B\+Zaxis}
+
+\mbox{\Hypertarget{class_wilson_mass_a4b69bf201f9167ba7cfe5d5d8071f0e9}\label{class_wilson_mass_a4b69bf201f9167ba7cfe5d5d8071f0e9}} 
+\index{WilsonMass@{WilsonMass}!BZorigin@{BZorigin}}
+\index{BZorigin@{BZorigin}!WilsonMass@{WilsonMass}}
+\doxysubsubsection{\texorpdfstring{BZorigin}{BZorigin}}
+{\footnotesize\ttfamily std\+::array$<$double, 3$>$ Wilson\+Mass\+::\+B\+Zorigin}
+
+\mbox{\Hypertarget{class_wilson_mass_a6fb249099e2f0dbc1e34e07ddd98cd78}\label{class_wilson_mass_a6fb249099e2f0dbc1e34e07ddd98cd78}} 
+\index{WilsonMass@{WilsonMass}!delta@{delta}}
+\index{delta@{delta}!WilsonMass@{WilsonMass}}
+\doxysubsubsection{\texorpdfstring{delta}{delta}}
+{\footnotesize\ttfamily double Wilson\+Mass\+::delta}
+
+\mbox{\Hypertarget{class_wilson_mass_ab29b78d11706949b09b8f569b79c5f80}\label{class_wilson_mass_ab29b78d11706949b09b8f569b79c5f80}} 
+\index{WilsonMass@{WilsonMass}!eps@{eps}}
+\index{eps@{eps}!WilsonMass@{WilsonMass}}
+\doxysubsubsection{\texorpdfstring{eps}{eps}}
+{\footnotesize\ttfamily double Wilson\+Mass\+::eps}
+
+
+
+to avoid singular norm 
+
+\mbox{\Hypertarget{class_wilson_mass_ae15f770b1156956f902330aabe2326fe}\label{class_wilson_mass_ae15f770b1156956f902330aabe2326fe}} 
+\index{WilsonMass@{WilsonMass}!mu@{mu}}
+\index{mu@{mu}!WilsonMass@{WilsonMass}}
+\doxysubsubsection{\texorpdfstring{mu}{mu}}
+{\footnotesize\ttfamily double Wilson\+Mass\+::mu}
+
+\mbox{\Hypertarget{class_wilson_mass_ae30118caf85f75262a3545e3d32f28ab}\label{class_wilson_mass_ae30118caf85f75262a3545e3d32f28ab}} 
+\index{WilsonMass@{WilsonMass}!t@{t}}
+\index{t@{t}!WilsonMass@{WilsonMass}}
+\doxysubsubsection{\texorpdfstring{t}{t}}
+{\footnotesize\ttfamily double Wilson\+Mass\+::t}
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Materials/Wilson\+Mass.\+h\end{DoxyCompactItemize}
+Materials/\mbox{\hyperlink{_wilson_mass_8h}{Wilson\+Mass.\+h}}\end{DoxyCompactItemize}

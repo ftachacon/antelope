@@ -1,4 +1,22 @@
 var searchData=
 [
-  ['kmesh_140',['kmesh',['../class_wannier90.html#a4dfa8bd1849b74100b0d509a6b9b5ae5',1,'Wannier90']]]
+  ['i_652',['I',['../constant_8h.html#a7585f9c650521ad09bbed8c7369caf87',1,'constant.h']]],
+  ['i0_653',['I0',['../class_pulse.html#ae19f8c10af4cb9504162a1120721c203',1,'Pulse']]],
+  ['iline_654',['iline',['../namespace_plot_material_structure.html#ad52e48fcca95301357445d358915efe3',1,'PlotMaterialStructure']]],
+  ['imethod_655',['imethod',['../classmomaxis.html#ae1cb1bc0c29d74ef6a0ff16d34c8a554',1,'momaxis']]],
+  ['indexrorigin_656',['indexRorigin',['../class_wannier90.html#aa41014c8ddb052f99805604410cea928',1,'Wannier90']]],
+  ['indexrvec_657',['indexRvec',['../class_wannier90.html#ae9e52a341f727fe5ac115b283c1bdbf4',1,'Wannier90']]],
+  ['initial_5favec_658',['initial_avec',['../classlaser.html#a856f4bea7eb016aff1b859f7a4e4d74f',1,'laser']]],
+  ['initial_5fevec_659',['initial_evec',['../classlaser.html#a6e8fcf050d8884e2822a03abdcd4b666',1,'laser']]],
+  ['initmatrix_660',['initMatrix',['../class_s_b_es.html#ab985732a2ee335dbc41edf0bfd62ffe5',1,'SBEs']]],
+  ['inittype_661',['initType',['../class_s_b_es.html#a0aa0eb66d48cabdf6bb58c8178d38225',1,'SBEs']]],
+  ['inverse_5fw0_662',['inverse_w0',['../class_pulse.html#aa7944e69834a7f547df2b3c9d9b9d4e4',1,'Pulse']]],
+  ['isdipolezero_663',['isDipoleZero',['../class_wannier90.html#a9113354aca59d2cc4ce39c16867703e5',1,'Wannier90::isDipoleZero()'],['../class_s_b_es.html#a8c07633ee694184972801d99160fea0a',1,'SBEs::isDipoleZero()']]],
+  ['isfermieused_664',['isFermiEUsed',['../class_wannier90.html#af545a709d0ef2bbc40cabed208cdbb52',1,'Wannier90']]],
+  ['isinterintra_665',['isInterIntra',['../class_s_b_es.html#a5e3bf9662e4df012994386bce09b872a',1,'SBEs']]],
+  ['ismeshallocated_666',['isMeshAllocated',['../class_wannier90.html#a6721aa58b6a7262f847daf05e76bd9e2',1,'Wannier90']]],
+  ['issoc_667',['isSOC',['../class_t_m_d_cs.html#a9fb59b84db712eac9655335fffbcb5e9',1,'TMDCs']]],
+  ['isstartkgiven_668',['isStartKGiven',['../namespace_plot_material_structure.html#ae7a944d41aa6b1f6dfea0402e458da7d',1,'PlotMaterialStructure']]],
+  ['isuppz_669',['isuppz',['../class_wannier90.html#a3fa1646b6c2b6074366b7822314a4ce2',1,'Wannier90']]],
+  ['itemp_670',['itemp',['../namespace_plot_material_structure.html#abd50b78ab30e2f4d2c55d0a7b1a8652d',1,'PlotMaterialStructure']]]
 ];

@@ -1,73 +1,194 @@
 \hypertarget{classmomaxis}{}\doxysection{momaxis Class Reference}
 \label{classmomaxis}\index{momaxis@{momaxis}}
+
+
+{\ttfamily \#include $<$momaxis.\+h$>$}
+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classmomaxis_aabdf2088e2f6a43f2adfbe1f67ef770e}\label{classmomaxis_aabdf2088e2f6a43f2adfbe1f67ef770e}} 
-{\bfseries momaxis} (array$<$ int, Ndim $>$ \+\_\+N, array$<$ double, Ndim $\ast$Ndim $>$ \+\_\+axisvec, array$<$ double, Ndim $>$ \+\_\+origink)
+\mbox{\hyperlink{classmomaxis_aabdf2088e2f6a43f2adfbe1f67ef770e}{momaxis}} (array$<$ int, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \+\_\+N, array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $\ast$\mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \+\_\+axisvec, array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \+\_\+origink)
 \item 
-\mbox{\Hypertarget{classmomaxis_a98048ed63ec60acb2d0511264edf6d75}\label{classmomaxis_a98048ed63ec60acb2d0511264edf6d75}} 
-void {\bfseries basic\+\_\+mem} ()
+\mbox{\hyperlink{classmomaxis_a3563fd53c453082a4b84e03d07f0be2c}{$\sim$momaxis}} ()
 \item 
-\mbox{\Hypertarget{classmomaxis_a067c8b673d96801a827640a83312b74e}\label{classmomaxis_a067c8b673d96801a827640a83312b74e}} 
-void {\bfseries steps\+\_\+sizes} (array$<$ int, Ndim $>$ \+\_\+N, array$<$ double, Ndim $\ast$Ndim $>$ \+\_\+axisvec, array$<$ double, Ndim $>$ \+\_\+origink)
+void \mbox{\hyperlink{classmomaxis_a98048ed63ec60acb2d0511264edf6d75}{basic\+\_\+mem}} ()
 \item 
-\mbox{\Hypertarget{classmomaxis_aff806e37efb279844766cd0dde1639c9}\label{classmomaxis_aff806e37efb279844766cd0dde1639c9}} 
-void {\bfseries set\+\_\+brillouin\+\_\+zone\+\_\+grid} ()
+void \mbox{\hyperlink{classmomaxis_a067c8b673d96801a827640a83312b74e}{steps\+\_\+sizes}} (array$<$ int, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \+\_\+N, array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $\ast$\mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \+\_\+axisvec, array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \+\_\+origink)
 \item 
-\mbox{\Hypertarget{classmomaxis_a23d4f5a89d9532507ceee0b2bea2a6c9}\label{classmomaxis_a23d4f5a89d9532507ceee0b2bea2a6c9}} 
-void {\bfseries mom\+\_\+outputs} (F\+I\+LE $\ast$output, int skip0, int skip1, int skip2)
+void \mbox{\hyperlink{classmomaxis_aff806e37efb279844766cd0dde1639c9}{set\+\_\+brillouin\+\_\+zone\+\_\+grid}} ()
 \item 
-\mbox{\Hypertarget{classmomaxis_ab4359bf19ad44343de9b7d2b9602bc70}\label{classmomaxis_ab4359bf19ad44343de9b7d2b9602bc70}} 
-int {\bfseries index} (const int i, const int j, const int k)
+void \mbox{\hyperlink{classmomaxis_a23d4f5a89d9532507ceee0b2bea2a6c9}{mom\+\_\+outputs}} (F\+I\+LE $\ast$output, int skip0, int skip1, int skip2)
 \item 
-\mbox{\Hypertarget{classmomaxis_a9b77a19a63f8152809160e257079fac3}\label{classmomaxis_a9b77a19a63f8152809160e257079fac3}} 
-int {\bfseries index} (const array$<$ int, Ndim $>$ \+\_\+index\+Arr)
+int \mbox{\hyperlink{classmomaxis_ab4359bf19ad44343de9b7d2b9602bc70}{index}} (const int i, const int j, const int k)
 \item 
-\mbox{\Hypertarget{classmomaxis_a0a54661ea0a09b3e462c255cfd1ac8be}\label{classmomaxis_a0a54661ea0a09b3e462c255cfd1ac8be}} 
-array$<$ int, Ndim $>$ {\bfseries index} (int \+\_\+kindex)
+int \mbox{\hyperlink{classmomaxis_a9b77a19a63f8152809160e257079fac3}{index}} (const array$<$ int, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \+\_\+index\+Arr)
 \item 
-\mbox{\Hypertarget{classmomaxis_a70e02a2137add759360a03d575141402}\label{classmomaxis_a70e02a2137add759360a03d575141402}} 
-void {\bfseries checker} ()
+array$<$ int, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \mbox{\hyperlink{classmomaxis_a0a54661ea0a09b3e462c255cfd1ac8be}{index}} (int \+\_\+kindex)
 \item 
-\mbox{\Hypertarget{classmomaxis_acadd663eec4644f31fa7033926bb6d99}\label{classmomaxis_acadd663eec4644f31fa7033926bb6d99}} 
-void {\bfseries print\+\_\+info} ()
+void \mbox{\hyperlink{classmomaxis_a70e02a2137add759360a03d575141402}{checker}} ()
+\item 
+void \mbox{\hyperlink{classmomaxis_acadd663eec4644f31fa7033926bb6d99}{print\+\_\+info}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classmomaxis_a18f4ea4e4fafe0feb09eb19b15309f33}\label{classmomaxis_a18f4ea4e4fafe0feb09eb19b15309f33}} 
-array$<$ double, Ndim $>$ $\ast$ {\bfseries kgrid}
+array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ $\ast$ \mbox{\hyperlink{classmomaxis_a18f4ea4e4fafe0feb09eb19b15309f33}{kgrid}}
 \item 
-\mbox{\Hypertarget{classmomaxis_a72f11dd7097b1eb33c9fc80fb062afc8}\label{classmomaxis_a72f11dd7097b1eb33c9fc80fb062afc8}} 
-array$<$ double, Ndim $\ast$Ndim $>$ {\bfseries Bz\+Axes}
+array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $\ast$\mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \mbox{\hyperlink{classmomaxis_a72f11dd7097b1eb33c9fc80fb062afc8}{Bz\+Axes}}
 \item 
-\mbox{\Hypertarget{classmomaxis_a1a8320eee0a87e85b43bda5e6aebf5c0}\label{classmomaxis_a1a8320eee0a87e85b43bda5e6aebf5c0}} 
-array$<$ double, Ndim $>$ {\bfseries Bz\+Origin}
+array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \mbox{\hyperlink{classmomaxis_a1a8320eee0a87e85b43bda5e6aebf5c0}{Bz\+Origin}}
 \item 
-\mbox{\Hypertarget{classmomaxis_a3348a2ba4583b6ac1151a7338fde04b8}\label{classmomaxis_a3348a2ba4583b6ac1151a7338fde04b8}} 
-double $\ast$ {\bfseries weight}
+double $\ast$ \mbox{\hyperlink{classmomaxis_a3348a2ba4583b6ac1151a7338fde04b8}{weight}}
 \item 
-\mbox{\Hypertarget{classmomaxis_a86972afee00cc5f1072b0c37c76d4f0f}\label{classmomaxis_a86972afee00cc5f1072b0c37c76d4f0f}} 
-double {\bfseries total\+\_\+weight}
+double \mbox{\hyperlink{classmomaxis_a86972afee00cc5f1072b0c37c76d4f0f}{total\+\_\+weight}}
 \item 
-\mbox{\Hypertarget{classmomaxis_a3003cd2745d7d6da227bea6cdec035a2}\label{classmomaxis_a3003cd2745d7d6da227bea6cdec035a2}} 
-array$<$ int, Ndim $>$ {\bfseries N}
+array$<$ int, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \mbox{\hyperlink{classmomaxis_a3003cd2745d7d6da227bea6cdec035a2}{N}}
 \item 
-\mbox{\Hypertarget{classmomaxis_a99d4e9acdf1edc641eb36a591c78919f}\label{classmomaxis_a99d4e9acdf1edc641eb36a591c78919f}} 
-int {\bfseries Ntotal}
+int \mbox{\hyperlink{classmomaxis_a99d4e9acdf1edc641eb36a591c78919f}{Ntotal}}
 \item 
-\mbox{\Hypertarget{classmomaxis_a5422b1ea0af8d2d6b30e7224da44e8e5}\label{classmomaxis_a5422b1ea0af8d2d6b30e7224da44e8e5}} 
-double {\bfseries Volume}
+double \mbox{\hyperlink{classmomaxis_a5422b1ea0af8d2d6b30e7224da44e8e5}{Volume}}
 \item 
-\mbox{\Hypertarget{classmomaxis_a94c45825f808e813f0eaa971c2dc9f78}\label{classmomaxis_a94c45825f808e813f0eaa971c2dc9f78}} 
-double {\bfseries dV}
+double \mbox{\hyperlink{classmomaxis_a94c45825f808e813f0eaa971c2dc9f78}{dV}}
 \item 
-\mbox{\Hypertarget{classmomaxis_ae1cb1bc0c29d74ef6a0ff16d34c8a554}\label{classmomaxis_ae1cb1bc0c29d74ef6a0ff16d34c8a554}} 
-string {\bfseries imethod}
+string \mbox{\hyperlink{classmomaxis_ae1cb1bc0c29d74ef6a0ff16d34c8a554}{imethod}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classmomaxis_aabdf2088e2f6a43f2adfbe1f67ef770e}\label{classmomaxis_aabdf2088e2f6a43f2adfbe1f67ef770e}} 
+\index{momaxis@{momaxis}!momaxis@{momaxis}}
+\index{momaxis@{momaxis}!momaxis@{momaxis}}
+\doxysubsubsection{\texorpdfstring{momaxis()}{momaxis()}}
+{\footnotesize\ttfamily momaxis\+::momaxis (\begin{DoxyParamCaption}\item[{array$<$ int, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$}]{\+\_\+N,  }\item[{array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $\ast$\mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$}]{\+\_\+axisvec,  }\item[{array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$}]{\+\_\+origink }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classmomaxis_a3563fd53c453082a4b84e03d07f0be2c}\label{classmomaxis_a3563fd53c453082a4b84e03d07f0be2c}} 
+\index{momaxis@{momaxis}!````~momaxis@{$\sim$momaxis}}
+\index{````~momaxis@{$\sim$momaxis}!momaxis@{momaxis}}
+\doxysubsubsection{\texorpdfstring{$\sim$momaxis()}{~momaxis()}}
+{\footnotesize\ttfamily momaxis\+::$\sim$momaxis (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classmomaxis_a98048ed63ec60acb2d0511264edf6d75}\label{classmomaxis_a98048ed63ec60acb2d0511264edf6d75}} 
+\index{momaxis@{momaxis}!basic\_mem@{basic\_mem}}
+\index{basic\_mem@{basic\_mem}!momaxis@{momaxis}}
+\doxysubsubsection{\texorpdfstring{basic\_mem()}{basic\_mem()}}
+{\footnotesize\ttfamily void momaxis\+::basic\+\_\+mem (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classmomaxis_a70e02a2137add759360a03d575141402}\label{classmomaxis_a70e02a2137add759360a03d575141402}} 
+\index{momaxis@{momaxis}!checker@{checker}}
+\index{checker@{checker}!momaxis@{momaxis}}
+\doxysubsubsection{\texorpdfstring{checker()}{checker()}}
+{\footnotesize\ttfamily void momaxis\+::checker (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classmomaxis_a9b77a19a63f8152809160e257079fac3}\label{classmomaxis_a9b77a19a63f8152809160e257079fac3}} 
+\index{momaxis@{momaxis}!index@{index}}
+\index{index@{index}!momaxis@{momaxis}}
+\doxysubsubsection{\texorpdfstring{index()}{index()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily int momaxis\+::index (\begin{DoxyParamCaption}\item[{const array$<$ int, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$}]{\+\_\+index\+Arr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classmomaxis_ab4359bf19ad44343de9b7d2b9602bc70}\label{classmomaxis_ab4359bf19ad44343de9b7d2b9602bc70}} 
+\index{momaxis@{momaxis}!index@{index}}
+\index{index@{index}!momaxis@{momaxis}}
+\doxysubsubsection{\texorpdfstring{index()}{index()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily int momaxis\+::index (\begin{DoxyParamCaption}\item[{const int}]{i,  }\item[{const int}]{j,  }\item[{const int}]{k }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classmomaxis_a0a54661ea0a09b3e462c255cfd1ac8be}\label{classmomaxis_a0a54661ea0a09b3e462c255cfd1ac8be}} 
+\index{momaxis@{momaxis}!index@{index}}
+\index{index@{index}!momaxis@{momaxis}}
+\doxysubsubsection{\texorpdfstring{index()}{index()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily array$<$int, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}}$>$ momaxis\+::index (\begin{DoxyParamCaption}\item[{int}]{\+\_\+kindex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classmomaxis_a23d4f5a89d9532507ceee0b2bea2a6c9}\label{classmomaxis_a23d4f5a89d9532507ceee0b2bea2a6c9}} 
+\index{momaxis@{momaxis}!mom\_outputs@{mom\_outputs}}
+\index{mom\_outputs@{mom\_outputs}!momaxis@{momaxis}}
+\doxysubsubsection{\texorpdfstring{mom\_outputs()}{mom\_outputs()}}
+{\footnotesize\ttfamily void momaxis\+::mom\+\_\+outputs (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{output,  }\item[{int}]{skip0 = {\ttfamily 1},  }\item[{int}]{skip1 = {\ttfamily 1},  }\item[{int}]{skip2 = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classmomaxis_acadd663eec4644f31fa7033926bb6d99}\label{classmomaxis_acadd663eec4644f31fa7033926bb6d99}} 
+\index{momaxis@{momaxis}!print\_info@{print\_info}}
+\index{print\_info@{print\_info}!momaxis@{momaxis}}
+\doxysubsubsection{\texorpdfstring{print\_info()}{print\_info()}}
+{\footnotesize\ttfamily void momaxis\+::print\+\_\+info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classmomaxis_aff806e37efb279844766cd0dde1639c9}\label{classmomaxis_aff806e37efb279844766cd0dde1639c9}} 
+\index{momaxis@{momaxis}!set\_brillouin\_zone\_grid@{set\_brillouin\_zone\_grid}}
+\index{set\_brillouin\_zone\_grid@{set\_brillouin\_zone\_grid}!momaxis@{momaxis}}
+\doxysubsubsection{\texorpdfstring{set\_brillouin\_zone\_grid()}{set\_brillouin\_zone\_grid()}}
+{\footnotesize\ttfamily void momaxis\+::set\+\_\+brillouin\+\_\+zone\+\_\+grid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classmomaxis_a067c8b673d96801a827640a83312b74e}\label{classmomaxis_a067c8b673d96801a827640a83312b74e}} 
+\index{momaxis@{momaxis}!steps\_sizes@{steps\_sizes}}
+\index{steps\_sizes@{steps\_sizes}!momaxis@{momaxis}}
+\doxysubsubsection{\texorpdfstring{steps\_sizes()}{steps\_sizes()}}
+{\footnotesize\ttfamily void momaxis\+::steps\+\_\+sizes (\begin{DoxyParamCaption}\item[{array$<$ int, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$}]{\+\_\+N,  }\item[{array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $\ast$\mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$}]{\+\_\+axisvec,  }\item[{array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$}]{\+\_\+origink }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classmomaxis_a72f11dd7097b1eb33c9fc80fb062afc8}\label{classmomaxis_a72f11dd7097b1eb33c9fc80fb062afc8}} 
+\index{momaxis@{momaxis}!BzAxes@{BzAxes}}
+\index{BzAxes@{BzAxes}!momaxis@{momaxis}}
+\doxysubsubsection{\texorpdfstring{BzAxes}{BzAxes}}
+{\footnotesize\ttfamily array$<$double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}}$\ast$\mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}}$>$ momaxis\+::\+Bz\+Axes}
+
+\mbox{\Hypertarget{classmomaxis_a1a8320eee0a87e85b43bda5e6aebf5c0}\label{classmomaxis_a1a8320eee0a87e85b43bda5e6aebf5c0}} 
+\index{momaxis@{momaxis}!BzOrigin@{BzOrigin}}
+\index{BzOrigin@{BzOrigin}!momaxis@{momaxis}}
+\doxysubsubsection{\texorpdfstring{BzOrigin}{BzOrigin}}
+{\footnotesize\ttfamily array$<$double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}}$>$ momaxis\+::\+Bz\+Origin}
+
+\mbox{\Hypertarget{classmomaxis_a94c45825f808e813f0eaa971c2dc9f78}\label{classmomaxis_a94c45825f808e813f0eaa971c2dc9f78}} 
+\index{momaxis@{momaxis}!dV@{dV}}
+\index{dV@{dV}!momaxis@{momaxis}}
+\doxysubsubsection{\texorpdfstring{dV}{dV}}
+{\footnotesize\ttfamily double momaxis\+::dV}
+
+\mbox{\Hypertarget{classmomaxis_ae1cb1bc0c29d74ef6a0ff16d34c8a554}\label{classmomaxis_ae1cb1bc0c29d74ef6a0ff16d34c8a554}} 
+\index{momaxis@{momaxis}!imethod@{imethod}}
+\index{imethod@{imethod}!momaxis@{momaxis}}
+\doxysubsubsection{\texorpdfstring{imethod}{imethod}}
+{\footnotesize\ttfamily string momaxis\+::imethod}
+
+\mbox{\Hypertarget{classmomaxis_a18f4ea4e4fafe0feb09eb19b15309f33}\label{classmomaxis_a18f4ea4e4fafe0feb09eb19b15309f33}} 
+\index{momaxis@{momaxis}!kgrid@{kgrid}}
+\index{kgrid@{kgrid}!momaxis@{momaxis}}
+\doxysubsubsection{\texorpdfstring{kgrid}{kgrid}}
+{\footnotesize\ttfamily array$<$double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}}$>$$\ast$ momaxis\+::kgrid}
+
+\mbox{\Hypertarget{classmomaxis_a3003cd2745d7d6da227bea6cdec035a2}\label{classmomaxis_a3003cd2745d7d6da227bea6cdec035a2}} 
+\index{momaxis@{momaxis}!N@{N}}
+\index{N@{N}!momaxis@{momaxis}}
+\doxysubsubsection{\texorpdfstring{N}{N}}
+{\footnotesize\ttfamily array$<$int, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}}$>$ momaxis\+::N}
+
+\mbox{\Hypertarget{classmomaxis_a99d4e9acdf1edc641eb36a591c78919f}\label{classmomaxis_a99d4e9acdf1edc641eb36a591c78919f}} 
+\index{momaxis@{momaxis}!Ntotal@{Ntotal}}
+\index{Ntotal@{Ntotal}!momaxis@{momaxis}}
+\doxysubsubsection{\texorpdfstring{Ntotal}{Ntotal}}
+{\footnotesize\ttfamily int momaxis\+::\+Ntotal}
+
+\mbox{\Hypertarget{classmomaxis_a86972afee00cc5f1072b0c37c76d4f0f}\label{classmomaxis_a86972afee00cc5f1072b0c37c76d4f0f}} 
+\index{momaxis@{momaxis}!total\_weight@{total\_weight}}
+\index{total\_weight@{total\_weight}!momaxis@{momaxis}}
+\doxysubsubsection{\texorpdfstring{total\_weight}{total\_weight}}
+{\footnotesize\ttfamily double momaxis\+::total\+\_\+weight}
+
+\mbox{\Hypertarget{classmomaxis_a5422b1ea0af8d2d6b30e7224da44e8e5}\label{classmomaxis_a5422b1ea0af8d2d6b30e7224da44e8e5}} 
+\index{momaxis@{momaxis}!Volume@{Volume}}
+\index{Volume@{Volume}!momaxis@{momaxis}}
+\doxysubsubsection{\texorpdfstring{Volume}{Volume}}
+{\footnotesize\ttfamily double momaxis\+::\+Volume}
+
+\mbox{\Hypertarget{classmomaxis_a3348a2ba4583b6ac1151a7338fde04b8}\label{classmomaxis_a3348a2ba4583b6ac1151a7338fde04b8}} 
+\index{momaxis@{momaxis}!weight@{weight}}
+\index{weight@{weight}!momaxis@{momaxis}}
+\doxysubsubsection{\texorpdfstring{weight}{weight}}
+{\footnotesize\ttfamily double$\ast$ momaxis\+::weight}
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-momaxis.\+h\end{DoxyCompactItemize}
+\mbox{\hyperlink{momaxis_8h}{momaxis.\+h}}\end{DoxyCompactItemize}

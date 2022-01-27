@@ -2,8 +2,11 @@
 \label{class_s_b_es}\index{SBEs@{SBEs}}
 
 
-Collaboration diagram for S\+B\+Es\+:
-\nopagebreak
+{\ttfamily \#include $<$S\+B\+Es.\+h$>$}
+
+
+
+Collaboration diagram for S\+B\+Es\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -13,158 +16,460 @@ Collaboration diagram for S\+B\+Es\+:
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_s_b_es_aa113bce130906e2f3742ec3b5f61789a}\label{class_s_b_es_aa113bce130906e2f3742ec3b5f61789a}} 
-{\bfseries S\+B\+Es} (const libconfig\+::\+Setting $\ast$\+\_\+cfg, Gauge\+Type \+\_\+gauge)
+\mbox{\hyperlink{class_s_b_es_aa113bce130906e2f3742ec3b5f61789a}{S\+B\+Es}} (const libconfig\+::\+Setting $\ast$\+\_\+cfg, \mbox{\hyperlink{constant_8h_ac40f02ca8e866f3423517f257579ca9b}{Gauge\+Type}} \+\_\+gauge)
 \item 
-\mbox{\Hypertarget{class_s_b_es_ad1b3a3bc1b5ada8dad663ad14edfbd4d}\label{class_s_b_es_ad1b3a3bc1b5ada8dad663ad14edfbd4d}} 
-void {\bfseries Run\+S\+B\+Es} (int \+\_\+kindex, double \+\_\+time)
+\mbox{\hyperlink{class_s_b_es_a1021d2b1c452b49fb2da22e04abb3298}{$\sim$\+S\+B\+Es}} ()
 \item 
-\mbox{\Hypertarget{class_s_b_es_a45d19265a4f22af79280ac4a9436f7d2}\label{class_s_b_es_a45d19265a4f22af79280ac4a9436f7d2}} 
-array$<$ double, Ndim $>$ {\bfseries Gen\+Current} (int \+\_\+kindex, double \+\_\+time)
+void \mbox{\hyperlink{class_s_b_es_ad1b3a3bc1b5ada8dad663ad14edfbd4d}{Run\+S\+B\+Es}} (int \+\_\+kindex, double \+\_\+time)
 \item 
-\mbox{\Hypertarget{class_s_b_es_acbf52ad95d6063497f09f2d2bb435ea2}\label{class_s_b_es_acbf52ad95d6063497f09f2d2bb435ea2}} 
-std\+::tuple$<$ array$<$ double, Ndim $>$, array$<$ double, Ndim $>$ $>$ {\bfseries Gen\+Inter\+Intra\+Current} (int \+\_\+kindex, double \+\_\+time)
+array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \mbox{\hyperlink{class_s_b_es_a45d19265a4f22af79280ac4a9436f7d2}{Gen\+Current}} (int \+\_\+kindex, double \+\_\+time)
 \item 
-\mbox{\Hypertarget{class_s_b_es_a9503851579b1a7ea96b7faab98a5881d}\label{class_s_b_es_a9503851579b1a7ea96b7faab98a5881d}} 
-void {\bfseries Gen\+Differential\+DM} (complex $\ast$out, complex $\ast$input, int \+\_\+kindex, double \+\_\+time)
+std\+::tuple$<$ array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$, array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ $>$ \mbox{\hyperlink{class_s_b_es_acbf52ad95d6063497f09f2d2bb435ea2}{Gen\+Inter\+Intra\+Current}} (int \+\_\+kindex, double \+\_\+time)
 \item 
-\mbox{\Hypertarget{class_s_b_es_a4e629035d2a8101a0eef811c5c356864}\label{class_s_b_es_a4e629035d2a8101a0eef811c5c356864}} 
+void \mbox{\hyperlink{class_s_b_es_a9503851579b1a7ea96b7faab98a5881d}{Gen\+Differential\+DM}} (\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$out, \mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$input, int \+\_\+kindex, double \+\_\+time)
+\item 
 void \mbox{\hyperlink{class_s_b_es_a4e629035d2a8101a0eef811c5c356864}{Initialize\+General}} (const libconfig\+::\+Setting $\ast$\+\_\+calc)
 \begin{DoxyCompactList}\small\item\em Initialize general stuff inside constructor. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_s_b_es_a9bc2fd1ba2ad531e6cb75567ba1f8e2c}\label{class_s_b_es_a9bc2fd1ba2ad531e6cb75567ba1f8e2c}} 
 void \mbox{\hyperlink{class_s_b_es_a9bc2fd1ba2ad531e6cb75567ba1f8e2c}{Initialize\+Laser}} (const libconfig\+::\+Setting $\ast$\+\_\+laser)
 \begin{DoxyCompactList}\small\item\em Initialize laser inside constructor. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_s_b_es_a484a32d347e2df92eff0baa327ca4a15}\label{class_s_b_es_a484a32d347e2df92eff0baa327ca4a15}} 
-void \mbox{\hyperlink{class_s_b_es_a484a32d347e2df92eff0baa327ca4a15}{Gen\+U\+Matrix}} (complex $\ast$\+\_\+ustore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint)
+void \mbox{\hyperlink{class_s_b_es_a484a32d347e2df92eff0baa327ca4a15}{Gen\+U\+Matrix}} (\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$\+\_\+ustore, std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \+\_\+kpoint)
 \begin{DoxyCompactList}\small\item\em Generate U matrix. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_s_b_es_abd50d47954e2d5f4a82618ba7f554b86}\label{class_s_b_es_abd50d47954e2d5f4a82618ba7f554b86}} 
-array$<$ double, Ndim $>$ {\bfseries Gen\+KpulsA} (array$<$ double, Ndim $>$ \+\_\+kpoint, double time)
+array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \mbox{\hyperlink{class_s_b_es_abd50d47954e2d5f4a82618ba7f554b86}{Gen\+KpulsA}} (array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \+\_\+kpoint, double time)
 \item 
-\mbox{\Hypertarget{class_s_b_es_ae5598b536528853ee3beae6a3403fc65}\label{class_s_b_es_ae5598b536528853ee3beae6a3403fc65}} 
-void \mbox{\hyperlink{class_s_b_es_ae5598b536528853ee3beae6a3403fc65}{Wannier\+To\+Hamiltonian}} (complex $\ast$out, complex $\ast$input, int \+\_\+kindex, double \+\_\+time)
+void \mbox{\hyperlink{class_s_b_es_ae5598b536528853ee3beae6a3403fc65}{Wannier\+To\+Hamiltonian}} (\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$out, \mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$input, int \+\_\+kindex, double \+\_\+time)
 \begin{DoxyCompactList}\small\item\em Convert Wannier representation to Hamiltonian representation. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_s_b_es_ae78ca5611d9525f89398e15cef609c1c}\label{class_s_b_es_ae78ca5611d9525f89398e15cef609c1c}} 
 void \mbox{\hyperlink{class_s_b_es_ae78ca5611d9525f89398e15cef609c1c}{Print\+Info}} ()
 \begin{DoxyCompactList}\small\item\em Print calculation information. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a6fca51320c8cbe9b958092248bfe51f3}\label{class_s_b_es_a6fca51320c8cbe9b958092248bfe51f3}} 
-const Gauge\+Type {\bfseries gauge}
+const \mbox{\hyperlink{constant_8h_ac40f02ca8e866f3423517f257579ca9b}{Gauge\+Type}} \mbox{\hyperlink{class_s_b_es_a6fca51320c8cbe9b958092248bfe51f3}{gauge}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a0aa0eb66d48cabdf6bb58c8178d38225}\label{class_s_b_es_a0aa0eb66d48cabdf6bb58c8178d38225}} 
-Initial\+Value\+Type {\bfseries init\+Type}
+\mbox{\hyperlink{_base_material_8h_a2a3bc89222d9566b96c351321b451286}{Initial\+Value\+Type}} \mbox{\hyperlink{class_s_b_es_a0aa0eb66d48cabdf6bb58c8178d38225}{init\+Type}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_ae738398ef5638f8a603700b111c7f85e}\label{class_s_b_es_ae738398ef5638f8a603700b111c7f85e}} 
-complex $\ast$$\ast$ {\bfseries dmatrix}
+\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$$\ast$ \mbox{\hyperlink{class_s_b_es_ae738398ef5638f8a603700b111c7f85e}{dmatrix}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_ab985732a2ee335dbc41edf0bfd62ffe5}\label{class_s_b_es_ab985732a2ee335dbc41edf0bfd62ffe5}} 
-complex $\ast$$\ast$ {\bfseries init\+Matrix}
+\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$$\ast$ \mbox{\hyperlink{class_s_b_es_ab985732a2ee335dbc41edf0bfd62ffe5}{init\+Matrix}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a8ec3b23f29f4ec37f182a44bb2f59aee}\label{class_s_b_es_a8ec3b23f29f4ec37f182a44bb2f59aee}} 
 \mbox{\hyperlink{class_base_material}{Base\+Material}} $\ast$ \mbox{\hyperlink{class_s_b_es_a8ec3b23f29f4ec37f182a44bb2f59aee}{material}}
 \begin{DoxyCompactList}\small\item\em dipole\&Hamiltonian generator \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_s_b_es_a018f46cc90da276ff09cf6279a2a2c1e}\label{class_s_b_es_a018f46cc90da276ff09cf6279a2a2c1e}} 
-complex $\ast$ {\bfseries hamiltonian}
+\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$ \mbox{\hyperlink{class_s_b_es_a018f46cc90da276ff09cf6279a2a2c1e}{hamiltonian}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_ad12b425420f0d618ebef4ded6f7d269f}\label{class_s_b_es_ad12b425420f0d618ebef4ded6f7d269f}} 
-complex $\ast$$\ast$ {\bfseries dipole\+Matrix}
+\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$$\ast$ \mbox{\hyperlink{class_s_b_es_ad12b425420f0d618ebef4ded6f7d269f}{dipole\+Matrix}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_ad1b336e02c4b08c5f73d8b483b772332}\label{class_s_b_es_ad1b336e02c4b08c5f73d8b483b772332}} 
-complex $\ast$$\ast$ {\bfseries j\+Matrix}
+\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$$\ast$ \mbox{\hyperlink{class_s_b_es_ad1b336e02c4b08c5f73d8b483b772332}{j\+Matrix}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a611a4063471d858821b5efe92a5cc88f}\label{class_s_b_es_a611a4063471d858821b5efe92a5cc88f}} 
-complex $\ast$ {\bfseries newd\+Matrix}
+\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$ \mbox{\hyperlink{class_s_b_es_a611a4063471d858821b5efe92a5cc88f}{newd\+Matrix}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a84ca963da877ff75dc703132be24a97f}\label{class_s_b_es_a84ca963da877ff75dc703132be24a97f}} 
-complex $\ast$ {\bfseries temp1\+Matrix}
+\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$ \mbox{\hyperlink{class_s_b_es_a84ca963da877ff75dc703132be24a97f}{temp1\+Matrix}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_abdca90841ec9ac991ee9332f7c72f3bc}\label{class_s_b_es_abdca90841ec9ac991ee9332f7c72f3bc}} 
-complex $\ast$ {\bfseries temp2\+Matrix}
+\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$ \mbox{\hyperlink{class_s_b_es_abdca90841ec9ac991ee9332f7c72f3bc}{temp2\+Matrix}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a3c963ebe2141c6aeccfb364f063286af}\label{class_s_b_es_a3c963ebe2141c6aeccfb364f063286af}} 
-complex $\ast$$\ast$ {\bfseries rk\+Matrix}
+\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$$\ast$ \mbox{\hyperlink{class_s_b_es_a3c963ebe2141c6aeccfb364f063286af}{rk\+Matrix}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a4d6b62a613771b7351d61f7df36d92d1}\label{class_s_b_es_a4d6b62a613771b7351d61f7df36d92d1}} 
-complex $\ast$ {\bfseries u\+Matrix}
+\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$ \mbox{\hyperlink{class_s_b_es_a4d6b62a613771b7351d61f7df36d92d1}{u\+Matrix}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a0536c06134ff175d28a5e937c913da3e}\label{class_s_b_es_a0536c06134ff175d28a5e937c913da3e}} 
-complex $\ast$ {\bfseries ctransu\+Matrix}
+\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$ \mbox{\hyperlink{class_s_b_es_a0536c06134ff175d28a5e937c913da3e}{ctransu\+Matrix}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a128717aafb31680c07b22f73b82170eb}\label{class_s_b_es_a128717aafb31680c07b22f73b82170eb}} 
-double $\ast$ {\bfseries dephasing\+Matrix}
+double $\ast$ \mbox{\hyperlink{class_s_b_es_a128717aafb31680c07b22f73b82170eb}{dephasing\+Matrix}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a6305c711029b3009c0887ce1383b13f4}\label{class_s_b_es_a6305c711029b3009c0887ce1383b13f4}} 
-complex $\ast$$\ast$$\ast$ {\bfseries p\+Matrix}
+\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$$\ast$$\ast$ \mbox{\hyperlink{class_s_b_es_a6305c711029b3009c0887ce1383b13f4}{p\+Matrix}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a70eeec63b23171579e6a5ab865f8f119}\label{class_s_b_es_a70eeec63b23171579e6a5ab865f8f119}} 
-double $\ast$$\ast$ {\bfseries edispersion}
+double $\ast$$\ast$ \mbox{\hyperlink{class_s_b_es_a70eeec63b23171579e6a5ab865f8f119}{edispersion}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a09e6590059d95f7d72d5d61a9ef647fe}\label{class_s_b_es_a09e6590059d95f7d72d5d61a9ef647fe}} 
-\mbox{\hyperlink{classlaser}{laser}} $\ast$ {\bfseries fpulses}
+\mbox{\hyperlink{classlaser}{laser}} $\ast$ \mbox{\hyperlink{class_s_b_es_a09e6590059d95f7d72d5d61a9ef647fe}{fpulses}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_acbac554bd87ce6dba6b4b3cd897587c8}\label{class_s_b_es_acbac554bd87ce6dba6b4b3cd897587c8}} 
-int {\bfseries Nband}
+int \mbox{\hyperlink{class_s_b_es_acbac554bd87ce6dba6b4b3cd897587c8}{Nband}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a61d3364b117aecf69208ada9c0b39766}\label{class_s_b_es_a61d3364b117aecf69208ada9c0b39766}} 
-array$<$ int, Ndim $>$ {\bfseries Nk}
+array$<$ int, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \mbox{\hyperlink{class_s_b_es_a61d3364b117aecf69208ada9c0b39766}{Nk}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_aad6c6f6da3402074137c6b1f6be22b2d}\label{class_s_b_es_aad6c6f6da3402074137c6b1f6be22b2d}} 
 double \mbox{\hyperlink{class_s_b_es_aad6c6f6da3402074137c6b1f6be22b2d}{Ef}}
 \begin{DoxyCompactList}\small\item\em Fermi energy. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_s_b_es_a4ba827ecab2a11ac0046b06dfb83b9cf}\label{class_s_b_es_a4ba827ecab2a11ac0046b06dfb83b9cf}} 
 double \mbox{\hyperlink{class_s_b_es_a4ba827ecab2a11ac0046b06dfb83b9cf}{thermalE}}
 \begin{DoxyCompactList}\small\item\em Thermal energy (kT) in a.\+u. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_s_b_es_a1d68f29d352329876a4856259a71a052}\label{class_s_b_es_a1d68f29d352329876a4856259a71a052}} 
-int {\bfseries R\+Korder}
+int \mbox{\hyperlink{class_s_b_es_a1d68f29d352329876a4856259a71a052}{R\+Korder}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a9b6e0644cb36148d621cfb2424367aaf}\label{class_s_b_es_a9b6e0644cb36148d621cfb2424367aaf}} 
-int {\bfseries Num\+RK}
+int \mbox{\hyperlink{class_s_b_es_a9b6e0644cb36148d621cfb2424367aaf}{Num\+RK}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a871507704b403dec5ef0161ead0ffd60}\label{class_s_b_es_a871507704b403dec5ef0161ead0ffd60}} 
-double $\ast$ {\bfseries t\+RK}
+double $\ast$ \mbox{\hyperlink{class_s_b_es_a871507704b403dec5ef0161ead0ffd60}{t\+RK}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_afff600dee3d7c1ccbf2d19ceea845835}\label{class_s_b_es_afff600dee3d7c1ccbf2d19ceea845835}} 
-double $\ast$ {\bfseries b\+RK}
+double $\ast$ \mbox{\hyperlink{class_s_b_es_afff600dee3d7c1ccbf2d19ceea845835}{b\+RK}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a618ce029cfb66c2ff52a7c8ba5952ad4}\label{class_s_b_es_a618ce029cfb66c2ff52a7c8ba5952ad4}} 
-double $\ast$$\ast$ {\bfseries a\+RK}
+double $\ast$$\ast$ \mbox{\hyperlink{class_s_b_es_a618ce029cfb66c2ff52a7c8ba5952ad4}{a\+RK}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_ab488683be5d5d6a40ac302cc4f4ee614}\label{class_s_b_es_ab488683be5d5d6a40ac302cc4f4ee614}} 
-\mbox{\hyperlink{classmomaxis}{momaxis}} $\ast$ {\bfseries kmesh}
+\mbox{\hyperlink{classmomaxis}{momaxis}} $\ast$ \mbox{\hyperlink{class_s_b_es_ab488683be5d5d6a40ac302cc4f4ee614}{kmesh}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a26cfb10101b1aaeaa170e8b0b96bd5e2}\label{class_s_b_es_a26cfb10101b1aaeaa170e8b0b96bd5e2}} 
-string {\bfseries target\+Material}
+string \mbox{\hyperlink{class_s_b_es_a26cfb10101b1aaeaa170e8b0b96bd5e2}{target\+Material}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_af1aecb222355a739918c8029e182de7a}\label{class_s_b_es_af1aecb222355a739918c8029e182de7a}} 
-array$<$ double, Ndim $>$ {\bfseries ksfactor}
+array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \mbox{\hyperlink{class_s_b_es_af1aecb222355a739918c8029e182de7a}{ksfactor}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a12f1782bcfb970d55443c377815048e4}\label{class_s_b_es_a12f1782bcfb970d55443c377815048e4}} 
-int {\bfseries shot\+Number}
+int \mbox{\hyperlink{class_s_b_es_a12f1782bcfb970d55443c377815048e4}{shot\+Number}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_ab021db40504f194f843facdfdf13de9f}\label{class_s_b_es_ab021db40504f194f843facdfdf13de9f}} 
-int {\bfseries diagnostic}
+int \mbox{\hyperlink{class_s_b_es_ab021db40504f194f843facdfdf13de9f}{diagnostic}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a423e5dca822ddb7ec2c8cb4ff37a37a8}\label{class_s_b_es_a423e5dca822ddb7ec2c8cb4ff37a37a8}} 
-double {\bfseries dephasing\+\_\+time\+\_\+inter}
+double \mbox{\hyperlink{class_s_b_es_a423e5dca822ddb7ec2c8cb4ff37a37a8}{dephasing\+\_\+time\+\_\+inter}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_ae083f34dde2ee0a8391154e57537bacf}\label{class_s_b_es_ae083f34dde2ee0a8391154e57537bacf}} 
-double {\bfseries dephasing\+\_\+time\+\_\+intra}
+double \mbox{\hyperlink{class_s_b_es_ae083f34dde2ee0a8391154e57537bacf}{dephasing\+\_\+time\+\_\+intra}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a81eac570632f67c6932c341889672749}\label{class_s_b_es_a81eac570632f67c6932c341889672749}} 
-double {\bfseries dephasing\+\_\+factor\+\_\+inter}
+double \mbox{\hyperlink{class_s_b_es_a81eac570632f67c6932c341889672749}{dephasing\+\_\+factor\+\_\+inter}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a5db8b79b2016a79029083b61fb122495}\label{class_s_b_es_a5db8b79b2016a79029083b61fb122495}} 
-double {\bfseries dephasing\+\_\+factor\+\_\+intra}
+double \mbox{\hyperlink{class_s_b_es_a5db8b79b2016a79029083b61fb122495}{dephasing\+\_\+factor\+\_\+intra}}
 \item 
-\mbox{\Hypertarget{class_s_b_es_a8c07633ee694184972801d99160fea0a}\label{class_s_b_es_a8c07633ee694184972801d99160fea0a}} 
 bool \mbox{\hyperlink{class_s_b_es_a8c07633ee694184972801d99160fea0a}{is\+Dipole\+Zero}}
 \begin{DoxyCompactList}\small\item\em default is true. Wannier dipole is non-\/zero in very rare cases. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_s_b_es_a5e3bf9662e4df012994386bce09b872a}\label{class_s_b_es_a5e3bf9662e4df012994386bce09b872a}} 
 bool \mbox{\hyperlink{class_s_b_es_a5e3bf9662e4df012994386bce09b872a}{is\+Inter\+Intra}}
 \begin{DoxyCompactList}\small\item\em default is true. Separate inter/intra when this is true. Total current is in inter when false. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_s_b_es_aa113bce130906e2f3742ec3b5f61789a}\label{class_s_b_es_aa113bce130906e2f3742ec3b5f61789a}} 
+\index{SBEs@{SBEs}!SBEs@{SBEs}}
+\index{SBEs@{SBEs}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{SBEs()}{SBEs()}}
+{\footnotesize\ttfamily S\+B\+Es\+::\+S\+B\+Es (\begin{DoxyParamCaption}\item[{const libconfig\+::\+Setting $\ast$}]{\+\_\+cfg,  }\item[{\mbox{\hyperlink{constant_8h_ac40f02ca8e866f3423517f257579ca9b}{Gauge\+Type}}}]{\+\_\+gauge }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_s_b_es_a1021d2b1c452b49fb2da22e04abb3298}\label{class_s_b_es_a1021d2b1c452b49fb2da22e04abb3298}} 
+\index{SBEs@{SBEs}!````~SBEs@{$\sim$SBEs}}
+\index{````~SBEs@{$\sim$SBEs}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{$\sim$SBEs()}{~SBEs()}}
+{\footnotesize\ttfamily S\+B\+Es\+::$\sim$\+S\+B\+Es (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_s_b_es_a45d19265a4f22af79280ac4a9436f7d2}\label{class_s_b_es_a45d19265a4f22af79280ac4a9436f7d2}} 
+\index{SBEs@{SBEs}!GenCurrent@{GenCurrent}}
+\index{GenCurrent@{GenCurrent}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{GenCurrent()}{GenCurrent()}}
+{\footnotesize\ttfamily array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ S\+B\+Es\+::\+Gen\+Current (\begin{DoxyParamCaption}\item[{int}]{\+\_\+kindex,  }\item[{double}]{\+\_\+time }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_s_b_es_a9503851579b1a7ea96b7faab98a5881d}\label{class_s_b_es_a9503851579b1a7ea96b7faab98a5881d}} 
+\index{SBEs@{SBEs}!GenDifferentialDM@{GenDifferentialDM}}
+\index{GenDifferentialDM@{GenDifferentialDM}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{GenDifferentialDM()}{GenDifferentialDM()}}
+{\footnotesize\ttfamily void S\+B\+Es\+::\+Gen\+Differential\+DM (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$}]{out,  }\item[{\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$}]{input,  }\item[{int}]{\+\_\+kindex,  }\item[{double}]{\+\_\+time }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_s_b_es_acbf52ad95d6063497f09f2d2bb435ea2}\label{class_s_b_es_acbf52ad95d6063497f09f2d2bb435ea2}} 
+\index{SBEs@{SBEs}!GenInterIntraCurrent@{GenInterIntraCurrent}}
+\index{GenInterIntraCurrent@{GenInterIntraCurrent}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{GenInterIntraCurrent()}{GenInterIntraCurrent()}}
+{\footnotesize\ttfamily std\+::tuple$<$ array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$, array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ $>$ S\+B\+Es\+::\+Gen\+Inter\+Intra\+Current (\begin{DoxyParamCaption}\item[{int}]{\+\_\+kindex,  }\item[{double}]{\+\_\+time }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_s_b_es_abd50d47954e2d5f4a82618ba7f554b86}\label{class_s_b_es_abd50d47954e2d5f4a82618ba7f554b86}} 
+\index{SBEs@{SBEs}!GenKpulsA@{GenKpulsA}}
+\index{GenKpulsA@{GenKpulsA}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{GenKpulsA()}{GenKpulsA()}}
+{\footnotesize\ttfamily array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ S\+B\+Es\+::\+Gen\+KpulsA (\begin{DoxyParamCaption}\item[{array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$}]{\+\_\+kpoint,  }\item[{double}]{time }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_s_b_es_a484a32d347e2df92eff0baa327ca4a15}\label{class_s_b_es_a484a32d347e2df92eff0baa327ca4a15}} 
+\index{SBEs@{SBEs}!GenUMatrix@{GenUMatrix}}
+\index{GenUMatrix@{GenUMatrix}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{GenUMatrix()}{GenUMatrix()}}
+{\footnotesize\ttfamily void S\+B\+Es\+::\+Gen\+U\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$}]{\+\_\+ustore,  }\item[{std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})}
+
+
+
+Generate U matrix. 
+
+\mbox{\Hypertarget{class_s_b_es_a4e629035d2a8101a0eef811c5c356864}\label{class_s_b_es_a4e629035d2a8101a0eef811c5c356864}} 
+\index{SBEs@{SBEs}!InitializeGeneral@{InitializeGeneral}}
+\index{InitializeGeneral@{InitializeGeneral}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{InitializeGeneral()}{InitializeGeneral()}}
+{\footnotesize\ttfamily void S\+B\+Es\+::\+Initialize\+General (\begin{DoxyParamCaption}\item[{const libconfig\+::\+Setting $\ast$}]{\+\_\+calc }\end{DoxyParamCaption})}
+
+
+
+Initialize general stuff inside constructor. 
+
+\mbox{\Hypertarget{class_s_b_es_a9bc2fd1ba2ad531e6cb75567ba1f8e2c}\label{class_s_b_es_a9bc2fd1ba2ad531e6cb75567ba1f8e2c}} 
+\index{SBEs@{SBEs}!InitializeLaser@{InitializeLaser}}
+\index{InitializeLaser@{InitializeLaser}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{InitializeLaser()}{InitializeLaser()}}
+{\footnotesize\ttfamily void S\+B\+Es\+::\+Initialize\+Laser (\begin{DoxyParamCaption}\item[{const libconfig\+::\+Setting $\ast$}]{\+\_\+laser }\end{DoxyParamCaption})}
+
+
+
+Initialize laser inside constructor. 
+
+\mbox{\Hypertarget{class_s_b_es_ae78ca5611d9525f89398e15cef609c1c}\label{class_s_b_es_ae78ca5611d9525f89398e15cef609c1c}} 
+\index{SBEs@{SBEs}!PrintInfo@{PrintInfo}}
+\index{PrintInfo@{PrintInfo}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{PrintInfo()}{PrintInfo()}}
+{\footnotesize\ttfamily void S\+B\+Es\+::\+Print\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Print calculation information. 
+
+\mbox{\Hypertarget{class_s_b_es_ad1b3a3bc1b5ada8dad663ad14edfbd4d}\label{class_s_b_es_ad1b3a3bc1b5ada8dad663ad14edfbd4d}} 
+\index{SBEs@{SBEs}!RunSBEs@{RunSBEs}}
+\index{RunSBEs@{RunSBEs}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{RunSBEs()}{RunSBEs()}}
+{\footnotesize\ttfamily void S\+B\+Es\+::\+Run\+S\+B\+Es (\begin{DoxyParamCaption}\item[{int}]{\+\_\+kindex,  }\item[{double}]{\+\_\+time }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_s_b_es_ae5598b536528853ee3beae6a3403fc65}\label{class_s_b_es_ae5598b536528853ee3beae6a3403fc65}} 
+\index{SBEs@{SBEs}!WannierToHamiltonian@{WannierToHamiltonian}}
+\index{WannierToHamiltonian@{WannierToHamiltonian}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{WannierToHamiltonian()}{WannierToHamiltonian()}}
+{\footnotesize\ttfamily void S\+B\+Es\+::\+Wannier\+To\+Hamiltonian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$}]{out,  }\item[{\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$}]{input,  }\item[{int}]{\+\_\+kindex,  }\item[{double}]{\+\_\+time }\end{DoxyParamCaption})}
+
+
+
+Convert Wannier representation to Hamiltonian representation. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_s_b_es_a618ce029cfb66c2ff52a7c8ba5952ad4}\label{class_s_b_es_a618ce029cfb66c2ff52a7c8ba5952ad4}} 
+\index{SBEs@{SBEs}!aRK@{aRK}}
+\index{aRK@{aRK}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{aRK}{aRK}}
+{\footnotesize\ttfamily double$\ast$$\ast$ S\+B\+Es\+::a\+RK}
+
+\mbox{\Hypertarget{class_s_b_es_afff600dee3d7c1ccbf2d19ceea845835}\label{class_s_b_es_afff600dee3d7c1ccbf2d19ceea845835}} 
+\index{SBEs@{SBEs}!bRK@{bRK}}
+\index{bRK@{bRK}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{bRK}{bRK}}
+{\footnotesize\ttfamily double$\ast$ S\+B\+Es\+::b\+RK}
+
+\mbox{\Hypertarget{class_s_b_es_a0536c06134ff175d28a5e937c913da3e}\label{class_s_b_es_a0536c06134ff175d28a5e937c913da3e}} 
+\index{SBEs@{SBEs}!ctransuMatrix@{ctransuMatrix}}
+\index{ctransuMatrix@{ctransuMatrix}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{ctransuMatrix}{ctransuMatrix}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$ S\+B\+Es\+::ctransu\+Matrix}
+
+\mbox{\Hypertarget{class_s_b_es_a81eac570632f67c6932c341889672749}\label{class_s_b_es_a81eac570632f67c6932c341889672749}} 
+\index{SBEs@{SBEs}!dephasing\_factor\_inter@{dephasing\_factor\_inter}}
+\index{dephasing\_factor\_inter@{dephasing\_factor\_inter}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{dephasing\_factor\_inter}{dephasing\_factor\_inter}}
+{\footnotesize\ttfamily double S\+B\+Es\+::dephasing\+\_\+factor\+\_\+inter}
+
+\mbox{\Hypertarget{class_s_b_es_a5db8b79b2016a79029083b61fb122495}\label{class_s_b_es_a5db8b79b2016a79029083b61fb122495}} 
+\index{SBEs@{SBEs}!dephasing\_factor\_intra@{dephasing\_factor\_intra}}
+\index{dephasing\_factor\_intra@{dephasing\_factor\_intra}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{dephasing\_factor\_intra}{dephasing\_factor\_intra}}
+{\footnotesize\ttfamily double S\+B\+Es\+::dephasing\+\_\+factor\+\_\+intra}
+
+\mbox{\Hypertarget{class_s_b_es_a423e5dca822ddb7ec2c8cb4ff37a37a8}\label{class_s_b_es_a423e5dca822ddb7ec2c8cb4ff37a37a8}} 
+\index{SBEs@{SBEs}!dephasing\_time\_inter@{dephasing\_time\_inter}}
+\index{dephasing\_time\_inter@{dephasing\_time\_inter}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{dephasing\_time\_inter}{dephasing\_time\_inter}}
+{\footnotesize\ttfamily double S\+B\+Es\+::dephasing\+\_\+time\+\_\+inter}
+
+\mbox{\Hypertarget{class_s_b_es_ae083f34dde2ee0a8391154e57537bacf}\label{class_s_b_es_ae083f34dde2ee0a8391154e57537bacf}} 
+\index{SBEs@{SBEs}!dephasing\_time\_intra@{dephasing\_time\_intra}}
+\index{dephasing\_time\_intra@{dephasing\_time\_intra}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{dephasing\_time\_intra}{dephasing\_time\_intra}}
+{\footnotesize\ttfamily double S\+B\+Es\+::dephasing\+\_\+time\+\_\+intra}
+
+\mbox{\Hypertarget{class_s_b_es_a128717aafb31680c07b22f73b82170eb}\label{class_s_b_es_a128717aafb31680c07b22f73b82170eb}} 
+\index{SBEs@{SBEs}!dephasingMatrix@{dephasingMatrix}}
+\index{dephasingMatrix@{dephasingMatrix}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{dephasingMatrix}{dephasingMatrix}}
+{\footnotesize\ttfamily double$\ast$ S\+B\+Es\+::dephasing\+Matrix}
+
+\mbox{\Hypertarget{class_s_b_es_ab021db40504f194f843facdfdf13de9f}\label{class_s_b_es_ab021db40504f194f843facdfdf13de9f}} 
+\index{SBEs@{SBEs}!diagnostic@{diagnostic}}
+\index{diagnostic@{diagnostic}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{diagnostic}{diagnostic}}
+{\footnotesize\ttfamily int S\+B\+Es\+::diagnostic}
+
+\mbox{\Hypertarget{class_s_b_es_ad12b425420f0d618ebef4ded6f7d269f}\label{class_s_b_es_ad12b425420f0d618ebef4ded6f7d269f}} 
+\index{SBEs@{SBEs}!dipoleMatrix@{dipoleMatrix}}
+\index{dipoleMatrix@{dipoleMatrix}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{dipoleMatrix}{dipoleMatrix}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}}$\ast$$\ast$ S\+B\+Es\+::dipole\+Matrix}
+
+\mbox{\Hypertarget{class_s_b_es_ae738398ef5638f8a603700b111c7f85e}\label{class_s_b_es_ae738398ef5638f8a603700b111c7f85e}} 
+\index{SBEs@{SBEs}!dmatrix@{dmatrix}}
+\index{dmatrix@{dmatrix}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{dmatrix}{dmatrix}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}}$\ast$$\ast$ S\+B\+Es\+::dmatrix}
+
+\mbox{\Hypertarget{class_s_b_es_a70eeec63b23171579e6a5ab865f8f119}\label{class_s_b_es_a70eeec63b23171579e6a5ab865f8f119}} 
+\index{SBEs@{SBEs}!edispersion@{edispersion}}
+\index{edispersion@{edispersion}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{edispersion}{edispersion}}
+{\footnotesize\ttfamily double$\ast$$\ast$ S\+B\+Es\+::edispersion}
+
+\mbox{\Hypertarget{class_s_b_es_aad6c6f6da3402074137c6b1f6be22b2d}\label{class_s_b_es_aad6c6f6da3402074137c6b1f6be22b2d}} 
+\index{SBEs@{SBEs}!Ef@{Ef}}
+\index{Ef@{Ef}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{Ef}{Ef}}
+{\footnotesize\ttfamily double S\+B\+Es\+::\+Ef}
+
+
+
+Fermi energy. 
+
+\mbox{\Hypertarget{class_s_b_es_a09e6590059d95f7d72d5d61a9ef647fe}\label{class_s_b_es_a09e6590059d95f7d72d5d61a9ef647fe}} 
+\index{SBEs@{SBEs}!fpulses@{fpulses}}
+\index{fpulses@{fpulses}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{fpulses}{fpulses}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classlaser}{laser}}$\ast$ S\+B\+Es\+::fpulses}
+
+\mbox{\Hypertarget{class_s_b_es_a6fca51320c8cbe9b958092248bfe51f3}\label{class_s_b_es_a6fca51320c8cbe9b958092248bfe51f3}} 
+\index{SBEs@{SBEs}!gauge@{gauge}}
+\index{gauge@{gauge}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{gauge}{gauge}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{constant_8h_ac40f02ca8e866f3423517f257579ca9b}{Gauge\+Type}} S\+B\+Es\+::gauge}
+
+\mbox{\Hypertarget{class_s_b_es_a018f46cc90da276ff09cf6279a2a2c1e}\label{class_s_b_es_a018f46cc90da276ff09cf6279a2a2c1e}} 
+\index{SBEs@{SBEs}!hamiltonian@{hamiltonian}}
+\index{hamiltonian@{hamiltonian}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{hamiltonian}{hamiltonian}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}}$\ast$ S\+B\+Es\+::hamiltonian}
+
+\mbox{\Hypertarget{class_s_b_es_ab985732a2ee335dbc41edf0bfd62ffe5}\label{class_s_b_es_ab985732a2ee335dbc41edf0bfd62ffe5}} 
+\index{SBEs@{SBEs}!initMatrix@{initMatrix}}
+\index{initMatrix@{initMatrix}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{initMatrix}{initMatrix}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}}$\ast$$\ast$ S\+B\+Es\+::init\+Matrix}
+
+\mbox{\Hypertarget{class_s_b_es_a0aa0eb66d48cabdf6bb58c8178d38225}\label{class_s_b_es_a0aa0eb66d48cabdf6bb58c8178d38225}} 
+\index{SBEs@{SBEs}!initType@{initType}}
+\index{initType@{initType}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{initType}{initType}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_base_material_8h_a2a3bc89222d9566b96c351321b451286}{Initial\+Value\+Type}} S\+B\+Es\+::init\+Type}
+
+\mbox{\Hypertarget{class_s_b_es_a8c07633ee694184972801d99160fea0a}\label{class_s_b_es_a8c07633ee694184972801d99160fea0a}} 
+\index{SBEs@{SBEs}!isDipoleZero@{isDipoleZero}}
+\index{isDipoleZero@{isDipoleZero}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{isDipoleZero}{isDipoleZero}}
+{\footnotesize\ttfamily bool S\+B\+Es\+::is\+Dipole\+Zero}
+
+
+
+default is true. Wannier dipole is non-\/zero in very rare cases. 
+
+\mbox{\Hypertarget{class_s_b_es_a5e3bf9662e4df012994386bce09b872a}\label{class_s_b_es_a5e3bf9662e4df012994386bce09b872a}} 
+\index{SBEs@{SBEs}!isInterIntra@{isInterIntra}}
+\index{isInterIntra@{isInterIntra}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{isInterIntra}{isInterIntra}}
+{\footnotesize\ttfamily bool S\+B\+Es\+::is\+Inter\+Intra}
+
+
+
+default is true. Separate inter/intra when this is true. Total current is in inter when false. 
+
+\mbox{\Hypertarget{class_s_b_es_ad1b336e02c4b08c5f73d8b483b772332}\label{class_s_b_es_ad1b336e02c4b08c5f73d8b483b772332}} 
+\index{SBEs@{SBEs}!jMatrix@{jMatrix}}
+\index{jMatrix@{jMatrix}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{jMatrix}{jMatrix}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$$\ast$ S\+B\+Es\+::j\+Matrix}
+
+\mbox{\Hypertarget{class_s_b_es_ab488683be5d5d6a40ac302cc4f4ee614}\label{class_s_b_es_ab488683be5d5d6a40ac302cc4f4ee614}} 
+\index{SBEs@{SBEs}!kmesh@{kmesh}}
+\index{kmesh@{kmesh}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{kmesh}{kmesh}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmomaxis}{momaxis}}$\ast$ S\+B\+Es\+::kmesh}
+
+\mbox{\Hypertarget{class_s_b_es_af1aecb222355a739918c8029e182de7a}\label{class_s_b_es_af1aecb222355a739918c8029e182de7a}} 
+\index{SBEs@{SBEs}!ksfactor@{ksfactor}}
+\index{ksfactor@{ksfactor}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{ksfactor}{ksfactor}}
+{\footnotesize\ttfamily array$<$double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}}$>$ S\+B\+Es\+::ksfactor}
+
+\mbox{\Hypertarget{class_s_b_es_a8ec3b23f29f4ec37f182a44bb2f59aee}\label{class_s_b_es_a8ec3b23f29f4ec37f182a44bb2f59aee}} 
+\index{SBEs@{SBEs}!material@{material}}
+\index{material@{material}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{material}{material}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_base_material}{Base\+Material}}$\ast$ S\+B\+Es\+::material}
+
+
+
+dipole\&Hamiltonian generator 
+
+\mbox{\Hypertarget{class_s_b_es_acbac554bd87ce6dba6b4b3cd897587c8}\label{class_s_b_es_acbac554bd87ce6dba6b4b3cd897587c8}} 
+\index{SBEs@{SBEs}!Nband@{Nband}}
+\index{Nband@{Nband}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{Nband}{Nband}}
+{\footnotesize\ttfamily int S\+B\+Es\+::\+Nband}
+
+\mbox{\Hypertarget{class_s_b_es_a611a4063471d858821b5efe92a5cc88f}\label{class_s_b_es_a611a4063471d858821b5efe92a5cc88f}} 
+\index{SBEs@{SBEs}!newdMatrix@{newdMatrix}}
+\index{newdMatrix@{newdMatrix}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{newdMatrix}{newdMatrix}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}}$\ast$ S\+B\+Es\+::newd\+Matrix}
+
+\mbox{\Hypertarget{class_s_b_es_a61d3364b117aecf69208ada9c0b39766}\label{class_s_b_es_a61d3364b117aecf69208ada9c0b39766}} 
+\index{SBEs@{SBEs}!Nk@{Nk}}
+\index{Nk@{Nk}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{Nk}{Nk}}
+{\footnotesize\ttfamily array$<$int, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}}$>$ S\+B\+Es\+::\+Nk}
+
+\mbox{\Hypertarget{class_s_b_es_a9b6e0644cb36148d621cfb2424367aaf}\label{class_s_b_es_a9b6e0644cb36148d621cfb2424367aaf}} 
+\index{SBEs@{SBEs}!NumRK@{NumRK}}
+\index{NumRK@{NumRK}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{NumRK}{NumRK}}
+{\footnotesize\ttfamily int S\+B\+Es\+::\+Num\+RK}
+
+\mbox{\Hypertarget{class_s_b_es_a6305c711029b3009c0887ce1383b13f4}\label{class_s_b_es_a6305c711029b3009c0887ce1383b13f4}} 
+\index{SBEs@{SBEs}!pMatrix@{pMatrix}}
+\index{pMatrix@{pMatrix}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{pMatrix}{pMatrix}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}}$\ast$$\ast$$\ast$ S\+B\+Es\+::p\+Matrix}
+
+\mbox{\Hypertarget{class_s_b_es_a3c963ebe2141c6aeccfb364f063286af}\label{class_s_b_es_a3c963ebe2141c6aeccfb364f063286af}} 
+\index{SBEs@{SBEs}!rkMatrix@{rkMatrix}}
+\index{rkMatrix@{rkMatrix}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{rkMatrix}{rkMatrix}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}}$\ast$$\ast$ S\+B\+Es\+::rk\+Matrix}
+
+\mbox{\Hypertarget{class_s_b_es_a1d68f29d352329876a4856259a71a052}\label{class_s_b_es_a1d68f29d352329876a4856259a71a052}} 
+\index{SBEs@{SBEs}!RKorder@{RKorder}}
+\index{RKorder@{RKorder}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{RKorder}{RKorder}}
+{\footnotesize\ttfamily int S\+B\+Es\+::\+R\+Korder}
+
+\mbox{\Hypertarget{class_s_b_es_a12f1782bcfb970d55443c377815048e4}\label{class_s_b_es_a12f1782bcfb970d55443c377815048e4}} 
+\index{SBEs@{SBEs}!shotNumber@{shotNumber}}
+\index{shotNumber@{shotNumber}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{shotNumber}{shotNumber}}
+{\footnotesize\ttfamily int S\+B\+Es\+::shot\+Number}
+
+\mbox{\Hypertarget{class_s_b_es_a26cfb10101b1aaeaa170e8b0b96bd5e2}\label{class_s_b_es_a26cfb10101b1aaeaa170e8b0b96bd5e2}} 
+\index{SBEs@{SBEs}!targetMaterial@{targetMaterial}}
+\index{targetMaterial@{targetMaterial}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{targetMaterial}{targetMaterial}}
+{\footnotesize\ttfamily string S\+B\+Es\+::target\+Material}
+
+\mbox{\Hypertarget{class_s_b_es_a84ca963da877ff75dc703132be24a97f}\label{class_s_b_es_a84ca963da877ff75dc703132be24a97f}} 
+\index{SBEs@{SBEs}!temp1Matrix@{temp1Matrix}}
+\index{temp1Matrix@{temp1Matrix}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{temp1Matrix}{temp1Matrix}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}}$\ast$ S\+B\+Es\+::temp1\+Matrix}
+
+\mbox{\Hypertarget{class_s_b_es_abdca90841ec9ac991ee9332f7c72f3bc}\label{class_s_b_es_abdca90841ec9ac991ee9332f7c72f3bc}} 
+\index{SBEs@{SBEs}!temp2Matrix@{temp2Matrix}}
+\index{temp2Matrix@{temp2Matrix}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{temp2Matrix}{temp2Matrix}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$ S\+B\+Es\+::temp2\+Matrix}
+
+\mbox{\Hypertarget{class_s_b_es_a4ba827ecab2a11ac0046b06dfb83b9cf}\label{class_s_b_es_a4ba827ecab2a11ac0046b06dfb83b9cf}} 
+\index{SBEs@{SBEs}!thermalE@{thermalE}}
+\index{thermalE@{thermalE}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{thermalE}{thermalE}}
+{\footnotesize\ttfamily double S\+B\+Es\+::thermalE}
+
+
+
+Thermal energy (kT) in a.\+u. 
+
+\mbox{\Hypertarget{class_s_b_es_a871507704b403dec5ef0161ead0ffd60}\label{class_s_b_es_a871507704b403dec5ef0161ead0ffd60}} 
+\index{SBEs@{SBEs}!tRK@{tRK}}
+\index{tRK@{tRK}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{tRK}{tRK}}
+{\footnotesize\ttfamily double$\ast$ S\+B\+Es\+::t\+RK}
+
+\mbox{\Hypertarget{class_s_b_es_a4d6b62a613771b7351d61f7df36d92d1}\label{class_s_b_es_a4d6b62a613771b7351d61f7df36d92d1}} 
+\index{SBEs@{SBEs}!uMatrix@{uMatrix}}
+\index{uMatrix@{uMatrix}!SBEs@{SBEs}}
+\doxysubsubsection{\texorpdfstring{uMatrix}{uMatrix}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}}$\ast$ S\+B\+Es\+::u\+Matrix}
+
+
+
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-S\+B\+Es.\+h\end{DoxyCompactItemize}
+\mbox{\hyperlink{_s_b_es_8h}{S\+B\+Es.\+h}}\end{DoxyCompactItemize}

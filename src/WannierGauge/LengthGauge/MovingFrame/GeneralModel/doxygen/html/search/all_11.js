@@ -1,7 +1,21 @@
 var searchData=
 [
-  ['vec_5fa_73',['vec_a',['../class_bie_se3surf.html#a3cd629638c96725331a1b7c27919c856',1,'BieSe3surf::vec_a()'],['../class_t_m_d_cs.html#aa506e139a2fb175d0907f1493c831460',1,'TMDCs::vec_a()']]],
-  ['vec_5fb_74',['vec_b',['../class_bie_se3surf.html#a9267449bd85db67ad3e9067429b1d451',1,'BieSe3surf::vec_b()'],['../class_t_m_d_cs.html#a3a1153dd66eaf5a3b301a1b06ce57667',1,'TMDCs::vec_b()']]],
-  ['vec_5flattice_75',['vec_lattice',['../class_wannier90.html#ad49969e19fe2541416f82ddab2818f22',1,'Wannier90']]],
-  ['volume_76',['Volume',['../class_wannier90.html#a72961dd4515d1281deb21c16a2b01386',1,'Wannier90']]]
+  ['sbes_302',['SBEs',['../class_s_b_es.html',1,'SBEs'],['../class_s_b_es.html#aa113bce130906e2f3742ec3b5f61789a',1,'SBEs::SBEs()']]],
+  ['sbes_2eh_303',['SBEs.h',['../_s_b_es_8h.html',1,'']]],
+  ['set_5fbrillouin_5fzone_5fgrid_304',['set_brillouin_zone_grid',['../classmomaxis.html#aff806e37efb279844766cd0dde1639c9',1,'momaxis']]],
+  ['set_5fmemory_305',['set_memory',['../classsolidstructure.html#a1fb85690e85c17ebcd39f427c7807156',1,'solidstructure']]],
+  ['set_5fof_5fb_5fbgrad_306',['Set_Of_B_BGrad',['../classsolidstructure.html#a6e5d2358df94d8243cf86fe8585de177',1,'solidstructure']]],
+  ['setbasis_307',['SetBasis',['../class_bie_se3surf.html#a83137c9888f0c6ec62d47df9fcfcc413',1,'BieSe3surf']]],
+  ['setreciprocalbasis_308',['SetReciprocalBasis',['../class_wannier90.html#a37fb1eefda5576ded2903ba4da0f194e',1,'Wannier90']]],
+  ['setting_5fcomplex_5fmemory_309',['setting_complex_memory',['../antelope_8cpp.html#a2aaa9d470e0f03b989652c518607cddb',1,'antelope.cpp']]],
+  ['setting_5fdouble_5fmemory_310',['setting_double_memory',['../antelope_8cpp.html#a6327501d0fbac306f9dbafebf60dc42a',1,'antelope.cpp']]],
+  ['shotnumber_311',['shotNumber',['../class_s_b_es.html#a12f1782bcfb970d55443c377815048e4',1,'SBEs::shotNumber()'],['../antelope_8cpp.html#a3a244f45c96a8b9cfe4cccffff4c0eaa',1,'shotNumber():&#160;antelope.cpp']]],
+  ['sizeofcomplex_312',['sizeofcomplex',['../namespace_plot_material_structure.html#ae73adfa9c756860a3b565ca64dbd7eee',1,'PlotMaterialStructure']]],
+  ['socparam_313',['socparam',['../class_t_m_d_cs.html#a0c47b7cffbf82313ac899898877a9bca',1,'TMDCs']]],
+  ['solidstructure_314',['solidstructure',['../classsolidstructure.html',1,'solidstructure'],['../classsolidstructure.html#a638224d778509e7d0526969dc994a5e8',1,'solidstructure::solidstructure()']]],
+  ['solidstructure_2eh_315',['solidstructure.h',['../solidstructure_8h.html',1,'']]],
+  ['startk_316',['StartK',['../namespace_plot_material_structure.html#a0ab9fb89d79822d4fe65ce34ee770958',1,'PlotMaterialStructure']]],
+  ['steps_5fsizes_317',['steps_sizes',['../classmomaxis.html#a067c8b673d96801a827640a83312b74e',1,'momaxis']]],
+  ['str_318',['str',['../namespace_plot_material_structure.html#a76c9e6cbcd0c2edf919ecd9620601b95',1,'PlotMaterialStructure']]],
+  ['system_5flist_2eh_319',['system_list.h',['../system__list_8h.html',1,'']]]
 ];

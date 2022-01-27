@@ -1,0 +1,58 @@
+\hypertarget{momaxis_8h}{}\doxysection{momaxis.\+h File Reference}
+\label{momaxis_8h}\index{momaxis.h@{momaxis.h}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$iomanip$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}math.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$complex$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$numeric$>$}\newline
+{\ttfamily \#include \char`\"{}constant.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utility.\+h\char`\"{}}\newline
+Include dependency graph for momaxis.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{momaxis_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{momaxis_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classmomaxis}{momaxis}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{momaxis_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}}~complex$<$double$>$
+\begin{DoxyCompactList}\small\item\em class for momentum grid \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{momaxis_8h_a0fa4878c968311979d497ccc322e0b9b}\label{momaxis_8h_a0fa4878c968311979d497ccc322e0b9b}} 
+\index{momaxis.h@{momaxis.h}!complex@{complex}}
+\index{complex@{complex}!momaxis.h@{momaxis.h}}
+\doxysubsubsection{\texorpdfstring{complex}{complex}}
+{\footnotesize\ttfamily \#define complex~complex$<$double$>$}
+
+
+
+class for momentum grid 
+
+This class get axes and start point of Brillouin zone and generate Axes can be non-\/orthogonal. K-\/points are equally spaces. Now first and last point are not same (step is divided by (N), not (N-\/1) ) \begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000001}{Todo}}]Fix integration method -\/ simpson, write new momoutput \end{DoxyRefDesc}
+\begin{DoxyAuthor}{Author}
+Alexis Agustín Chacón Salazar 
+
+Dasol Kim 
+\end{DoxyAuthor}

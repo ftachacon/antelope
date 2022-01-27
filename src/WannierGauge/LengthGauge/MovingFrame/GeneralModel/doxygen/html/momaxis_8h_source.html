@@ -65,7 +65,7 @@ $(function() {
 <div class="title">momaxis.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<a href="momaxis_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#ifndef momaxis_h</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#define momaxis_h</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
@@ -79,10 +79,10 @@ $(function() {
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;complex&gt;</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;numeric&gt;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;constant.h&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;utility.h&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="constant_8h.html">constant.h</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="utility_8h.html">utility.h</a>&quot;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#define complex complex&lt;double&gt;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="momaxis_8h.html#a0fa4878c968311979d497ccc322e0b9b">   28</a></span>&#160;<span class="preprocessor">#define complex complex&lt;double&gt;</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">using namespace </span>std;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
@@ -91,24 +91,24 @@ $(function() {
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    </div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    array&lt;double, Ndim&gt; *kgrid; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    array&lt;double, Ndim*Ndim&gt; BzAxes;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    array&lt;double, Ndim&gt; BzOrigin;</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classmomaxis.html#a18f4ea4e4fafe0feb09eb19b15309f33">   37</a></span>&#160;    array&lt;double, Ndim&gt; *<a class="code" href="classmomaxis.html#a18f4ea4e4fafe0feb09eb19b15309f33">kgrid</a>; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classmomaxis.html#a72f11dd7097b1eb33c9fc80fb062afc8">   38</a></span>&#160;    array&lt;double, Ndim*Ndim&gt; <a class="code" href="classmomaxis.html#a72f11dd7097b1eb33c9fc80fb062afc8">BzAxes</a>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classmomaxis.html#a1a8320eee0a87e85b43bda5e6aebf5c0">   39</a></span>&#160;    array&lt;double, Ndim&gt; <a class="code" href="classmomaxis.html#a1a8320eee0a87e85b43bda5e6aebf5c0">BzOrigin</a>;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="comment">//double AxisVec[Ngrad][Ngrad];       // axisvec[i][j] = j th component of i th vector</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">//double StartPoint[Ngrad];  </span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    </div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="comment">//double *dk;                             //grid or mesh steps</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">double</span> *weight;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">double</span> total_weight;</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classmomaxis.html#a3348a2ba4583b6ac1151a7338fde04b8">   44</a></span>&#160;    <span class="keywordtype">double</span> *<a class="code" href="classmomaxis.html#a3348a2ba4583b6ac1151a7338fde04b8">weight</a>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classmomaxis.html#a86972afee00cc5f1072b0c37c76d4f0f">   45</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classmomaxis.html#a86972afee00cc5f1072b0c37c76d4f0f">total_weight</a>;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    array&lt;int, Ndim&gt; N;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classmomaxis.html#a3003cd2745d7d6da227bea6cdec035a2">   47</a></span>&#160;    array&lt;int, Ndim&gt; <a class="code" href="classmomaxis.html#a3003cd2745d7d6da227bea6cdec035a2">N</a>;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">int</span> Ntotal;</div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classmomaxis.html#a99d4e9acdf1edc641eb36a591c78919f">   49</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classmomaxis.html#a99d4e9acdf1edc641eb36a591c78919f">Ntotal</a>;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">double</span> Volume, dV;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">string</span> imethod;</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classmomaxis.html#a5422b1ea0af8d2d6b30e7224da44e8e5">   51</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classmomaxis.html#a5422b1ea0af8d2d6b30e7224da44e8e5">Volume</a>, dV;</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classmomaxis.html#ae1cb1bc0c29d74ef6a0ff16d34c8a554">   52</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="classmomaxis.html#ae1cb1bc0c29d74ef6a0ff16d34c8a554">imethod</a>;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="classmomaxis.html">momaxis</a>( array&lt;int, Ndim&gt; _N ,array&lt;double, Ndim*Ndim&gt; _axisvec, array&lt;double, Ndim&gt; _origink )</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classmomaxis.html#aabdf2088e2f6a43f2adfbe1f67ef770e">   54</a></span>&#160;    <a class="code" href="classmomaxis.html#aabdf2088e2f6a43f2adfbe1f67ef770e">momaxis</a>( array&lt;int, Ndim&gt; _N ,array&lt;double, Ndim*Ndim&gt; _axisvec, array&lt;double, Ndim&gt; _origink )</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        : N(_N), BzAxes(_axisvec), BzOrigin(_origink)</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    {</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        steps_sizes( _N, _axisvec, _origink );</div>
@@ -130,15 +130,15 @@ $(function() {
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                     , <span class="keywordtype">int</span> skip2 );          <span class="comment">//Momentum output</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">int</span> index( <span class="keyword">const</span> <span class="keywordtype">int</span> i ,<span class="keyword">const</span> <span class="keywordtype">int</span> j ,<span class="keyword">const</span> <span class="keywordtype">int</span> k )</div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classmomaxis.html#ab4359bf19ad44343de9b7d2b9602bc70">   76</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classmomaxis.html#ab4359bf19ad44343de9b7d2b9602bc70">index</a>( <span class="keyword">const</span> <span class="keywordtype">int</span> i ,<span class="keyword">const</span> <span class="keywordtype">int</span> j ,<span class="keyword">const</span> <span class="keywordtype">int</span> k )</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    {</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">return</span> N[1]*N[2]*i + N[2]*j + k;</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    };</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">int</span> index( <span class="keyword">const</span> array&lt;int, Ndim&gt; _indexArr )</div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="classmomaxis.html#a9b77a19a63f8152809160e257079fac3">   80</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classmomaxis.html#a9b77a19a63f8152809160e257079fac3">index</a>( <span class="keyword">const</span> array&lt;int, Ndim&gt; _indexArr )</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    {</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordflow">return</span> N[1]*N[2]*_indexArr[0] + N[2]*_indexArr[1] + _indexArr[2];</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    };</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    array&lt;int, Ndim&gt; index( <span class="keywordtype">int</span> _kindex)</div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="classmomaxis.html#a0a54661ea0a09b3e462c255cfd1ac8be">   84</a></span>&#160;    array&lt;int, Ndim&gt; <a class="code" href="classmomaxis.html#a0a54661ea0a09b3e462c255cfd1ac8be">index</a>( <span class="keywordtype">int</span> _kindex)</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    {</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordflow">return</span> { _kindex/(N[1]*N[2]), (_kindex/N[2])%N[1], _kindex%N[2] };</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    };</div>
@@ -169,7 +169,7 @@ $(function() {
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">//Destructor</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;momaxis::~momaxis()</div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="classmomaxis.html#a3563fd53c453082a4b84e03d07f0be2c">  115</a></span>&#160;<a class="code" href="classmomaxis.html#a3563fd53c453082a4b84e03d07f0be2c">momaxis::~momaxis</a>()</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;{</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keyword">delete</span>[] weight;</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keyword">delete</span>[] kgrid;</div>
@@ -181,7 +181,7 @@ $(function() {
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keywordtype">void</span> momaxis::checker(  )</div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="classmomaxis.html#a70e02a2137add759360a03d575141402">  127</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classmomaxis.html#a70e02a2137add759360a03d575141402">momaxis::checker</a>(  )</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;{</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordflow">if</span> ( N[0] &lt;= 0 || N[1] &lt;= 0 || N[2] &lt;= 0)</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    {</div>
@@ -192,12 +192,12 @@ $(function() {
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment">//Creating basic memory</span></div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="keywordtype">void</span> momaxis::basic_mem()</div>
+<div class="line"><a name="l00138"></a><span class="lineno"><a class="line" href="classmomaxis.html#a98048ed63ec60acb2d0511264edf6d75">  138</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classmomaxis.html#a98048ed63ec60acb2d0511264edf6d75">momaxis::basic_mem</a>()</div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;{</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    kgrid = <span class="keyword">new</span> array&lt;double, Ndim&gt;[Ntotal];</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    kgrid = <span class="keyword">new</span> array&lt;double, Ndim&gt;[<a class="code" href="namespace_plot_material_structure.html#aee710850c4091091bd6d3c3945bb2f0f">Ntotal</a>];</div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    weight = <span class="keyword">new</span> <span class="keywordtype">double</span>[Ntotal];</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    fill(weight, weight + Ntotal, 1.); <span class="comment">// This default value acts as trapzoid</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    weight = <span class="keyword">new</span> <span class="keywordtype">double</span>[<a class="code" href="namespace_plot_material_structure.html#aee710850c4091091bd6d3c3945bb2f0f">Ntotal</a>];</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    fill(weight, weight + <a class="code" href="namespace_plot_material_structure.html#aee710850c4091091bd6d3c3945bb2f0f">Ntotal</a>, 1.); <span class="comment">// This default value acts as trapzoid</span></div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="keywordtype">double</span> temp_weight;</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; N[0]; ++i)</div>
@@ -224,7 +224,7 @@ $(function() {
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        }</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    }</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    total_weight = 0.;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Ntotal; ++i)</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="namespace_plot_material_structure.html#aee710850c4091091bd6d3c3945bb2f0f">Ntotal</a>; ++i)</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    {</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        total_weight += weight[i];</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    }</div>
@@ -234,34 +234,34 @@ $(function() {
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment">//Momentum steps and sizes</span></div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="keywordtype">void</span>  momaxis::steps_sizes( array&lt;int, Ndim&gt; _N ,array&lt;double, Ndim*Ndim&gt; _axisvec, array&lt;double, Ndim&gt; _origink )</div>
+<div class="line"><a name="l00180"></a><span class="lineno"><a class="line" href="classmomaxis.html#a067c8b673d96801a827640a83312b74e">  180</a></span>&#160;<span class="keywordtype">void</span>  <a class="code" href="classmomaxis.html#a067c8b673d96801a827640a83312b74e">momaxis::steps_sizes</a>( array&lt;int, Ndim&gt; _N ,array&lt;double, Ndim*Ndim&gt; _axisvec, array&lt;double, Ndim&gt; _origink )</div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;{</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    Ntotal = N[0] * N[1] * N[2];</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <a class="code" href="namespace_plot_material_structure.html#aee710850c4091091bd6d3c3945bb2f0f">Ntotal</a> = N[0] * N[1] * N[2];</div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    </div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    checker( );</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    </div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    basic_mem( );</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    </div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    vector&lt;array&lt;double, Ndim&gt; &gt; axesList;</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Ndim; ++i)</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a>; ++i)</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    {</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        <span class="keywordflow">if</span> (N[i] != 1)</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        {</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            axesList.push_back({BzAxes[Ndim*i + 0], BzAxes[Ndim*i + 1], BzAxes[Ndim*i + 2]});</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            axesList.push_back({BzAxes[<a class="code" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a>*i + 0], BzAxes[<a class="code" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a>*i + 1], BzAxes[<a class="code" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a>*i + 2]});</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        }</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    }</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    array&lt;double, Ndim&gt; tempArray;</div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keywordflow">switch</span> (axesList.size())</div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    {</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keywordflow">case</span> 1: <span class="comment">// length of first vector</span></div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        Volume = sqrt( inner_product(axesList[0].begin(), axesList[0].end(), axesList[0].begin(), 0.0) );</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        Volume = sqrt( inner_product(axesList[0].begin(), axesList[0].<a class="code" href="namespace_plot_material_structure.html#a55d6bb5577df25addce5b0611c1d062e">end</a>(), axesList[0].begin(), 0.0) );</div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keywordflow">case</span> 2: <span class="comment">// length of cross product between two vectors</span></div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        tempArray = CrossProduct( axesList[0], axesList[1] );</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        tempArray = <a class="code" href="utility_8h.html#a4f5515b138930699e5805a24d770a8d2">CrossProduct</a>( axesList[0], axesList[1] );</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        Volume = sqrt( inner_product(tempArray.begin(), tempArray.end(), tempArray.begin(), 0.0) );</div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keywordflow">case</span> 3: <span class="comment">// triple product</span></div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        tempArray = CrossProduct( axesList[0], axesList[1] );</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        tempArray = <a class="code" href="utility_8h.html#a4f5515b138930699e5805a24d770a8d2">CrossProduct</a>( axesList[0], axesList[1] );</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        Volume = sqrt( inner_product(tempArray.begin(), tempArray.end(), axesList[2].begin(), 0.0) );</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keywordflow">default</span>: <span class="comment">// single point</span></div>
@@ -272,7 +272,7 @@ $(function() {
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    }</div>
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    dV = abs(Volume) / Ntotal;</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    dV = abs(Volume) / <a class="code" href="namespace_plot_material_structure.html#aee710850c4091091bd6d3c3945bb2f0f">Ntotal</a>;</div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    </div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;}</div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
@@ -383,7 +383,7 @@ $(function() {
 <div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; </div>
 <div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160; </div>
 <div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="comment">//First Brillouine Zone</span></div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="keywordtype">void</span> momaxis::set_brillouin_zone_grid()</div>
+<div class="line"><a name="l00329"></a><span class="lineno"><a class="line" href="classmomaxis.html#aff806e37efb279844766cd0dde1639c9">  329</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classmomaxis.html#aff806e37efb279844766cd0dde1639c9">momaxis::set_brillouin_zone_grid</a>()</div>
 <div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;{</div>
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <span class="keywordtype">double</span> ifrac, jfrac, kfrac;</div>
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keywordtype">int</span> kindex;</div>
@@ -406,9 +406,9 @@ $(function() {
 <div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                    kfrac = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(k)/(N[2]-1) - 0.5;</div>
 <div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                kindex = index(i, j, k);</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                kgrid[kindex] = {BzOrigin[0] + ifrac*BzAxes[0*Ndim + 0] + jfrac*BzAxes[1*Ndim + 0] + kfrac*BzAxes[2*Ndim + 0], </div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                                    BzOrigin[1] + ifrac*BzAxes[0*Ndim + 1] + jfrac*BzAxes[1*Ndim + 1] + kfrac*BzAxes[2*Ndim + 1], </div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                                    BzOrigin[2] + ifrac*BzAxes[0*Ndim + 2] + jfrac*BzAxes[1*Ndim + 2] + kfrac*BzAxes[2*Ndim + 2] };</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                kgrid[kindex] = {BzOrigin[0] + ifrac*BzAxes[0*<a class="code" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a> + 0] + jfrac*BzAxes[1*<a class="code" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a> + 0] + kfrac*BzAxes[2*<a class="code" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a> + 0], </div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                                    BzOrigin[1] + ifrac*BzAxes[0*<a class="code" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a> + 1] + jfrac*BzAxes[1*<a class="code" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a> + 1] + kfrac*BzAxes[2*<a class="code" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a> + 1], </div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                                    BzOrigin[2] + ifrac*BzAxes[0*<a class="code" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a> + 2] + jfrac*BzAxes[1*<a class="code" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a> + 2] + kfrac*BzAxes[2*<a class="code" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a> + 2] };</div>
 <div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;            }</div>
 <div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        }</div>
 <div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    }</div>
@@ -418,11 +418,11 @@ $(function() {
 <div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160; </div>
 <div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160; </div>
 <div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="comment">//Outputs of grid</span></div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="keywordtype">void</span> momaxis::mom_outputs( FILE *output, <span class="keywordtype">int</span> skip0=1, <span class="keywordtype">int</span> skip1=1, <span class="keywordtype">int</span> skip2=1 )</div>
+<div class="line"><a name="l00364"></a><span class="lineno"><a class="line" href="classmomaxis.html#a23d4f5a89d9532507ceee0b2bea2a6c9">  364</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classmomaxis.html#a23d4f5a89d9532507ceee0b2bea2a6c9">momaxis::mom_outputs</a>( FILE *output, <span class="keywordtype">int</span> skip0=1, <span class="keywordtype">int</span> skip1=1, <span class="keywordtype">int</span> skip2=1 )</div>
 <div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;{</div>
 <div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;}</div>
 <div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="keywordtype">void</span> momaxis::print_info()</div>
+<div class="line"><a name="l00368"></a><span class="lineno"><a class="line" href="classmomaxis.html#acadd663eec4644f31fa7033926bb6d99">  368</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classmomaxis.html#acadd663eec4644f31fa7033926bb6d99">momaxis::print_info</a>()</div>
 <div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;{</div>
 <div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;\n==========================================\n&quot;</span>;</div>
 <div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;Brillouin zone volume = &quot;</span> &lt;&lt; Volume &lt;&lt;  <span class="stringliteral">&quot; a.u.\n&quot;</span>;</div>
@@ -433,7 +433,33 @@ $(function() {
 <div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; </div>
 <div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* momaxis_h */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclassmomaxis_html_a18f4ea4e4fafe0feb09eb19b15309f33"><div class="ttname"><a href="classmomaxis.html#a18f4ea4e4fafe0feb09eb19b15309f33">momaxis::kgrid</a></div><div class="ttdeci">array&lt; double, Ndim &gt; * kgrid</div><div class="ttdef"><b>Definition:</b> momaxis.h:37</div></div>
+<div class="ttc" id="aconstant_8h_html"><div class="ttname"><a href="constant_8h.html">constant.h</a></div></div>
+<div class="ttc" id="aclassmomaxis_html_a5422b1ea0af8d2d6b30e7224da44e8e5"><div class="ttname"><a href="classmomaxis.html#a5422b1ea0af8d2d6b30e7224da44e8e5">momaxis::Volume</a></div><div class="ttdeci">double Volume</div><div class="ttdef"><b>Definition:</b> momaxis.h:51</div></div>
+<div class="ttc" id="aclassmomaxis_html_acadd663eec4644f31fa7033926bb6d99"><div class="ttname"><a href="classmomaxis.html#acadd663eec4644f31fa7033926bb6d99">momaxis::print_info</a></div><div class="ttdeci">void print_info()</div><div class="ttdef"><b>Definition:</b> momaxis.h:368</div></div>
+<div class="ttc" id="aclassmomaxis_html_a86972afee00cc5f1072b0c37c76d4f0f"><div class="ttname"><a href="classmomaxis.html#a86972afee00cc5f1072b0c37c76d4f0f">momaxis::total_weight</a></div><div class="ttdeci">double total_weight</div><div class="ttdef"><b>Definition:</b> momaxis.h:45</div></div>
+<div class="ttc" id="aclassmomaxis_html_a23d4f5a89d9532507ceee0b2bea2a6c9"><div class="ttname"><a href="classmomaxis.html#a23d4f5a89d9532507ceee0b2bea2a6c9">momaxis::mom_outputs</a></div><div class="ttdeci">void mom_outputs(FILE *output, int skip0, int skip1, int skip2)</div><div class="ttdef"><b>Definition:</b> momaxis.h:364</div></div>
+<div class="ttc" id="aconstant_8h_html_a3d6661e5760f081da05443d09aed736b"><div class="ttname"><a href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a></div><div class="ttdeci">constexpr int Ndim</div><div class="ttdef"><b>Definition:</b> constant.h:39</div></div>
+<div class="ttc" id="anamespace_plot_material_structure_html_a55d6bb5577df25addce5b0611c1d062e"><div class="ttname"><a href="namespace_plot_material_structure.html#a55d6bb5577df25addce5b0611c1d062e">PlotMaterialStructure.end</a></div><div class="ttdeci">end</div><div class="ttdef"><b>Definition:</b> PlotMaterialStructure.py:96</div></div>
+<div class="ttc" id="autility_8h_html"><div class="ttname"><a href="utility_8h.html">utility.h</a></div></div>
+<div class="ttc" id="aclassmomaxis_html_ab4359bf19ad44343de9b7d2b9602bc70"><div class="ttname"><a href="classmomaxis.html#ab4359bf19ad44343de9b7d2b9602bc70">momaxis::index</a></div><div class="ttdeci">int index(const int i, const int j, const int k)</div><div class="ttdef"><b>Definition:</b> momaxis.h:76</div></div>
+<div class="ttc" id="aclassmomaxis_html_a3348a2ba4583b6ac1151a7338fde04b8"><div class="ttname"><a href="classmomaxis.html#a3348a2ba4583b6ac1151a7338fde04b8">momaxis::weight</a></div><div class="ttdeci">double * weight</div><div class="ttdef"><b>Definition:</b> momaxis.h:44</div></div>
+<div class="ttc" id="aclassmomaxis_html_a1a8320eee0a87e85b43bda5e6aebf5c0"><div class="ttname"><a href="classmomaxis.html#a1a8320eee0a87e85b43bda5e6aebf5c0">momaxis::BzOrigin</a></div><div class="ttdeci">array&lt; double, Ndim &gt; BzOrigin</div><div class="ttdef"><b>Definition:</b> momaxis.h:39</div></div>
+<div class="ttc" id="aclassmomaxis_html_a0a54661ea0a09b3e462c255cfd1ac8be"><div class="ttname"><a href="classmomaxis.html#a0a54661ea0a09b3e462c255cfd1ac8be">momaxis::index</a></div><div class="ttdeci">array&lt; int, Ndim &gt; index(int _kindex)</div><div class="ttdef"><b>Definition:</b> momaxis.h:84</div></div>
+<div class="ttc" id="aclassmomaxis_html_aabdf2088e2f6a43f2adfbe1f67ef770e"><div class="ttname"><a href="classmomaxis.html#aabdf2088e2f6a43f2adfbe1f67ef770e">momaxis::momaxis</a></div><div class="ttdeci">momaxis(array&lt; int, Ndim &gt; _N, array&lt; double, Ndim *Ndim &gt; _axisvec, array&lt; double, Ndim &gt; _origink)</div><div class="ttdef"><b>Definition:</b> momaxis.h:54</div></div>
+<div class="ttc" id="aclassmomaxis_html_a3003cd2745d7d6da227bea6cdec035a2"><div class="ttname"><a href="classmomaxis.html#a3003cd2745d7d6da227bea6cdec035a2">momaxis::N</a></div><div class="ttdeci">array&lt; int, Ndim &gt; N</div><div class="ttdef"><b>Definition:</b> momaxis.h:47</div></div>
+<div class="ttc" id="aclassmomaxis_html_a98048ed63ec60acb2d0511264edf6d75"><div class="ttname"><a href="classmomaxis.html#a98048ed63ec60acb2d0511264edf6d75">momaxis::basic_mem</a></div><div class="ttdeci">void basic_mem()</div><div class="ttdef"><b>Definition:</b> momaxis.h:138</div></div>
 <div class="ttc" id="aclassmomaxis_html"><div class="ttname"><a href="classmomaxis.html">momaxis</a></div><div class="ttdef"><b>Definition:</b> momaxis.h:32</div></div>
+<div class="ttc" id="anamespace_plot_material_structure_html_aee710850c4091091bd6d3c3945bb2f0f"><div class="ttname"><a href="namespace_plot_material_structure.html#aee710850c4091091bd6d3c3945bb2f0f">PlotMaterialStructure.Ntotal</a></div><div class="ttdeci">int Ntotal</div><div class="ttdef"><b>Definition:</b> PlotMaterialStructure.py:88</div></div>
+<div class="ttc" id="aclassmomaxis_html_a72f11dd7097b1eb33c9fc80fb062afc8"><div class="ttname"><a href="classmomaxis.html#a72f11dd7097b1eb33c9fc80fb062afc8">momaxis::BzAxes</a></div><div class="ttdeci">array&lt; double, Ndim *Ndim &gt; BzAxes</div><div class="ttdef"><b>Definition:</b> momaxis.h:38</div></div>
+<div class="ttc" id="aclassmomaxis_html_a70e02a2137add759360a03d575141402"><div class="ttname"><a href="classmomaxis.html#a70e02a2137add759360a03d575141402">momaxis::checker</a></div><div class="ttdeci">void checker()</div><div class="ttdef"><b>Definition:</b> momaxis.h:127</div></div>
+<div class="ttc" id="aclassmomaxis_html_ae1cb1bc0c29d74ef6a0ff16d34c8a554"><div class="ttname"><a href="classmomaxis.html#ae1cb1bc0c29d74ef6a0ff16d34c8a554">momaxis::imethod</a></div><div class="ttdeci">string imethod</div><div class="ttdef"><b>Definition:</b> momaxis.h:52</div></div>
+<div class="ttc" id="aclassmomaxis_html_aff806e37efb279844766cd0dde1639c9"><div class="ttname"><a href="classmomaxis.html#aff806e37efb279844766cd0dde1639c9">momaxis::set_brillouin_zone_grid</a></div><div class="ttdeci">void set_brillouin_zone_grid()</div><div class="ttdef"><b>Definition:</b> momaxis.h:329</div></div>
+<div class="ttc" id="aclassmomaxis_html_a99d4e9acdf1edc641eb36a591c78919f"><div class="ttname"><a href="classmomaxis.html#a99d4e9acdf1edc641eb36a591c78919f">momaxis::Ntotal</a></div><div class="ttdeci">int Ntotal</div><div class="ttdef"><b>Definition:</b> momaxis.h:49</div></div>
+<div class="ttc" id="aclassmomaxis_html_a3563fd53c453082a4b84e03d07f0be2c"><div class="ttname"><a href="classmomaxis.html#a3563fd53c453082a4b84e03d07f0be2c">momaxis::~momaxis</a></div><div class="ttdeci">~momaxis()</div><div class="ttdef"><b>Definition:</b> momaxis.h:115</div></div>
+<div class="ttc" id="aclassmomaxis_html_a067c8b673d96801a827640a83312b74e"><div class="ttname"><a href="classmomaxis.html#a067c8b673d96801a827640a83312b74e">momaxis::steps_sizes</a></div><div class="ttdeci">void steps_sizes(array&lt; int, Ndim &gt; _N, array&lt; double, Ndim *Ndim &gt; _axisvec, array&lt; double, Ndim &gt; _origink)</div><div class="ttdef"><b>Definition:</b> momaxis.h:180</div></div>
+<div class="ttc" id="aclassmomaxis_html_a9b77a19a63f8152809160e257079fac3"><div class="ttname"><a href="classmomaxis.html#a9b77a19a63f8152809160e257079fac3">momaxis::index</a></div><div class="ttdeci">int index(const array&lt; int, Ndim &gt; _indexArr)</div><div class="ttdef"><b>Definition:</b> momaxis.h:80</div></div>
+<div class="ttc" id="autility_8h_html_a4f5515b138930699e5805a24d770a8d2"><div class="ttname"><a href="utility_8h.html#a4f5515b138930699e5805a24d770a8d2">CrossProduct</a></div><div class="ttdeci">T CrossProduct(std::array&lt; T, 2 &gt; _a, std::array&lt; T, 2 &gt; _b)</div><div class="ttdoc">cross-product</div><div class="ttdef"><b>Definition:</b> utility.h:60</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

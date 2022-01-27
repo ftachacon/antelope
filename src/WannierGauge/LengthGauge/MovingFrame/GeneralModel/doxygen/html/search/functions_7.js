@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wanniertohamiltonian_113',['WannierToHamiltonian',['../class_s_b_es.html#ae5598b536528853ee3beae6a3403fc65',1,'SBEs']]]
+  ['haldane_5fmodel_5fparams_500',['haldane_model_params',['../classsolidstructure.html#a69a222f7694f074c327b502ca02bb246',1,'solidstructure']]]
 ];

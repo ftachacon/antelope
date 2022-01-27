@@ -65,7 +65,7 @@ $(function() {
 <div class="title">solidstructure.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div>
+<a href="solidstructure_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//  solidstructure.h</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//  Created by Alexis Agustín  Chacón Salazar on 3/19/19.</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// Structural information defined as follow:</span></div>
@@ -89,8 +89,8 @@ $(function() {
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//#include &quot;mkl.h&quot;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;constant.h&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;momaxis.h&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="constant_8h.html">constant.h</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="momaxis_8h.html">momaxis.h</a>&quot;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">using namespace </span>std;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
@@ -114,15 +114,15 @@ $(function() {
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">     </span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">     */</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">int</span> rflag;</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classsolidstructure.html#ad65be23fe20398cd43cc0cfe7bedd0b8">   50</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classsolidstructure.html#ad65be23fe20398cd43cc0cfe7bedd0b8">rflag</a>;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">//Hopping parameters</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">double</span> t1, t2, phi0, M0;</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a9935bef87fc036a700a845bab35ac8fc">   53</a></span>&#160;    <span class="keywordtype">double</span> t1, <a class="code" href="classsolidstructure.html#a9935bef87fc036a700a845bab35ac8fc">t2</a>, phi0, M0;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    </div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">//Lattice constant</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">//double lattice_a0;</span></div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="classmomaxis.html">momaxis</a> *g; <span class="comment">//Momentum grid input</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a152ec73da9300476610c1eb671650659">   58</a></span>&#160;    <a class="code" href="classmomaxis.html">momaxis</a> *<a class="code" href="classsolidstructure.html#a152ec73da9300476610c1eb671650659">g</a>; <span class="comment">//Momentum grid input</span></div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    </div>
@@ -130,31 +130,31 @@ $(function() {
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">    /***********************</span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">     VARIABLES, for OUTPUTS</span></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">     ******/</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">double</span> *energy_gap;            <span class="comment">// Energy gap difference</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">double</span> ks00[Ngrad];</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">double</span> ks01[Ngrad];</div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a0bd277e20f3713657f5ffba8bf52a17d">   66</a></span>&#160;    <span class="keywordtype">double</span> *<a class="code" href="classsolidstructure.html#a0bd277e20f3713657f5ffba8bf52a17d">energy_gap</a>;            <span class="comment">// Energy gap difference</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classsolidstructure.html#aae61b11a247b193525a5feb22c8685d8">   67</a></span>&#160;    <span class="keywordtype">double</span> ks00[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a48e3f8a70246f55c6c405485e2379e33">   68</a></span>&#160;    <span class="keywordtype">double</span> ks01[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">double</span> ks10[Ngrad];</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">double</span> ks11[Ngrad];</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">double</span> ks12[Ngrad];</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">double</span> ks13[Ngrad];</div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a38e98a0e1e7d6e40721bed794a10a679">   70</a></span>&#160;    <span class="keywordtype">double</span> ks10[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classsolidstructure.html#aa0680375baec74e172a55e0f1ca93d5f">   71</a></span>&#160;    <span class="keywordtype">double</span> ks11[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classsolidstructure.html#ad4277fa33cdf5942b68d85e9d5431052">   72</a></span>&#160;    <span class="keywordtype">double</span> ks12[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a3528d1c7b1c36060f434701a33caccac">   73</a></span>&#160;    <span class="keywordtype">double</span> ks13[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">double</span> ks20[Ngrad];</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">double</span> ks21[Ngrad];</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">double</span> ks22[Ngrad];</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">double</span> ks23[Ngrad];</div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classsolidstructure.html#abefdf067b9f4f9ef09bbd1586ea2fba5">   76</a></span>&#160;    <span class="keywordtype">double</span> ks20[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classsolidstructure.html#ae8a20fc0588a9078cfcff5b7feadec1e">   77</a></span>&#160;    <span class="keywordtype">double</span> ks21[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a72d7f3e2210fd2ae9256da40de4caa67">   78</a></span>&#160;    <span class="keywordtype">double</span> ks22[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a19daf821026ed17e21a0e7c9c6c7db0f">   79</a></span>&#160;    <span class="keywordtype">double</span> ks23[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    </div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    </div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="comment">//Variables</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">double</span> *chi_gap[Ngrad];        <span class="comment">// Berry Connection difference</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordtype">double</span> *groupvel_c[Ngrad];</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">double</span> *groupvel_v[Ngrad];</div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classsolidstructure.html#ac887278f34deb47e1a7deba71301170d">   83</a></span>&#160;    <span class="keywordtype">double</span> *chi_gap[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];        <span class="comment">// Berry Connection difference</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="classsolidstructure.html#ace71c4f3737858667c3cf124eda77ab4">   84</a></span>&#160;    <span class="keywordtype">double</span> *groupvel_c[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a61c090c07ddda25f55129a4bd681a2e7">   85</a></span>&#160;    <span class="keywordtype">double</span> *groupvel_v[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    </div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordtype">double</span> *zbcurva_v;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">double</span> *zbcurva_c;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">double</span> T1,T2;</div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="classsolidstructure.html#add1505f4d3f02ee9dbea7b808014c823">   88</a></span>&#160;    <span class="keywordtype">double</span> *<a class="code" href="classsolidstructure.html#add1505f4d3f02ee9dbea7b808014c823">zbcurva_v</a>;</div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a455f8364c92f1d986dca2f4b0d76e945">   89</a></span>&#160;    <span class="keywordtype">double</span> *<a class="code" href="classsolidstructure.html#a455f8364c92f1d986dca2f4b0d76e945">zbcurva_c</a>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="classsolidstructure.html#ada2661133bcfd6ab85c26dd869e5ab85">   90</a></span>&#160;    <span class="keywordtype">double</span> T1,<a class="code" href="classsolidstructure.html#ada2661133bcfd6ab85c26dd869e5ab85">T2</a>;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    </div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    </div>
@@ -162,89 +162,89 @@ $(function() {
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">     VARIABLES, var., for PROCESSES</span></div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">            ***************************/</span></div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="comment">//Basic vectors for Honneycomb Lattice</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordtype">double</span> vec_a[Ngrad][Nvects];</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">double</span> vec_b[Ngrad][Nvects];</div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="classsolidstructure.html#aec59167186f14263c784a3bef8027f0c">   98</a></span>&#160;    <span class="keywordtype">double</span> vec_a[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>][Nvects];</div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a2e85147d1613dc704112b41716db547f">   99</a></span>&#160;    <span class="keywordtype">double</span> vec_b[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>][Nvects];</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    </div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    </div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    </div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    </div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="comment">//Variables for B0, B1, B2, B3 evaluations and their gradient along x and y directions</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">double</span> b0res0, b1res0, b2res0, b3res0, bnorm ;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">double</span> xb0der0, xb1der0, xb2der0, xb3der0, xbnorm0;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">double</span> yb0der0, yb1der0, yb2der0, yb3der0, ybnorm0;</div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a161a322bbf9877dfca2d3b04eef939fa">  105</a></span>&#160;    <span class="keywordtype">double</span> b0res0, b1res0, b2res0, b3res0, <a class="code" href="classsolidstructure.html#a161a322bbf9877dfca2d3b04eef939fa">bnorm</a> ;</div>
+<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="classsolidstructure.html#ac217db4795d8ddfdaaa81bb2adc9cac2">  106</a></span>&#160;    <span class="keywordtype">double</span> xb0der0, xb1der0, xb2der0, xb3der0, <a class="code" href="classsolidstructure.html#ac217db4795d8ddfdaaa81bb2adc9cac2">xbnorm0</a>;</div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a0a5b3a820258fae192113dabd0715747">  107</a></span>&#160;    <span class="keywordtype">double</span> yb0der0, yb1der0, yb2der0, yb3der0, <a class="code" href="classsolidstructure.html#a0a5b3a820258fae192113dabd0715747">ybnorm0</a>;</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordtype">int</span> gauge;</div>
+<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="classsolidstructure.html#afe7bd0c7be95cebaa7d77645523b1ea0">  109</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classsolidstructure.html#afe7bd0c7be95cebaa7d77645523b1ea0">gauge</a>;</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordtype">double</span> wave_norm, wave_norm2;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">double</span> gauge_b_set[Nvects];</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">double</span> gauge_b_set_grad[Ngrad][Nvects];</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">double</span> w_norm_grad[Ngrad];</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordtype">double</span> grad_bnorm[Ngrad];</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordtype">double</span> xtemp[Ngrad*2];</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordtype">double</span> ytemp[Ngrad*2];</div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a02f71baa64292f9f97d091d60692cc15">  111</a></span>&#160;    <span class="keywordtype">double</span> wave_norm, <a class="code" href="classsolidstructure.html#a02f71baa64292f9f97d091d60692cc15">wave_norm2</a>;</div>
+<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a46d17ef49fd5f88b29c35e213b40ea6b">  112</a></span>&#160;    <span class="keywordtype">double</span> gauge_b_set[Nvects];</div>
+<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="classsolidstructure.html#aa4313d42e276440128681b95a450d5b0">  113</a></span>&#160;    <span class="keywordtype">double</span> gauge_b_set_grad[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>][Nvects];</div>
+<div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="classsolidstructure.html#af860bb39fffc4762c2c99b2d91774444">  114</a></span>&#160;    <span class="keywordtype">double</span> w_norm_grad[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a79324fc36478fa78ef42db6c7bfe6c7b">  115</a></span>&#160;    <span class="keywordtype">double</span> grad_bnorm[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
+<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a79c89f903c93acf58c6f8370d1b86126">  116</a></span>&#160;    <span class="keywordtype">double</span> xtemp[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>*2];</div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="classsolidstructure.html#afd2d4e5590977a478ecb09bdbd47e178">  117</a></span>&#160;    <span class="keywordtype">double</span> ytemp[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>*2];</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    </div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    </div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="comment">//Variables for energy dispersion</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordtype">double</span> energyv0, energyc0, energyg0, eg0;</div>
+<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="classsolidstructure.html#ad357ab808b8755cdd2e0e2c72f362c70">  121</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classsolidstructure.html#ad357ab808b8755cdd2e0e2c72f362c70">energyv0</a>, energyc0, energyg0, eg0;</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    </div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordtype">double</span> zBcurva_c0, zBcurva_v0;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordtype">double</span> xcberryconn0, xvberryconn0, xchig0;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">double</span> ycberryconn0, yvberryconn0, ychig0;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordtype">double</span> chig0[Ngrad]; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordtype">double</span> MinEGap, MaxEGap; </div>
+<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a6d7628d8a0b2ce1d30a24f9fb12dc85a">  124</a></span>&#160;    <span class="keywordtype">double</span> zBcurva_c0, <a class="code" href="classsolidstructure.html#a6d7628d8a0b2ce1d30a24f9fb12dc85a">zBcurva_v0</a>;</div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a0eff5d262c12300304b090f7df28ffbf">  125</a></span>&#160;    <span class="keywordtype">double</span> xcberryconn0, <a class="code" href="classsolidstructure.html#a0eff5d262c12300304b090f7df28ffbf">xvberryconn0</a>, xchig0;</div>
+<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="classsolidstructure.html#ada59a3c2d49c7a1f31c329cb7aa5ec6c">  126</a></span>&#160;    <span class="keywordtype">double</span> ycberryconn0, <a class="code" href="classsolidstructure.html#ada59a3c2d49c7a1f31c329cb7aa5ec6c">yvberryconn0</a>, ychig0;</div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a8d4f924e51cb80168373e9cc96084402">  127</a></span>&#160;    <span class="keywordtype">double</span> chig0[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>]; </div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classsolidstructure.html#ac6421a34d0f120ff60f81bad453500d4">  128</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classsolidstructure.html#ac6421a34d0f120ff60f81bad453500d4">MinEGap</a>, MaxEGap; </div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    </div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordtype">double</span> re_width;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordtype">double</span> reg0;</div>
+<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="classsolidstructure.html#aa394de5b9a5f47ce48600802aabd50bc">  130</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classsolidstructure.html#aa394de5b9a5f47ce48600802aabd50bc">re_width</a>;</div>
+<div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a3b1d3e6472cd4999a0017dfe84a6d3bf">  131</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classsolidstructure.html#a3b1d3e6472cd4999a0017dfe84a6d3bf">reg0</a>;</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    </div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    </div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="comment">//Anomalous velocity variables</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordtype">double</span> xanomalous_v0, yanomalous_v0;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keywordtype">double</span> xanomalous_c0, yanomalous_c0;</div>
+<div class="line"><a name="l00135"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a2635561e225c5182309e4eb962927c5d">  135</a></span>&#160;    <span class="keywordtype">double</span> xanomalous_v0, <a class="code" href="classsolidstructure.html#a2635561e225c5182309e4eb962927c5d">yanomalous_v0</a>;</div>
+<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a8142bc1c120df5887a852356d3872f68">  136</a></span>&#160;    <span class="keywordtype">double</span> xanomalous_c0, <a class="code" href="classsolidstructure.html#a8142bc1c120df5887a852356d3872f68">yanomalous_c0</a>;</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    </div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    </div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    </div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="comment">//Group velocity vars.</span></div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="keywordtype">double</span> group_v0[Ngrad];</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keywordtype">double</span> group_c0[Ngrad];</div>
+<div class="line"><a name="l00141"></a><span class="lineno"><a class="line" href="classsolidstructure.html#afbf72808192d6fd36bbe356c42c31b9b">  141</a></span>&#160;    <span class="keywordtype">double</span> group_v0[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
+<div class="line"><a name="l00142"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a7ead0c032a68e4d9639e56396bf0531c">  142</a></span>&#160;    <span class="keywordtype">double</span> group_c0[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    </div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    </div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    </div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="comment">//Dipole matrix element from val. -&gt; cond. band vars.</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    complex curvatemp1, curvatemp2;</div>
+<div class="line"><a name="l00148"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a8ce5aade72d28c2ed8aeabf9060b912a">  148</a></span>&#160;    <a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> curvatemp1, <a class="code" href="classsolidstructure.html#a8ce5aade72d28c2ed8aeabf9060b912a">curvatemp2</a>;</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    </div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    complex wv_grad0[Ngrad][Ngrad];</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    complex wc_grad0[Ngrad][Ngrad];</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    complex velocity_cv0[Ngrad];</div>
+<div class="line"><a name="l00150"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a5c5bd92caba2cea027ccfd926206bbd5">  150</a></span>&#160;    <a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> wv_grad0[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>][<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
+<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a1809be1426ccdfc7e87c2ec47a0799b9">  151</a></span>&#160;    <a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> wc_grad0[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>][<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
+<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a2571bf9de509928eec75ff03e313689b">  152</a></span>&#160;    <a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> velocity_cv0[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    </div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    complex dip_cv0[Ngrad];</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    complex tempc[Ngrad];</div>
+<div class="line"><a name="l00154"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a25c310379f7d1e1d2a798c5955b98743">  154</a></span>&#160;    <a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> dip_cv0[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
+<div class="line"><a name="l00155"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a3d6b1c726618532783328487f2d83d33">  155</a></span>&#160;    <a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> tempc[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    </div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    complex *dipole_cv[Ngrad];</div>
+<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="classsolidstructure.html#aff1d894f29774464f3642a7a04eaa97d">  157</a></span>&#160;    <a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> *dipole_cv[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    </div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keywordtype">double</span> chi_c0[Ngrad];</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keywordtype">double</span> chi_v0[Ngrad];</div>
+<div class="line"><a name="l00159"></a><span class="lineno"><a class="line" href="classsolidstructure.html#abbe19abe6eeb8e742989333597876528">  159</a></span>&#160;    <span class="keywordtype">double</span> chi_c0[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
+<div class="line"><a name="l00160"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a5417c4a3de864b2d896a0dadea2cf1f7">  160</a></span>&#160;    <span class="keywordtype">double</span> chi_v0[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    </div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    </div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="comment">//Smoothed or regularization parameter</span></div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordtype">double</span> eps_phi0;</div>
+<div class="line"><a name="l00164"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a0a9c955d422d69f4e08b0a7ecb10945d">  164</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classsolidstructure.html#a0a9c955d422d69f4e08b0a7ecb10945d">eps_phi0</a>;</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    </div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    </div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="comment">//K and K&#39; points</span></div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keywordtype">double</span> K[Ngrad];</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keywordtype">double</span> Kprime[Ngrad];</div>
+<div class="line"><a name="l00168"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a7c805fc528bd5c31b056765b29b81434">  168</a></span>&#160;    <span class="keywordtype">double</span> K[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
+<div class="line"><a name="l00169"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a6d1cc228bbb1807194f04eecb4557416">  169</a></span>&#160;    <span class="keywordtype">double</span> Kprime[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    </div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    </div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="comment">//Maxima momentum</span></div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keywordtype">double</span> honeycomb_lattice_kmax[Ngrad];</div>
+<div class="line"><a name="l00173"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a03a09bbf3d3dbcdf669b72790c5b33da">  173</a></span>&#160;    <span class="keywordtype">double</span> honeycomb_lattice_kmax[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    </div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keywordtype">double</span> flag;</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="keywordtype">double</span> angle_a0, angle_b0;</div>
+<div class="line"><a name="l00175"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a9685b451e5ff03c3e68edb01157c114b">  175</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classsolidstructure.html#a9685b451e5ff03c3e68edb01157c114b">flag</a>;</div>
+<div class="line"><a name="l00176"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a0099c1817dd97ed9faa810241d728c7b">  176</a></span>&#160;    <span class="keywordtype">double</span> angle_a0, <a class="code" href="classsolidstructure.html#a0099c1817dd97ed9faa810241d728c7b">angle_b0</a>;</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    </div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    </div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    complex uwave_val0[Ngrad];</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    complex uwave_cond0[Ngrad];</div>
+<div class="line"><a name="l00179"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a9dd9f23df72c3b15f5be272796406c1f">  179</a></span>&#160;    <a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> uwave_val0[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
+<div class="line"><a name="l00180"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a76526bf65a6a2d2865ca97ea4297897c">  180</a></span>&#160;    <a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> uwave_cond0[<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>];</div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    </div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    </div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    </div>
@@ -291,9 +291,9 @@ $(function() {
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    </div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="keywordtype">void</span> lattice_structure( );</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    </div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="keywordtype">void</span> anomalous_velCV( complex <span class="keyword">const</span> efield, <span class="keywordtype">double</span> <span class="keyword">const</span> zBerryCurvature );</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="keywordtype">void</span> anomalous_velCV( <a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> <span class="keyword">const</span> efield, <span class="keywordtype">double</span> <span class="keyword">const</span> zBerryCurvature );</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    </div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <span class="keywordtype">void</span> cdot( <span class="keyword">const</span> complex *v1, <span class="keyword">const</span> complex *v2, <span class="keyword">const</span> <span class="keywordtype">int</span> Nv, complex *res);</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <span class="keywordtype">void</span> cdot( <span class="keyword">const</span> <a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> *v1, <span class="keyword">const</span> <a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> *v2, <span class="keyword">const</span> <span class="keywordtype">int</span> Nv, <a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> *res);</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    </div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keywordtype">double</span> ChernNumber( );</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    </div>
@@ -314,7 +314,7 @@ $(function() {
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
 <div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">//######################################</span></div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;solidstructure::solidstructure(  <span class="keyword">const</span> <a class="code" href="classmomaxis.html">momaxis</a> *_g</div>
+<div class="line"><a name="l00250"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a638224d778509e7d0526969dc994a5e8">  250</a></span>&#160;<a class="code" href="classsolidstructure.html#a638224d778509e7d0526969dc994a5e8">solidstructure::solidstructure</a>(  <span class="keyword">const</span> <a class="code" href="classmomaxis.html">momaxis</a> *_g</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                                ,<span class="keyword">const</span> <span class="keywordtype">double</span> *_a0</div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                                ,<span class="keyword">const</span> <span class="keywordtype">double</span> *_dephasing</div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                                ,<span class="keyword">const</span> <span class="keywordtype">double</span> *_dephasing2</div>
@@ -336,8 +336,8 @@ $(function() {
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    </div>
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    </div>
 <div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <span class="comment">//Momentum axis and grid</span></div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    g = <span class="keyword">new</span> <a class="code" href="classmomaxis.html">momaxis</a>( _g-&gt;N, _g-&gt;kmaxs, &amp;(_g-&gt;lattice_a0) );</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    g-&gt;integral_method( _g-&gt;imethod );</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    g = <span class="keyword">new</span> <a class="code" href="classmomaxis.html">momaxis</a>( _g-&gt;<a class="code" href="classmomaxis.html#a3003cd2745d7d6da227bea6cdec035a2">N</a>, _g-&gt;kmaxs, &amp;(_g-&gt;lattice_a0) );</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    g-&gt;integral_method( _g-&gt;<a class="code" href="classmomaxis.html#ae1cb1bc0c29d74ef6a0ff16d34c8a554">imethod</a> );</div>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    </div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
 <div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="comment">//Bravais vector-basis</span></div>
@@ -350,7 +350,7 @@ $(function() {
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; </div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="comment">//######################################</span></div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;solidstructure::~solidstructure( )</div>
+<div class="line"><a name="l00286"></a><span class="lineno"><a class="line" href="classsolidstructure.html#aaeb0d67052bfa24440aef2fe77f40de4">  286</a></span>&#160;<a class="code" href="classsolidstructure.html#aaeb0d67052bfa24440aef2fe77f40de4">solidstructure::~solidstructure</a>( )</div>
 <div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;{</div>
 <div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;   </div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    </div>
@@ -358,7 +358,7 @@ $(function() {
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    free(energy_gap);</div>
 <div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    </div>
 <div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    </div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="keywordflow">for</span> (n = 0; n &lt; Ngrad; n++ )</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="keywordflow">for</span> (n = 0; n &lt; <a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>; n++ )</div>
 <div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    {</div>
 <div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        </div>
 <div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        </div>
@@ -378,7 +378,7 @@ $(function() {
 <div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;}</div>
 <div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
 <div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="keywordtype">double</span> solidstructure::myRegularization( <span class="keywordtype">double</span> <span class="keyword">const</span> *kx, <span class="keywordtype">double</span> <span class="keyword">const</span> *ky, <span class="keywordtype">double</span> *skx, <span class="keywordtype">double</span> *sky  )</div>
+<div class="line"><a name="l00314"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a138f0f600870a14b7069d0f1908e0f14">  314</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="classsolidstructure.html#a138f0f600870a14b7069d0f1908e0f14">solidstructure::myRegularization</a>( <span class="keywordtype">double</span> <span class="keyword">const</span> *kx, <span class="keywordtype">double</span> <span class="keyword">const</span> *ky, <span class="keywordtype">double</span> *skx, <span class="keywordtype">double</span> *sky  )</div>
 <div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;{</div>
 <div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    </div>
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    </div>
@@ -389,7 +389,7 @@ $(function() {
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; </div>
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="comment">//######################################</span></div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="keywordtype">void</span>  solidstructure::haldane_model_params( <span class="keywordtype">double</span> <span class="keyword">const</span> *_t1</div>
+<div class="line"><a name="l00325"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a69a222f7694f074c327b502ca02bb246">  325</a></span>&#160;<span class="keywordtype">void</span>  <a class="code" href="classsolidstructure.html#a69a222f7694f074c327b502ca02bb246">solidstructure::haldane_model_params</a>( <span class="keywordtype">double</span> <span class="keyword">const</span> *_t1</div>
 <div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                                           ,<span class="keywordtype">double</span> <span class="keyword">const</span> *_t2</div>
 <div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;                                           ,<span class="keywordtype">double</span> <span class="keyword">const</span> *_phi0</div>
 <div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                                           ,<span class="keywordtype">double</span> <span class="keyword">const</span> *_M0</div>
@@ -409,7 +409,7 @@ $(function() {
 <div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;}</div>
 <div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
 <div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment">//######################################</span></div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="keywordtype">void</span> solidstructure::lattice_structure()</div>
+<div class="line"><a name="l00345"></a><span class="lineno"><a class="line" href="classsolidstructure.html#abc59ba0f6a253b8910377c3e2d3624ef">  345</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsolidstructure.html#abc59ba0f6a253b8910377c3e2d3624ef">solidstructure::lattice_structure</a>()</div>
 <div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;{</div>
 <div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;  </div>
 <div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    flag = 1;</div>
@@ -454,7 +454,7 @@ $(function() {
 <div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160; </div>
 <div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160; </div>
 <div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment">//######################################</span></div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="keywordtype">double</span> solidstructure::min( <span class="keywordtype">double</span> *v, <span class="keywordtype">int</span> Nsize )</div>
+<div class="line"><a name="l00390"></a><span class="lineno"><a class="line" href="classsolidstructure.html#ad9de8b99d76ba61889a33e98df239239">  390</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="classsolidstructure.html#ad9de8b99d76ba61889a33e98df239239">solidstructure::min</a>( <span class="keywordtype">double</span> *v, <span class="keywordtype">int</span> Nsize )</div>
 <div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;{</div>
 <div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160; </div>
 <div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    <span class="keywordtype">double</span> min0 = v[0];</div>
@@ -469,7 +469,7 @@ $(function() {
 <div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160; </div>
 <div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160; </div>
 <div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="comment">//######################################</span></div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="keywordtype">double</span> solidstructure::max( <span class="keywordtype">double</span> *v, <span class="keywordtype">int</span> Nsize)</div>
+<div class="line"><a name="l00405"></a><span class="lineno"><a class="line" href="classsolidstructure.html#adc4228fa56a5f5f1eee9f01149b92000">  405</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="classsolidstructure.html#adc4228fa56a5f5f1eee9f01149b92000">solidstructure::max</a>( <span class="keywordtype">double</span> *v, <span class="keywordtype">int</span> Nsize)</div>
 <div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;{</div>
 <div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160; </div>
 <div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    <span class="keywordtype">double</span> max0 = v[0];</div>
@@ -483,7 +483,7 @@ $(function() {
 <div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160; </div>
 <div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160; </div>
 <div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="comment">//######################################</span></div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="keywordtype">void</span> solidstructure::set_memory()</div>
+<div class="line"><a name="l00419"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a1fb85690e85c17ebcd39f427c7807156">  419</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsolidstructure.html#a1fb85690e85c17ebcd39f427c7807156">solidstructure::set_memory</a>()</div>
 <div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;{</div>
 <div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160; </div>
 <div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    energy_gap         = (<span class="keywordtype">double</span>*) malloc( (g-&gt;Ntotal) * <span class="keyword">sizeof</span>( double ) ) ;   <span class="comment">// Energy gap difference</span></div>
@@ -498,7 +498,7 @@ $(function() {
 <div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;    memset( zbcurva_c,   0, (g-&gt;Ntotal)*<span class="keyword">sizeof</span>( <span class="keywordtype">double</span> ) );</div>
 <div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;    </div>
 <div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;    </div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;    <span class="keywordflow">for</span> (n = 0; n &lt; Ngrad; n++ )</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;    <span class="keywordflow">for</span> (n = 0; n &lt; <a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>; n++ )</div>
 <div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;    {</div>
 <div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;    </div>
 <div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;        </div>
@@ -506,13 +506,13 @@ $(function() {
 <div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;        groupvel_c[n]  = (<span class="keywordtype">double</span>*) malloc( (g-&gt;Ntotal) * <span class="keyword">sizeof</span>( double ) ) ;</div>
 <div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;        groupvel_v[n]  = (<span class="keywordtype">double</span>*) malloc( (g-&gt;Ntotal) * <span class="keyword">sizeof</span>( double ) ) ;</div>
 <div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;        </div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;        dipole_cv[n]   = (complex*) malloc( (g-&gt;Ntotal) * <span class="keyword">sizeof</span>( complex ) ) ;</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;        dipole_cv[n]   = (<a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a>*) malloc( (g-&gt;Ntotal) * <span class="keyword">sizeof</span>( <a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> ) ) ;</div>
 <div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;        </div>
 <div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;        memset( chi_gap[n],    0, (g-&gt;Ntotal)*<span class="keyword">sizeof</span>( <span class="keywordtype">double</span> ) );</div>
 <div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;        memset( groupvel_c[n], 0, (g-&gt;Ntotal)*<span class="keyword">sizeof</span>( <span class="keywordtype">double</span> ) );</div>
 <div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;        memset( groupvel_v[n], 0, (g-&gt;Ntotal)*<span class="keyword">sizeof</span>( <span class="keywordtype">double</span> ) );</div>
 <div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160; </div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;        memset( dipole_cv[n],  0, (g-&gt;Ntotal)*<span class="keyword">sizeof</span>( complex ) );</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;        memset( dipole_cv[n],  0, (g-&gt;Ntotal)*<span class="keyword">sizeof</span>( <a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> ) );</div>
 <div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;        </div>
 <div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160; </div>
 <div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;    }</div>
@@ -522,7 +522,7 @@ $(function() {
 <div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160; </div>
 <div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160; </div>
 <div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="comment">//######################################</span></div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="keywordtype">void</span> solidstructure::bases_vectors()</div>
+<div class="line"><a name="l00458"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a0af4eef40ba7dd4f7744006116eb1cad">  458</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsolidstructure.html#a0af4eef40ba7dd4f7744006116eb1cad">solidstructure::bases_vectors</a>()</div>
 <div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;{</div>
 <div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;    <span class="comment">//First vector base: position atom</span></div>
 <div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;    vec_a[0][0] = 0.;</div>
@@ -548,17 +548,17 @@ $(function() {
 <div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;    </div>
 <div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;    </div>
 <div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;    <span class="comment">//K and K&#39; points</span></div>
-<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;    K[0] = 2.*dospi/sqrt(3.)/3./(g-&gt;lattice_a0) ;</div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;    K[0] = 2.*<a class="code" href="constant_8h.html#ae11e01cd32d72dedca12d3bce0fad0cf">dospi</a>/sqrt(3.)/3./(g-&gt;lattice_a0) ;</div>
 <div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;    K[1] = 0. ;</div>
 <div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;    </div>
 <div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;    </div>
-<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;    Kprime[0] = -2.*dospi/sqrt(3.)/3./(g-&gt;lattice_a0) ;</div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;    Kprime[0] = -2.*<a class="code" href="constant_8h.html#ae11e01cd32d72dedca12d3bce0fad0cf">dospi</a>/sqrt(3.)/3./(g-&gt;lattice_a0) ;</div>
 <div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;    Kprime[1] = 0. ;</div>
 <div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;    </div>
 <div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;    </div>
 <div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;    <span class="comment">//Honeycomb lattice maxima momentum on x and y directions definition</span></div>
-<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;    honeycomb_lattice_kmax[0] = dospi/sqrt(3.)/(g-&gt;lattice_a0);</div>
-<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;    honeycomb_lattice_kmax[1] = dospi/3./(g-&gt;lattice_a0);</div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;    honeycomb_lattice_kmax[0] = <a class="code" href="constant_8h.html#ae11e01cd32d72dedca12d3bce0fad0cf">dospi</a>/sqrt(3.)/(g-&gt;lattice_a0);</div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;    honeycomb_lattice_kmax[1] = <a class="code" href="constant_8h.html#ae11e01cd32d72dedca12d3bce0fad0cf">dospi</a>/3./(g-&gt;lattice_a0);</div>
 <div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;    </div>
 <div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160; </div>
 <div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;    ks00[0]= -1.7;</div>
@@ -611,7 +611,7 @@ $(function() {
 <div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160; </div>
 <div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;<span class="comment">//######################################</span></div>
 <div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;<span class="comment">//New function</span></div>
-<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;<span class="keywordtype">void</span> solidstructure::Set_Of_B_BGrad( <span class="keywordtype">double</span> <span class="keyword">const</span> *kx, <span class="keywordtype">double</span> <span class="keyword">const</span> *ky )</div>
+<div class="line"><a name="l00547"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a6e5d2358df94d8243cf86fe8585de177">  547</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsolidstructure.html#a6e5d2358df94d8243cf86fe8585de177">solidstructure::Set_Of_B_BGrad</a>( <span class="keywordtype">double</span> <span class="keyword">const</span> *kx, <span class="keywordtype">double</span> <span class="keyword">const</span> *ky )</div>
 <div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;{</div>
 <div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;    </div>
 <div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;    b0res0  = 0.; b1res0  = 0.;</div>
@@ -738,12 +738,12 @@ $(function() {
 <div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160; </div>
 <div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;    <span class="comment">//############################</span></div>
 <div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;    <span class="comment">//##Wave-functions</span></div>
-<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;    uwave_val0[0] = ( -gauge_b_set[0] + I*gauge_b_set[1] )/wave_norm;</div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;    uwave_val0[0] = ( -gauge_b_set[0] + <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a>*gauge_b_set[1] )/wave_norm;</div>
 <div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;    uwave_val0[1] = (  gauge_b_set[2] + bnorm  )/wave_norm;</div>
 <div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;    </div>
 <div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;    </div>
 <div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;    uwave_cond0[0] = ( gauge_b_set[2] + bnorm )/wave_norm;</div>
-<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;    uwave_cond0[1] = ( gauge_b_set[0] + I*gauge_b_set[1] )/wave_norm;</div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;    uwave_cond0[1] = ( gauge_b_set[0] + <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a>*gauge_b_set[1] )/wave_norm;</div>
 <div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;    </div>
 <div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;    </div>
 <div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;    </div>
@@ -751,7 +751,7 @@ $(function() {
 <div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;    <span class="comment">// Gradient of BNorm = [ B1^2 + B2^2 +B3^2 ]^1/2</span></div>
 <div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;    <span class="comment">// and</span></div>
 <div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;    <span class="comment">// Gradient on the  wavefunction normalization factor</span></div>
-<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;    <span class="keywordflow">for</span> (n = 0; n&lt;Ngrad; n++)</div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;    <span class="keywordflow">for</span> (n = 0; n&lt;<a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>; n++)</div>
 <div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;    {</div>
 <div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;        </div>
 <div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;        </div>
@@ -804,10 +804,10 @@ $(function() {
 <div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;    </div>
 <div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;    <span class="comment">//##################################</span></div>
 <div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;    <span class="comment">//## W.F. VALENCE BAND GRAD</span></div>
-<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;    wv_grad0[0][0]  = ( -xtemp[0] +  I*xtemp[1]  )/wave_norm2;</div>
+<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;    wv_grad0[0][0]  = ( -xtemp[0] +  <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a>*xtemp[1]  )/wave_norm2;</div>
 <div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;    wv_grad0[0][1]  = ( +xtemp[2] -   xtemp[3]   )/wave_norm2;</div>
 <div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;    </div>
-<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;    wv_grad0[1][0]   = ( -ytemp[0] + I*ytemp[1]  )/wave_norm2;</div>
+<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;    wv_grad0[1][0]   = ( -ytemp[0] + <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a>*ytemp[1]  )/wave_norm2;</div>
 <div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;    wv_grad0[1][1]   = ( +ytemp[2] -  ytemp[3]   )/wave_norm2;</div>
 <div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;    </div>
 <div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;    </div>
@@ -815,10 +815,10 @@ $(function() {
 <div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;    <span class="comment">//#################################</span></div>
 <div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;    <span class="comment">//## W.F. CONDUCTION BAND GRAD</span></div>
 <div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;    wc_grad0[0][0] = (  xtemp[2] -   xtemp[3]  )/wave_norm2;</div>
-<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;    wc_grad0[0][1] = (  xtemp[0] + I*xtemp[1]  )/wave_norm2;</div>
+<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;    wc_grad0[0][1] = (  xtemp[0] + <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a>*xtemp[1]  )/wave_norm2;</div>
 <div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;    </div>
 <div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;    wc_grad0[1][0] = (  ytemp[2]  - ytemp[3]   )/wave_norm2;</div>
-<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;    wc_grad0[1][1] = (  ytemp[0] + I*ytemp[1]  )/wave_norm2;</div>
+<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;    wc_grad0[1][1] = (  ytemp[0] + <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a>*ytemp[1]  )/wave_norm2;</div>
 <div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;    </div>
 <div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;    </div>
 <div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;    </div>
@@ -832,13 +832,13 @@ $(function() {
 <div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;    </div>
 <div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;    </div>
 <div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;    <span class="comment">//Berry Connection difference: Xig0 = Xi_c - Xi_v = 2*Xi_c</span></div>
-<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;    cdot( uwave_cond0, wc_grad0[0], Ngrad, &amp;tempc[0] ) ;</div>
-<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;    cdot( uwave_cond0, wc_grad0[1], Ngrad, &amp;tempc[1] ) ;</div>
+<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;    cdot( uwave_cond0, wc_grad0[0], <a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>, &amp;tempc[0] ) ;</div>
+<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;    cdot( uwave_cond0, wc_grad0[1], <a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>, &amp;tempc[1] ) ;</div>
 <div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;    </div>
 <div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;    </div>
 <div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;    <span class="comment">//Connection Difference</span></div>
-<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;    chig0[0]    = 2.* real( I * tempc[0] ) ;</div>
-<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;    chig0[1]    = 2.* real( I * tempc[1] ) ;</div>
+<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;    chig0[0]    = 2.* real( <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a> * tempc[0] ) ;</div>
+<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;    chig0[1]    = 2.* real( <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a> * tempc[1] ) ;</div>
 <div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;    </div>
 <div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;    </div>
 <div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;    </div>
@@ -846,16 +846,16 @@ $(function() {
 <div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;    </div>
 <div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;    </div>
 <div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;    <span class="comment">//Dipole transiton val. -&gt; cond. band</span></div>
-<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;    cdot( uwave_cond0, wv_grad0[0], Ngrad, &amp;tempc[0] );</div>
-<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;    cdot( uwave_cond0, wv_grad0[1], Ngrad, &amp;tempc[1] );</div>
+<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;    cdot( uwave_cond0, wv_grad0[0], <a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>, &amp;tempc[0] );</div>
+<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;    cdot( uwave_cond0, wv_grad0[1], <a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>, &amp;tempc[1] );</div>
 <div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160;    </div>
 <div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;    </div>
-<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;    dip_cv0[0]      =  I*tempc[0];</div>
-<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;    dip_cv0[1]      =  I*tempc[1];</div>
+<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;    dip_cv0[0]      =  <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a>*tempc[0];</div>
+<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;    dip_cv0[1]      =  <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a>*tempc[1];</div>
 <div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;    </div>
 <div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;    </div>
-<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;    velocity_cv0[0] = I * eg0 * dip_cv0[0];</div>
-<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;    velocity_cv0[1] = I * eg0 * dip_cv0[1];</div>
+<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;    velocity_cv0[0] = <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a> * eg0 * dip_cv0[0];</div>
+<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;    velocity_cv0[1] = <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a> * eg0 * dip_cv0[1];</div>
 <div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;    </div>
 <div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;    zBcurva_c0      =  2. * imag( conj(dip_cv0[0])*dip_cv0[1] );</div>
 <div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;    </div>
@@ -872,7 +872,7 @@ $(function() {
 <div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160; </div>
 <div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160; </div>
 <div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;<span class="comment">//Conduction Band energy/spectrum</span></div>
-<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;<span class="keywordtype">void</span> solidstructure::Ec( )</div>
+<div class="line"><a name="l00808"></a><span class="lineno"><a class="line" href="classsolidstructure.html#af0e9f9b4deda6fef21f489a4a4daefaf">  808</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsolidstructure.html#af0e9f9b4deda6fef21f489a4a4daefaf">solidstructure::Ec</a>( )</div>
 <div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;{</div>
 <div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;    </div>
 <div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;    energyc0 = b0res0 + bnorm;</div>
@@ -882,7 +882,7 @@ $(function() {
 <div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160; </div>
 <div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160; </div>
 <div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;<span class="comment">//Valence Band energy/spectrum</span></div>
-<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;<span class="keywordtype">void</span> solidstructure::Ev( )</div>
+<div class="line"><a name="l00818"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a749544e9b33c8dbf7d89119c8ffb4e6d">  818</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsolidstructure.html#a749544e9b33c8dbf7d89119c8ffb4e6d">solidstructure::Ev</a>( )</div>
 <div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;{</div>
 <div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;    </div>
 <div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;    energyv0 = b0res0 - bnorm;</div>
@@ -890,49 +890,49 @@ $(function() {
 <div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160;}</div>
 <div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160; </div>
 <div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160; </div>
-<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;<span class="keywordtype">void</span> solidstructure::BerryConnectionCV()</div>
+<div class="line"><a name="l00826"></a><span class="lineno"><a class="line" href="classsolidstructure.html#ad93c55ce67503c1c6ee62442107fe537">  826</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsolidstructure.html#ad93c55ce67503c1c6ee62442107fe537">solidstructure::BerryConnectionCV</a>()</div>
 <div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160;{</div>
 <div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160;    </div>
 <div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;    <span class="comment">//Connection difference Xig0 = Xi_c - Xi_v = 2*Xi_c</span></div>
-<div class="line"><a name="l00830"></a><span class="lineno">  830</span>&#160;    cdot( uwave_cond0, wc_grad0[0], Ngrad, &amp;tempc[0] ) ;</div>
-<div class="line"><a name="l00831"></a><span class="lineno">  831</span>&#160;    cdot( uwave_cond0, wc_grad0[1], Ngrad, &amp;tempc[1] ) ;</div>
+<div class="line"><a name="l00830"></a><span class="lineno">  830</span>&#160;    cdot( uwave_cond0, wc_grad0[0], <a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>, &amp;tempc[0] ) ;</div>
+<div class="line"><a name="l00831"></a><span class="lineno">  831</span>&#160;    cdot( uwave_cond0, wc_grad0[1], <a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>, &amp;tempc[1] ) ;</div>
 <div class="line"><a name="l00832"></a><span class="lineno">  832</span>&#160;    </div>
 <div class="line"><a name="l00833"></a><span class="lineno">  833</span>&#160;    </div>
-<div class="line"><a name="l00834"></a><span class="lineno">  834</span>&#160;    chi_c0[0]    = + real( I * tempc[0] ) ;</div>
-<div class="line"><a name="l00835"></a><span class="lineno">  835</span>&#160;    chi_c0[1]    = + real( I * tempc[1] ) ;</div>
+<div class="line"><a name="l00834"></a><span class="lineno">  834</span>&#160;    chi_c0[0]    = + real( <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a> * tempc[0] ) ;</div>
+<div class="line"><a name="l00835"></a><span class="lineno">  835</span>&#160;    chi_c0[1]    = + real( <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a> * tempc[1] ) ;</div>
 <div class="line"><a name="l00836"></a><span class="lineno">  836</span>&#160;    </div>
-<div class="line"><a name="l00837"></a><span class="lineno">  837</span>&#160;    chi_v0[0]    = - real( I * tempc[0] ) ;</div>
-<div class="line"><a name="l00838"></a><span class="lineno">  838</span>&#160;    chi_v0[1]    = - real( I * tempc[1] ) ;</div>
+<div class="line"><a name="l00837"></a><span class="lineno">  837</span>&#160;    chi_v0[0]    = - real( <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a> * tempc[0] ) ;</div>
+<div class="line"><a name="l00838"></a><span class="lineno">  838</span>&#160;    chi_v0[1]    = - real( <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a> * tempc[1] ) ;</div>
 <div class="line"><a name="l00839"></a><span class="lineno">  839</span>&#160;    </div>
 <div class="line"><a name="l00840"></a><span class="lineno">  840</span>&#160;    </div>
 <div class="line"><a name="l00841"></a><span class="lineno">  841</span>&#160;}</div>
 <div class="line"><a name="l00842"></a><span class="lineno">  842</span>&#160; </div>
 <div class="line"><a name="l00843"></a><span class="lineno">  843</span>&#160; </div>
-<div class="line"><a name="l00844"></a><span class="lineno">  844</span>&#160;<span class="keywordtype">void</span> solidstructure::dipoleCV( )</div>
+<div class="line"><a name="l00844"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a95d60d36f1303236002d1e5de841081d">  844</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsolidstructure.html#a95d60d36f1303236002d1e5de841081d">solidstructure::dipoleCV</a>( )</div>
 <div class="line"><a name="l00845"></a><span class="lineno">  845</span>&#160;{</div>
 <div class="line"><a name="l00846"></a><span class="lineno">  846</span>&#160;    </div>
 <div class="line"><a name="l00847"></a><span class="lineno">  847</span>&#160;    <span class="comment">//Dipole transiton val. -&gt; cond. band, dip_cv = i&lt;u_c_k|\nabla_k|u_v_k&gt;</span></div>
-<div class="line"><a name="l00848"></a><span class="lineno">  848</span>&#160;    cdot( uwave_cond0, wv_grad0[0], Ngrad, &amp;tempc[0] );</div>
-<div class="line"><a name="l00849"></a><span class="lineno">  849</span>&#160;    cdot( uwave_cond0, wv_grad0[1], Ngrad, &amp;tempc[1] );</div>
+<div class="line"><a name="l00848"></a><span class="lineno">  848</span>&#160;    cdot( uwave_cond0, wv_grad0[0], <a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>, &amp;tempc[0] );</div>
+<div class="line"><a name="l00849"></a><span class="lineno">  849</span>&#160;    cdot( uwave_cond0, wv_grad0[1], <a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>, &amp;tempc[1] );</div>
 <div class="line"><a name="l00850"></a><span class="lineno">  850</span>&#160;    </div>
-<div class="line"><a name="l00851"></a><span class="lineno">  851</span>&#160;    dip_cv0[0]  =  I*tempc[0];</div>
-<div class="line"><a name="l00852"></a><span class="lineno">  852</span>&#160;    dip_cv0[1]  =  I*tempc[1];</div>
+<div class="line"><a name="l00851"></a><span class="lineno">  851</span>&#160;    dip_cv0[0]  =  <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a>*tempc[0];</div>
+<div class="line"><a name="l00852"></a><span class="lineno">  852</span>&#160;    dip_cv0[1]  =  <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a>*tempc[1];</div>
 <div class="line"><a name="l00853"></a><span class="lineno">  853</span>&#160;    </div>
 <div class="line"><a name="l00854"></a><span class="lineno">  854</span>&#160;}</div>
 <div class="line"><a name="l00855"></a><span class="lineno">  855</span>&#160; </div>
 <div class="line"><a name="l00856"></a><span class="lineno">  856</span>&#160; </div>
 <div class="line"><a name="l00857"></a><span class="lineno">  857</span>&#160;<span class="comment">//Cond. Band Berry Curvature: -((xGradtheta*yGradphi - xGradphi*yGradtheta)*Sin(theta))/2.</span></div>
-<div class="line"><a name="l00858"></a><span class="lineno">  858</span>&#160;<span class="keywordtype">void</span> solidstructure::zBerryCurvaCV( )</div>
+<div class="line"><a name="l00858"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a341622ecc3eefc025cf7229be3c7528f">  858</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsolidstructure.html#a341622ecc3eefc025cf7229be3c7528f">solidstructure::zBerryCurvaCV</a>( )</div>
 <div class="line"><a name="l00859"></a><span class="lineno">  859</span>&#160;{</div>
 <div class="line"><a name="l00860"></a><span class="lineno">  860</span>&#160;    </div>
 <div class="line"><a name="l00861"></a><span class="lineno">  861</span>&#160;<span class="comment">/*****************</span></div>
 <div class="line"><a name="l00862"></a><span class="lineno">  862</span>&#160;<span class="comment"> Before using this fungtion we should called:</span></div>
 <div class="line"><a name="l00863"></a><span class="lineno">  863</span>&#160;<span class="comment"> *******/</span></div>
 <div class="line"><a name="l00864"></a><span class="lineno">  864</span>&#160;    </div>
-<div class="line"><a name="l00865"></a><span class="lineno">  865</span>&#160;    cdot(  wc_grad0[0] , wc_grad0[1], Ngrad, &amp;curvatemp1 );</div>
-<div class="line"><a name="l00866"></a><span class="lineno">  866</span>&#160;    cdot(  wc_grad0[1] , wc_grad0[0], Ngrad, &amp;curvatemp2 );</div>
+<div class="line"><a name="l00865"></a><span class="lineno">  865</span>&#160;    cdot(  wc_grad0[0] , wc_grad0[1], <a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>, &amp;curvatemp1 );</div>
+<div class="line"><a name="l00866"></a><span class="lineno">  866</span>&#160;    cdot(  wc_grad0[1] , wc_grad0[0], <a class="code" href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a>, &amp;curvatemp2 );</div>
 <div class="line"><a name="l00867"></a><span class="lineno">  867</span>&#160;    </div>
-<div class="line"><a name="l00868"></a><span class="lineno">  868</span>&#160;    zBcurva_c0 = real( I*(curvatemp1 - curvatemp2) );</div>
+<div class="line"><a name="l00868"></a><span class="lineno">  868</span>&#160;    zBcurva_c0 = real( <a class="code" href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a>*(curvatemp1 - curvatemp2) );</div>
 <div class="line"><a name="l00869"></a><span class="lineno">  869</span>&#160;    </div>
 <div class="line"><a name="l00870"></a><span class="lineno">  870</span>&#160;    </div>
 <div class="line"><a name="l00871"></a><span class="lineno">  871</span>&#160;    </div>
@@ -942,7 +942,7 @@ $(function() {
 <div class="line"><a name="l00875"></a><span class="lineno">  875</span>&#160; </div>
 <div class="line"><a name="l00876"></a><span class="lineno">  876</span>&#160;<span class="comment">//##########################</span></div>
 <div class="line"><a name="l00877"></a><span class="lineno">  877</span>&#160;<span class="comment">//Group velocity</span></div>
-<div class="line"><a name="l00878"></a><span class="lineno">  878</span>&#160;<span class="keywordtype">void</span> solidstructure::group_velCV( )</div>
+<div class="line"><a name="l00878"></a><span class="lineno"><a class="line" href="classsolidstructure.html#ac5c81c34bceee9c99d1b3fed220954aa">  878</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsolidstructure.html#ac5c81c34bceee9c99d1b3fed220954aa">solidstructure::group_velCV</a>( )</div>
 <div class="line"><a name="l00879"></a><span class="lineno">  879</span>&#160;{</div>
 <div class="line"><a name="l00880"></a><span class="lineno">  880</span>&#160;    </div>
 <div class="line"><a name="l00881"></a><span class="lineno">  881</span>&#160;    </div>
@@ -958,7 +958,7 @@ $(function() {
 <div class="line"><a name="l00891"></a><span class="lineno">  891</span>&#160; </div>
 <div class="line"><a name="l00892"></a><span class="lineno">  892</span>&#160;<span class="comment">//##########################</span></div>
 <div class="line"><a name="l00893"></a><span class="lineno">  893</span>&#160;<span class="comment">//Anomalous velocity</span></div>
-<div class="line"><a name="l00894"></a><span class="lineno">  894</span>&#160;<span class="keywordtype">void</span> solidstructure::anomalous_velCV( complex <span class="keyword">const</span> efield, <span class="keywordtype">double</span> <span class="keyword">const</span> zBerryCurvature )</div>
+<div class="line"><a name="l00894"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a7bb841240adb9dc96bcd02c9a967449c">  894</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsolidstructure.html#a7bb841240adb9dc96bcd02c9a967449c">solidstructure::anomalous_velCV</a>( <a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> <span class="keyword">const</span> efield, <span class="keywordtype">double</span> <span class="keyword">const</span> zBerryCurvature )</div>
 <div class="line"><a name="l00895"></a><span class="lineno">  895</span>&#160;{</div>
 <div class="line"><a name="l00896"></a><span class="lineno">  896</span>&#160;    </div>
 <div class="line"><a name="l00897"></a><span class="lineno">  897</span>&#160;    </div>
@@ -974,7 +974,7 @@ $(function() {
 <div class="line"><a name="l00907"></a><span class="lineno">  907</span>&#160; </div>
 <div class="line"><a name="l00908"></a><span class="lineno">  908</span>&#160; </div>
 <div class="line"><a name="l00909"></a><span class="lineno">  909</span>&#160;<span class="comment">//###########################</span></div>
-<div class="line"><a name="l00910"></a><span class="lineno">  910</span>&#160;<span class="keywordtype">double</span> solidstructure::ChernNumber( )</div>
+<div class="line"><a name="l00910"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a739d8fabf271885f20701cb851c57544">  910</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="classsolidstructure.html#a739d8fabf271885f20701cb851c57544">solidstructure::ChernNumber</a>( )</div>
 <div class="line"><a name="l00911"></a><span class="lineno">  911</span>&#160;{</div>
 <div class="line"><a name="l00912"></a><span class="lineno">  912</span>&#160;    </div>
 <div class="line"><a name="l00913"></a><span class="lineno">  913</span>&#160;    <span class="keywordtype">double</span> chern0=0.;</div>
@@ -989,7 +989,7 @@ $(function() {
 <div class="line"><a name="l00922"></a><span class="lineno">  922</span>&#160;            </div>
 <div class="line"><a name="l00923"></a><span class="lineno">  923</span>&#160;                Set_Of_B_BGrad( &amp;g-&gt;k[0][i], &amp;g-&gt;k[1][j] );</div>
 <div class="line"><a name="l00924"></a><span class="lineno">  924</span>&#160;               </div>
-<div class="line"><a name="l00925"></a><span class="lineno">  925</span>&#160;                chern0+=zBcurva_c0*g-&gt;weight[ g-&gt;index(&amp;i,&amp;j,&amp;ktemp) ]*g-&gt;dk[0]*g-&gt;dk[1]/4./pi;</div>
+<div class="line"><a name="l00925"></a><span class="lineno">  925</span>&#160;                chern0+=zBcurva_c0*g-&gt;weight[ g-&gt;index(&amp;i,&amp;j,&amp;ktemp) ]*g-&gt;dk[0]*g-&gt;dk[1]/4./<a class="code" href="constant_8h.html#a43016d873124d39034edb8cd164794db">pi</a>;</div>
 <div class="line"><a name="l00926"></a><span class="lineno">  926</span>&#160;            </div>
 <div class="line"><a name="l00927"></a><span class="lineno">  927</span>&#160;            }</div>
 <div class="line"><a name="l00928"></a><span class="lineno">  928</span>&#160;        </div>
@@ -1001,7 +1001,7 @@ $(function() {
 <div class="line"><a name="l00934"></a><span class="lineno">  934</span>&#160; </div>
 <div class="line"><a name="l00935"></a><span class="lineno">  935</span>&#160; </div>
 <div class="line"><a name="l00936"></a><span class="lineno">  936</span>&#160;<span class="comment">//##########################</span></div>
-<div class="line"><a name="l00937"></a><span class="lineno">  937</span>&#160;<span class="keywordtype">void</span> solidstructure::cdot( <span class="keyword">const</span> complex *v1, <span class="keyword">const</span> complex *v2, <span class="keyword">const</span> <span class="keywordtype">int</span> Nv, complex *res)</div>
+<div class="line"><a name="l00937"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a5a402bc1099a56fcf38414670414ce63">  937</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsolidstructure.html#a5a402bc1099a56fcf38414670414ce63">solidstructure::cdot</a>( <span class="keyword">const</span> <a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> *v1, <span class="keyword">const</span> <a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> *v2, <span class="keyword">const</span> <span class="keywordtype">int</span> Nv, <a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> *res)</div>
 <div class="line"><a name="l00938"></a><span class="lineno">  938</span>&#160;{</div>
 <div class="line"><a name="l00939"></a><span class="lineno">  939</span>&#160;    </div>
 <div class="line"><a name="l00940"></a><span class="lineno">  940</span>&#160;    *res = 0.;</div>
@@ -1012,7 +1012,7 @@ $(function() {
 <div class="line"><a name="l00945"></a><span class="lineno">  945</span>&#160; </div>
 <div class="line"><a name="l00946"></a><span class="lineno">  946</span>&#160; </div>
 <div class="line"><a name="l00947"></a><span class="lineno">  947</span>&#160;<span class="comment">//##########################</span></div>
-<div class="line"><a name="l00948"></a><span class="lineno">  948</span>&#160;<span class="keywordtype">void</span> solidstructure::energy_vc_output( FILE *output, <span class="keywordtype">int</span> skip0=1, <span class="keywordtype">int</span> skip1=1, <span class="keywordtype">int</span> skip2=1 )</div>
+<div class="line"><a name="l00948"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a74202960a4fe88a2bd9e77004ccc7295">  948</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsolidstructure.html#a74202960a4fe88a2bd9e77004ccc7295">solidstructure::energy_vc_output</a>( FILE *output, <span class="keywordtype">int</span> skip0=1, <span class="keywordtype">int</span> skip1=1, <span class="keywordtype">int</span> skip2=1 )</div>
 <div class="line"><a name="l00949"></a><span class="lineno">  949</span>&#160;{</div>
 <div class="line"><a name="l00950"></a><span class="lineno">  950</span>&#160; </div>
 <div class="line"><a name="l00951"></a><span class="lineno">  951</span>&#160;    <span class="keywordflow">if</span> (flag==0)</div>
@@ -1054,7 +1054,7 @@ $(function() {
 <div class="line"><a name="l00987"></a><span class="lineno">  987</span>&#160; </div>
 <div class="line"><a name="l00988"></a><span class="lineno">  988</span>&#160; </div>
 <div class="line"><a name="l00989"></a><span class="lineno">  989</span>&#160;<span class="comment">//##########################</span></div>
-<div class="line"><a name="l00990"></a><span class="lineno">  990</span>&#160;<span class="keywordtype">void</span> solidstructure::dipole_cv_output( FILE *output, <span class="keywordtype">int</span> skip0=1, <span class="keywordtype">int</span> skip1=1, <span class="keywordtype">int</span> skip2=1 )</div>
+<div class="line"><a name="l00990"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a674b9f607917dd1e314c2c9e874ab45b">  990</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsolidstructure.html#a674b9f607917dd1e314c2c9e874ab45b">solidstructure::dipole_cv_output</a>( FILE *output, <span class="keywordtype">int</span> skip0=1, <span class="keywordtype">int</span> skip1=1, <span class="keywordtype">int</span> skip2=1 )</div>
 <div class="line"><a name="l00991"></a><span class="lineno">  991</span>&#160;{</div>
 <div class="line"><a name="l00992"></a><span class="lineno">  992</span>&#160;    </div>
 <div class="line"><a name="l00993"></a><span class="lineno">  993</span>&#160;    <span class="keywordflow">if</span> (flag==0)</div>
@@ -1098,7 +1098,7 @@ $(function() {
 <div class="line"><a name="l01031"></a><span class="lineno"> 1031</span>&#160; </div>
 <div class="line"><a name="l01032"></a><span class="lineno"> 1032</span>&#160; </div>
 <div class="line"><a name="l01033"></a><span class="lineno"> 1033</span>&#160;<span class="comment">//##########################</span></div>
-<div class="line"><a name="l01034"></a><span class="lineno"> 1034</span>&#160;<span class="keywordtype">void</span> solidstructure::connection_c_output( FILE *output, <span class="keywordtype">int</span> skip0=1, <span class="keywordtype">int</span> skip1=1, <span class="keywordtype">int</span> skip2=1 )</div>
+<div class="line"><a name="l01034"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a3afe3a667acdbf454392056b7fd66abe"> 1034</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsolidstructure.html#a3afe3a667acdbf454392056b7fd66abe">solidstructure::connection_c_output</a>( FILE *output, <span class="keywordtype">int</span> skip0=1, <span class="keywordtype">int</span> skip1=1, <span class="keywordtype">int</span> skip2=1 )</div>
 <div class="line"><a name="l01035"></a><span class="lineno"> 1035</span>&#160;{</div>
 <div class="line"><a name="l01036"></a><span class="lineno"> 1036</span>&#160;    </div>
 <div class="line"><a name="l01037"></a><span class="lineno"> 1037</span>&#160;    </div>
@@ -1141,7 +1141,7 @@ $(function() {
 <div class="line"><a name="l01074"></a><span class="lineno"> 1074</span>&#160; </div>
 <div class="line"><a name="l01075"></a><span class="lineno"> 1075</span>&#160; </div>
 <div class="line"><a name="l01076"></a><span class="lineno"> 1076</span>&#160;<span class="comment">//##########################</span></div>
-<div class="line"><a name="l01077"></a><span class="lineno"> 1077</span>&#160;<span class="keywordtype">void</span> solidstructure::curvature_c_output( FILE *output, <span class="keywordtype">int</span> skip0=1, <span class="keywordtype">int</span> skip1=1, <span class="keywordtype">int</span> skip2=1 )</div>
+<div class="line"><a name="l01077"></a><span class="lineno"><a class="line" href="classsolidstructure.html#aba33be747f93f95742ce6e60475f49f0"> 1077</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsolidstructure.html#aba33be747f93f95742ce6e60475f49f0">solidstructure::curvature_c_output</a>( FILE *output, <span class="keywordtype">int</span> skip0=1, <span class="keywordtype">int</span> skip1=1, <span class="keywordtype">int</span> skip2=1 )</div>
 <div class="line"><a name="l01078"></a><span class="lineno"> 1078</span>&#160;{</div>
 <div class="line"><a name="l01079"></a><span class="lineno"> 1079</span>&#160;    </div>
 <div class="line"><a name="l01080"></a><span class="lineno"> 1080</span>&#160;    <span class="keywordflow">if</span> (flag==0)</div>
@@ -1184,7 +1184,7 @@ $(function() {
 <div class="line"><a name="l01117"></a><span class="lineno"> 1117</span>&#160; </div>
 <div class="line"><a name="l01118"></a><span class="lineno"> 1118</span>&#160; </div>
 <div class="line"><a name="l01119"></a><span class="lineno"> 1119</span>&#160;<span class="comment">//##########################</span></div>
-<div class="line"><a name="l01120"></a><span class="lineno"> 1120</span>&#160;<span class="keywordtype">void</span> solidstructure::group_vel_vc_output( FILE *output, <span class="keywordtype">int</span> skip0=1, <span class="keywordtype">int</span> skip1=1, <span class="keywordtype">int</span> skip2=1 )</div>
+<div class="line"><a name="l01120"></a><span class="lineno"><a class="line" href="classsolidstructure.html#a2919a5d44b239f13aeaaed7c69b084be"> 1120</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsolidstructure.html#a2919a5d44b239f13aeaaed7c69b084be">solidstructure::group_vel_vc_output</a>( FILE *output, <span class="keywordtype">int</span> skip0=1, <span class="keywordtype">int</span> skip1=1, <span class="keywordtype">int</span> skip2=1 )</div>
 <div class="line"><a name="l01121"></a><span class="lineno"> 1121</span>&#160;{</div>
 <div class="line"><a name="l01122"></a><span class="lineno"> 1122</span>&#160;    </div>
 <div class="line"><a name="l01123"></a><span class="lineno"> 1123</span>&#160;    </div>
@@ -1238,8 +1238,66 @@ $(function() {
 <div class="line"><a name="l01171"></a><span class="lineno"> 1171</span>&#160; </div>
 <div class="line"><a name="l01172"></a><span class="lineno"> 1172</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* solidstructure_h */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclasssolidstructure_html_a1fb85690e85c17ebcd39f427c7807156"><div class="ttname"><a href="classsolidstructure.html#a1fb85690e85c17ebcd39f427c7807156">solidstructure::set_memory</a></div><div class="ttdeci">void set_memory()</div><div class="ttdef"><b>Definition:</b> solidstructure.h:419</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a161a322bbf9877dfca2d3b04eef939fa"><div class="ttname"><a href="classsolidstructure.html#a161a322bbf9877dfca2d3b04eef939fa">solidstructure::bnorm</a></div><div class="ttdeci">double bnorm</div><div class="ttdef"><b>Definition:</b> solidstructure.h:105</div></div>
+<div class="ttc" id="aconstant_8h_html_ae11e01cd32d72dedca12d3bce0fad0cf"><div class="ttname"><a href="constant_8h.html#ae11e01cd32d72dedca12d3bce0fad0cf">dospi</a></div><div class="ttdeci">const double dospi</div><div class="ttdef"><b>Definition:</b> constant.h:29</div></div>
+<div class="ttc" id="aclasssolidstructure_html_af0e9f9b4deda6fef21f489a4a4daefaf"><div class="ttname"><a href="classsolidstructure.html#af0e9f9b4deda6fef21f489a4a4daefaf">solidstructure::Ec</a></div><div class="ttdeci">void Ec()</div><div class="ttdef"><b>Definition:</b> solidstructure.h:808</div></div>
+<div class="ttc" id="aconstant_8h_html"><div class="ttname"><a href="constant_8h.html">constant.h</a></div></div>
+<div class="ttc" id="aclasssolidstructure_html_aaeb0d67052bfa24440aef2fe77f40de4"><div class="ttname"><a href="classsolidstructure.html#aaeb0d67052bfa24440aef2fe77f40de4">solidstructure::~solidstructure</a></div><div class="ttdeci">~solidstructure()</div><div class="ttdef"><b>Definition:</b> solidstructure.h:286</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a3afe3a667acdbf454392056b7fd66abe"><div class="ttname"><a href="classsolidstructure.html#a3afe3a667acdbf454392056b7fd66abe">solidstructure::connection_c_output</a></div><div class="ttdeci">void connection_c_output(FILE *output, int skip0, int skip1, int skip2)</div><div class="ttdef"><b>Definition:</b> solidstructure.h:1034</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a739d8fabf271885f20701cb851c57544"><div class="ttname"><a href="classsolidstructure.html#a739d8fabf271885f20701cb851c57544">solidstructure::ChernNumber</a></div><div class="ttdeci">double ChernNumber()</div><div class="ttdef"><b>Definition:</b> solidstructure.h:910</div></div>
+<div class="ttc" id="aconstant_8h_html_a7585f9c650521ad09bbed8c7369caf87"><div class="ttname"><a href="constant_8h.html#a7585f9c650521ad09bbed8c7369caf87">I</a></div><div class="ttdeci">const complex I</div><div class="ttdef"><b>Definition:</b> constant.h:24</div></div>
+<div class="ttc" id="aclasssolidstructure_html_ac6421a34d0f120ff60f81bad453500d4"><div class="ttname"><a href="classsolidstructure.html#ac6421a34d0f120ff60f81bad453500d4">solidstructure::MinEGap</a></div><div class="ttdeci">double MinEGap</div><div class="ttdef"><b>Definition:</b> solidstructure.h:128</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a138f0f600870a14b7069d0f1908e0f14"><div class="ttname"><a href="classsolidstructure.html#a138f0f600870a14b7069d0f1908e0f14">solidstructure::myRegularization</a></div><div class="ttdeci">double myRegularization(double const *kx, double const *ky, double *skx, double *sky)</div><div class="ttdef"><b>Definition:</b> solidstructure.h:314</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a455f8364c92f1d986dca2f4b0d76e945"><div class="ttname"><a href="classsolidstructure.html#a455f8364c92f1d986dca2f4b0d76e945">solidstructure::zbcurva_c</a></div><div class="ttdeci">double * zbcurva_c</div><div class="ttdef"><b>Definition:</b> solidstructure.h:89</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a7bb841240adb9dc96bcd02c9a967449c"><div class="ttname"><a href="classsolidstructure.html#a7bb841240adb9dc96bcd02c9a967449c">solidstructure::anomalous_velCV</a></div><div class="ttdeci">void anomalous_velCV(complex const efield, double const zBerryCurvature)</div><div class="ttdef"><b>Definition:</b> solidstructure.h:894</div></div>
+<div class="ttc" id="aconstant_8h_html_a43016d873124d39034edb8cd164794db"><div class="ttname"><a href="constant_8h.html#a43016d873124d39034edb8cd164794db">pi</a></div><div class="ttdeci">const double pi</div><div class="ttdef"><b>Definition:</b> constant.h:28</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a0a5b3a820258fae192113dabd0715747"><div class="ttname"><a href="classsolidstructure.html#a0a5b3a820258fae192113dabd0715747">solidstructure::ybnorm0</a></div><div class="ttdeci">double ybnorm0</div><div class="ttdef"><b>Definition:</b> solidstructure.h:107</div></div>
+<div class="ttc" id="a_t_m_d_cs_8h_html_a0fa4878c968311979d497ccc322e0b9b"><div class="ttname"><a href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a></div><div class="ttdeci">#define complex</div><div class="ttdef"><b>Definition:</b> TMDCs.h:20</div></div>
+<div class="ttc" id="aclasssolidstructure_html_abc59ba0f6a253b8910377c3e2d3624ef"><div class="ttname"><a href="classsolidstructure.html#abc59ba0f6a253b8910377c3e2d3624ef">solidstructure::lattice_structure</a></div><div class="ttdeci">void lattice_structure()</div><div class="ttdef"><b>Definition:</b> solidstructure.h:345</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a0a9c955d422d69f4e08b0a7ecb10945d"><div class="ttname"><a href="classsolidstructure.html#a0a9c955d422d69f4e08b0a7ecb10945d">solidstructure::eps_phi0</a></div><div class="ttdeci">double eps_phi0</div><div class="ttdef"><b>Definition:</b> solidstructure.h:164</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a674b9f607917dd1e314c2c9e874ab45b"><div class="ttname"><a href="classsolidstructure.html#a674b9f607917dd1e314c2c9e874ab45b">solidstructure::dipole_cv_output</a></div><div class="ttdeci">void dipole_cv_output(FILE *output, int skip0, int skip1, int skip2)</div><div class="ttdef"><b>Definition:</b> solidstructure.h:990</div></div>
 <div class="ttc" id="aclasssolidstructure_html"><div class="ttname"><a href="classsolidstructure.html">solidstructure</a></div><div class="ttdef"><b>Definition:</b> solidstructure.h:30</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a0af4eef40ba7dd4f7744006116eb1cad"><div class="ttname"><a href="classsolidstructure.html#a0af4eef40ba7dd4f7744006116eb1cad">solidstructure::bases_vectors</a></div><div class="ttdeci">void bases_vectors()</div><div class="ttdef"><b>Definition:</b> solidstructure.h:458</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a69a222f7694f074c327b502ca02bb246"><div class="ttname"><a href="classsolidstructure.html#a69a222f7694f074c327b502ca02bb246">solidstructure::haldane_model_params</a></div><div class="ttdeci">void haldane_model_params(double const *_t1, double const *_t2, double const *_phi0, double const *_M0, int const _gauge)</div><div class="ttdef"><b>Definition:</b> solidstructure.h:325</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a0bd277e20f3713657f5ffba8bf52a17d"><div class="ttname"><a href="classsolidstructure.html#a0bd277e20f3713657f5ffba8bf52a17d">solidstructure::energy_gap</a></div><div class="ttdeci">double * energy_gap</div><div class="ttdef"><b>Definition:</b> solidstructure.h:66</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a2635561e225c5182309e4eb962927c5d"><div class="ttname"><a href="classsolidstructure.html#a2635561e225c5182309e4eb962927c5d">solidstructure::yanomalous_v0</a></div><div class="ttdeci">double yanomalous_v0</div><div class="ttdef"><b>Definition:</b> solidstructure.h:135</div></div>
+<div class="ttc" id="aclasssolidstructure_html_aba33be747f93f95742ce6e60475f49f0"><div class="ttname"><a href="classsolidstructure.html#aba33be747f93f95742ce6e60475f49f0">solidstructure::curvature_c_output</a></div><div class="ttdeci">void curvature_c_output(FILE *output, int skip0, int skip1, int skip2)</div><div class="ttdef"><b>Definition:</b> solidstructure.h:1077</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a0eff5d262c12300304b090f7df28ffbf"><div class="ttname"><a href="classsolidstructure.html#a0eff5d262c12300304b090f7df28ffbf">solidstructure::xvberryconn0</a></div><div class="ttdeci">double xvberryconn0</div><div class="ttdef"><b>Definition:</b> solidstructure.h:125</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a6e5d2358df94d8243cf86fe8585de177"><div class="ttname"><a href="classsolidstructure.html#a6e5d2358df94d8243cf86fe8585de177">solidstructure::Set_Of_B_BGrad</a></div><div class="ttdeci">void Set_Of_B_BGrad(double const *kx, double const *ky)</div><div class="ttdef"><b>Definition:</b> solidstructure.h:547</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a8142bc1c120df5887a852356d3872f68"><div class="ttname"><a href="classsolidstructure.html#a8142bc1c120df5887a852356d3872f68">solidstructure::yanomalous_c0</a></div><div class="ttdeci">double yanomalous_c0</div><div class="ttdef"><b>Definition:</b> solidstructure.h:136</div></div>
+<div class="ttc" id="aconstant_8h_html_a957c4ea902833ed08f112787ca559a21"><div class="ttname"><a href="constant_8h.html#a957c4ea902833ed08f112787ca559a21">Ngrad</a></div><div class="ttdeci">const int Ngrad</div><div class="ttdef"><b>Definition:</b> constant.h:41</div></div>
+<div class="ttc" id="aclasssolidstructure_html_ad65be23fe20398cd43cc0cfe7bedd0b8"><div class="ttname"><a href="classsolidstructure.html#ad65be23fe20398cd43cc0cfe7bedd0b8">solidstructure::rflag</a></div><div class="ttdeci">int rflag</div><div class="ttdef"><b>Definition:</b> solidstructure.h:50</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a95d60d36f1303236002d1e5de841081d"><div class="ttname"><a href="classsolidstructure.html#a95d60d36f1303236002d1e5de841081d">solidstructure::dipoleCV</a></div><div class="ttdeci">void dipoleCV()</div><div class="ttdef"><b>Definition:</b> solidstructure.h:844</div></div>
+<div class="ttc" id="aclasssolidstructure_html_ada59a3c2d49c7a1f31c329cb7aa5ec6c"><div class="ttname"><a href="classsolidstructure.html#ada59a3c2d49c7a1f31c329cb7aa5ec6c">solidstructure::yvberryconn0</a></div><div class="ttdeci">double yvberryconn0</div><div class="ttdef"><b>Definition:</b> solidstructure.h:126</div></div>
+<div class="ttc" id="amomaxis_8h_html"><div class="ttname"><a href="momaxis_8h.html">momaxis.h</a></div></div>
+<div class="ttc" id="aclasssolidstructure_html_a5a402bc1099a56fcf38414670414ce63"><div class="ttname"><a href="classsolidstructure.html#a5a402bc1099a56fcf38414670414ce63">solidstructure::cdot</a></div><div class="ttdeci">void cdot(const complex *v1, const complex *v2, const int Nv, complex *res)</div><div class="ttdef"><b>Definition:</b> solidstructure.h:937</div></div>
+<div class="ttc" id="aclasssolidstructure_html_aa394de5b9a5f47ce48600802aabd50bc"><div class="ttname"><a href="classsolidstructure.html#aa394de5b9a5f47ce48600802aabd50bc">solidstructure::re_width</a></div><div class="ttdeci">double re_width</div><div class="ttdef"><b>Definition:</b> solidstructure.h:130</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a02f71baa64292f9f97d091d60692cc15"><div class="ttname"><a href="classsolidstructure.html#a02f71baa64292f9f97d091d60692cc15">solidstructure::wave_norm2</a></div><div class="ttdeci">double wave_norm2</div><div class="ttdef"><b>Definition:</b> solidstructure.h:111</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a9685b451e5ff03c3e68edb01157c114b"><div class="ttname"><a href="classsolidstructure.html#a9685b451e5ff03c3e68edb01157c114b">solidstructure::flag</a></div><div class="ttdeci">double flag</div><div class="ttdef"><b>Definition:</b> solidstructure.h:175</div></div>
+<div class="ttc" id="aclassmomaxis_html_a3003cd2745d7d6da227bea6cdec035a2"><div class="ttname"><a href="classmomaxis.html#a3003cd2745d7d6da227bea6cdec035a2">momaxis::N</a></div><div class="ttdeci">array&lt; int, Ndim &gt; N</div><div class="ttdef"><b>Definition:</b> momaxis.h:47</div></div>
 <div class="ttc" id="aclassmomaxis_html"><div class="ttname"><a href="classmomaxis.html">momaxis</a></div><div class="ttdef"><b>Definition:</b> momaxis.h:32</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a0099c1817dd97ed9faa810241d728c7b"><div class="ttname"><a href="classsolidstructure.html#a0099c1817dd97ed9faa810241d728c7b">solidstructure::angle_b0</a></div><div class="ttdeci">double angle_b0</div><div class="ttdef"><b>Definition:</b> solidstructure.h:176</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a6d7628d8a0b2ce1d30a24f9fb12dc85a"><div class="ttname"><a href="classsolidstructure.html#a6d7628d8a0b2ce1d30a24f9fb12dc85a">solidstructure::zBcurva_v0</a></div><div class="ttdeci">double zBcurva_v0</div><div class="ttdef"><b>Definition:</b> solidstructure.h:124</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a341622ecc3eefc025cf7229be3c7528f"><div class="ttname"><a href="classsolidstructure.html#a341622ecc3eefc025cf7229be3c7528f">solidstructure::zBerryCurvaCV</a></div><div class="ttdeci">void zBerryCurvaCV()</div><div class="ttdef"><b>Definition:</b> solidstructure.h:858</div></div>
+<div class="ttc" id="aclassmomaxis_html_ae1cb1bc0c29d74ef6a0ff16d34c8a554"><div class="ttname"><a href="classmomaxis.html#ae1cb1bc0c29d74ef6a0ff16d34c8a554">momaxis::imethod</a></div><div class="ttdeci">string imethod</div><div class="ttdef"><b>Definition:</b> momaxis.h:52</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a8ce5aade72d28c2ed8aeabf9060b912a"><div class="ttname"><a href="classsolidstructure.html#a8ce5aade72d28c2ed8aeabf9060b912a">solidstructure::curvatemp2</a></div><div class="ttdeci">complex curvatemp2</div><div class="ttdef"><b>Definition:</b> solidstructure.h:148</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a749544e9b33c8dbf7d89119c8ffb4e6d"><div class="ttname"><a href="classsolidstructure.html#a749544e9b33c8dbf7d89119c8ffb4e6d">solidstructure::Ev</a></div><div class="ttdeci">void Ev()</div><div class="ttdef"><b>Definition:</b> solidstructure.h:818</div></div>
+<div class="ttc" id="aclasssolidstructure_html_add1505f4d3f02ee9dbea7b808014c823"><div class="ttname"><a href="classsolidstructure.html#add1505f4d3f02ee9dbea7b808014c823">solidstructure::zbcurva_v</a></div><div class="ttdeci">double * zbcurva_v</div><div class="ttdef"><b>Definition:</b> solidstructure.h:88</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a152ec73da9300476610c1eb671650659"><div class="ttname"><a href="classsolidstructure.html#a152ec73da9300476610c1eb671650659">solidstructure::g</a></div><div class="ttdeci">momaxis * g</div><div class="ttdef"><b>Definition:</b> solidstructure.h:58</div></div>
+<div class="ttc" id="aclasssolidstructure_html_ac217db4795d8ddfdaaa81bb2adc9cac2"><div class="ttname"><a href="classsolidstructure.html#ac217db4795d8ddfdaaa81bb2adc9cac2">solidstructure::xbnorm0</a></div><div class="ttdeci">double xbnorm0</div><div class="ttdef"><b>Definition:</b> solidstructure.h:106</div></div>
+<div class="ttc" id="aclasssolidstructure_html_ad9de8b99d76ba61889a33e98df239239"><div class="ttname"><a href="classsolidstructure.html#ad9de8b99d76ba61889a33e98df239239">solidstructure::min</a></div><div class="ttdeci">double min(double *v, int Nsize)</div><div class="ttdef"><b>Definition:</b> solidstructure.h:390</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a74202960a4fe88a2bd9e77004ccc7295"><div class="ttname"><a href="classsolidstructure.html#a74202960a4fe88a2bd9e77004ccc7295">solidstructure::energy_vc_output</a></div><div class="ttdeci">void energy_vc_output(FILE *output, int skip0, int skip1, int skip2)</div><div class="ttdef"><b>Definition:</b> solidstructure.h:948</div></div>
+<div class="ttc" id="aclasssolidstructure_html_ad93c55ce67503c1c6ee62442107fe537"><div class="ttname"><a href="classsolidstructure.html#ad93c55ce67503c1c6ee62442107fe537">solidstructure::BerryConnectionCV</a></div><div class="ttdeci">void BerryConnectionCV()</div><div class="ttdef"><b>Definition:</b> solidstructure.h:826</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a638224d778509e7d0526969dc994a5e8"><div class="ttname"><a href="classsolidstructure.html#a638224d778509e7d0526969dc994a5e8">solidstructure::solidstructure</a></div><div class="ttdeci">solidstructure(const momaxis *_g, const double *_a0, const double *_dephasing, const double *_dephasing2)</div><div class="ttdef"><b>Definition:</b> solidstructure.h:250</div></div>
+<div class="ttc" id="aclasssolidstructure_html_ac5c81c34bceee9c99d1b3fed220954aa"><div class="ttname"><a href="classsolidstructure.html#ac5c81c34bceee9c99d1b3fed220954aa">solidstructure::group_velCV</a></div><div class="ttdeci">void group_velCV()</div><div class="ttdef"><b>Definition:</b> solidstructure.h:878</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a2919a5d44b239f13aeaaed7c69b084be"><div class="ttname"><a href="classsolidstructure.html#a2919a5d44b239f13aeaaed7c69b084be">solidstructure::group_vel_vc_output</a></div><div class="ttdeci">void group_vel_vc_output(FILE *output, int skip0, int skip1, int skip2)</div><div class="ttdef"><b>Definition:</b> solidstructure.h:1120</div></div>
+<div class="ttc" id="aclasssolidstructure_html_afe7bd0c7be95cebaa7d77645523b1ea0"><div class="ttname"><a href="classsolidstructure.html#afe7bd0c7be95cebaa7d77645523b1ea0">solidstructure::gauge</a></div><div class="ttdeci">int gauge</div><div class="ttdef"><b>Definition:</b> solidstructure.h:109</div></div>
+<div class="ttc" id="aclasssolidstructure_html_adc4228fa56a5f5f1eee9f01149b92000"><div class="ttname"><a href="classsolidstructure.html#adc4228fa56a5f5f1eee9f01149b92000">solidstructure::max</a></div><div class="ttdeci">double max(double *v, int Nsize)</div><div class="ttdef"><b>Definition:</b> solidstructure.h:405</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a9935bef87fc036a700a845bab35ac8fc"><div class="ttname"><a href="classsolidstructure.html#a9935bef87fc036a700a845bab35ac8fc">solidstructure::t2</a></div><div class="ttdeci">double t2</div><div class="ttdef"><b>Definition:</b> solidstructure.h:53</div></div>
+<div class="ttc" id="aclasssolidstructure_html_ada2661133bcfd6ab85c26dd869e5ab85"><div class="ttname"><a href="classsolidstructure.html#ada2661133bcfd6ab85c26dd869e5ab85">solidstructure::T2</a></div><div class="ttdeci">double T2</div><div class="ttdef"><b>Definition:</b> solidstructure.h:90</div></div>
+<div class="ttc" id="aclasssolidstructure_html_ad357ab808b8755cdd2e0e2c72f362c70"><div class="ttname"><a href="classsolidstructure.html#ad357ab808b8755cdd2e0e2c72f362c70">solidstructure::energyv0</a></div><div class="ttdeci">double energyv0</div><div class="ttdef"><b>Definition:</b> solidstructure.h:121</div></div>
+<div class="ttc" id="aclasssolidstructure_html_a3b1d3e6472cd4999a0017dfe84a6d3bf"><div class="ttname"><a href="classsolidstructure.html#a3b1d3e6472cd4999a0017dfe84a6d3bf">solidstructure::reg0</a></div><div class="ttdeci">double reg0</div><div class="ttdef"><b>Definition:</b> solidstructure.h:131</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

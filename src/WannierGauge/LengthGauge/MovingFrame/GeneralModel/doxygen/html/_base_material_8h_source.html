@@ -65,7 +65,7 @@ $(function() {
 <div class="title">BaseMaterial.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<a href="_base_material_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
@@ -73,13 +73,13 @@ $(function() {
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;array&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;tuple&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;libconfig.h++&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;constant.h&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="constant_8h.html">constant.h</a>&quot;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">enum class</span> InitialValueType</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="_base_material_8h.html#a2a3bc89222d9566b96c351321b451286">   15</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="_base_material_8h.html#a2a3bc89222d9566b96c351321b451286">InitialValueType</a></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    UniformValence,</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    FermiDirac,</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    Custom</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="_base_material_8h.html#a2a3bc89222d9566b96c351321b451286a41e47c72fc66e2527412bd6bd29911bf">UniformValence</a>,</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="_base_material_8h.html#a2a3bc89222d9566b96c351321b451286a25149c17a6bca3d87edd9ee80cdb4df5">FermiDirac</a>,</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="_base_material_8h.html#a2a3bc89222d9566b96c351321b451286a90589c47f06eb971d548591f23c285af">Custom</a></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;};</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="class_base_material.html">   22</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_base_material.html">BaseMaterial</a></div>
@@ -91,36 +91,43 @@ $(function() {
 <div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="class_base_material.html#a90dd928adc8fff78b06a3e19bc133f49">   31</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_base_material.html#a90dd928adc8fff78b06a3e19bc133f49">~BaseMaterial</a>() {};</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    </div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="class_base_material.html#ad2630d3b55e2a642d21fa6d3d8c867ed">   40</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_base_material.html#ad2630d3b55e2a642d21fa6d3d8c867ed">GenInitialValue</a>(complex *_dmstore, std::array&lt;double, Ndim&gt; _kpoint)</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="class_base_material.html#ad2630d3b55e2a642d21fa6d3d8c867ed">   40</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_base_material.html#ad2630d3b55e2a642d21fa6d3d8c867ed">GenInitialValue</a>(<a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> *_dmstore, std::array&lt;double, Ndim&gt; _kpoint)</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    {</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        cerr &lt;&lt; <span class="stringliteral">&quot;Error: Try to using custom inital value without implementing GenInitialValue.&quot;</span>;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        exit(EXIT_FAILURE);</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    };</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_base_material.html#a4090b0669eefbd99b3bf824e0ef65810">GenHamiltonian</a>(complex *_hstore, std::array&lt;double, Ndim&gt; _kpoint) = 0;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_base_material.html#a4090b0669eefbd99b3bf824e0ef65810">GenHamiltonian</a>(<a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> *_hstore, std::array&lt;double, Ndim&gt; _kpoint) = 0;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_base_material.html#af8a9f23ac1ddcb07afd9657582377af7">GenDipole</a>(complex **_dstore, std::array&lt;double, Ndim&gt; _kpoint) = 0;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_base_material.html#af8a9f23ac1ddcb07afd9657582377af7">GenDipole</a>(<a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> **_dstore, std::array&lt;double, Ndim&gt; _kpoint) = 0;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_base_material.html#af40f6eb595ac0437cea9bb94f4bf036b">GenJMatrix</a>(complex **_jstore, std::array&lt;double, Ndim&gt; _kpoint) = 0;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_base_material.html#af40f6eb595ac0437cea9bb94f4bf036b">GenJMatrix</a>(<a class="code" href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> **_jstore, std::array&lt;double, Ndim&gt; _kpoint) = 0;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keyword">virtual</span> std::tuple&lt;std::array&lt;double, Ndim*Ndim&gt;, std::array&lt;double, Ndim&gt; &gt; <a class="code" href="class_base_material.html#ad502cd0e3d6c200489a07476bc579f0c">GenBrillouinzone</a>() = 0;</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> PrintMaterialInformation() = 0;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_base_material.html#a17addbe0f1a21e939995a9234c10b42c">PrintMaterialInformation</a>() = 0;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclass_base_material_html_a4090b0669eefbd99b3bf824e0ef65810"><div class="ttname"><a href="class_base_material.html#a4090b0669eefbd99b3bf824e0ef65810">BaseMaterial::GenHamiltonian</a></div><div class="ttdeci">virtual void GenHamiltonian(complex *_hstore, std::array&lt; double, Ndim &gt; _kpoint)=0</div><div class="ttdoc">Generate Hamiltonian matrix - tight binding matrix.</div></div>
+<div class="ttc" id="aconstant_8h_html"><div class="ttname"><a href="constant_8h.html">constant.h</a></div></div>
 <div class="ttc" id="aclass_base_material_html_af40f6eb595ac0437cea9bb94f4bf036b"><div class="ttname"><a href="class_base_material.html#af40f6eb595ac0437cea9bb94f4bf036b">BaseMaterial::GenJMatrix</a></div><div class="ttdeci">virtual void GenJMatrix(complex **_jstore, std::array&lt; double, Ndim &gt; _kpoint)=0</div><div class="ttdoc">Generate interband and intraband current matrix.</div></div>
+<div class="ttc" id="a_base_material_8h_html_a2a3bc89222d9566b96c351321b451286a25149c17a6bca3d87edd9ee80cdb4df5"><div class="ttname"><a href="_base_material_8h.html#a2a3bc89222d9566b96c351321b451286a25149c17a6bca3d87edd9ee80cdb4df5">InitialValueType::FermiDirac</a></div><div class="ttdeci">@ FermiDirac</div></div>
+<div class="ttc" id="aclass_base_material_html_a17addbe0f1a21e939995a9234c10b42c"><div class="ttname"><a href="class_base_material.html#a17addbe0f1a21e939995a9234c10b42c">BaseMaterial::PrintMaterialInformation</a></div><div class="ttdeci">virtual void PrintMaterialInformation()=0</div></div>
+<div class="ttc" id="a_base_material_8h_html_a2a3bc89222d9566b96c351321b451286"><div class="ttname"><a href="_base_material_8h.html#a2a3bc89222d9566b96c351321b451286">InitialValueType</a></div><div class="ttdeci">InitialValueType</div><div class="ttdoc">Ancestor class of every material Hamiltonian generator.</div><div class="ttdef"><b>Definition:</b> BaseMaterial.h:15</div></div>
+<div class="ttc" id="a_t_m_d_cs_8h_html_a0fa4878c968311979d497ccc322e0b9b"><div class="ttname"><a href="_t_m_d_cs_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a></div><div class="ttdeci">#define complex</div><div class="ttdef"><b>Definition:</b> TMDCs.h:20</div></div>
 <div class="ttc" id="aclass_base_material_html_a90dd928adc8fff78b06a3e19bc133f49"><div class="ttname"><a href="class_base_material.html#a90dd928adc8fff78b06a3e19bc133f49">BaseMaterial::~BaseMaterial</a></div><div class="ttdeci">virtual ~BaseMaterial()</div><div class="ttdoc">virtual desctructor is used to prevent memory leak</div><div class="ttdef"><b>Definition:</b> BaseMaterial.h:31</div></div>
 <div class="ttc" id="aclass_base_material_html_ad2630d3b55e2a642d21fa6d3d8c867ed"><div class="ttname"><a href="class_base_material.html#ad2630d3b55e2a642d21fa6d3d8c867ed">BaseMaterial::GenInitialValue</a></div><div class="ttdeci">virtual void GenInitialValue(complex *_dmstore, std::array&lt; double, Ndim &gt; _kpoint)</div><div class="ttdoc">Generate custom inital value.</div><div class="ttdef"><b>Definition:</b> BaseMaterial.h:40</div></div>
 <div class="ttc" id="aclass_base_material_html_ad502cd0e3d6c200489a07476bc579f0c"><div class="ttname"><a href="class_base_material.html#ad502cd0e3d6c200489a07476bc579f0c">BaseMaterial::GenBrillouinzone</a></div><div class="ttdeci">virtual std::tuple&lt; std::array&lt; double, Ndim *Ndim &gt;, std::array&lt; double, Ndim &gt; &gt; GenBrillouinzone()=0</div><div class="ttdoc">Generate Brillouin zone information.</div></div>
 <div class="ttc" id="aclass_base_material_html_a450fe898d8f43d6eb075ec92c6a11241"><div class="ttname"><a href="class_base_material.html#a450fe898d8f43d6eb075ec92c6a11241">BaseMaterial::Nband</a></div><div class="ttdeci">int Nband</div><div class="ttdoc">Number of bands.</div><div class="ttdef"><b>Definition:</b> BaseMaterial.h:26</div></div>
 <div class="ttc" id="aclass_base_material_html_af8a9f23ac1ddcb07afd9657582377af7"><div class="ttname"><a href="class_base_material.html#af8a9f23ac1ddcb07afd9657582377af7">BaseMaterial::GenDipole</a></div><div class="ttdeci">virtual void GenDipole(complex **_dstore, std::array&lt; double, Ndim &gt; _kpoint)=0</div><div class="ttdoc">Generate dipole matrix in Wannier basis.</div></div>
+<div class="ttc" id="a_base_material_8h_html_a2a3bc89222d9566b96c351321b451286a90589c47f06eb971d548591f23c285af"><div class="ttname"><a href="_base_material_8h.html#a2a3bc89222d9566b96c351321b451286a90589c47f06eb971d548591f23c285af">InitialValueType::Custom</a></div><div class="ttdeci">@ Custom</div></div>
 <div class="ttc" id="aclass_base_material_html_a271a5f25c64e0b7dae8f344d076fb328"><div class="ttname"><a href="class_base_material.html#a271a5f25c64e0b7dae8f344d076fb328">BaseMaterial::Nval</a></div><div class="ttdeci">int Nval</div><div class="ttdoc">Number of valence bands - only used for indicating which band is lowest conduction band.</div><div class="ttdef"><b>Definition:</b> BaseMaterial.h:28</div></div>
 <div class="ttc" id="aclass_base_material_html"><div class="ttname"><a href="class_base_material.html">BaseMaterial</a></div><div class="ttdef"><b>Definition:</b> BaseMaterial.h:22</div></div>
+<div class="ttc" id="a_base_material_8h_html_a2a3bc89222d9566b96c351321b451286a41e47c72fc66e2527412bd6bd29911bf"><div class="ttname"><a href="_base_material_8h.html#a2a3bc89222d9566b96c351321b451286a41e47c72fc66e2527412bd6bd29911bf">InitialValueType::UniformValence</a></div><div class="ttdeci">@ UniformValence</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

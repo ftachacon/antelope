@@ -69,6 +69,8 @@ $(function() {
 <div class="title">BaseMaterial Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_base_material_8h_source.html">BaseMaterial.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for BaseMaterial:</div>
 <div class="dyncontent">
@@ -83,40 +85,64 @@ Inheritance diagram for BaseMaterial:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a90dd928adc8fff78b06a3e19bc133f49"><td class="memItemLeft" align="right" valign="top"><a id="a90dd928adc8fff78b06a3e19bc133f49"></a>
-virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_material.html#a90dd928adc8fff78b06a3e19bc133f49">~BaseMaterial</a> ()</td></tr>
-<tr class="memdesc:a90dd928adc8fff78b06a3e19bc133f49"><td class="mdescLeft">&#160;</td><td class="mdescRight">virtual desctructor is used to prevent memory leak <br /></td></tr>
+<tr class="memitem:a90dd928adc8fff78b06a3e19bc133f49"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_material.html#a90dd928adc8fff78b06a3e19bc133f49">~BaseMaterial</a> ()</td></tr>
+<tr class="memdesc:a90dd928adc8fff78b06a3e19bc133f49"><td class="mdescLeft">&#160;</td><td class="mdescRight">virtual desctructor is used to prevent memory leak  <a href="class_base_material.html#a90dd928adc8fff78b06a3e19bc133f49">More...</a><br /></td></tr>
 <tr class="separator:a90dd928adc8fff78b06a3e19bc133f49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2630d3b55e2a642d21fa6d3d8c867ed"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_material.html#ad2630d3b55e2a642d21fa6d3d8c867ed">GenInitialValue</a> (complex *_dmstore, std::array&lt; double, Ndim &gt; _kpoint)</td></tr>
+<tr class="memitem:ad2630d3b55e2a642d21fa6d3d8c867ed"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_material.html#ad2630d3b55e2a642d21fa6d3d8c867ed">GenInitialValue</a> (<a class="el" href="_s_b_es_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> *_dmstore, std::array&lt; double, <a class="el" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a> &gt; _kpoint)</td></tr>
 <tr class="memdesc:ad2630d3b55e2a642d21fa6d3d8c867ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate custom inital value.  <a href="class_base_material.html#ad2630d3b55e2a642d21fa6d3d8c867ed">More...</a><br /></td></tr>
 <tr class="separator:ad2630d3b55e2a642d21fa6d3d8c867ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4090b0669eefbd99b3bf824e0ef65810"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_material.html#a4090b0669eefbd99b3bf824e0ef65810">GenHamiltonian</a> (complex *_hstore, std::array&lt; double, Ndim &gt; _kpoint)=0</td></tr>
+<tr class="memitem:a4090b0669eefbd99b3bf824e0ef65810"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_material.html#a4090b0669eefbd99b3bf824e0ef65810">GenHamiltonian</a> (<a class="el" href="_s_b_es_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> *_hstore, std::array&lt; double, <a class="el" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a> &gt; _kpoint)=0</td></tr>
 <tr class="memdesc:a4090b0669eefbd99b3bf824e0ef65810"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate Hamiltonian matrix - tight binding matrix.  <a href="class_base_material.html#a4090b0669eefbd99b3bf824e0ef65810">More...</a><br /></td></tr>
 <tr class="separator:a4090b0669eefbd99b3bf824e0ef65810"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8a9f23ac1ddcb07afd9657582377af7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_material.html#af8a9f23ac1ddcb07afd9657582377af7">GenDipole</a> (complex **_dstore, std::array&lt; double, Ndim &gt; _kpoint)=0</td></tr>
+<tr class="memitem:af8a9f23ac1ddcb07afd9657582377af7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_material.html#af8a9f23ac1ddcb07afd9657582377af7">GenDipole</a> (<a class="el" href="_s_b_es_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> **_dstore, std::array&lt; double, <a class="el" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a> &gt; _kpoint)=0</td></tr>
 <tr class="memdesc:af8a9f23ac1ddcb07afd9657582377af7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate dipole matrix in Wannier basis.  <a href="class_base_material.html#af8a9f23ac1ddcb07afd9657582377af7">More...</a><br /></td></tr>
 <tr class="separator:af8a9f23ac1ddcb07afd9657582377af7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af40f6eb595ac0437cea9bb94f4bf036b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_material.html#af40f6eb595ac0437cea9bb94f4bf036b">GenJMatrix</a> (complex **_jstore, std::array&lt; double, Ndim &gt; _kpoint)=0</td></tr>
+<tr class="memitem:af40f6eb595ac0437cea9bb94f4bf036b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_material.html#af40f6eb595ac0437cea9bb94f4bf036b">GenJMatrix</a> (<a class="el" href="_s_b_es_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> **_jstore, std::array&lt; double, <a class="el" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a> &gt; _kpoint)=0</td></tr>
 <tr class="memdesc:af40f6eb595ac0437cea9bb94f4bf036b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate interband and intraband current matrix.  <a href="class_base_material.html#af40f6eb595ac0437cea9bb94f4bf036b">More...</a><br /></td></tr>
 <tr class="separator:af40f6eb595ac0437cea9bb94f4bf036b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad502cd0e3d6c200489a07476bc579f0c"><td class="memItemLeft" align="right" valign="top">virtual std::tuple&lt; std::array&lt; double, Ndim *Ndim &gt;, std::array&lt; double, Ndim &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_material.html#ad502cd0e3d6c200489a07476bc579f0c">GenBrillouinzone</a> ()=0</td></tr>
+<tr class="memitem:ad502cd0e3d6c200489a07476bc579f0c"><td class="memItemLeft" align="right" valign="top">virtual std::tuple&lt; std::array&lt; double, <a class="el" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a> *<a class="el" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a> &gt;, std::array&lt; double, <a class="el" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_material.html#ad502cd0e3d6c200489a07476bc579f0c">GenBrillouinzone</a> ()=0</td></tr>
 <tr class="memdesc:ad502cd0e3d6c200489a07476bc579f0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate Brillouin zone information.  <a href="class_base_material.html#ad502cd0e3d6c200489a07476bc579f0c">More...</a><br /></td></tr>
 <tr class="separator:ad502cd0e3d6c200489a07476bc579f0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17addbe0f1a21e939995a9234c10b42c"><td class="memItemLeft" align="right" valign="top"><a id="a17addbe0f1a21e939995a9234c10b42c"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>PrintMaterialInformation</b> ()=0</td></tr>
+<tr class="memitem:a17addbe0f1a21e939995a9234c10b42c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_material.html#a17addbe0f1a21e939995a9234c10b42c">PrintMaterialInformation</a> ()=0</td></tr>
 <tr class="separator:a17addbe0f1a21e939995a9234c10b42c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a450fe898d8f43d6eb075ec92c6a11241"><td class="memItemLeft" align="right" valign="top"><a id="a450fe898d8f43d6eb075ec92c6a11241"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_material.html#a450fe898d8f43d6eb075ec92c6a11241">Nband</a></td></tr>
-<tr class="memdesc:a450fe898d8f43d6eb075ec92c6a11241"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bands. <br /></td></tr>
+<tr class="memitem:a450fe898d8f43d6eb075ec92c6a11241"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_material.html#a450fe898d8f43d6eb075ec92c6a11241">Nband</a></td></tr>
+<tr class="memdesc:a450fe898d8f43d6eb075ec92c6a11241"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bands.  <a href="class_base_material.html#a450fe898d8f43d6eb075ec92c6a11241">More...</a><br /></td></tr>
 <tr class="separator:a450fe898d8f43d6eb075ec92c6a11241"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a271a5f25c64e0b7dae8f344d076fb328"><td class="memItemLeft" align="right" valign="top"><a id="a271a5f25c64e0b7dae8f344d076fb328"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_material.html#a271a5f25c64e0b7dae8f344d076fb328">Nval</a></td></tr>
-<tr class="memdesc:a271a5f25c64e0b7dae8f344d076fb328"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of valence bands - only used for indicating which band is lowest conduction band. <br /></td></tr>
+<tr class="memitem:a271a5f25c64e0b7dae8f344d076fb328"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_material.html#a271a5f25c64e0b7dae8f344d076fb328">Nval</a></td></tr>
+<tr class="memdesc:a271a5f25c64e0b7dae8f344d076fb328"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of valence bands - only used for indicating which band is lowest conduction band.  <a href="class_base_material.html#a271a5f25c64e0b7dae8f344d076fb328">More...</a><br /></td></tr>
 <tr class="separator:a271a5f25c64e0b7dae8f344d076fb328"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a90dd928adc8fff78b06a3e19bc133f49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90dd928adc8fff78b06a3e19bc133f49">&#9670;&nbsp;</a></span>~BaseMaterial()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual BaseMaterial::~BaseMaterial </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>virtual desctructor is used to prevent memory leak </p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="ad502cd0e3d6c200489a07476bc579f0c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad502cd0e3d6c200489a07476bc579f0c">&#9670;&nbsp;</a></span>GenBrillouinzone()</h2>
@@ -128,7 +154,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::tuple&lt;std::array&lt;double, Ndim*Ndim&gt;, std::array&lt;double, Ndim&gt; &gt; BaseMaterial::GenBrillouinzone </td>
+          <td class="memname">virtual std::tuple&lt;std::array&lt;double, <a class="el" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a>*<a class="el" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a>&gt;, std::array&lt;double, <a class="el" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a>&gt; &gt; BaseMaterial::GenBrillouinzone </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -161,13 +187,13 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
         <tr>
           <td class="memname">virtual void BaseMaterial::GenDipole </td>
           <td>(</td>
-          <td class="paramtype">complex **&#160;</td>
+          <td class="paramtype"><a class="el" href="_s_b_es_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> **&#160;</td>
           <td class="paramname"><em>_dstore</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::array&lt; double, Ndim &gt;&#160;</td>
+          <td class="paramtype">std::array&lt; double, <a class="el" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a> &gt;&#160;</td>
           <td class="paramname"><em>_kpoint</em>&#160;</td>
         </tr>
         <tr>
@@ -208,13 +234,13 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
         <tr>
           <td class="memname">virtual void BaseMaterial::GenHamiltonian </td>
           <td>(</td>
-          <td class="paramtype">complex *&#160;</td>
+          <td class="paramtype"><a class="el" href="_s_b_es_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> *&#160;</td>
           <td class="paramname"><em>_hstore</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::array&lt; double, Ndim &gt;&#160;</td>
+          <td class="paramtype">std::array&lt; double, <a class="el" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a> &gt;&#160;</td>
           <td class="paramname"><em>_kpoint</em>&#160;</td>
         </tr>
         <tr>
@@ -255,13 +281,13 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
         <tr>
           <td class="memname">virtual void BaseMaterial::GenInitialValue </td>
           <td>(</td>
-          <td class="paramtype">complex *&#160;</td>
+          <td class="paramtype"><a class="el" href="_s_b_es_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> *&#160;</td>
           <td class="paramname"><em>_dmstore</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::array&lt; double, Ndim &gt;&#160;</td>
+          <td class="paramtype">std::array&lt; double, <a class="el" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a> &gt;&#160;</td>
           <td class="paramname"><em>_kpoint</em>&#160;</td>
         </tr>
         <tr>
@@ -300,13 +326,13 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
         <tr>
           <td class="memname">virtual void BaseMaterial::GenJMatrix </td>
           <td>(</td>
-          <td class="paramtype">complex **&#160;</td>
+          <td class="paramtype"><a class="el" href="_s_b_es_8h.html#a0fa4878c968311979d497ccc322e0b9b">complex</a> **&#160;</td>
           <td class="paramname"><em>_jstore</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::array&lt; double, Ndim &gt;&#160;</td>
+          <td class="paramtype">std::array&lt; double, <a class="el" href="constant_8h.html#a3d6661e5760f081da05443d09aed736b">Ndim</a> &gt;&#160;</td>
           <td class="paramname"><em>_kpoint</em>&#160;</td>
         </tr>
         <tr>
@@ -325,13 +351,73 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 <p>Generate interband and intraband current matrix. </p>
 <p>Remember </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">_jstore</td><td>store <img class="formulaInl" alt="$ - \frac{\partial H(\textbf{k})}{\partial \textbf{k}} + i [\textbf{D}(\textbf{k}), H(\textbf{k})] $" src="form_2.png"/> </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">_jstore</td><td>store <img class="formulaInl" alt="$ - \frac{\partial H(\textbf{k})}{\partial \textbf{k}} + i [\textbf{D}(\textbf{k}), H(\textbf{k})] $" src="form_0.png"/> </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">_kpoint</td><td>kpoints = {kx, ky, kz} </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Implemented in <a class="el" href="class_t_m_d_cs.html#aaa9120a5ae8a80ec2196615708e6a220">TMDCs</a>, <a class="el" href="class_bie_se3surf.html#ae5695a3e9cec80b10ab7bbc4a8c6b1ce">BieSe3surf</a>, and <a class="el" href="class_wilson_mass.html#a41a3114da6dd600adbc08aa2ed024141">WilsonMass</a>.</p>
+
+</div>
+</div>
+<a id="a17addbe0f1a21e939995a9234c10b42c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17addbe0f1a21e939995a9234c10b42c">&#9670;&nbsp;</a></span>PrintMaterialInformation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void BaseMaterial::PrintMaterialInformation </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="class_t_m_d_cs.html#a05d0bd8c486f3a5fa7bf9181d666e46d">TMDCs</a>, <a class="el" href="class_bie_se3surf.html#a89a1be778ff8b35b121571375e629254">BieSe3surf</a>, and <a class="el" href="class_wilson_mass.html#a1a201f0e9dadfc2bb84f4292506fb65a">WilsonMass</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a450fe898d8f43d6eb075ec92c6a11241"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a450fe898d8f43d6eb075ec92c6a11241">&#9670;&nbsp;</a></span>Nband</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int BaseMaterial::Nband</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of bands. </p>
+
+</div>
+</div>
+<a id="a271a5f25c64e0b7dae8f344d076fb328"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a271a5f25c64e0b7dae8f344d076fb328">&#9670;&nbsp;</a></span>Nval</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int BaseMaterial::Nval</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of valence bands - only used for indicating which band is lowest conduction band. </p>
 
 </div>
 </div>

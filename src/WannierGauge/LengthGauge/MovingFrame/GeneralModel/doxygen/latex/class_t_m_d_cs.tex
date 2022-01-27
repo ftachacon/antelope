@@ -2,8 +2,11 @@
 \label{class_t_m_d_cs}\index{TMDCs@{TMDCs}}
 
 
-Inheritance diagram for T\+M\+D\+Cs\+:
-\nopagebreak
+{\ttfamily \#include $<$T\+M\+D\+Cs.\+h$>$}
+
+
+
+Inheritance diagram for T\+M\+D\+Cs\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -12,8 +15,7 @@ Inheritance diagram for T\+M\+D\+Cs\+:
 \end{figure}
 
 
-Collaboration diagram for T\+M\+D\+Cs\+:
-\nopagebreak
+Collaboration diagram for T\+M\+D\+Cs\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -23,128 +25,108 @@ Collaboration diagram for T\+M\+D\+Cs\+:
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_a86192521fdb2fd08765f2410f77df31b}\label{class_t_m_d_cs_a86192521fdb2fd08765f2410f77df31b}} 
-{\bfseries T\+M\+D\+Cs} (const libconfig\+::\+Setting $\ast$params)
+\mbox{\hyperlink{class_t_m_d_cs_a86192521fdb2fd08765f2410f77df31b}{T\+M\+D\+Cs}} (const libconfig\+::\+Setting $\ast$params)
 \item 
-void \mbox{\hyperlink{class_t_m_d_cs_ab7f79dc7186b28a986e96d4b1418ba3b}{Gen\+Hamiltonian}} (complex $\ast$\+\_\+hstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\mbox{\hyperlink{class_t_m_d_cs_a237e9343e4d281fb7c41eaaf88f02996}{$\sim$\+T\+M\+D\+Cs}} ()
+\item 
+void \mbox{\hyperlink{class_t_m_d_cs_ab7f79dc7186b28a986e96d4b1418ba3b}{Gen\+Hamiltonian}} (\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$\+\_\+hstore, std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \+\_\+kpoint) override
 \begin{DoxyCompactList}\small\item\em Generate Hamiltonian matrix -\/ tight binding matrix. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_t_m_d_cs_a0001fc5456a51d1930ebb5807868da1e}{Gen\+Dipole}} (complex $\ast$$\ast$\+\_\+dstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+void \mbox{\hyperlink{class_t_m_d_cs_a0001fc5456a51d1930ebb5807868da1e}{Gen\+Dipole}} (\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$$\ast$\+\_\+dstore, std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \+\_\+kpoint) override
 \begin{DoxyCompactList}\small\item\em Generate dipole matrix in Wannier basis. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_t_m_d_cs_aaa9120a5ae8a80ec2196615708e6a220}{Gen\+J\+Matrix}} (complex $\ast$$\ast$\+\_\+jstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+void \mbox{\hyperlink{class_t_m_d_cs_aaa9120a5ae8a80ec2196615708e6a220}{Gen\+J\+Matrix}} (\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$$\ast$\+\_\+jstore, std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \+\_\+kpoint) override
 \begin{DoxyCompactList}\small\item\em Generate interband and intraband current matrix. \end{DoxyCompactList}\item 
-std\+::tuple$<$ std\+::array$<$ double, Ndim $\ast$Ndim $>$, std\+::array$<$ double, Ndim $>$ $>$ \mbox{\hyperlink{class_t_m_d_cs_a4d32b26b1d107b53932feac418c848b4}{Gen\+Brillouinzone}} () override
+std\+::tuple$<$ std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $\ast$\mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$, std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ $>$ \mbox{\hyperlink{class_t_m_d_cs_a4d32b26b1d107b53932feac418c848b4}{Gen\+Brillouinzone}} () override
 \begin{DoxyCompactList}\small\item\em Generate Brillouin zone information. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_t_m_d_cs_a05d0bd8c486f3a5fa7bf9181d666e46d}\label{class_t_m_d_cs_a05d0bd8c486f3a5fa7bf9181d666e46d}} 
-void {\bfseries Print\+Material\+Information} () override
+void \mbox{\hyperlink{class_t_m_d_cs_a05d0bd8c486f3a5fa7bf9181d666e46d}{Print\+Material\+Information}} () override
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_a377fc8411bad2f1b937d4fc6c32928ae}\label{class_t_m_d_cs_a377fc8411bad2f1b937d4fc6c32928ae}} 
-double {\bfseries e1}
+double \mbox{\hyperlink{class_t_m_d_cs_a377fc8411bad2f1b937d4fc6c32928ae}{e1}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_abd314eabbb1294d318d0923ad7406d4b}\label{class_t_m_d_cs_abd314eabbb1294d318d0923ad7406d4b}} 
-double {\bfseries e2}
+double \mbox{\hyperlink{class_t_m_d_cs_abd314eabbb1294d318d0923ad7406d4b}{e2}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_a2999de9a6ebf2b01659c4a2453c5b55e}\label{class_t_m_d_cs_a2999de9a6ebf2b01659c4a2453c5b55e}} 
-double {\bfseries t0}
+double \mbox{\hyperlink{class_t_m_d_cs_a2999de9a6ebf2b01659c4a2453c5b55e}{t0}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_ad225a1209c05a1b3652e462b5f1a126f}\label{class_t_m_d_cs_ad225a1209c05a1b3652e462b5f1a126f}} 
-double {\bfseries t1}
+double \mbox{\hyperlink{class_t_m_d_cs_ad225a1209c05a1b3652e462b5f1a126f}{t1}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_a1372d5c3da214de50ad346a6b9f0b2d8}\label{class_t_m_d_cs_a1372d5c3da214de50ad346a6b9f0b2d8}} 
-double {\bfseries t2}
+double \mbox{\hyperlink{class_t_m_d_cs_a1372d5c3da214de50ad346a6b9f0b2d8}{t2}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_a9a1757323d5698de2a6ca92c538eca8c}\label{class_t_m_d_cs_a9a1757323d5698de2a6ca92c538eca8c}} 
-double {\bfseries t11}
+double \mbox{\hyperlink{class_t_m_d_cs_a9a1757323d5698de2a6ca92c538eca8c}{t11}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_a833b51f28e1b274f8d3ed661c18d02d6}\label{class_t_m_d_cs_a833b51f28e1b274f8d3ed661c18d02d6}} 
-double {\bfseries t12}
+double \mbox{\hyperlink{class_t_m_d_cs_a833b51f28e1b274f8d3ed661c18d02d6}{t12}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_add6b0686cbdae941da3ae196668374da}\label{class_t_m_d_cs_add6b0686cbdae941da3ae196668374da}} 
-double {\bfseries t22}
+double \mbox{\hyperlink{class_t_m_d_cs_add6b0686cbdae941da3ae196668374da}{t22}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_ad83ad895d307c6e0c16468177d9d3de9}\label{class_t_m_d_cs_ad83ad895d307c6e0c16468177d9d3de9}} 
-double {\bfseries r0}
+double \mbox{\hyperlink{class_t_m_d_cs_ad83ad895d307c6e0c16468177d9d3de9}{r0}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_adf14229ddca283fa73cb85d28cf6eafe}\label{class_t_m_d_cs_adf14229ddca283fa73cb85d28cf6eafe}} 
-double {\bfseries r2}
+double \mbox{\hyperlink{class_t_m_d_cs_adf14229ddca283fa73cb85d28cf6eafe}{r2}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_a7502b780078cdaa5a5d9474274ce7eab}\label{class_t_m_d_cs_a7502b780078cdaa5a5d9474274ce7eab}} 
-double {\bfseries r11}
+double \mbox{\hyperlink{class_t_m_d_cs_a7502b780078cdaa5a5d9474274ce7eab}{r11}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_a8cc9b6c9a5a43676887d79f92b2d9df9}\label{class_t_m_d_cs_a8cc9b6c9a5a43676887d79f92b2d9df9}} 
-double {\bfseries r12}
+double \mbox{\hyperlink{class_t_m_d_cs_a8cc9b6c9a5a43676887d79f92b2d9df9}{r12}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_af904b215a0196b34e180da2f5698ae72}\label{class_t_m_d_cs_af904b215a0196b34e180da2f5698ae72}} 
-double {\bfseries u0}
+double \mbox{\hyperlink{class_t_m_d_cs_af904b215a0196b34e180da2f5698ae72}{u0}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_af9409d474fd2339ea612b3518cf8392c}\label{class_t_m_d_cs_af9409d474fd2339ea612b3518cf8392c}} 
-double {\bfseries u1}
+double \mbox{\hyperlink{class_t_m_d_cs_af9409d474fd2339ea612b3518cf8392c}{u1}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_ab343cd85a8695f7063404843ab334e16}\label{class_t_m_d_cs_ab343cd85a8695f7063404843ab334e16}} 
-double {\bfseries u2}
+double \mbox{\hyperlink{class_t_m_d_cs_ab343cd85a8695f7063404843ab334e16}{u2}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_a187277417af3af49aa13839fe70c9834}\label{class_t_m_d_cs_a187277417af3af49aa13839fe70c9834}} 
-double {\bfseries u11}
+double \mbox{\hyperlink{class_t_m_d_cs_a187277417af3af49aa13839fe70c9834}{u11}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_a868be14c0684cf7e80623b6e1c598207}\label{class_t_m_d_cs_a868be14c0684cf7e80623b6e1c598207}} 
-double {\bfseries u12}
+double \mbox{\hyperlink{class_t_m_d_cs_a868be14c0684cf7e80623b6e1c598207}{u12}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_a5b0d340a1fb08d02b2f8cf4dae636aba}\label{class_t_m_d_cs_a5b0d340a1fb08d02b2f8cf4dae636aba}} 
-double {\bfseries u22}
+double \mbox{\hyperlink{class_t_m_d_cs_a5b0d340a1fb08d02b2f8cf4dae636aba}{u22}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_ac34b076443ac928819bd74e53642baef}\label{class_t_m_d_cs_ac34b076443ac928819bd74e53642baef}} 
-double {\bfseries r1}
+double \mbox{\hyperlink{class_t_m_d_cs_ac34b076443ac928819bd74e53642baef}{r1}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_a249a4b9af6911255bee0d369cb140bed}\label{class_t_m_d_cs_a249a4b9af6911255bee0d369cb140bed}} 
-double {\bfseries a0}
+double \mbox{\hyperlink{class_t_m_d_cs_a249a4b9af6911255bee0d369cb140bed}{a0}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_a0c47b7cffbf82313ac899898877a9bca}\label{class_t_m_d_cs_a0c47b7cffbf82313ac899898877a9bca}} 
-double {\bfseries socparam}
+double \mbox{\hyperlink{class_t_m_d_cs_a0c47b7cffbf82313ac899898877a9bca}{socparam}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_aa506e139a2fb175d0907f1493c831460}\label{class_t_m_d_cs_aa506e139a2fb175d0907f1493c831460}} 
 double \mbox{\hyperlink{class_t_m_d_cs_aa506e139a2fb175d0907f1493c831460}{vec\+\_\+a}} \mbox{[}3\mbox{]}\mbox{[}2\mbox{]}
 \begin{DoxyCompactList}\small\item\em 3 NN vectors (from A to B ) \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_t_m_d_cs_a3a1153dd66eaf5a3b301a1b06ce57667}\label{class_t_m_d_cs_a3a1153dd66eaf5a3b301a1b06ce57667}} 
 double \mbox{\hyperlink{class_t_m_d_cs_a3a1153dd66eaf5a3b301a1b06ce57667}{vec\+\_\+b}} \mbox{[}3\mbox{]}\mbox{[}2\mbox{]}
 \begin{DoxyCompactList}\small\item\em 3 N\+NN vectors (from A to A, or B to B) \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_t_m_d_cs_aa2f004d092adabcc744e061af32db9ce}\label{class_t_m_d_cs_aa2f004d092adabcc744e061af32db9ce}} 
 double \mbox{\hyperlink{class_t_m_d_cs_aa2f004d092adabcc744e061af32db9ce}{eps}}
 \begin{DoxyCompactList}\small\item\em to avoid singular norm \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_t_m_d_cs_a9fb59b84db712eac9655335fffbcb5e9}\label{class_t_m_d_cs_a9fb59b84db712eac9655335fffbcb5e9}} 
-bool {\bfseries is\+S\+OC}
+bool \mbox{\hyperlink{class_t_m_d_cs_a9fb59b84db712eac9655335fffbcb5e9}{is\+S\+OC}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_a34ba13a84ac8a6411f900cc238888fba}\label{class_t_m_d_cs_a34ba13a84ac8a6411f900cc238888fba}} 
-string {\bfseries material}
+string \mbox{\hyperlink{class_t_m_d_cs_a34ba13a84ac8a6411f900cc238888fba}{material}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_a58c8672174ad384c443c0119ff1f840c}\label{class_t_m_d_cs_a58c8672174ad384c443c0119ff1f840c}} 
-double {\bfseries angle\+\_\+a0} \mbox{[}3\mbox{]}
+double \mbox{\hyperlink{class_t_m_d_cs_a58c8672174ad384c443c0119ff1f840c}{angle\+\_\+a0}} \mbox{[}3\mbox{]}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_af07f71f49fdffebc5263d5e9acadd045}\label{class_t_m_d_cs_af07f71f49fdffebc5263d5e9acadd045}} 
-double {\bfseries angle\+\_\+b0} \mbox{[}3\mbox{]}
+double \mbox{\hyperlink{class_t_m_d_cs_af07f71f49fdffebc5263d5e9acadd045}{angle\+\_\+b0}} \mbox{[}3\mbox{]}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_a94df5225f6d08c1184de8a0fd50b85eb}\label{class_t_m_d_cs_a94df5225f6d08c1184de8a0fd50b85eb}} 
-std\+::array$<$ double, 9 $>$ {\bfseries B\+Zaxis}
+std\+::array$<$ double, 9 $>$ \mbox{\hyperlink{class_t_m_d_cs_a94df5225f6d08c1184de8a0fd50b85eb}{B\+Zaxis}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_a0017976541b7387d4077a82083f2fa0e}\label{class_t_m_d_cs_a0017976541b7387d4077a82083f2fa0e}} 
-std\+::array$<$ double, 3 $>$ {\bfseries B\+Zorigin}
+std\+::array$<$ double, 3 $>$ \mbox{\hyperlink{class_t_m_d_cs_a0017976541b7387d4077a82083f2fa0e}{B\+Zorigin}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_ae5ca908cc2058e625759aac5d012899f}\label{class_t_m_d_cs_ae5ca908cc2058e625759aac5d012899f}} 
-complex $\ast$ {\bfseries temp\+Umat}
+\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$ \mbox{\hyperlink{class_t_m_d_cs_ae5ca908cc2058e625759aac5d012899f}{temp\+Umat}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_a9bfef108fda2b450f4930bbd6c65524d}\label{class_t_m_d_cs_a9bfef108fda2b450f4930bbd6c65524d}} 
-complex $\ast$ {\bfseries tempctrans\+Umat}
+\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$ \mbox{\hyperlink{class_t_m_d_cs_a9bfef108fda2b450f4930bbd6c65524d}{tempctrans\+Umat}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_a281f23d6e97f94d222fe359fac975315}\label{class_t_m_d_cs_a281f23d6e97f94d222fe359fac975315}} 
-complex $\ast$ {\bfseries temp\+Hmat}
+\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$ \mbox{\hyperlink{class_t_m_d_cs_a281f23d6e97f94d222fe359fac975315}{temp\+Hmat}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_afb54047185d0d79932f5a55ad3cf68a2}\label{class_t_m_d_cs_afb54047185d0d79932f5a55ad3cf68a2}} 
-double $\ast$ {\bfseries temp\+Eval}
+double $\ast$ \mbox{\hyperlink{class_t_m_d_cs_afb54047185d0d79932f5a55ad3cf68a2}{temp\+Eval}}
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_a53f200d3f59b3de0e023ce04d7fee4ff}\label{class_t_m_d_cs_a53f200d3f59b3de0e023ce04d7fee4ff}} 
-int $\ast$ {\bfseries temp\+Isuppz}
+int $\ast$ \mbox{\hyperlink{class_t_m_d_cs_a53f200d3f59b3de0e023ce04d7fee4ff}{temp\+Isuppz}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_t_m_d_cs_a86192521fdb2fd08765f2410f77df31b}\label{class_t_m_d_cs_a86192521fdb2fd08765f2410f77df31b}} 
+\index{TMDCs@{TMDCs}!TMDCs@{TMDCs}}
+\index{TMDCs@{TMDCs}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{TMDCs()}{TMDCs()}}
+{\footnotesize\ttfamily T\+M\+D\+Cs\+::\+T\+M\+D\+Cs (\begin{DoxyParamCaption}\item[{const libconfig\+::\+Setting $\ast$}]{params }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_t_m_d_cs_a237e9343e4d281fb7c41eaaf88f02996}\label{class_t_m_d_cs_a237e9343e4d281fb7c41eaaf88f02996}} 
+\index{TMDCs@{TMDCs}!````~TMDCs@{$\sim$TMDCs}}
+\index{````~TMDCs@{$\sim$TMDCs}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{$\sim$TMDCs()}{~TMDCs()}}
+{\footnotesize\ttfamily T\+M\+D\+Cs\+::$\sim$\+T\+M\+D\+Cs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
 
 
 \doxysubsection{Member Function Documentation}
@@ -152,7 +134,7 @@ int $\ast$ {\bfseries temp\+Isuppz}
 \index{TMDCs@{TMDCs}!GenBrillouinzone@{GenBrillouinzone}}
 \index{GenBrillouinzone@{GenBrillouinzone}!TMDCs@{TMDCs}}
 \doxysubsubsection{\texorpdfstring{GenBrillouinzone()}{GenBrillouinzone()}}
-{\footnotesize\ttfamily std\+::tuple$<$ std\+::array$<$ double, Ndim $\ast$Ndim $>$, std\+::array$<$ double, Ndim $>$ $>$ T\+M\+D\+Cs\+::\+Gen\+Brillouinzone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily std\+::tuple$<$ std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $\ast$\mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$, std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ $>$ T\+M\+D\+Cs\+::\+Gen\+Brillouinzone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -173,7 +155,7 @@ Implements \mbox{\hyperlink{class_base_material_ad502cd0e3d6c200489a07476bc579f0
 \index{TMDCs@{TMDCs}!GenDipole@{GenDipole}}
 \index{GenDipole@{GenDipole}!TMDCs@{TMDCs}}
 \doxysubsubsection{\texorpdfstring{GenDipole()}{GenDipole()}}
-{\footnotesize\ttfamily void T\+M\+D\+Cs\+::\+Gen\+Dipole (\begin{DoxyParamCaption}\item[{complex $\ast$$\ast$}]{\+\_\+dstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void T\+M\+D\+Cs\+::\+Gen\+Dipole (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$$\ast$}]{\+\_\+dstore,  }\item[{std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -194,7 +176,7 @@ Implements \mbox{\hyperlink{class_base_material_af8a9f23ac1ddcb07afd9657582377af
 \index{TMDCs@{TMDCs}!GenHamiltonian@{GenHamiltonian}}
 \index{GenHamiltonian@{GenHamiltonian}!TMDCs@{TMDCs}}
 \doxysubsubsection{\texorpdfstring{GenHamiltonian()}{GenHamiltonian()}}
-{\footnotesize\ttfamily void T\+M\+D\+Cs\+::\+Gen\+Hamiltonian (\begin{DoxyParamCaption}\item[{complex $\ast$}]{\+\_\+hstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void T\+M\+D\+Cs\+::\+Gen\+Hamiltonian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$}]{\+\_\+hstore,  }\item[{std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -215,7 +197,7 @@ Implements \mbox{\hyperlink{class_base_material_a4090b0669eefbd99b3bf824e0ef6581
 \index{TMDCs@{TMDCs}!GenJMatrix@{GenJMatrix}}
 \index{GenJMatrix@{GenJMatrix}!TMDCs@{TMDCs}}
 \doxysubsubsection{\texorpdfstring{GenJMatrix()}{GenJMatrix()}}
-{\footnotesize\ttfamily void T\+M\+D\+Cs\+::\+Gen\+J\+Matrix (\begin{DoxyParamCaption}\item[{complex $\ast$$\ast$}]{\+\_\+jstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void T\+M\+D\+Cs\+::\+Gen\+J\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$$\ast$}]{\+\_\+jstore,  }\item[{std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -232,8 +214,243 @@ Remember
 
 Implements \mbox{\hyperlink{class_base_material_af40f6eb595ac0437cea9bb94f4bf036b}{Base\+Material}}.
 
+\mbox{\Hypertarget{class_t_m_d_cs_a05d0bd8c486f3a5fa7bf9181d666e46d}\label{class_t_m_d_cs_a05d0bd8c486f3a5fa7bf9181d666e46d}} 
+\index{TMDCs@{TMDCs}!PrintMaterialInformation@{PrintMaterialInformation}}
+\index{PrintMaterialInformation@{PrintMaterialInformation}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{PrintMaterialInformation()}{PrintMaterialInformation()}}
+{\footnotesize\ttfamily void T\+M\+D\+Cs\+::\+Print\+Material\+Information (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_base_material_a17addbe0f1a21e939995a9234c10b42c}{Base\+Material}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_t_m_d_cs_a249a4b9af6911255bee0d369cb140bed}\label{class_t_m_d_cs_a249a4b9af6911255bee0d369cb140bed}} 
+\index{TMDCs@{TMDCs}!a0@{a0}}
+\index{a0@{a0}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{a0}{a0}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::a0}
+
+\mbox{\Hypertarget{class_t_m_d_cs_a58c8672174ad384c443c0119ff1f840c}\label{class_t_m_d_cs_a58c8672174ad384c443c0119ff1f840c}} 
+\index{TMDCs@{TMDCs}!angle\_a0@{angle\_a0}}
+\index{angle\_a0@{angle\_a0}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{angle\_a0}{angle\_a0}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::angle\+\_\+a0\mbox{[}3\mbox{]}}
+
+\mbox{\Hypertarget{class_t_m_d_cs_af07f71f49fdffebc5263d5e9acadd045}\label{class_t_m_d_cs_af07f71f49fdffebc5263d5e9acadd045}} 
+\index{TMDCs@{TMDCs}!angle\_b0@{angle\_b0}}
+\index{angle\_b0@{angle\_b0}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{angle\_b0}{angle\_b0}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::angle\+\_\+b0\mbox{[}3\mbox{]}}
+
+\mbox{\Hypertarget{class_t_m_d_cs_a94df5225f6d08c1184de8a0fd50b85eb}\label{class_t_m_d_cs_a94df5225f6d08c1184de8a0fd50b85eb}} 
+\index{TMDCs@{TMDCs}!BZaxis@{BZaxis}}
+\index{BZaxis@{BZaxis}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{BZaxis}{BZaxis}}
+{\footnotesize\ttfamily std\+::array$<$double, 9$>$ T\+M\+D\+Cs\+::\+B\+Zaxis}
+
+\mbox{\Hypertarget{class_t_m_d_cs_a0017976541b7387d4077a82083f2fa0e}\label{class_t_m_d_cs_a0017976541b7387d4077a82083f2fa0e}} 
+\index{TMDCs@{TMDCs}!BZorigin@{BZorigin}}
+\index{BZorigin@{BZorigin}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{BZorigin}{BZorigin}}
+{\footnotesize\ttfamily std\+::array$<$double, 3$>$ T\+M\+D\+Cs\+::\+B\+Zorigin}
+
+\mbox{\Hypertarget{class_t_m_d_cs_a377fc8411bad2f1b937d4fc6c32928ae}\label{class_t_m_d_cs_a377fc8411bad2f1b937d4fc6c32928ae}} 
+\index{TMDCs@{TMDCs}!e1@{e1}}
+\index{e1@{e1}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{e1}{e1}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::e1}
+
+\mbox{\Hypertarget{class_t_m_d_cs_abd314eabbb1294d318d0923ad7406d4b}\label{class_t_m_d_cs_abd314eabbb1294d318d0923ad7406d4b}} 
+\index{TMDCs@{TMDCs}!e2@{e2}}
+\index{e2@{e2}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{e2}{e2}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::e2}
+
+\mbox{\Hypertarget{class_t_m_d_cs_aa2f004d092adabcc744e061af32db9ce}\label{class_t_m_d_cs_aa2f004d092adabcc744e061af32db9ce}} 
+\index{TMDCs@{TMDCs}!eps@{eps}}
+\index{eps@{eps}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{eps}{eps}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::eps}
+
+
+
+to avoid singular norm 
+
+\mbox{\Hypertarget{class_t_m_d_cs_a9fb59b84db712eac9655335fffbcb5e9}\label{class_t_m_d_cs_a9fb59b84db712eac9655335fffbcb5e9}} 
+\index{TMDCs@{TMDCs}!isSOC@{isSOC}}
+\index{isSOC@{isSOC}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{isSOC}{isSOC}}
+{\footnotesize\ttfamily bool T\+M\+D\+Cs\+::is\+S\+OC}
+
+\mbox{\Hypertarget{class_t_m_d_cs_a34ba13a84ac8a6411f900cc238888fba}\label{class_t_m_d_cs_a34ba13a84ac8a6411f900cc238888fba}} 
+\index{TMDCs@{TMDCs}!material@{material}}
+\index{material@{material}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{material}{material}}
+{\footnotesize\ttfamily string T\+M\+D\+Cs\+::material}
+
+\mbox{\Hypertarget{class_t_m_d_cs_ad83ad895d307c6e0c16468177d9d3de9}\label{class_t_m_d_cs_ad83ad895d307c6e0c16468177d9d3de9}} 
+\index{TMDCs@{TMDCs}!r0@{r0}}
+\index{r0@{r0}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{r0}{r0}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::r0}
+
+\mbox{\Hypertarget{class_t_m_d_cs_ac34b076443ac928819bd74e53642baef}\label{class_t_m_d_cs_ac34b076443ac928819bd74e53642baef}} 
+\index{TMDCs@{TMDCs}!r1@{r1}}
+\index{r1@{r1}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{r1}{r1}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::r1}
+
+\mbox{\Hypertarget{class_t_m_d_cs_a7502b780078cdaa5a5d9474274ce7eab}\label{class_t_m_d_cs_a7502b780078cdaa5a5d9474274ce7eab}} 
+\index{TMDCs@{TMDCs}!r11@{r11}}
+\index{r11@{r11}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{r11}{r11}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::r11}
+
+\mbox{\Hypertarget{class_t_m_d_cs_a8cc9b6c9a5a43676887d79f92b2d9df9}\label{class_t_m_d_cs_a8cc9b6c9a5a43676887d79f92b2d9df9}} 
+\index{TMDCs@{TMDCs}!r12@{r12}}
+\index{r12@{r12}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{r12}{r12}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::r12}
+
+\mbox{\Hypertarget{class_t_m_d_cs_adf14229ddca283fa73cb85d28cf6eafe}\label{class_t_m_d_cs_adf14229ddca283fa73cb85d28cf6eafe}} 
+\index{TMDCs@{TMDCs}!r2@{r2}}
+\index{r2@{r2}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{r2}{r2}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::r2}
+
+\mbox{\Hypertarget{class_t_m_d_cs_a0c47b7cffbf82313ac899898877a9bca}\label{class_t_m_d_cs_a0c47b7cffbf82313ac899898877a9bca}} 
+\index{TMDCs@{TMDCs}!socparam@{socparam}}
+\index{socparam@{socparam}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{socparam}{socparam}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::socparam}
+
+\mbox{\Hypertarget{class_t_m_d_cs_a2999de9a6ebf2b01659c4a2453c5b55e}\label{class_t_m_d_cs_a2999de9a6ebf2b01659c4a2453c5b55e}} 
+\index{TMDCs@{TMDCs}!t0@{t0}}
+\index{t0@{t0}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{t0}{t0}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::t0}
+
+\mbox{\Hypertarget{class_t_m_d_cs_ad225a1209c05a1b3652e462b5f1a126f}\label{class_t_m_d_cs_ad225a1209c05a1b3652e462b5f1a126f}} 
+\index{TMDCs@{TMDCs}!t1@{t1}}
+\index{t1@{t1}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{t1}{t1}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::t1}
+
+\mbox{\Hypertarget{class_t_m_d_cs_a9a1757323d5698de2a6ca92c538eca8c}\label{class_t_m_d_cs_a9a1757323d5698de2a6ca92c538eca8c}} 
+\index{TMDCs@{TMDCs}!t11@{t11}}
+\index{t11@{t11}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{t11}{t11}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::t11}
+
+\mbox{\Hypertarget{class_t_m_d_cs_a833b51f28e1b274f8d3ed661c18d02d6}\label{class_t_m_d_cs_a833b51f28e1b274f8d3ed661c18d02d6}} 
+\index{TMDCs@{TMDCs}!t12@{t12}}
+\index{t12@{t12}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{t12}{t12}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::t12}
+
+\mbox{\Hypertarget{class_t_m_d_cs_a1372d5c3da214de50ad346a6b9f0b2d8}\label{class_t_m_d_cs_a1372d5c3da214de50ad346a6b9f0b2d8}} 
+\index{TMDCs@{TMDCs}!t2@{t2}}
+\index{t2@{t2}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{t2}{t2}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::t2}
+
+\mbox{\Hypertarget{class_t_m_d_cs_add6b0686cbdae941da3ae196668374da}\label{class_t_m_d_cs_add6b0686cbdae941da3ae196668374da}} 
+\index{TMDCs@{TMDCs}!t22@{t22}}
+\index{t22@{t22}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{t22}{t22}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::t22}
+
+\mbox{\Hypertarget{class_t_m_d_cs_a9bfef108fda2b450f4930bbd6c65524d}\label{class_t_m_d_cs_a9bfef108fda2b450f4930bbd6c65524d}} 
+\index{TMDCs@{TMDCs}!tempctransUmat@{tempctransUmat}}
+\index{tempctransUmat@{tempctransUmat}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{tempctransUmat}{tempctransUmat}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}}$\ast$ T\+M\+D\+Cs\+::tempctrans\+Umat}
+
+\mbox{\Hypertarget{class_t_m_d_cs_afb54047185d0d79932f5a55ad3cf68a2}\label{class_t_m_d_cs_afb54047185d0d79932f5a55ad3cf68a2}} 
+\index{TMDCs@{TMDCs}!tempEval@{tempEval}}
+\index{tempEval@{tempEval}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{tempEval}{tempEval}}
+{\footnotesize\ttfamily double$\ast$ T\+M\+D\+Cs\+::temp\+Eval}
+
+\mbox{\Hypertarget{class_t_m_d_cs_a281f23d6e97f94d222fe359fac975315}\label{class_t_m_d_cs_a281f23d6e97f94d222fe359fac975315}} 
+\index{TMDCs@{TMDCs}!tempHmat@{tempHmat}}
+\index{tempHmat@{tempHmat}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{tempHmat}{tempHmat}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}}$\ast$ T\+M\+D\+Cs\+::temp\+Hmat}
+
+\mbox{\Hypertarget{class_t_m_d_cs_a53f200d3f59b3de0e023ce04d7fee4ff}\label{class_t_m_d_cs_a53f200d3f59b3de0e023ce04d7fee4ff}} 
+\index{TMDCs@{TMDCs}!tempIsuppz@{tempIsuppz}}
+\index{tempIsuppz@{tempIsuppz}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{tempIsuppz}{tempIsuppz}}
+{\footnotesize\ttfamily int$\ast$ T\+M\+D\+Cs\+::temp\+Isuppz}
+
+\mbox{\Hypertarget{class_t_m_d_cs_ae5ca908cc2058e625759aac5d012899f}\label{class_t_m_d_cs_ae5ca908cc2058e625759aac5d012899f}} 
+\index{TMDCs@{TMDCs}!tempUmat@{tempUmat}}
+\index{tempUmat@{tempUmat}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{tempUmat}{tempUmat}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}}$\ast$ T\+M\+D\+Cs\+::temp\+Umat}
+
+\mbox{\Hypertarget{class_t_m_d_cs_af904b215a0196b34e180da2f5698ae72}\label{class_t_m_d_cs_af904b215a0196b34e180da2f5698ae72}} 
+\index{TMDCs@{TMDCs}!u0@{u0}}
+\index{u0@{u0}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{u0}{u0}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::u0}
+
+\mbox{\Hypertarget{class_t_m_d_cs_af9409d474fd2339ea612b3518cf8392c}\label{class_t_m_d_cs_af9409d474fd2339ea612b3518cf8392c}} 
+\index{TMDCs@{TMDCs}!u1@{u1}}
+\index{u1@{u1}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{u1}{u1}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::u1}
+
+\mbox{\Hypertarget{class_t_m_d_cs_a187277417af3af49aa13839fe70c9834}\label{class_t_m_d_cs_a187277417af3af49aa13839fe70c9834}} 
+\index{TMDCs@{TMDCs}!u11@{u11}}
+\index{u11@{u11}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{u11}{u11}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::u11}
+
+\mbox{\Hypertarget{class_t_m_d_cs_a868be14c0684cf7e80623b6e1c598207}\label{class_t_m_d_cs_a868be14c0684cf7e80623b6e1c598207}} 
+\index{TMDCs@{TMDCs}!u12@{u12}}
+\index{u12@{u12}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{u12}{u12}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::u12}
+
+\mbox{\Hypertarget{class_t_m_d_cs_ab343cd85a8695f7063404843ab334e16}\label{class_t_m_d_cs_ab343cd85a8695f7063404843ab334e16}} 
+\index{TMDCs@{TMDCs}!u2@{u2}}
+\index{u2@{u2}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{u2}{u2}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::u2}
+
+\mbox{\Hypertarget{class_t_m_d_cs_a5b0d340a1fb08d02b2f8cf4dae636aba}\label{class_t_m_d_cs_a5b0d340a1fb08d02b2f8cf4dae636aba}} 
+\index{TMDCs@{TMDCs}!u22@{u22}}
+\index{u22@{u22}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{u22}{u22}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::u22}
+
+\mbox{\Hypertarget{class_t_m_d_cs_aa506e139a2fb175d0907f1493c831460}\label{class_t_m_d_cs_aa506e139a2fb175d0907f1493c831460}} 
+\index{TMDCs@{TMDCs}!vec\_a@{vec\_a}}
+\index{vec\_a@{vec\_a}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{vec\_a}{vec\_a}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::vec\+\_\+a\mbox{[}3\mbox{]}\mbox{[}2\mbox{]}}
+
+
+
+3 NN vectors (from A to B ) 
+
+\mbox{\Hypertarget{class_t_m_d_cs_a3a1153dd66eaf5a3b301a1b06ce57667}\label{class_t_m_d_cs_a3a1153dd66eaf5a3b301a1b06ce57667}} 
+\index{TMDCs@{TMDCs}!vec\_b@{vec\_b}}
+\index{vec\_b@{vec\_b}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{vec\_b}{vec\_b}}
+{\footnotesize\ttfamily double T\+M\+D\+Cs\+::vec\+\_\+b\mbox{[}3\mbox{]}\mbox{[}2\mbox{]}}
+
+
+
+3 N\+NN vectors (from A to A, or B to B) 
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Materials/T\+M\+D\+Cs.\+h\end{DoxyCompactItemize}
+Materials/\mbox{\hyperlink{_t_m_d_cs_8h}{T\+M\+D\+Cs.\+h}}\end{DoxyCompactItemize}
