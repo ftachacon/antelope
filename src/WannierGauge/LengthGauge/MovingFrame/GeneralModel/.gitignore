@@ -9,7 +9,7 @@ AlsisPythonShort/*
 
 # upload doxygen
 !/doxygen
-doxygen/*
+!doxygen/*
 
 # Ignore compiled file
 exec_hhg_mpi
