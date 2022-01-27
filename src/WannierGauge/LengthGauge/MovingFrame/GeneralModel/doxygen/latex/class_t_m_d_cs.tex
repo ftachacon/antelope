@@ -7,7 +7,7 @@ Inheritance diagram for T\+M\+D\+Cs\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=178pt]{class_t_m_d_cs__inherit__graph}
+\includegraphics[width=161pt]{class_t_m_d_cs__inherit__graph}
 \end{center}
 \end{figure}
 
@@ -17,7 +17,7 @@ Collaboration diagram for T\+M\+D\+Cs\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=178pt]{class_t_m_d_cs__coll__graph}
+\includegraphics[width=161pt]{class_t_m_d_cs__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -26,24 +26,14 @@ Collaboration diagram for T\+M\+D\+Cs\+:
 \mbox{\Hypertarget{class_t_m_d_cs_a86192521fdb2fd08765f2410f77df31b}\label{class_t_m_d_cs_a86192521fdb2fd08765f2410f77df31b}} 
 {\bfseries T\+M\+D\+Cs} (const libconfig\+::\+Setting $\ast$params)
 \item 
-\mbox{\Hypertarget{class_t_m_d_cs_aadaf41504a0a43c762284b7a8192e018}\label{class_t_m_d_cs_aadaf41504a0a43c762284b7a8192e018}} 
-void {\bfseries Gen\+Initial\+Value} (complex $\ast$\+\_\+dmstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
-\item 
-\mbox{\Hypertarget{class_t_m_d_cs_ae20a64c87b9166c78d3206ef7992d1f8}\label{class_t_m_d_cs_ae20a64c87b9166c78d3206ef7992d1f8}} 
-void {\bfseries Gen\+U\+Matrix} (complex $\ast$\+\_\+ustore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
-\item 
-\mbox{\Hypertarget{class_t_m_d_cs_ab7f79dc7186b28a986e96d4b1418ba3b}\label{class_t_m_d_cs_ab7f79dc7186b28a986e96d4b1418ba3b}} 
-void {\bfseries Gen\+Hamiltonian} (complex $\ast$\+\_\+hstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
-\item 
-\mbox{\Hypertarget{class_t_m_d_cs_a0001fc5456a51d1930ebb5807868da1e}\label{class_t_m_d_cs_a0001fc5456a51d1930ebb5807868da1e}} 
-void {\bfseries Gen\+Dipole} (complex $\ast$$\ast$\+\_\+dstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
-\item 
-\mbox{\Hypertarget{class_t_m_d_cs_aaa9120a5ae8a80ec2196615708e6a220}\label{class_t_m_d_cs_aaa9120a5ae8a80ec2196615708e6a220}} 
-void {\bfseries Gen\+J\+Matrix} (complex $\ast$$\ast$\+\_\+jstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
-\item 
-\mbox{\Hypertarget{class_t_m_d_cs_a4d32b26b1d107b53932feac418c848b4}\label{class_t_m_d_cs_a4d32b26b1d107b53932feac418c848b4}} 
-std\+::tuple$<$ std\+::array$<$ double, Ndim $\ast$Ndim $>$, std\+::array$<$ double, Ndim $>$ $>$ {\bfseries Gen\+Brillouinzone} () override
-\item 
+void \mbox{\hyperlink{class_t_m_d_cs_ab7f79dc7186b28a986e96d4b1418ba3b}{Gen\+Hamiltonian}} (complex $\ast$\+\_\+hstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\begin{DoxyCompactList}\small\item\em Generate Hamiltonian matrix -\/ tight binding matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_t_m_d_cs_a0001fc5456a51d1930ebb5807868da1e}{Gen\+Dipole}} (complex $\ast$$\ast$\+\_\+dstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\begin{DoxyCompactList}\small\item\em Generate dipole matrix in Wannier basis. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_t_m_d_cs_aaa9120a5ae8a80ec2196615708e6a220}{Gen\+J\+Matrix}} (complex $\ast$$\ast$\+\_\+jstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\begin{DoxyCompactList}\small\item\em Generate interband and intraband current matrix. \end{DoxyCompactList}\item 
+std\+::tuple$<$ std\+::array$<$ double, Ndim $\ast$Ndim $>$, std\+::array$<$ double, Ndim $>$ $>$ \mbox{\hyperlink{class_t_m_d_cs_a4d32b26b1d107b53932feac418c848b4}{Gen\+Brillouinzone}} () override
+\begin{DoxyCompactList}\small\item\em Generate Brillouin zone information. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_t_m_d_cs_a05d0bd8c486f3a5fa7bf9181d666e46d}\label{class_t_m_d_cs_a05d0bd8c486f3a5fa7bf9181d666e46d}} 
 void {\bfseries Print\+Material\+Information} () override
 \end{DoxyCompactItemize}
@@ -155,6 +145,93 @@ double $\ast$ {\bfseries temp\+Eval}
 \mbox{\Hypertarget{class_t_m_d_cs_a53f200d3f59b3de0e023ce04d7fee4ff}\label{class_t_m_d_cs_a53f200d3f59b3de0e023ce04d7fee4ff}} 
 int $\ast$ {\bfseries temp\+Isuppz}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_t_m_d_cs_a4d32b26b1d107b53932feac418c848b4}\label{class_t_m_d_cs_a4d32b26b1d107b53932feac418c848b4}} 
+\index{TMDCs@{TMDCs}!GenBrillouinzone@{GenBrillouinzone}}
+\index{GenBrillouinzone@{GenBrillouinzone}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{GenBrillouinzone()}{GenBrillouinzone()}}
+{\footnotesize\ttfamily std\+::tuple$<$ std\+::array$<$ double, Ndim $\ast$Ndim $>$, std\+::array$<$ double, Ndim $>$ $>$ T\+M\+D\+Cs\+::\+Gen\+Brillouinzone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Generate Brillouin zone information. 
+
+To use this function, see below example.
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} [axes, origin] = \mbox{\hyperlink{class_t_m_d_cs_a4d32b26b1d107b53932feac418c848b4}{GenBrillouinzone}}(); }
+\end{DoxyCode}
+ \begin{DoxyReturn}{Returns}
+Brillouin zone axes and origin points are returned as a tuple 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_base_material_ad502cd0e3d6c200489a07476bc579f0c}{Base\+Material}}.
+
+\mbox{\Hypertarget{class_t_m_d_cs_a0001fc5456a51d1930ebb5807868da1e}\label{class_t_m_d_cs_a0001fc5456a51d1930ebb5807868da1e}} 
+\index{TMDCs@{TMDCs}!GenDipole@{GenDipole}}
+\index{GenDipole@{GenDipole}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{GenDipole()}{GenDipole()}}
+{\footnotesize\ttfamily void T\+M\+D\+Cs\+::\+Gen\+Dipole (\begin{DoxyParamCaption}\item[{complex $\ast$$\ast$}]{\+\_\+dstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Generate dipole matrix in Wannier basis. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+dstore} & dipole matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_base_material_af8a9f23ac1ddcb07afd9657582377af7}{Base\+Material}}.
+
+\mbox{\Hypertarget{class_t_m_d_cs_ab7f79dc7186b28a986e96d4b1418ba3b}\label{class_t_m_d_cs_ab7f79dc7186b28a986e96d4b1418ba3b}} 
+\index{TMDCs@{TMDCs}!GenHamiltonian@{GenHamiltonian}}
+\index{GenHamiltonian@{GenHamiltonian}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{GenHamiltonian()}{GenHamiltonian()}}
+{\footnotesize\ttfamily void T\+M\+D\+Cs\+::\+Gen\+Hamiltonian (\begin{DoxyParamCaption}\item[{complex $\ast$}]{\+\_\+hstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Generate Hamiltonian matrix -\/ tight binding matrix. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+hstore} & Hamiltonian matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_base_material_a4090b0669eefbd99b3bf824e0ef65810}{Base\+Material}}.
+
+\mbox{\Hypertarget{class_t_m_d_cs_aaa9120a5ae8a80ec2196615708e6a220}\label{class_t_m_d_cs_aaa9120a5ae8a80ec2196615708e6a220}} 
+\index{TMDCs@{TMDCs}!GenJMatrix@{GenJMatrix}}
+\index{GenJMatrix@{GenJMatrix}!TMDCs@{TMDCs}}
+\doxysubsubsection{\texorpdfstring{GenJMatrix()}{GenJMatrix()}}
+{\footnotesize\ttfamily void T\+M\+D\+Cs\+::\+Gen\+J\+Matrix (\begin{DoxyParamCaption}\item[{complex $\ast$$\ast$}]{\+\_\+jstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Generate interband and intraband current matrix. 
+
+Remember 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+jstore} & store $ - \frac{\partial H(\textbf{k})}{\partial \textbf{k}} + i [\textbf{D}(\textbf{k}), H(\textbf{k})] $ \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_base_material_af40f6eb595ac0437cea9bb94f4bf036b}{Base\+Material}}.
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

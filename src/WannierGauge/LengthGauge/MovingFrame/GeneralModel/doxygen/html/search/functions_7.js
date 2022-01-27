@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7ebasematerial_104',['~BaseMaterial',['../class_base_material.html#a90dd928adc8fff78b06a3e19bc133f49',1,'BaseMaterial']]]
+  ['wanniertohamiltonian_113',['WannierToHamiltonian',['../class_s_b_es.html#ae5598b536528853ee3beae6a3403fc65',1,'SBEs']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7ewanniermaterial',['~WannierMaterial',['../class_wannier_material.html#aec1a2077bb9c951142046b50b3cf8dc4',1,'WannierMaterial']]]
+  ['_7ebasematerial_114',['~BaseMaterial',['../class_base_material.html#a90dd928adc8fff78b06a3e19bc133f49',1,'BaseMaterial']]]
 ];

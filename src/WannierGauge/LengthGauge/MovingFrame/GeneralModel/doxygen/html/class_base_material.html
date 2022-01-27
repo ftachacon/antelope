@@ -69,6 +69,17 @@ $(function() {
 <div class="title">BaseMaterial Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="dynheader">
+Inheritance diagram for BaseMaterial:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_base_material__inherit__graph.png" border="0" usemap="#_base_material_inherit__map" alt="Inheritance graph"/></div>
+<map name="_base_material_inherit__map" id="_base_material_inherit__map">
+<area shape="rect" title=" " alt="" coords="101,5,209,32"/>
+<area shape="rect" href="class_bie_se3surf.html" title="Hamiltonian and dipole generator for Bi2Se3 surface states." alt="" coords="5,80,97,107"/>
+<area shape="rect" href="class_t_m_d_cs.html" title=" " alt="" coords="121,80,189,107"/>
+<area shape="rect" href="class_wilson_mass.html" title="Hamiltonian and dipole generator for 2&#45;band square lattice including Wilson mass term." alt="" coords="213,80,313,107"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -77,6 +88,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="memdesc:a90dd928adc8fff78b06a3e19bc133f49"><td class="mdescLeft">&#160;</td><td class="mdescRight">virtual desctructor is used to prevent memory leak <br /></td></tr>
 <tr class="separator:a90dd928adc8fff78b06a3e19bc133f49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad2630d3b55e2a642d21fa6d3d8c867ed"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_material.html#ad2630d3b55e2a642d21fa6d3d8c867ed">GenInitialValue</a> (complex *_dmstore, std::array&lt; double, Ndim &gt; _kpoint)</td></tr>
+<tr class="memdesc:ad2630d3b55e2a642d21fa6d3d8c867ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate custom inital value.  <a href="class_base_material.html#ad2630d3b55e2a642d21fa6d3d8c867ed">More...</a><br /></td></tr>
 <tr class="separator:ad2630d3b55e2a642d21fa6d3d8c867ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4090b0669eefbd99b3bf824e0ef65810"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_material.html#a4090b0669eefbd99b3bf824e0ef65810">GenHamiltonian</a> (complex *_hstore, std::array&lt; double, Ndim &gt; _kpoint)=0</td></tr>
 <tr class="memdesc:a4090b0669eefbd99b3bf824e0ef65810"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate Hamiltonian matrix - tight binding matrix.  <a href="class_base_material.html#a4090b0669eefbd99b3bf824e0ef65810">More...</a><br /></td></tr>
@@ -133,6 +145,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 <p>To use this function, see below example.</p><div class="fragment"><div class="line"><span class="keyword">auto</span> [axes, origin] = <a class="code" href="class_base_material.html#ad502cd0e3d6c200489a07476bc579f0c">GenBrillouinzone</a>(); </div>
 </div><!-- fragment --> <dl class="section return"><dt>Returns</dt><dd>Brillouin zone axes and origin points are returned as a tuple </dd></dl>
 
+<p>Implemented in <a class="el" href="class_t_m_d_cs.html#a4d32b26b1d107b53932feac418c848b4">TMDCs</a>, <a class="el" href="class_bie_se3surf.html#a4f5bb6b464ce3c4e2fa430d7c16b9189">BieSe3surf</a>, and <a class="el" href="class_wilson_mass.html#a234ce32e40498a5516e48bd0ce315b4f">WilsonMass</a>.</p>
+
 </div>
 </div>
 <a id="af8a9f23ac1ddcb07afd9657582377af7"></a>
@@ -177,6 +191,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
   </table>
   </dd>
 </dl>
+
+<p>Implemented in <a class="el" href="class_t_m_d_cs.html#a0001fc5456a51d1930ebb5807868da1e">TMDCs</a>, <a class="el" href="class_bie_se3surf.html#a84cf299527528174653be41e2e1f681c">BieSe3surf</a>, and <a class="el" href="class_wilson_mass.html#a5eccf814c7eb68f0b453a14c6b45fa01">WilsonMass</a>.</p>
 
 </div>
 </div>
@@ -223,6 +239,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
   </dd>
 </dl>
 
+<p>Implemented in <a class="el" href="class_t_m_d_cs.html#ab7f79dc7186b28a986e96d4b1418ba3b">TMDCs</a>, <a class="el" href="class_bie_se3surf.html#a99c544c2467afc34e3b7b426458d2599">BieSe3surf</a>, and <a class="el" href="class_wilson_mass.html#aed4048bb4a06169ffc8010852fd46262">WilsonMass</a>.</p>
+
 </div>
 </div>
 <a id="ad2630d3b55e2a642d21fa6d3d8c867ed"></a>
@@ -254,10 +272,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Generate custom inital value. </p>
 <p>Generate custom initial value of density matrix. Should be used only when you need strange initial value. This is not pure virtual function. One can ignore this when implementing Material class. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">_dmstore</td><td>Initial value of density matrix </td></tr>
@@ -305,11 +325,13 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 <p>Generate interband and intraband current matrix. </p>
 <p>Remember </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">_jstore</td><td>store <img class="formulaInl" alt="" src=".png"/> </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">_jstore</td><td>store <img class="formulaInl" alt="$ - \frac{\partial H(\textbf{k})}{\partial \textbf{k}} + i [\textbf{D}(\textbf{k}), H(\textbf{k})] $" src="form_2.png"/> </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">_kpoint</td><td>kpoints = {kx, ky, kz} </td></tr>
   </table>
   </dd>
 </dl>
+
+<p>Implemented in <a class="el" href="class_t_m_d_cs.html#aaa9120a5ae8a80ec2196615708e6a220">TMDCs</a>, <a class="el" href="class_bie_se3surf.html#ae5695a3e9cec80b10ab7bbc4a8c6b1ce">BieSe3surf</a>, and <a class="el" href="class_wilson_mass.html#a41a3114da6dd600adbc08aa2ed024141">WilsonMass</a>.</p>
 
 </div>
 </div>

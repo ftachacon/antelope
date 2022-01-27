@@ -74,9 +74,10 @@ Collaboration diagram for SBEs:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_s_b_es__coll__graph.png" border="0" usemap="#_s_b_es_coll__map" alt="Collaboration graph"/></div>
 <map name="_s_b_es_coll__map" id="_s_b_es_coll__map">
-<area shape="rect" title=" " alt="" coords="52,95,107,121"/>
+<area shape="rect" title=" " alt="" coords="99,95,153,121"/>
 <area shape="rect" href="classlaser.html" title=" " alt="" coords="5,5,60,32"/>
 <area shape="rect" href="classmomaxis.html" title=" " alt="" coords="85,5,167,32"/>
+<area shape="rect" href="class_base_material.html" title=" " alt="" coords="192,5,300,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -91,6 +92,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>RunSBEs</b> (int _kin
 <tr class="memitem:a45d19265a4f22af79280ac4a9436f7d2"><td class="memItemLeft" align="right" valign="top"><a id="a45d19265a4f22af79280ac4a9436f7d2"></a>
 array&lt; double, Ndim &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GenCurrent</b> (int _kindex, double _time)</td></tr>
 <tr class="separator:a45d19265a4f22af79280ac4a9436f7d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbf52ad95d6063497f09f2d2bb435ea2"><td class="memItemLeft" align="right" valign="top"><a id="acbf52ad95d6063497f09f2d2bb435ea2"></a>
+std::tuple&lt; array&lt; double, Ndim &gt;, array&lt; double, Ndim &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GenInterIntraCurrent</b> (int _kindex, double _time)</td></tr>
+<tr class="separator:acbf52ad95d6063497f09f2d2bb435ea2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9503851579b1a7ea96b7faab98a5881d"><td class="memItemLeft" align="right" valign="top"><a id="a9503851579b1a7ea96b7faab98a5881d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>GenDifferentialDM</b> (complex *out, complex *input, int _kindex, double _time)</td></tr>
 <tr class="separator:a9503851579b1a7ea96b7faab98a5881d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -102,25 +106,40 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_b_es.html#a9bc2fd1ba2ad531e6cb75567ba1f8e2c">InitializeLaser</a> (const libconfig::Setting *_laser)</td></tr>
 <tr class="memdesc:a9bc2fd1ba2ad531e6cb75567ba1f8e2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize laser inside constructor. <br /></td></tr>
 <tr class="separator:a9bc2fd1ba2ad531e6cb75567ba1f8e2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a484a32d347e2df92eff0baa327ca4a15"><td class="memItemLeft" align="right" valign="top"><a id="a484a32d347e2df92eff0baa327ca4a15"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_b_es.html#a484a32d347e2df92eff0baa327ca4a15">GenUMatrix</a> (complex *_ustore, std::array&lt; double, Ndim &gt; _kpoint)</td></tr>
+<tr class="memdesc:a484a32d347e2df92eff0baa327ca4a15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate U matrix. <br /></td></tr>
+<tr class="separator:a484a32d347e2df92eff0baa327ca4a15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd50d47954e2d5f4a82618ba7f554b86"><td class="memItemLeft" align="right" valign="top"><a id="abd50d47954e2d5f4a82618ba7f554b86"></a>
 array&lt; double, Ndim &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GenKpulsA</b> (array&lt; double, Ndim &gt; _kpoint, double time)</td></tr>
 <tr class="separator:abd50d47954e2d5f4a82618ba7f554b86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5598b536528853ee3beae6a3403fc65"><td class="memItemLeft" align="right" valign="top"><a id="ae5598b536528853ee3beae6a3403fc65"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_b_es.html#ae5598b536528853ee3beae6a3403fc65">WannierToHamiltonian</a> (complex *out, complex *input, int _kindex, double _time)</td></tr>
+<tr class="memdesc:ae5598b536528853ee3beae6a3403fc65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert Wannier representation to Hamiltonian representation. <br /></td></tr>
+<tr class="separator:ae5598b536528853ee3beae6a3403fc65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae78ca5611d9525f89398e15cef609c1c"><td class="memItemLeft" align="right" valign="top"><a id="ae78ca5611d9525f89398e15cef609c1c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_b_es.html#ae78ca5611d9525f89398e15cef609c1c">PrintInfo</a> ()</td></tr>
+<tr class="memdesc:ae78ca5611d9525f89398e15cef609c1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print calculation information. <br /></td></tr>
+<tr class="separator:ae78ca5611d9525f89398e15cef609c1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a6fca51320c8cbe9b958092248bfe51f3"><td class="memItemLeft" align="right" valign="top"><a id="a6fca51320c8cbe9b958092248bfe51f3"></a>
 const GaugeType&#160;</td><td class="memItemRight" valign="bottom"><b>gauge</b></td></tr>
 <tr class="separator:a6fca51320c8cbe9b958092248bfe51f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0aa0eb66d48cabdf6bb58c8178d38225"><td class="memItemLeft" align="right" valign="top"><a id="a0aa0eb66d48cabdf6bb58c8178d38225"></a>
+InitialValueType&#160;</td><td class="memItemRight" valign="bottom"><b>initType</b></td></tr>
+<tr class="separator:a0aa0eb66d48cabdf6bb58c8178d38225"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae738398ef5638f8a603700b111c7f85e"><td class="memItemLeft" align="right" valign="top"><a id="ae738398ef5638f8a603700b111c7f85e"></a>
 complex **&#160;</td><td class="memItemRight" valign="bottom"><b>dmatrix</b></td></tr>
 <tr class="separator:ae738398ef5638f8a603700b111c7f85e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab985732a2ee335dbc41edf0bfd62ffe5"><td class="memItemLeft" align="right" valign="top"><a id="ab985732a2ee335dbc41edf0bfd62ffe5"></a>
 complex **&#160;</td><td class="memItemRight" valign="bottom"><b>initMatrix</b></td></tr>
 <tr class="separator:ab985732a2ee335dbc41edf0bfd62ffe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2d0f158fb96c264633068514f17d757"><td class="memItemLeft" align="right" valign="top"><a id="af2d0f158fb96c264633068514f17d757"></a>
-WannierMaterial *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_b_es.html#af2d0f158fb96c264633068514f17d757">material</a></td></tr>
-<tr class="memdesc:af2d0f158fb96c264633068514f17d757"><td class="mdescLeft">&#160;</td><td class="mdescRight">dipole&amp;Hamiltonian generator <br /></td></tr>
-<tr class="separator:af2d0f158fb96c264633068514f17d757"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ec3b23f29f4ec37f182a44bb2f59aee"><td class="memItemLeft" align="right" valign="top"><a id="a8ec3b23f29f4ec37f182a44bb2f59aee"></a>
+<a class="el" href="class_base_material.html">BaseMaterial</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_b_es.html#a8ec3b23f29f4ec37f182a44bb2f59aee">material</a></td></tr>
+<tr class="memdesc:a8ec3b23f29f4ec37f182a44bb2f59aee"><td class="mdescLeft">&#160;</td><td class="mdescRight">dipole&amp;Hamiltonian generator <br /></td></tr>
+<tr class="separator:a8ec3b23f29f4ec37f182a44bb2f59aee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a018f46cc90da276ff09cf6279a2a2c1e"><td class="memItemLeft" align="right" valign="top"><a id="a018f46cc90da276ff09cf6279a2a2c1e"></a>
 complex *&#160;</td><td class="memItemRight" valign="bottom"><b>hamiltonian</b></td></tr>
 <tr class="separator:a018f46cc90da276ff09cf6279a2a2c1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,6 +182,17 @@ double **&#160;</td><td class="memItemRight" valign="bottom"><b>edispersion</b><
 <tr class="memitem:acbac554bd87ce6dba6b4b3cd897587c8"><td class="memItemLeft" align="right" valign="top"><a id="acbac554bd87ce6dba6b4b3cd897587c8"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>Nband</b></td></tr>
 <tr class="separator:acbac554bd87ce6dba6b4b3cd897587c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61d3364b117aecf69208ada9c0b39766"><td class="memItemLeft" align="right" valign="top"><a id="a61d3364b117aecf69208ada9c0b39766"></a>
+array&lt; int, Ndim &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Nk</b></td></tr>
+<tr class="separator:a61d3364b117aecf69208ada9c0b39766"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad6c6f6da3402074137c6b1f6be22b2d"><td class="memItemLeft" align="right" valign="top"><a id="aad6c6f6da3402074137c6b1f6be22b2d"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_b_es.html#aad6c6f6da3402074137c6b1f6be22b2d">Ef</a></td></tr>
+<tr class="memdesc:aad6c6f6da3402074137c6b1f6be22b2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fermi energy. <br /></td></tr>
+<tr class="separator:aad6c6f6da3402074137c6b1f6be22b2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ba827ecab2a11ac0046b06dfb83b9cf"><td class="memItemLeft" align="right" valign="top"><a id="a4ba827ecab2a11ac0046b06dfb83b9cf"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_b_es.html#a4ba827ecab2a11ac0046b06dfb83b9cf">thermalE</a></td></tr>
+<tr class="memdesc:a4ba827ecab2a11ac0046b06dfb83b9cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thermal energy (kT) in a.u. <br /></td></tr>
+<tr class="separator:a4ba827ecab2a11ac0046b06dfb83b9cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d68f29d352329876a4856259a71a052"><td class="memItemLeft" align="right" valign="top"><a id="a1d68f29d352329876a4856259a71a052"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>RKorder</b></td></tr>
 <tr class="separator:a1d68f29d352329876a4856259a71a052"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -209,6 +239,10 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>dephasing_factor_in
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_b_es.html#a8c07633ee694184972801d99160fea0a">isDipoleZero</a></td></tr>
 <tr class="memdesc:a8c07633ee694184972801d99160fea0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">default is true. Wannier dipole is non-zero in very rare cases. <br /></td></tr>
 <tr class="separator:a8c07633ee694184972801d99160fea0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e3bf9662e4df012994386bce09b872a"><td class="memItemLeft" align="right" valign="top"><a id="a5e3bf9662e4df012994386bce09b872a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_s_b_es.html#a5e3bf9662e4df012994386bce09b872a">isInterIntra</a></td></tr>
+<tr class="memdesc:a5e3bf9662e4df012994386bce09b872a"><td class="mdescLeft">&#160;</td><td class="mdescRight">default is true. Separate inter/intra when this is true. Total current is in inter when false. <br /></td></tr>
+<tr class="separator:a5e3bf9662e4df012994386bce09b872a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="_s_b_es_8h_source.html">SBEs.h</a></li>

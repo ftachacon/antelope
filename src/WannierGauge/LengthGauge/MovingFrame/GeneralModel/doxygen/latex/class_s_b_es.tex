@@ -7,7 +7,7 @@ Collaboration diagram for S\+B\+Es\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=202pt]{class_s_b_es__coll__graph}
+\includegraphics[width=301pt]{class_s_b_es__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -22,6 +22,9 @@ void {\bfseries Run\+S\+B\+Es} (int \+\_\+kindex, double \+\_\+time)
 \mbox{\Hypertarget{class_s_b_es_a45d19265a4f22af79280ac4a9436f7d2}\label{class_s_b_es_a45d19265a4f22af79280ac4a9436f7d2}} 
 array$<$ double, Ndim $>$ {\bfseries Gen\+Current} (int \+\_\+kindex, double \+\_\+time)
 \item 
+\mbox{\Hypertarget{class_s_b_es_acbf52ad95d6063497f09f2d2bb435ea2}\label{class_s_b_es_acbf52ad95d6063497f09f2d2bb435ea2}} 
+std\+::tuple$<$ array$<$ double, Ndim $>$, array$<$ double, Ndim $>$ $>$ {\bfseries Gen\+Inter\+Intra\+Current} (int \+\_\+kindex, double \+\_\+time)
+\item 
 \mbox{\Hypertarget{class_s_b_es_a9503851579b1a7ea96b7faab98a5881d}\label{class_s_b_es_a9503851579b1a7ea96b7faab98a5881d}} 
 void {\bfseries Gen\+Differential\+DM} (complex $\ast$out, complex $\ast$input, int \+\_\+kindex, double \+\_\+time)
 \item 
@@ -31,14 +34,26 @@ void \mbox{\hyperlink{class_s_b_es_a4e629035d2a8101a0eef811c5c356864}{Initialize
 \mbox{\Hypertarget{class_s_b_es_a9bc2fd1ba2ad531e6cb75567ba1f8e2c}\label{class_s_b_es_a9bc2fd1ba2ad531e6cb75567ba1f8e2c}} 
 void \mbox{\hyperlink{class_s_b_es_a9bc2fd1ba2ad531e6cb75567ba1f8e2c}{Initialize\+Laser}} (const libconfig\+::\+Setting $\ast$\+\_\+laser)
 \begin{DoxyCompactList}\small\item\em Initialize laser inside constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_s_b_es_a484a32d347e2df92eff0baa327ca4a15}\label{class_s_b_es_a484a32d347e2df92eff0baa327ca4a15}} 
+void \mbox{\hyperlink{class_s_b_es_a484a32d347e2df92eff0baa327ca4a15}{Gen\+U\+Matrix}} (complex $\ast$\+\_\+ustore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint)
+\begin{DoxyCompactList}\small\item\em Generate U matrix. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_s_b_es_abd50d47954e2d5f4a82618ba7f554b86}\label{class_s_b_es_abd50d47954e2d5f4a82618ba7f554b86}} 
 array$<$ double, Ndim $>$ {\bfseries Gen\+KpulsA} (array$<$ double, Ndim $>$ \+\_\+kpoint, double time)
-\end{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_s_b_es_ae5598b536528853ee3beae6a3403fc65}\label{class_s_b_es_ae5598b536528853ee3beae6a3403fc65}} 
+void \mbox{\hyperlink{class_s_b_es_ae5598b536528853ee3beae6a3403fc65}{Wannier\+To\+Hamiltonian}} (complex $\ast$out, complex $\ast$input, int \+\_\+kindex, double \+\_\+time)
+\begin{DoxyCompactList}\small\item\em Convert Wannier representation to Hamiltonian representation. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_s_b_es_ae78ca5611d9525f89398e15cef609c1c}\label{class_s_b_es_ae78ca5611d9525f89398e15cef609c1c}} 
+void \mbox{\hyperlink{class_s_b_es_ae78ca5611d9525f89398e15cef609c1c}{Print\+Info}} ()
+\begin{DoxyCompactList}\small\item\em Print calculation information. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_s_b_es_a6fca51320c8cbe9b958092248bfe51f3}\label{class_s_b_es_a6fca51320c8cbe9b958092248bfe51f3}} 
 const Gauge\+Type {\bfseries gauge}
+\item 
+\mbox{\Hypertarget{class_s_b_es_a0aa0eb66d48cabdf6bb58c8178d38225}\label{class_s_b_es_a0aa0eb66d48cabdf6bb58c8178d38225}} 
+Initial\+Value\+Type {\bfseries init\+Type}
 \item 
 \mbox{\Hypertarget{class_s_b_es_ae738398ef5638f8a603700b111c7f85e}\label{class_s_b_es_ae738398ef5638f8a603700b111c7f85e}} 
 complex $\ast$$\ast$ {\bfseries dmatrix}
@@ -46,8 +61,8 @@ complex $\ast$$\ast$ {\bfseries dmatrix}
 \mbox{\Hypertarget{class_s_b_es_ab985732a2ee335dbc41edf0bfd62ffe5}\label{class_s_b_es_ab985732a2ee335dbc41edf0bfd62ffe5}} 
 complex $\ast$$\ast$ {\bfseries init\+Matrix}
 \item 
-\mbox{\Hypertarget{class_s_b_es_af2d0f158fb96c264633068514f17d757}\label{class_s_b_es_af2d0f158fb96c264633068514f17d757}} 
-Wannier\+Material $\ast$ \mbox{\hyperlink{class_s_b_es_af2d0f158fb96c264633068514f17d757}{material}}
+\mbox{\Hypertarget{class_s_b_es_a8ec3b23f29f4ec37f182a44bb2f59aee}\label{class_s_b_es_a8ec3b23f29f4ec37f182a44bb2f59aee}} 
+\mbox{\hyperlink{class_base_material}{Base\+Material}} $\ast$ \mbox{\hyperlink{class_s_b_es_a8ec3b23f29f4ec37f182a44bb2f59aee}{material}}
 \begin{DoxyCompactList}\small\item\em dipole\&Hamiltonian generator \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_s_b_es_a018f46cc90da276ff09cf6279a2a2c1e}\label{class_s_b_es_a018f46cc90da276ff09cf6279a2a2c1e}} 
 complex $\ast$ {\bfseries hamiltonian}
@@ -91,6 +106,15 @@ double $\ast$$\ast$ {\bfseries edispersion}
 \mbox{\Hypertarget{class_s_b_es_acbac554bd87ce6dba6b4b3cd897587c8}\label{class_s_b_es_acbac554bd87ce6dba6b4b3cd897587c8}} 
 int {\bfseries Nband}
 \item 
+\mbox{\Hypertarget{class_s_b_es_a61d3364b117aecf69208ada9c0b39766}\label{class_s_b_es_a61d3364b117aecf69208ada9c0b39766}} 
+array$<$ int, Ndim $>$ {\bfseries Nk}
+\item 
+\mbox{\Hypertarget{class_s_b_es_aad6c6f6da3402074137c6b1f6be22b2d}\label{class_s_b_es_aad6c6f6da3402074137c6b1f6be22b2d}} 
+double \mbox{\hyperlink{class_s_b_es_aad6c6f6da3402074137c6b1f6be22b2d}{Ef}}
+\begin{DoxyCompactList}\small\item\em Fermi energy. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_s_b_es_a4ba827ecab2a11ac0046b06dfb83b9cf}\label{class_s_b_es_a4ba827ecab2a11ac0046b06dfb83b9cf}} 
+double \mbox{\hyperlink{class_s_b_es_a4ba827ecab2a11ac0046b06dfb83b9cf}{thermalE}}
+\begin{DoxyCompactList}\small\item\em Thermal energy (kT) in a.\+u. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_s_b_es_a1d68f29d352329876a4856259a71a052}\label{class_s_b_es_a1d68f29d352329876a4856259a71a052}} 
 int {\bfseries R\+Korder}
 \item 
@@ -135,7 +159,10 @@ double {\bfseries dephasing\+\_\+factor\+\_\+intra}
 \item 
 \mbox{\Hypertarget{class_s_b_es_a8c07633ee694184972801d99160fea0a}\label{class_s_b_es_a8c07633ee694184972801d99160fea0a}} 
 bool \mbox{\hyperlink{class_s_b_es_a8c07633ee694184972801d99160fea0a}{is\+Dipole\+Zero}}
-\begin{DoxyCompactList}\small\item\em default is true. Wannier dipole is non-\/zero in very rare cases. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em default is true. Wannier dipole is non-\/zero in very rare cases. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_s_b_es_a5e3bf9662e4df012994386bce09b872a}\label{class_s_b_es_a5e3bf9662e4df012994386bce09b872a}} 
+bool \mbox{\hyperlink{class_s_b_es_a5e3bf9662e4df012994386bce09b872a}{is\+Inter\+Intra}}
+\begin{DoxyCompactList}\small\item\em default is true. Separate inter/intra when this is true. Total current is in inter when false. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

@@ -2,12 +2,21 @@
 \label{class_bie_se3surf}\index{BieSe3surf@{BieSe3surf}}
 
 
+Hamiltonian and dipole generator for Bi2\+Se3 surface states.  
+
+
+
+
+{\ttfamily \#include $<$Bi2\+Se3surf.\+h$>$}
+
+
+
 Inheritance diagram for Bie\+Se3surf\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=178pt]{class_bie_se3surf__inherit__graph}
+\includegraphics[width=161pt]{class_bie_se3surf__inherit__graph}
 \end{center}
 \end{figure}
 
@@ -17,7 +26,7 @@ Collaboration diagram for Bie\+Se3surf\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=178pt]{class_bie_se3surf__coll__graph}
+\includegraphics[width=161pt]{class_bie_se3surf__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -29,24 +38,14 @@ Collaboration diagram for Bie\+Se3surf\+:
 \mbox{\Hypertarget{class_bie_se3surf_a83137c9888f0c6ec62d47df9fcfcc413}\label{class_bie_se3surf_a83137c9888f0c6ec62d47df9fcfcc413}} 
 void {\bfseries Set\+Basis} ()
 \item 
-\mbox{\Hypertarget{class_bie_se3surf_a2abc7382a9b5f9aa4a9af811ee9a0afd}\label{class_bie_se3surf_a2abc7382a9b5f9aa4a9af811ee9a0afd}} 
-void {\bfseries Gen\+Initial\+Value} (complex $\ast$\+\_\+dmstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
-\item 
-\mbox{\Hypertarget{class_bie_se3surf_a336f32c78cf4005ba709a611acdd7acf}\label{class_bie_se3surf_a336f32c78cf4005ba709a611acdd7acf}} 
-void {\bfseries Gen\+U\+Matrix} (complex $\ast$\+\_\+ustore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
-\item 
-\mbox{\Hypertarget{class_bie_se3surf_a99c544c2467afc34e3b7b426458d2599}\label{class_bie_se3surf_a99c544c2467afc34e3b7b426458d2599}} 
-void {\bfseries Gen\+Hamiltonian} (complex $\ast$\+\_\+hstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
-\item 
-\mbox{\Hypertarget{class_bie_se3surf_a84cf299527528174653be41e2e1f681c}\label{class_bie_se3surf_a84cf299527528174653be41e2e1f681c}} 
-void {\bfseries Gen\+Dipole} (complex $\ast$$\ast$\+\_\+dstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
-\item 
-\mbox{\Hypertarget{class_bie_se3surf_ae5695a3e9cec80b10ab7bbc4a8c6b1ce}\label{class_bie_se3surf_ae5695a3e9cec80b10ab7bbc4a8c6b1ce}} 
-void {\bfseries Gen\+J\+Matrix} (complex $\ast$$\ast$\+\_\+jstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
-\item 
-\mbox{\Hypertarget{class_bie_se3surf_a4f5bb6b464ce3c4e2fa430d7c16b9189}\label{class_bie_se3surf_a4f5bb6b464ce3c4e2fa430d7c16b9189}} 
-std\+::tuple$<$ std\+::array$<$ double, Ndim $\ast$Ndim $>$, std\+::array$<$ double, Ndim $>$ $>$ {\bfseries Gen\+Brillouinzone} () override
-\item 
+void \mbox{\hyperlink{class_bie_se3surf_a99c544c2467afc34e3b7b426458d2599}{Gen\+Hamiltonian}} (complex $\ast$\+\_\+hstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\begin{DoxyCompactList}\small\item\em Generate Hamiltonian matrix -\/ tight binding matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_bie_se3surf_a84cf299527528174653be41e2e1f681c}{Gen\+Dipole}} (complex $\ast$$\ast$\+\_\+dstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\begin{DoxyCompactList}\small\item\em Generate dipole matrix in Wannier basis. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_bie_se3surf_ae5695a3e9cec80b10ab7bbc4a8c6b1ce}{Gen\+J\+Matrix}} (complex $\ast$$\ast$\+\_\+jstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint) override
+\begin{DoxyCompactList}\small\item\em Generate interband and intraband current matrix. \end{DoxyCompactList}\item 
+std\+::tuple$<$ std\+::array$<$ double, Ndim $\ast$Ndim $>$, std\+::array$<$ double, Ndim $>$ $>$ \mbox{\hyperlink{class_bie_se3surf_a4f5bb6b464ce3c4e2fa430d7c16b9189}{Gen\+Brillouinzone}} () override
+\begin{DoxyCompactList}\small\item\em Generate Brillouin zone information. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_bie_se3surf_a89a1be778ff8b35b121571375e629254}\label{class_bie_se3surf_a89a1be778ff8b35b121571375e629254}} 
 void {\bfseries Print\+Material\+Information} () override
 \item 
@@ -107,6 +106,103 @@ std\+::array$<$ double, 9 $>$ {\bfseries B\+Zaxis}
 \mbox{\Hypertarget{class_bie_se3surf_af0053ae8dff6432da8113edc9507029d}\label{class_bie_se3surf_af0053ae8dff6432da8113edc9507029d}} 
 std\+::array$<$ double, 3 $>$ {\bfseries B\+Zorigin}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Hamiltonian and dipole generator for Bi2\+Se3 surface states. 
+
+Equation for this class comes from Phys\+Rev\+B.\+84.\+115413 and Paper of Denitsa (add refer after publihsed) This class assumes system is pure 2d -\/ no slant plane \begin{DoxyAuthor}{Author}
+Dasol Kim 
+
+Alexis Agustín Chacón Salazar 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_bie_se3surf_a4f5bb6b464ce3c4e2fa430d7c16b9189}\label{class_bie_se3surf_a4f5bb6b464ce3c4e2fa430d7c16b9189}} 
+\index{BieSe3surf@{BieSe3surf}!GenBrillouinzone@{GenBrillouinzone}}
+\index{GenBrillouinzone@{GenBrillouinzone}!BieSe3surf@{BieSe3surf}}
+\doxysubsubsection{\texorpdfstring{GenBrillouinzone()}{GenBrillouinzone()}}
+{\footnotesize\ttfamily std\+::tuple$<$ std\+::array$<$ double, Ndim $\ast$Ndim $>$, std\+::array$<$ double, Ndim $>$ $>$ Bie\+Se3surf\+::\+Gen\+Brillouinzone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Generate Brillouin zone information. 
+
+To use this function, see below example.
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} [axes, origin] = \mbox{\hyperlink{class_bie_se3surf_a4f5bb6b464ce3c4e2fa430d7c16b9189}{GenBrillouinzone}}(); }
+\end{DoxyCode}
+ \begin{DoxyReturn}{Returns}
+Brillouin zone axes and origin points are returned as a tuple 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_base_material_ad502cd0e3d6c200489a07476bc579f0c}{Base\+Material}}.
+
+\mbox{\Hypertarget{class_bie_se3surf_a84cf299527528174653be41e2e1f681c}\label{class_bie_se3surf_a84cf299527528174653be41e2e1f681c}} 
+\index{BieSe3surf@{BieSe3surf}!GenDipole@{GenDipole}}
+\index{GenDipole@{GenDipole}!BieSe3surf@{BieSe3surf}}
+\doxysubsubsection{\texorpdfstring{GenDipole()}{GenDipole()}}
+{\footnotesize\ttfamily void Bie\+Se3surf\+::\+Gen\+Dipole (\begin{DoxyParamCaption}\item[{complex $\ast$$\ast$}]{\+\_\+dstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Generate dipole matrix in Wannier basis. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+dstore} & dipole matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_base_material_af8a9f23ac1ddcb07afd9657582377af7}{Base\+Material}}.
+
+\mbox{\Hypertarget{class_bie_se3surf_a99c544c2467afc34e3b7b426458d2599}\label{class_bie_se3surf_a99c544c2467afc34e3b7b426458d2599}} 
+\index{BieSe3surf@{BieSe3surf}!GenHamiltonian@{GenHamiltonian}}
+\index{GenHamiltonian@{GenHamiltonian}!BieSe3surf@{BieSe3surf}}
+\doxysubsubsection{\texorpdfstring{GenHamiltonian()}{GenHamiltonian()}}
+{\footnotesize\ttfamily void Bie\+Se3surf\+::\+Gen\+Hamiltonian (\begin{DoxyParamCaption}\item[{complex $\ast$}]{\+\_\+hstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Generate Hamiltonian matrix -\/ tight binding matrix. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+hstore} & Hamiltonian matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_base_material_a4090b0669eefbd99b3bf824e0ef65810}{Base\+Material}}.
+
+\mbox{\Hypertarget{class_bie_se3surf_ae5695a3e9cec80b10ab7bbc4a8c6b1ce}\label{class_bie_se3surf_ae5695a3e9cec80b10ab7bbc4a8c6b1ce}} 
+\index{BieSe3surf@{BieSe3surf}!GenJMatrix@{GenJMatrix}}
+\index{GenJMatrix@{GenJMatrix}!BieSe3surf@{BieSe3surf}}
+\doxysubsubsection{\texorpdfstring{GenJMatrix()}{GenJMatrix()}}
+{\footnotesize\ttfamily void Bie\+Se3surf\+::\+Gen\+J\+Matrix (\begin{DoxyParamCaption}\item[{complex $\ast$$\ast$}]{\+\_\+jstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Generate interband and intraband current matrix. 
+
+Remember 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+jstore} & store $ - \frac{\partial H(\textbf{k})}{\partial \textbf{k}} + i [\textbf{D}(\textbf{k}), H(\textbf{k})] $ \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_base_material_af40f6eb595ac0437cea9bb94f4bf036b}{Base\+Material}}.
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

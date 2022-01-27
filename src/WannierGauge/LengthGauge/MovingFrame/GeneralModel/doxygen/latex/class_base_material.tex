@@ -1,5 +1,15 @@
 \hypertarget{class_base_material}{}\doxysection{Base\+Material Class Reference}
 \label{class_base_material}\index{BaseMaterial@{BaseMaterial}}
+
+
+Inheritance diagram for Base\+Material\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=311pt]{class_base_material__inherit__graph}
+\end{center}
+\end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -7,7 +17,7 @@
 virtual \mbox{\hyperlink{class_base_material_a90dd928adc8fff78b06a3e19bc133f49}{$\sim$\+Base\+Material}} ()
 \begin{DoxyCompactList}\small\item\em virtual desctructor is used to prevent memory leak \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{class_base_material_ad2630d3b55e2a642d21fa6d3d8c867ed}{Gen\+Initial\+Value}} (complex $\ast$\+\_\+dmstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint)
-\item 
+\begin{DoxyCompactList}\small\item\em Generate custom inital value. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{class_base_material_a4090b0669eefbd99b3bf824e0ef65810}{Gen\+Hamiltonian}} (complex $\ast$\+\_\+hstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint)=0
 \begin{DoxyCompactList}\small\item\em Generate Hamiltonian matrix -\/ tight binding matrix. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{class_base_material_af8a9f23ac1ddcb07afd9657582377af7}{Gen\+Dipole}} (complex $\ast$$\ast$\+\_\+dstore, std\+::array$<$ double, Ndim $>$ \+\_\+kpoint)=0
@@ -48,6 +58,10 @@ To use this function, see below example.
  \begin{DoxyReturn}{Returns}
 Brillouin zone axes and origin points are returned as a tuple 
 \end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_t_m_d_cs_a4d32b26b1d107b53932feac418c848b4}{T\+M\+D\+Cs}}, \mbox{\hyperlink{class_bie_se3surf_a4f5bb6b464ce3c4e2fa430d7c16b9189}{Bie\+Se3surf}}, and \mbox{\hyperlink{class_wilson_mass_a234ce32e40498a5516e48bd0ce315b4f}{Wilson\+Mass}}.
+
 \mbox{\Hypertarget{class_base_material_af8a9f23ac1ddcb07afd9657582377af7}\label{class_base_material_af8a9f23ac1ddcb07afd9657582377af7}} 
 \index{BaseMaterial@{BaseMaterial}!GenDipole@{GenDipole}}
 \index{GenDipole@{GenDipole}!BaseMaterial@{BaseMaterial}}
@@ -65,6 +79,10 @@ Generate dipole matrix in Wannier basis.
 \mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
 \hline
 \end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_t_m_d_cs_a0001fc5456a51d1930ebb5807868da1e}{T\+M\+D\+Cs}}, \mbox{\hyperlink{class_bie_se3surf_a84cf299527528174653be41e2e1f681c}{Bie\+Se3surf}}, and \mbox{\hyperlink{class_wilson_mass_a5eccf814c7eb68f0b453a14c6b45fa01}{Wilson\+Mass}}.
+
 \mbox{\Hypertarget{class_base_material_a4090b0669eefbd99b3bf824e0ef65810}\label{class_base_material_a4090b0669eefbd99b3bf824e0ef65810}} 
 \index{BaseMaterial@{BaseMaterial}!GenHamiltonian@{GenHamiltonian}}
 \index{GenHamiltonian@{GenHamiltonian}!BaseMaterial@{BaseMaterial}}
@@ -82,11 +100,19 @@ Generate Hamiltonian matrix -\/ tight binding matrix.
 \mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
 \hline
 \end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_t_m_d_cs_ab7f79dc7186b28a986e96d4b1418ba3b}{T\+M\+D\+Cs}}, \mbox{\hyperlink{class_bie_se3surf_a99c544c2467afc34e3b7b426458d2599}{Bie\+Se3surf}}, and \mbox{\hyperlink{class_wilson_mass_aed4048bb4a06169ffc8010852fd46262}{Wilson\+Mass}}.
+
 \mbox{\Hypertarget{class_base_material_ad2630d3b55e2a642d21fa6d3d8c867ed}\label{class_base_material_ad2630d3b55e2a642d21fa6d3d8c867ed}} 
 \index{BaseMaterial@{BaseMaterial}!GenInitialValue@{GenInitialValue}}
 \index{GenInitialValue@{GenInitialValue}!BaseMaterial@{BaseMaterial}}
 \doxysubsubsection{\texorpdfstring{GenInitialValue()}{GenInitialValue()}}
-{\footnotesize\ttfamily virtual void Base\+Material\+::\+Gen\+Initial\+Value (\begin{DoxyParamCaption}\item[{complex $\ast$}]{\+\_\+dmstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void Base\+Material\+::\+Gen\+Initial\+Value (\begin{DoxyParamCaption}\item[{complex $\ast$}]{\+\_\+dmstore,  }\item[{std\+::array$<$ double, Ndim $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Generate custom inital value. 
 
 Generate custom initial value of density matrix. Should be used only when you need strange initial value. This is not pure virtual function. One can ignore this when implementing Material class. 
 \begin{DoxyParams}[1]{Parameters}
@@ -107,11 +133,15 @@ Generate interband and intraband current matrix.
 
 Remember 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\texttt{ out}}  & {\em \+\_\+jstore} & store  \\
+\mbox{\texttt{ out}}  & {\em \+\_\+jstore} & store $ - \frac{\partial H(\textbf{k})}{\partial \textbf{k}} + i [\textbf{D}(\textbf{k}), H(\textbf{k})] $ \\
 \hline
 \mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
 \hline
 \end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_t_m_d_cs_aaa9120a5ae8a80ec2196615708e6a220}{T\+M\+D\+Cs}}, \mbox{\hyperlink{class_bie_se3surf_ae5695a3e9cec80b10ab7bbc4a8c6b1ce}{Bie\+Se3surf}}, and \mbox{\hyperlink{class_wilson_mass_a41a3114da6dd600adbc08aa2ed024141}{Wilson\+Mass}}.
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

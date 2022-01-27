@@ -297,12 +297,12 @@ string&#160;</td><td class="memItemRight" valign="bottom"><b>fileNamePicture</b>
 <tr class="memitem:a1da6957fbebfdf214f6bf0bf78385cdf"><td class="memItemLeft" align="right" valign="top"><a id="a1da6957fbebfdf214f6bf0bf78385cdf"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>FullRadiationRotated</b> = np.zeros(InterC.shape, dtype=np.complex128)</td></tr>
 <tr class="separator:a1da6957fbebfdf214f6bf0bf78385cdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ed657f72806b05f33556f9ba29206c5"><td class="memItemLeft" align="right" valign="top"><a id="a3ed657f72806b05f33556f9ba29206c5"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Sinter</b> = <a class="el" href="namespace_analysis_reader___py_dir.html#ab6e1a49a623a55d76e543bfe8f445f64">FFT_InterC</a>[0, :] + <a class="el" href="namespace_analysis_reader___py_dir.html#ab6e1a49a623a55d76e543bfe8f445f64">FFT_InterC</a>[1, :]</td></tr>
-<tr class="separator:a3ed657f72806b05f33556f9ba29206c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b009e8d5e303b52134bd2e8f4a300cc"><td class="memItemLeft" align="right" valign="top"><a id="a0b009e8d5e303b52134bd2e8f4a300cc"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Sintra</b> = FFT_IntraC[0, :] + FFT_IntraC[1, :]</td></tr>
-<tr class="separator:a0b009e8d5e303b52134bd2e8f4a300cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c044a3c2550b2c52b764966a2931d90"><td class="memItemLeft" align="right" valign="top"><a id="a3c044a3c2550b2c52b764966a2931d90"></a>
+tuple&#160;</td><td class="memItemRight" valign="bottom"><b>Sinter</b> = ( abs(<a class="el" href="namespace_analysis_reader___py_dir.html#ab6e1a49a623a55d76e543bfe8f445f64">FFT_InterC</a>[0, :])**2 + abs(<a class="el" href="namespace_analysis_reader___py_dir.html#ab6e1a49a623a55d76e543bfe8f445f64">FFT_InterC</a>[1, :])**2 + hzero)</td></tr>
+<tr class="separator:a3c044a3c2550b2c52b764966a2931d90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d89d4a94f960199edaa7c767610f09c"><td class="memItemLeft" align="right" valign="top"><a id="a4d89d4a94f960199edaa7c767610f09c"></a>
+tuple&#160;</td><td class="memItemRight" valign="bottom"><b>Sintra</b> = ( abs(FFT_IntraC[0, :])**2 + abs(FFT_IntraC[1, :])**2 + hzero)</td></tr>
+<tr class="separator:a4d89d4a94f960199edaa7c767610f09c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54b42cbee5a2b62a6ce49bddb45aee0c"><td class="memItemLeft" align="right" valign="top"><a id="a54b42cbee5a2b62a6ce49bddb45aee0c"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>thetaz</b> = config['<a class="el" href="classlaser.html">laser</a>']['pulses'][refPulse]['thetaz']</td></tr>
 <tr class="separator:a54b42cbee5a2b62a6ce49bddb45aee0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
