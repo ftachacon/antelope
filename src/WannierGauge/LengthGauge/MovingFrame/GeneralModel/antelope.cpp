@@ -1,5 +1,6 @@
 /// main cpp file
 /**
+ * @file main.cpp
  * @author Dasol Kim
  * @author Alexis Agustín  Chacón Salazar
 */
