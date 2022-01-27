@@ -1,0 +1,303 @@
+\hypertarget{class_haldane}{}\doxysection{Haldane Class Reference}
+\label{class_haldane}\index{Haldane@{Haldane}}
+
+
+Hamiltonian and dipole generator for \mbox{\hyperlink{class_haldane}{Haldane}} model.  
+
+
+
+
+{\ttfamily \#include $<$Haldane.\+h$>$}
+
+
+
+Inheritance diagram for Haldane\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=161pt]{class_haldane__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Haldane\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=161pt]{class_haldane__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_haldane_ae42957b5f23ed82c4e6ad7935dd014e4}{Haldane}} (const libconfig\+::\+Setting $\ast$params)
+\item 
+void \mbox{\hyperlink{class_haldane_aa7de0a9b020461f249da2ca08013358e}{Set\+Basis}} ()
+\item 
+void \mbox{\hyperlink{class_haldane_a39767fcc5c1270f1ac5282c196d37230}{Gen\+Hamiltonian}} (\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$\+\_\+hstore, std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \+\_\+kpoint) override
+\begin{DoxyCompactList}\small\item\em Generate Hamiltonian matrix -\/ tight binding matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_haldane_a88d92d3eabdf401f9d554913a00ccbe6}{Gen\+Dipole}} (\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$$\ast$\+\_\+dstore, std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \+\_\+kpoint) override
+\begin{DoxyCompactList}\small\item\em Generate dipole matrix in Wannier basis. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_haldane_a096df1a88e2ff014e2f095185df1efe1}{Gen\+J\+Matrix}} (\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$$\ast$\+\_\+jstore, std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \+\_\+kpoint) override
+\begin{DoxyCompactList}\small\item\em Generate interband and intraband current matrix. \end{DoxyCompactList}\item 
+std\+::tuple$<$ std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $\ast$\mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$, std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ $>$ \mbox{\hyperlink{class_haldane_a560545d2051a9a75f8de791083b9b77b}{Gen\+Brillouinzone}} () override
+\begin{DoxyCompactList}\small\item\em Generate Brillouin zone information. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_haldane_a25fbd5756c4911e34c36953395f1cfa7}{Print\+Material\+Information}} () override
+\item 
+void \mbox{\hyperlink{class_haldane_aba5b03170147c7a6edc625f5a0bf379c}{Gen\+Bcomp}} (std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ \+\_\+kpoint)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_haldane_a6cf3a9e7402c6d4aa1166a5c584b15d4}{t1}}
+\item 
+double \mbox{\hyperlink{class_haldane_a73c08cdf53fb9fbbe791ba8856d75b50}{t2}}
+\item 
+double \mbox{\hyperlink{class_haldane_a253b4c3acff7fe57e1b0070b4914693f}{M0}}
+\item 
+double \mbox{\hyperlink{class_haldane_a7a0355d762026f42f1381f24e3bff780}{phi0}}
+\item 
+double \mbox{\hyperlink{class_haldane_af24c40879591a2e57eda77cf802a2af6}{a0}}
+\item 
+double \mbox{\hyperlink{class_haldane_a7bd6c8ed242faf04790731ed1033954f}{vec\+\_\+a}} \mbox{[}3\mbox{]}\mbox{[}2\mbox{]}
+\begin{DoxyCompactList}\small\item\em 3 NN vectors (from A to B ) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_haldane_ab1d7ca09448b38a87077c149954406b4}{vec\+\_\+b}} \mbox{[}3\mbox{]}\mbox{[}2\mbox{]}
+\begin{DoxyCompactList}\small\item\em 3 N\+NN vectors (from A to A, or B to B) \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_haldane_ac4d228b7d08dd3ec569a13ef8525c60d}{eps}}
+\begin{DoxyCompactList}\small\item\em to avoid singular norm \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_haldane_adf833c2b9e20fed80cb05a8fa1d47af5}{Bcomp}} \mbox{[}4\mbox{]}
+\item 
+double \mbox{\hyperlink{class_haldane_a94426a3a656d1e80aebef3439ac3d70d}{angle\+\_\+a0}}
+\item 
+double \mbox{\hyperlink{class_haldane_a1275c8b3163b56e22e06bf7bf2b40db0}{angle\+\_\+b0}}
+\item 
+std\+::array$<$ double, 9 $>$ \mbox{\hyperlink{class_haldane_a7aae1885540321a5a66576ecc244a988}{B\+Zaxis}}
+\item 
+std\+::array$<$ double, 3 $>$ \mbox{\hyperlink{class_haldane_a4c66416a66c5fd0a3535eca9ba918900}{B\+Zorigin}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Hamiltonian and dipole generator for \mbox{\hyperlink{class_haldane}{Haldane}} model. 
+
+Some contents of this file comes from \textquotesingle{}\mbox{\hyperlink{solidstructure_8h}{solidstructure.\+h}}\textquotesingle{} written by Alexis Chacon This class assumes system is pure 2d -\/ no slant plane \begin{DoxyAuthor}{Author}
+Dasol Kim 
+
+Alexis Agustín Chacón Salazar 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_haldane_ae42957b5f23ed82c4e6ad7935dd014e4}\label{class_haldane_ae42957b5f23ed82c4e6ad7935dd014e4}} 
+\index{Haldane@{Haldane}!Haldane@{Haldane}}
+\index{Haldane@{Haldane}!Haldane@{Haldane}}
+\doxysubsubsection{\texorpdfstring{Haldane()}{Haldane()}}
+{\footnotesize\ttfamily Haldane\+::\+Haldane (\begin{DoxyParamCaption}\item[{const libconfig\+::\+Setting $\ast$}]{params }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_haldane_aba5b03170147c7a6edc625f5a0bf379c}\label{class_haldane_aba5b03170147c7a6edc625f5a0bf379c}} 
+\index{Haldane@{Haldane}!GenBcomp@{GenBcomp}}
+\index{GenBcomp@{GenBcomp}!Haldane@{Haldane}}
+\doxysubsubsection{\texorpdfstring{GenBcomp()}{GenBcomp()}}
+{\footnotesize\ttfamily void Haldane\+::\+Gen\+Bcomp (\begin{DoxyParamCaption}\item[{std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_haldane_a560545d2051a9a75f8de791083b9b77b}\label{class_haldane_a560545d2051a9a75f8de791083b9b77b}} 
+\index{Haldane@{Haldane}!GenBrillouinzone@{GenBrillouinzone}}
+\index{GenBrillouinzone@{GenBrillouinzone}!Haldane@{Haldane}}
+\doxysubsubsection{\texorpdfstring{GenBrillouinzone()}{GenBrillouinzone()}}
+{\footnotesize\ttfamily std\+::tuple$<$ std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $\ast$\mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$, std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$ $>$ Haldane\+::\+Gen\+Brillouinzone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Generate Brillouin zone information. 
+
+To use this function, see below example.
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} [axes, origin] = \mbox{\hyperlink{class_haldane_a560545d2051a9a75f8de791083b9b77b}{GenBrillouinzone}}(); }
+\end{DoxyCode}
+ \begin{DoxyReturn}{Returns}
+Brillouin zone axes and origin points are returned as a tuple 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_base_material_ad502cd0e3d6c200489a07476bc579f0c}{Base\+Material}}.
+
+\mbox{\Hypertarget{class_haldane_a88d92d3eabdf401f9d554913a00ccbe6}\label{class_haldane_a88d92d3eabdf401f9d554913a00ccbe6}} 
+\index{Haldane@{Haldane}!GenDipole@{GenDipole}}
+\index{GenDipole@{GenDipole}!Haldane@{Haldane}}
+\doxysubsubsection{\texorpdfstring{GenDipole()}{GenDipole()}}
+{\footnotesize\ttfamily void Haldane\+::\+Gen\+Dipole (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$$\ast$}]{\+\_\+dstore,  }\item[{std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Generate dipole matrix in Wannier basis. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+dstore} & dipole matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_base_material_af8a9f23ac1ddcb07afd9657582377af7}{Base\+Material}}.
+
+\mbox{\Hypertarget{class_haldane_a39767fcc5c1270f1ac5282c196d37230}\label{class_haldane_a39767fcc5c1270f1ac5282c196d37230}} 
+\index{Haldane@{Haldane}!GenHamiltonian@{GenHamiltonian}}
+\index{GenHamiltonian@{GenHamiltonian}!Haldane@{Haldane}}
+\doxysubsubsection{\texorpdfstring{GenHamiltonian()}{GenHamiltonian()}}
+{\footnotesize\ttfamily void Haldane\+::\+Gen\+Hamiltonian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$}]{\+\_\+hstore,  }\item[{std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Generate Hamiltonian matrix -\/ tight binding matrix. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+hstore} & Hamiltonian matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_base_material_a4090b0669eefbd99b3bf824e0ef65810}{Base\+Material}}.
+
+\mbox{\Hypertarget{class_haldane_a096df1a88e2ff014e2f095185df1efe1}\label{class_haldane_a096df1a88e2ff014e2f095185df1efe1}} 
+\index{Haldane@{Haldane}!GenJMatrix@{GenJMatrix}}
+\index{GenJMatrix@{GenJMatrix}!Haldane@{Haldane}}
+\doxysubsubsection{\texorpdfstring{GenJMatrix()}{GenJMatrix()}}
+{\footnotesize\ttfamily void Haldane\+::\+Gen\+J\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_s_b_es_8h_a0fa4878c968311979d497ccc322e0b9b}{complex}} $\ast$$\ast$}]{\+\_\+jstore,  }\item[{std\+::array$<$ double, \mbox{\hyperlink{constant_8h_a3d6661e5760f081da05443d09aed736b}{Ndim}} $>$}]{\+\_\+kpoint }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Generate interband and intraband current matrix. 
+
+Remember 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em \+\_\+jstore} & store $ - \frac{\partial H(\textbf{k})}{\partial \textbf{k}} + i [\textbf{D}(\textbf{k}), H(\textbf{k})] $ \\
+\hline
+\mbox{\texttt{ in}}  & {\em \+\_\+kpoint} & kpoints = \{kx, ky, kz\} \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_base_material_af40f6eb595ac0437cea9bb94f4bf036b}{Base\+Material}}.
+
+\mbox{\Hypertarget{class_haldane_a25fbd5756c4911e34c36953395f1cfa7}\label{class_haldane_a25fbd5756c4911e34c36953395f1cfa7}} 
+\index{Haldane@{Haldane}!PrintMaterialInformation@{PrintMaterialInformation}}
+\index{PrintMaterialInformation@{PrintMaterialInformation}!Haldane@{Haldane}}
+\doxysubsubsection{\texorpdfstring{PrintMaterialInformation()}{PrintMaterialInformation()}}
+{\footnotesize\ttfamily void Haldane\+::\+Print\+Material\+Information (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_base_material_a17addbe0f1a21e939995a9234c10b42c}{Base\+Material}}.
+
+\mbox{\Hypertarget{class_haldane_aa7de0a9b020461f249da2ca08013358e}\label{class_haldane_aa7de0a9b020461f249da2ca08013358e}} 
+\index{Haldane@{Haldane}!SetBasis@{SetBasis}}
+\index{SetBasis@{SetBasis}!Haldane@{Haldane}}
+\doxysubsubsection{\texorpdfstring{SetBasis()}{SetBasis()}}
+{\footnotesize\ttfamily void Haldane\+::\+Set\+Basis (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_haldane_af24c40879591a2e57eda77cf802a2af6}\label{class_haldane_af24c40879591a2e57eda77cf802a2af6}} 
+\index{Haldane@{Haldane}!a0@{a0}}
+\index{a0@{a0}!Haldane@{Haldane}}
+\doxysubsubsection{\texorpdfstring{a0}{a0}}
+{\footnotesize\ttfamily double Haldane\+::a0}
+
+\mbox{\Hypertarget{class_haldane_a94426a3a656d1e80aebef3439ac3d70d}\label{class_haldane_a94426a3a656d1e80aebef3439ac3d70d}} 
+\index{Haldane@{Haldane}!angle\_a0@{angle\_a0}}
+\index{angle\_a0@{angle\_a0}!Haldane@{Haldane}}
+\doxysubsubsection{\texorpdfstring{angle\_a0}{angle\_a0}}
+{\footnotesize\ttfamily double Haldane\+::angle\+\_\+a0}
+
+\mbox{\Hypertarget{class_haldane_a1275c8b3163b56e22e06bf7bf2b40db0}\label{class_haldane_a1275c8b3163b56e22e06bf7bf2b40db0}} 
+\index{Haldane@{Haldane}!angle\_b0@{angle\_b0}}
+\index{angle\_b0@{angle\_b0}!Haldane@{Haldane}}
+\doxysubsubsection{\texorpdfstring{angle\_b0}{angle\_b0}}
+{\footnotesize\ttfamily double Haldane\+::angle\+\_\+b0}
+
+\mbox{\Hypertarget{class_haldane_adf833c2b9e20fed80cb05a8fa1d47af5}\label{class_haldane_adf833c2b9e20fed80cb05a8fa1d47af5}} 
+\index{Haldane@{Haldane}!Bcomp@{Bcomp}}
+\index{Bcomp@{Bcomp}!Haldane@{Haldane}}
+\doxysubsubsection{\texorpdfstring{Bcomp}{Bcomp}}
+{\footnotesize\ttfamily double Haldane\+::\+Bcomp\mbox{[}4\mbox{]}}
+
+\mbox{\Hypertarget{class_haldane_a7aae1885540321a5a66576ecc244a988}\label{class_haldane_a7aae1885540321a5a66576ecc244a988}} 
+\index{Haldane@{Haldane}!BZaxis@{BZaxis}}
+\index{BZaxis@{BZaxis}!Haldane@{Haldane}}
+\doxysubsubsection{\texorpdfstring{BZaxis}{BZaxis}}
+{\footnotesize\ttfamily std\+::array$<$double, 9$>$ Haldane\+::\+B\+Zaxis}
+
+\mbox{\Hypertarget{class_haldane_a4c66416a66c5fd0a3535eca9ba918900}\label{class_haldane_a4c66416a66c5fd0a3535eca9ba918900}} 
+\index{Haldane@{Haldane}!BZorigin@{BZorigin}}
+\index{BZorigin@{BZorigin}!Haldane@{Haldane}}
+\doxysubsubsection{\texorpdfstring{BZorigin}{BZorigin}}
+{\footnotesize\ttfamily std\+::array$<$double, 3$>$ Haldane\+::\+B\+Zorigin}
+
+\mbox{\Hypertarget{class_haldane_ac4d228b7d08dd3ec569a13ef8525c60d}\label{class_haldane_ac4d228b7d08dd3ec569a13ef8525c60d}} 
+\index{Haldane@{Haldane}!eps@{eps}}
+\index{eps@{eps}!Haldane@{Haldane}}
+\doxysubsubsection{\texorpdfstring{eps}{eps}}
+{\footnotesize\ttfamily double Haldane\+::eps}
+
+
+
+to avoid singular norm 
+
+\mbox{\Hypertarget{class_haldane_a253b4c3acff7fe57e1b0070b4914693f}\label{class_haldane_a253b4c3acff7fe57e1b0070b4914693f}} 
+\index{Haldane@{Haldane}!M0@{M0}}
+\index{M0@{M0}!Haldane@{Haldane}}
+\doxysubsubsection{\texorpdfstring{M0}{M0}}
+{\footnotesize\ttfamily double Haldane\+::\+M0}
+
+\mbox{\Hypertarget{class_haldane_a7a0355d762026f42f1381f24e3bff780}\label{class_haldane_a7a0355d762026f42f1381f24e3bff780}} 
+\index{Haldane@{Haldane}!phi0@{phi0}}
+\index{phi0@{phi0}!Haldane@{Haldane}}
+\doxysubsubsection{\texorpdfstring{phi0}{phi0}}
+{\footnotesize\ttfamily double Haldane\+::phi0}
+
+\mbox{\Hypertarget{class_haldane_a6cf3a9e7402c6d4aa1166a5c584b15d4}\label{class_haldane_a6cf3a9e7402c6d4aa1166a5c584b15d4}} 
+\index{Haldane@{Haldane}!t1@{t1}}
+\index{t1@{t1}!Haldane@{Haldane}}
+\doxysubsubsection{\texorpdfstring{t1}{t1}}
+{\footnotesize\ttfamily double Haldane\+::t1}
+
+\mbox{\Hypertarget{class_haldane_a73c08cdf53fb9fbbe791ba8856d75b50}\label{class_haldane_a73c08cdf53fb9fbbe791ba8856d75b50}} 
+\index{Haldane@{Haldane}!t2@{t2}}
+\index{t2@{t2}!Haldane@{Haldane}}
+\doxysubsubsection{\texorpdfstring{t2}{t2}}
+{\footnotesize\ttfamily double Haldane\+::t2}
+
+\mbox{\Hypertarget{class_haldane_a7bd6c8ed242faf04790731ed1033954f}\label{class_haldane_a7bd6c8ed242faf04790731ed1033954f}} 
+\index{Haldane@{Haldane}!vec\_a@{vec\_a}}
+\index{vec\_a@{vec\_a}!Haldane@{Haldane}}
+\doxysubsubsection{\texorpdfstring{vec\_a}{vec\_a}}
+{\footnotesize\ttfamily double Haldane\+::vec\+\_\+a\mbox{[}3\mbox{]}\mbox{[}2\mbox{]}}
+
+
+
+3 NN vectors (from A to B ) 
+
+\mbox{\Hypertarget{class_haldane_ab1d7ca09448b38a87077c149954406b4}\label{class_haldane_ab1d7ca09448b38a87077c149954406b4}} 
+\index{Haldane@{Haldane}!vec\_b@{vec\_b}}
+\index{vec\_b@{vec\_b}!Haldane@{Haldane}}
+\doxysubsubsection{\texorpdfstring{vec\_b}{vec\_b}}
+{\footnotesize\ttfamily double Haldane\+::vec\+\_\+b\mbox{[}3\mbox{]}\mbox{[}2\mbox{]}}
+
+
+
+3 N\+NN vectors (from A to A, or B to B) 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Materials/\mbox{\hyperlink{_haldane_8h}{Haldane.\+h}}\end{DoxyCompactItemize}

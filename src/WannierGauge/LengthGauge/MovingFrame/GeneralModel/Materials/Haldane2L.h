@@ -2,7 +2,6 @@
 /**
  * Some contents of this file comes from 'solidstructure.h' written by Alexis Chacon
  * This class assumes system is pure 2d - no slant plane
- * @todo Fix GenInitialValue function behavior when \f$|\textmf{B}| = 0$\f. 
  * @author Dasol Kim
  * @author Alexis Agustín  Chacón Salazar
 */

@@ -1,10 +1,11 @@
 var searchData=
 [
-  ['pararange_514',['ParaRange',['../utility_8h.html#ae067c253f8dc385a4e354634f7bbe100',1,'utility.h']]],
-  ['print_5finfo_515',['print_info',['../classmomaxis.html#acadd663eec4644f31fa7033926bb6d99',1,'momaxis']]],
-  ['print_5flaserinfo_516',['Print_LaserInfo',['../classlaser.html#a448435062c118cd1f60518a52fbc65ca',1,'laser']]],
-  ['print_5fpulseinfo_517',['Print_PulseInfo',['../class_pulse.html#ae6335a983bc9f0c6cd0832ba1943e87e',1,'Pulse']]],
-  ['printinfo_518',['PrintInfo',['../class_s_b_es.html#ae78ca5611d9525f89398e15cef609c1c',1,'SBEs']]],
-  ['printmaterialinformation_519',['PrintMaterialInformation',['../class_bie_se3surf.html#a89a1be778ff8b35b121571375e629254',1,'BieSe3surf::PrintMaterialInformation()'],['../class_t_m_d_cs.html#a05d0bd8c486f3a5fa7bf9181d666e46d',1,'TMDCs::PrintMaterialInformation()'],['../class_wannier90.html#a014e75165925536ecfa096769ee3538d',1,'Wannier90::PrintMaterialInformation()'],['../class_wilson_mass.html#a1a201f0e9dadfc2bb84f4292506fb65a',1,'WilsonMass::PrintMaterialInformation()'],['../class_base_material.html#a17addbe0f1a21e939995a9234c10b42c',1,'BaseMaterial::PrintMaterialInformation()']]],
-  ['pulse_520',['Pulse',['../class_pulse.html#af1ab2726f54f1636645a1ce12099bfab',1,'Pulse']]]
+  ['main_518',['main',['../antelope_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'antelope.cpp']]],
+  ['matrixmult_519',['MatrixMult',['../utility_8h.html#af1b87da66c6f5ebd31d4f7fe68fbc0d7',1,'MatrixMult(T *out, T *A, T *B, int Nrows, int Ncols, int Nmid):&#160;utility.h'],['../utility_8h.html#a1cb6e8f9eb2dcac634a6f444c9caa9a5',1,'MatrixMult(T *out, T *A, T *B, int N):&#160;utility.h']]],
+  ['max_520',['max',['../classsolidstructure.html#adc4228fa56a5f5f1eee9f01149b92000',1,'solidstructure']]],
+  ['min_521',['min',['../classsolidstructure.html#ad9de8b99d76ba61889a33e98df239239',1,'solidstructure']]],
+  ['mom_5foutputs_522',['mom_outputs',['../classmomaxis.html#a23d4f5a89d9532507ceee0b2bea2a6c9',1,'momaxis']]],
+  ['momaxis_523',['momaxis',['../classmomaxis.html#aabdf2088e2f6a43f2adfbe1f67ef770e',1,'momaxis']]],
+  ['my_5fmpi_5fclx_5fsum_524',['My_MPI_CLX_SUM',['../antelope_8cpp.html#a468961dc983f2651499d2c9e7eae72a8',1,'antelope.cpp']]],
+  ['myregularization_525',['myRegularization',['../classsolidstructure.html#a138f0f600870a14b7069d0f1908e0f14',1,'solidstructure']]]
 ];

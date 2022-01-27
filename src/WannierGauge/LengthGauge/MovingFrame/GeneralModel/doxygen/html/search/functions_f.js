@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['wannier90_536',['Wannier90',['../class_wannier90.html#aefd7c34665d823692f7b3ef84d517fbd',1,'Wannier90']]],
-  ['wanniertohamiltonian_537',['WannierToHamiltonian',['../class_s_b_es.html#ae5598b536528853ee3beae6a3403fc65',1,'SBEs']]],
-  ['whitespaces_538',['whiteSpaces',['../utility_8h.html#aed8ff2c38a8f85dbb65430db776210c6',1,'utility.h']]],
-  ['wilsonmass_539',['WilsonMass',['../class_wilson_mass.html#ae3a377c8b1c21cb0997c3281f72ea147',1,'WilsonMass']]]
+  ['tmdcs_544',['TMDCs',['../class_t_m_d_cs.html#a86192521fdb2fd08765f2410f77df31b',1,'TMDCs']]],
+  ['trim_545',['trim',['../utility_8h.html#ae09ff3f9ef4f6ed1e6f8bce21611c350',1,'utility.h']]],
+  ['trim_5fleft_546',['trim_left',['../utility_8h.html#abe9a7a913241dd3c7c10556db0c7476c',1,'utility.h']]],
+  ['trim_5fright_547',['trim_right',['../utility_8h.html#a31195fb00e3cfc59f131e4a4d225b7d4',1,'utility.h']]]
 ];

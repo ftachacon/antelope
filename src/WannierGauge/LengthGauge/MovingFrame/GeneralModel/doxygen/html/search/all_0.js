@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['a0_0',['a0',['../class_bie_se3surf.html#a931357349c2d668ede60955f635bf20b',1,'BieSe3surf::a0()'],['../class_t_m_d_cs.html#a249a4b9af6911255bee0d369cb140bed',1,'TMDCs::a0()'],['../class_wilson_mass.html#a16af45b5abd7c89da5f5a0456c6a3c54',1,'WilsonMass::a0()']]],
+  ['a0_0',['a0',['../class_bie_se3surf.html#a931357349c2d668ede60955f635bf20b',1,'BieSe3surf::a0()'],['../class_haldane.html#af24c40879591a2e57eda77cf802a2af6',1,'Haldane::a0()'],['../class_haldane2_l.html#a989cc139ccff016cc4224811c14fa15f',1,'Haldane2L::a0()'],['../class_kane_mele.html#a568c7faadf7eba350c10bdae92cf51e7',1,'KaneMele::a0()'],['../class_t_m_d_cs.html#a249a4b9af6911255bee0d369cb140bed',1,'TMDCs::a0()'],['../class_wilson_mass.html#a16af45b5abd7c89da5f5a0456c6a3c54',1,'WilsonMass::a0()']]],
   ['a0x_1',['A0x',['../class_pulse.html#ab023b3eda761cc2aab3f6273e28c33aa',1,'Pulse']]],
   ['a0y_2',['A0y',['../class_pulse.html#a1dc79a860e7bdc121391522b79a35925',1,'Pulse']]],
   ['a1_3',['a1',['../class_wilson_mass.html#afa15b9b4f4822b8b37a4054cd358c13b',1,'WilsonMass']]],
@@ -8,8 +8,8 @@ var searchData=
   ['action_5',['action',['../namespace_plot_material_structure.html#ab11d0d2c180f918e6799e0bf1082bc6a',1,'PlotMaterialStructure']]],
   ['alaser_6',['alaser',['../classlaser.html#a5414184b855cc386a492e4e23fbabdd9',1,'laser']]],
   ['allocate_7',['Allocate',['../class_wannier90.html#ad499a7b24d6f7c52d8ab2760cab076b7',1,'Wannier90']]],
-  ['angle_5fa0_8',['angle_a0',['../class_bie_se3surf.html#a51208d5b36bbb61c81b2415199187e5a',1,'BieSe3surf::angle_a0()'],['../class_t_m_d_cs.html#a58c8672174ad384c443c0119ff1f840c',1,'TMDCs::angle_a0()'],['../classsolidstructure.html#a88c013f1bf0e8d7510bacf91ed834e06',1,'solidstructure::angle_a0()']]],
-  ['angle_5fb0_9',['angle_b0',['../class_bie_se3surf.html#a0b60924b15b78a2ae9e07b8045504d17',1,'BieSe3surf::angle_b0()'],['../class_t_m_d_cs.html#af07f71f49fdffebc5263d5e9acadd045',1,'TMDCs::angle_b0()'],['../classsolidstructure.html#a0099c1817dd97ed9faa810241d728c7b',1,'solidstructure::angle_b0()']]],
+  ['angle_5fa0_8',['angle_a0',['../class_bie_se3surf.html#a51208d5b36bbb61c81b2415199187e5a',1,'BieSe3surf::angle_a0()'],['../class_haldane.html#a94426a3a656d1e80aebef3439ac3d70d',1,'Haldane::angle_a0()'],['../class_haldane2_l.html#aedcba0052b72e771bb7bfc421496c4e5',1,'Haldane2L::angle_a0()'],['../class_kane_mele.html#a6e19982701067c8b0d3501526e12d156',1,'KaneMele::angle_a0()'],['../class_t_m_d_cs.html#a58c8672174ad384c443c0119ff1f840c',1,'TMDCs::angle_a0()'],['../classsolidstructure.html#a88c013f1bf0e8d7510bacf91ed834e06',1,'solidstructure::angle_a0()']]],
+  ['angle_5fb0_9',['angle_b0',['../class_bie_se3surf.html#a0b60924b15b78a2ae9e07b8045504d17',1,'BieSe3surf::angle_b0()'],['../class_haldane.html#a1275c8b3163b56e22e06bf7bf2b40db0',1,'Haldane::angle_b0()'],['../class_haldane2_l.html#ae51e8358e19a5087d01db41e03a81d2c',1,'Haldane2L::angle_b0()'],['../class_kane_mele.html#ae0ac6db6837fa0fabf1f7a28dcf22c35',1,'KaneMele::angle_b0()'],['../class_t_m_d_cs.html#af07f71f49fdffebc5263d5e9acadd045',1,'TMDCs::angle_b0()'],['../classsolidstructure.html#a0099c1817dd97ed9faa810241d728c7b',1,'solidstructure::angle_b0()']]],
   ['anomalous_5fvelcv_10',['anomalous_velCV',['../classsolidstructure.html#a7bb841240adb9dc96bcd02c9a967449c',1,'solidstructure']]],
   ['antelope_2ecpp_11',['antelope.cpp',['../antelope_8cpp.html',1,'']]],
   ['args_12',['args',['../namespace_plot_material_structure.html#ae97dc493d36d8c39cad3a84d1c952336',1,'PlotMaterialStructure']]],
