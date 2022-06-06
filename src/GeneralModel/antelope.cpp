@@ -43,6 +43,7 @@ double flag_occ_dephasing = 0.;
 double flag_t2 = 0.;
 int diagnostic = 0;
 int shotNumber   = 0;
+int printFrequency = 100;   // determine print log frequency
 
 //################################
 int main( int argc, char *argv[] )
@@ -260,15 +261,23 @@ int main( int argc, char *argv[] )
     double currenttime, currentcycle;
     complex *temp_density_matrix_integrated = new complex[Nband*Nband];
     complex *temp_1d_integrated_occupation = new complex[sbe->Nk[0]];
-    FILE *dm1dout;
+    double *snapshot_nc = new double[sbe->kmesh->Ntotal];
+    complex *snapshot_pi = new complex[sbe->kmesh->Ntotal];
+    FILE *dm1dout, *nc_out, *pi_out, *shot_out;
     if (rank == MASTER)
     {
         dm1dout = fopen("occupation_1d_integration.dat", "w");
+        nc_out = fopen("fisrt_conduction.dat", "w");
+        pi_out = fopen("fisrt_coherence.dat", "w");
+        shot_out = fopen("snapshot_log.dat", "w");
     }
     double occup_temp = 0;
     double maxcycles = 2*sbe->fpulses->pulses[0].twidth / sbe->fpulses->pulses[0].period0;
 
-    int shotFrequency = int(sbe->fpulses->pulses[0].period0/10/sbe->fpulses->dt);
+    shotNumber = sbe->shotNumber;
+    int shotFrequency = sbe->fpulses->Nt + 100;
+    if (shotNumber != 0)
+        shotFrequency = int(sbe->fpulses->pulses[0].period0/shotNumber/sbe->fpulses->dt);
     //#####################################
     //#####################################
     //Time integration loop
@@ -311,7 +320,7 @@ int main( int argc, char *argv[] )
         }
         // Snapshots - including diagnostics and density plots 
         // if (shotNumber > 0 && ktime % shotNumber == 0)
-        if (ktime % shotFrequency == 0)
+        if (shotNumber > 0 && ktime % shotFrequency == 0)
         {
             // temporary routine - integrating occupation
             for (int m = 0; m < sbe->Nk[0]; ++m)
@@ -350,8 +359,55 @@ int main( int argc, char *argv[] )
                 }
                 fprintf(dm1dout, "\n");
             }
-            // -----------
 
+            // snapshot here
+            // move density matrix to contigous array in k-space
+            for(int jtemp = jstart; jtemp < jend; jtemp++ )
+            {
+                auto ki = sbe->kmesh->index(jtemp);
+                if (sbe->gauge == GaugeType::LengthWannier)
+                {
+                    sbe->WannierToHamiltonian(sbe->newdMatrix, sbe->dmatrix[jtemp], jtemp, currenttime);
+                    snapshot_nc[jtemp] = real(sbe->newdMatrix[sbe->material->Nval*Nband + sbe->material->Nval]);
+                    snapshot_pi[jtemp] = sbe->newdMatrix[sbe->material->Nval*Nband + sbe->material->Nval-1];
+                }
+                else
+                {
+                    snapshot_nc[jtemp] = real(sbe->dmatrix[jtemp][sbe->material->Nval*Nband + sbe->material->Nval]);
+                    snapshot_pi[jtemp] = sbe->dmatrix[jtemp][sbe->material->Nval*Nband + sbe->material->Nval-1];
+                }
+            }
+            // gather
+            if (rank == MASTER)
+            {
+                MPI_Gatherv(MPI_IN_PLACE, blockcounts[rank], MPI_DOUBLE, 
+                    snapshot_nc, blockcounts, displs, MPI_DOUBLE, MASTER, MPI_COMM_WORLD);
+                MPI_Gatherv(MPI_IN_PLACE, blockcounts[rank], MPI_DOUBLE_COMPLEX, 
+                    snapshot_pi, blockcounts, displs, MPI_DOUBLE_COMPLEX, MASTER, MPI_COMM_WORLD);
+            }
+            else
+            {
+                MPI_Gatherv(&snapshot_nc[displs[rank]], blockcounts[rank], MPI_DOUBLE, 
+                    snapshot_nc, blockcounts, displs, MPI_DOUBLE, MASTER, MPI_COMM_WORLD);
+                MPI_Gatherv(&snapshot_pi[displs[rank]], blockcounts[rank], MPI_DOUBLE_COMPLEX, 
+                    snapshot_pi, blockcounts, displs, MPI_DOUBLE_COMPLEX, MASTER, MPI_COMM_WORLD);
+            }
+            // write
+            if (rank == MASTER)
+            {
+                fwrite(snapshot_nc, sizeof(double), sbe->kmesh->Ntotal, nc_out);
+                fwrite(snapshot_pi, sizeof(complex), sbe->kmesh->Ntotal, pi_out);
+
+                array<double, Ndim> Etemp, Atemp;
+                Etemp = sbe->fpulses->elaser(currenttime);
+                Atemp = sbe->fpulses->avlaser(currenttime);
+                fprintf(shot_out, "%d   %e  %e  %e  %e  %e\n", ktime, currenttime, Etemp[0], Etemp[1], Atemp[0], Atemp[1]);
+            }
+        }
+
+        // stdout print log
+        if (ktime % printFrequency == 0)
+        {
             for (int ij = 0; ij < Nband * Nband; ++ij)
             {
                 temp_density_matrix_integrated[ij] = density_matrix_integrated[ktime][ij];
@@ -397,7 +453,8 @@ int main( int argc, char *argv[] )
 
     } //End of Time integration loop
     delete[] temp_density_matrix_integrated;
-    delete[] temp_1d_integrated_occupation; 
+    delete[] temp_1d_integrated_occupation;
+    delete[] snapshot_nc, snapshot_pi; 
 
     //##############################################
     // inter, intrabnad currents, occupation, cohereneces are integrated through every sub-grids (all-processors)
@@ -463,7 +520,9 @@ int main( int argc, char *argv[] )
         fclose( intraj_out );
         fclose( occup_out);
         fclose( dm1dout );
-        
+        fclose( nc_out );
+        fclose( pi_out );
+        fclose( shot_out );
     }   
     
     

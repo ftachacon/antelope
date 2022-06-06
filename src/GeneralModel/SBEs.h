@@ -421,6 +421,8 @@ void SBEs::InitializeGeneral(const libconfig::Setting *_calc)
     RKorder = 5;
     dephasing_time_inter = -1.;
     dephasing_time_intra = -1.;
+    shotNumber = 0;
+    isInterIntra = false;
 
     const libconfig::Setting &calc = (*_calc);
     fill(Nk.begin(), Nk.end(), 1);
