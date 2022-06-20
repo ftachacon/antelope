@@ -187,6 +187,10 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
     {
         material = new TMDCs( &cfg[targetMaterial.c_str()] );
     }
+    else if (targetMaterial == "XYHlattice")
+    {
+        material = new XYHlattice( &cfg[targetMaterial.c_str() ]);
+    }
     else
     {
         cerr << "Undefined Material\n";
