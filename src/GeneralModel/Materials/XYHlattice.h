@@ -113,6 +113,13 @@ void XYHlattice::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint)
     // Acomp --> alpha_plus, alpha_minus, beta
     complex dx_Acomp[3];    complex dy_Acomp[3];
 
+    dx_Acomp[0] = dx_Bcomp[0] + dx_Bcomp[1];
+    dx_Acomp[1] = dx_Bcomp[0] - dx_Bcomp[1];
+    dx_Acomp[2] = dx_Bcomp[2];
+
+    dy_Acomp[0] = dy_Bcomp[0] + dy_Bcomp[1];
+    dy_Acomp[1] = dy_Bcomp[0] - dy_Bcomp[1];
+    dy_Acomp[2] = dy_Bcomp[2];
     // block of off-diagonal
     _jstore[0][2] = (3./4 * tl + 1./4 * tr) * dx_Acomp[0] + tr * dx_Acomp[2];      
     _jstore[0][3] = sqrt(3.)/4 * (tl - tr) * dx_Acomp[1];
