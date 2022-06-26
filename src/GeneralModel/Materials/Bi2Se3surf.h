@@ -1,9 +1,7 @@
-/// Hamiltonian and dipole generator for Bi2Se3 surface states
 /**
- * Equation for this class comes from PhysRevB.84.115413 and Paper of Denitsa (add refer after publihsed)
- * This class assumes system is pure 2d - no slant plane
+ * @brief Hamiltonian and dipole generator for Bi2Se3 surface states
+ * @details Equation for this class comes from 10.1103/PhysRevA.103.023101
  * @author Dasol Kim
- * @author Alexis Agustín  Chacón Salazar
 */
 #pragma once
 

@@ -1,9 +1,6 @@
-/// Hamiltonian and dipole generator for Kane-Mele model
 /**
- * Some contents of this file comes from 'solidstructure.h' written by Alexis Chacon
- * This class assumes system is pure 2d - no slant plane
+ * @brief Hamiltonian and dipole generator for Kane-Mele model
  * @author Dasol Kim
- * @author Alexis Agustín  Chacón Salazar
 */
 #pragma once
 

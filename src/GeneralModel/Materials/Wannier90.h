@@ -55,8 +55,8 @@ public:
     complex ***pre_jmat;
 
     // calculated differential of dipole and Hamiltonian
-    // \sum_R f(R) e^ikR = f0
-    // \sum_R f(R) e^i(k+dk)R = f0 + \sum_i dk_i * f_1,i + \sum_i,j dk_i*dk_j * f_1,i, j
+    // eq: \sum_R f(R) e^ikR = f0
+    // eq: \sum_R f(R) e^i(k+dk)R = f0 + \sum_i dk_i * f_1,i + \sum_i,j dk_i*dk_j * f_1,i, j
     complex ***pre_d1ham;           ///< 1st order talyor for Hamiltonian, pre_d1ham[kindex][m*Nband+n][i] = \sum_R Hmn(R)*R_i
     complex ****pre_d1pos;          ///< 1st order talyor for dipole, pre_d1pos[kindex][i][m*Nband+n][j] = \sum_R <0m|r_i|Rn>*R_j
     complex ****pre_d1jmat;         ///< 1st order talyor for derivative of Hamiltonian, pre_d1jmat[kindex][i][m*Nband+n][j] = -im *sum_R R_i*R_j*Hmn(R)
