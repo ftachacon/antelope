@@ -30,10 +30,6 @@
 
 #define MASTER 0    /* task id of master task or node */
 
-
-void setting_complex_memory(complex **_TempPointer, long long int _Ntime);
-void setting_double_memory(double **_TempPointer, long long int _Ntime );
-
 void My_MPI_CLX_SUM( complex *in, complex *inout, int *len, MPI_Datatype *dptr );
 
 string targetMaterial;
@@ -112,29 +108,6 @@ int main( int argc, char *argv[] )
 
 	MPI_Barrier( MPI_COMM_WORLD );	
 
-    // if (rank == MASTER)
-    // {
-    //     ofstream tempInit, currentInitx, currentInity;
-    //     tempInit.open("InitWannier.dat");
-    //     currentInitx.open("InitCurrentx.dat");
-    //     currentInity.open("InitCurrenty.dat");
-    //     array<double, Ndim> tempCurrent;
-    //     for (int i = 0; i < sbew->kmesh->N[0]; ++i)
-    //     {
-    //         for (int j = 0; j < sbew->kmesh->N[1]; ++j)
-    //         {
-    //             tempInit << sbew->dmatrix[sbew->kmesh->index(i, j, 0)][0] << "   ";
-    //             tempCurrent = sbew->GenCurrent(sbew->kmesh->index(i, j, 0), sbew->fpulses->atmin);
-    //             currentInitx << tempCurrent[0] << "   " ;
-    //             currentInity << tempCurrent[1] << "   " ;
-    //         }
-    //         tempInit << endl;
-    //         currentInitx << endl;
-    //         currentInity << endl;
-    //     }
-    // }	
-
-
     //###############################
     //Variables
     int jstart, jend, ktemp;
@@ -187,16 +160,11 @@ int main( int argc, char *argv[] )
     
     for (int itemp=0; itemp<Ngrad; itemp++ )
     {        
-        
-        setting_complex_memory( &inter_rad[itemp], sbe->fpulses->Nt );
-        setting_complex_memory( &intra_rad[itemp], sbe->fpulses->Nt );
-        
-        for (int jtemp=0; jtemp<sbe->fpulses->Nt; jtemp++)
-        {
-            inter_rad[itemp][jtemp]=0.;
-            intra_rad[itemp][jtemp]=0.;
-        }
-        
+        inter_rad[itemp] = new complex[sbe->fpulses->Nt];
+        intra_rad[itemp] = new complex[sbe->fpulses->Nt];
+
+        fill(intra_rad[itemp], intra_rad[itemp] + sbe->fpulses->Nt, 0.);
+        fill(intra_rad[itemp], intra_rad[itemp] + sbe->fpulses->Nt, 0.);
     }
 
     density_matrix_integrated = Create2D<complex>(sbe->fpulses->Nt, Nband*Nband);
@@ -528,10 +496,8 @@ int main( int argc, char *argv[] )
     
     for (int itemp=0; itemp < Ngrad; itemp++)
     {
-        free( inter_rad[itemp] );
-        free( intra_rad[itemp] );
-    
-        
+        delete( inter_rad[itemp] );
+        delete( intra_rad[itemp] );  
     }
 
     delete[] blockcounts;
@@ -553,33 +519,6 @@ int main( int argc, char *argv[] )
 
     
 };
-
-
-
-void setting_complex_memory(complex **_TempPointer, long long int _Ntime)
-{
-    *_TempPointer      = (complex*)malloc( _Ntime*sizeof(complex) );
-    memset( *_TempPointer,     0,    sizeof(complex)*_Ntime );
-    /*for (int i=0; i<_Ntime; i++)
-    {
-        _TempPointer[i]=complex(0.,0.);
-        //_TempPointer++;
-    }//*/
-}
-
-
-void setting_double_memory(double **_TempPointer, long long int _Ntime)
-{
-    *_TempPointer      = (double*)malloc( _Ntime*sizeof(double) );
-    memset( *_TempPointer,     0,    sizeof(double)*_Ntime );
-    
-   /* for (int i=0; i<_Ntime; i++)
-    {
-        _TempPointer[i]=0.;
-        //_TempPointer++;
-    }//*/
-    
-}
 
 
 
