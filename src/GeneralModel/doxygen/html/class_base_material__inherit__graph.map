@@ -1,9 +1,0 @@
-<map id="BaseMaterial" name="BaseMaterial">
-<area shape="rect" id="node1" title=" " alt="" coords="269,5,377,32"/>
-<area shape="rect" id="node2" href="$class_bie_se3surf.html" title="Hamiltonian and dipole generator for Bi2Se3 surface states." alt="" coords="5,80,97,107"/>
-<area shape="rect" id="node3" href="$class_haldane.html" title="Hamiltonian and dipole generator for Haldane model." alt="" coords="121,80,197,107"/>
-<area shape="rect" id="node4" href="$class_haldane2_l.html" title="Hamiltonian and dipole generator for Haldane2L model (Bilayer Haldane)" alt="" coords="222,80,313,107"/>
-<area shape="rect" id="node5" href="$class_kane_mele.html" title="Hamiltonian and dipole generator for Kane&#45;Mele model." alt="" coords="337,80,424,107"/>
-<area shape="rect" id="node6" href="$class_t_m_d_cs.html" title=" " alt="" coords="448,80,516,107"/>
-<area shape="rect" id="node7" href="$class_wilson_mass.html" title="Hamiltonian and dipole generator for 2&#45;band square lattice including Wilson mass term." alt="" coords="540,80,640,107"/>
-</map>
