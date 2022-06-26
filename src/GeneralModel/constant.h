@@ -37,7 +37,6 @@ const double au_angstrom = 0.529177210903;      ///< 1 a.u. in \f$\AA\f$
 const double au_eV =  27.211386245988;          ///< 1 a.u. in eV
 
 constexpr int Ndim      = 3;
-//const int Nvects    = 3; //Number of basis vectors of HoneyComb lattice
 const int Ngrad     = 2;
 
 enum class GaugeType

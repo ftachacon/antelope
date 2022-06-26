@@ -32,14 +32,22 @@
 
 void My_MPI_CLX_SUM( complex *in, complex *inout, int *len, MPI_Datatype *dptr );
 
-string targetMaterial;
+/**
+ * @brief to store the every calculation-related paramters.
+ * 
+ */
+struct calc_param
+{
+    string targetMaterial;
 
-double ksfactor = 1;
-double flag_occ_dephasing = 0.;
-double flag_t2 = 0.;
-int diagnostic = 0;
-int shotNumber   = 0;
-int printFrequency = 100;   // determine print log frequency
+    int shotNumber {0};         /// number of snapshots to be stored
+    int printFrequency {100};   /// determine print log frequency
+
+    double ksfactor = 1;
+    double flag_occ_dephasing = 0.;
+    double flag_t2 = 0.;
+    int diagnostic = 0;
+};
 
 //################################
 int main( int argc, char *argv[] )
@@ -71,11 +79,11 @@ int main( int argc, char *argv[] )
     MPI_Comm_rank( nodecomm, &node_rank );
     MPI_Comm_size( nodecomm, &node_size );
 
+
     //#############################
+    // read config file
 
-
-
-    // Test libconfigc++
+    // Check libconfigc++ and read.
     // try-catch code are copied from libconfig example
     libconfig::Config cfg;
     try
@@ -117,8 +125,21 @@ int main( int argc, char *argv[] )
 
     SBEs *sbe = new SBEs(&cfg.getRoot(), tempGauge);
 
-    double dV = sbe->kmesh->dV;
-    int Nband = sbe->Nband;
+    // Redefine local const variable for convinience.
+    const double dV = sbe->kmesh->dV;
+    const int Nband = sbe->Nband;
+    const int Ntotal = sbe->kmesh->Ntotal;
+    const int Nt = sbe->fpulses->Nt;
+    const double dt = sbe->fpulses->dt;
+
+
+    //#############################
+    // initialize shared memory window for local node
+
+    // paramters
+    calc_param param;
+
+    // array spanning whole BZ
 
 	MPI_Barrier( MPI_COMM_WORLD );	
 
@@ -130,11 +151,10 @@ int main( int argc, char *argv[] )
     complex **density_matrix_integrated;
 
     double at=0, nv=0.;
-
-    complex tgv_v[Ngrad] = {0.,0.};
-    complex tgv_c[Ngrad] = {0.,0.};
-    complex tdip_cv[Ngrad]={0.,0.};
     
+    complex **dMatrix = Create2D<complex>(Ntotal, Nband*Nband);
+    complex **initMatrix  = Create2D<complex>(Ntotal, Nband*Nband);
+
     // Number of k-grid for each process
     // and their displacement in global buffer
     int *blockcounts;
@@ -196,7 +216,8 @@ int main( int argc, char *argv[] )
             Etemp = sbe->fpulses->elaser(  at );
             Atemp = sbe->fpulses->avlaser( at );
                 
-            fprintf( laserout,"%e    %e    %e    %e    %e    %e    %e\n", at, Etemp[0], Etemp[1], Etemp[2], Atemp[0], Atemp[1], Atemp[2] );
+            fprintf( laserout,"%e    %e    %e    %e    %e    %e    %e\n", 
+                at, Etemp[0], Etemp[1], Etemp[2], Atemp[0], Atemp[1], Atemp[2] );
 
         } 
         fflush( laserout );
@@ -256,10 +277,10 @@ int main( int argc, char *argv[] )
     double occup_temp = 0;
     double maxcycles = 2*sbe->fpulses->pulses[0].twidth / sbe->fpulses->pulses[0].period0;
 
-    shotNumber = sbe->shotNumber;
+    param.shotNumber = sbe->shotNumber;
     int shotFrequency = sbe->fpulses->Nt + 100;
-    if (shotNumber != 0)
-        shotFrequency = int(sbe->fpulses->pulses[0].period0/shotNumber/sbe->fpulses->dt);
+    if (param.shotNumber != 0)
+        shotFrequency = int(sbe->fpulses->pulses[0].period0/param.shotNumber/sbe->fpulses->dt);
     //#####################################
     //#####################################
     //Time integration loop
@@ -302,7 +323,7 @@ int main( int argc, char *argv[] )
         }
         // Snapshots - including diagnostics and density plots 
         // if (shotNumber > 0 && ktime % shotNumber == 0)
-        if (shotNumber > 0 && ktime % shotFrequency == 0)
+        if (param.shotNumber > 0 && ktime % shotFrequency == 0)
         {
             // temporary routine - integrating occupation
             for (int m = 0; m < sbe->Nk[0]; ++m)
@@ -388,7 +409,7 @@ int main( int argc, char *argv[] )
         }
 
         // stdout print log
-        if (ktime % printFrequency == 0)
+        if (ktime % param.printFrequency == 0)
         {
             for (int ij = 0; ij < Nband * Nband; ++ij)
             {
@@ -518,6 +539,9 @@ int main( int argc, char *argv[] )
     delete[] displs;
 
     Delete2D<complex>(density_matrix_integrated, Nband*Nband, sbe->fpulses->Nt);
+
+    Delete2D<complex>(dMatrix, Ntotal, Nband*Nband);
+    Delete2D<complex>(initMatrix, Ntotal, Nband*Nband);
     
     
     //fclose(simulation_out);
