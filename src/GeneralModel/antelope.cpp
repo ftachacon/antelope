@@ -54,11 +54,25 @@ int main( int argc, char *argv[] )
 	
     //#############################
 	//Getting rank and size variables
-	int rank=0, Nprocessors=1;
+	int mpi_rank=0, mpi_size=1;
 
-	MPI_Comm_rank( MPI_COMM_WORLD, &rank );	//Getting the local id or rank process
-	MPI_Comm_size( MPI_COMM_WORLD, &Nprocessors );	//Getting the size or number of proccesses or nodes
-	MPI_Barrier( MPI_COMM_WORLD );	
+	MPI_Comm_rank( MPI_COMM_WORLD, &mpi_rank );	//Getting the local id or rank process
+	MPI_Comm_size( MPI_COMM_WORLD, &mpi_size );	//Getting the size or number of proccesses or nodes
+	
+    // ##############################
+    // communicator for local node
+    MPI_Comm nodecomm;
+
+    // create communicator for local node
+    MPI_Comm_split_type(MPI_COMM_WORLD, MPI_COMM_TYPE_SHARED, mpi_rank, MPI_INFO_NULL, &nodecomm);
+
+    // get rank and size for local node
+    int node_rank=0, node_size=1;
+    MPI_Comm_rank( nodecomm, &node_rank );
+    MPI_Comm_size( nodecomm, &node_size );
+
+    //#############################
+
 
 
     // Test libconfigc++
@@ -97,7 +111,7 @@ int main( int argc, char *argv[] )
     }
     else
     {
-        if (rank == MASTER) cout << "Warning: No gauge type is specified. Choose LengthWannier for default gauge.\n";
+        if (mpi_rank == MASTER) cout << "Warning: No gauge type is specified. Choose LengthWannier for default gauge.\n";
         tempGauge = GaugeType::LengthWannier;
     }
 
@@ -139,7 +153,7 @@ int main( int argc, char *argv[] )
     FILE *intraj_out, *interj_out;
     
     
-    if ( rank == MASTER )
+    if ( mpi_rank == MASTER )
     {
         laserout         = fopen( "outlaserdata.dat","w" ); // Laser field characteristics,time axis,
         lparamout        = fopen( "laserParameters.dat", "w" );
@@ -150,7 +164,7 @@ int main( int argc, char *argv[] )
     
     
 
-    if (rank == MASTER)
+    if (mpi_rank == MASTER)
     {
         sbe->PrintInfo();
     }
@@ -170,7 +184,7 @@ int main( int argc, char *argv[] )
     density_matrix_integrated = Create2D<complex>(sbe->fpulses->Nt, Nband*Nband);
 
     
-    if (rank == MASTER)
+    if (mpi_rank == MASTER)
     {
         //###############################
         //Saving or Output of laser
@@ -193,24 +207,24 @@ int main( int argc, char *argv[] )
     MPI_Barrier( MPI_COMM_WORLD );
     
     
-    blockcounts = new int[Nprocessors];
-    displs = new int[Nprocessors];
+    blockcounts = new int[mpi_size];
+    displs = new int[mpi_size];
 
     int Npoints = sbe->kmesh->Ntotal;
-    for (int itemp = 0; itemp < Nprocessors; ++itemp)
+    for (int itemp = 0; itemp < mpi_size; ++itemp)
     {
-        ParaRange(Npoints, 0, Nprocessors, itemp, &jstart, &jend);
+        ParaRange(Npoints, 0, mpi_size, itemp, &jstart, &jend);
 
         blockcounts[itemp] = (jend - jstart);
         displs[itemp] = jstart;
     }
-    ParaRange(Npoints, 0, Nprocessors, rank, &jstart, &jend);
+    ParaRange(Npoints, 0, mpi_size, mpi_rank, &jstart, &jend);
  
     
-    cout << "\nrank = " << rank << "  uses j = " << jstart << ";  to  j = " << jend << "  with Nprocesses = " << Nprocessors <<endl << endl;
+    cout << "\nrank = " << mpi_rank << "  uses j = " << jstart << ";  to  j = " << jend << "  with Nprocesses = " << mpi_size <<endl << endl;
     
     
-    if(rank==MASTER)
+    if(mpi_rank==MASTER)
     {
         cout.precision( 5 );
 
@@ -232,7 +246,7 @@ int main( int argc, char *argv[] )
     double *snapshot_nc = new double[sbe->kmesh->Ntotal];
     complex *snapshot_pi = new complex[sbe->kmesh->Ntotal];
     FILE *dm1dout, *nc_out, *pi_out, *shot_out;
-    if (rank == MASTER)
+    if (mpi_rank == MASTER)
     {
         dm1dout = fopen("occupation_1d_integration.dat", "w");
         nc_out = fopen("fisrt_conduction.dat", "w");
@@ -309,7 +323,7 @@ int main( int argc, char *argv[] )
                 }
             }
             MPI_Barrier(MPI_COMM_WORLD);
-            if (rank == MASTER)
+            if (mpi_rank == MASTER)
             {
                 MPI_Reduce(MPI_IN_PLACE, &temp_1d_integrated_occupation[0], sbe->Nk[0], 
                     MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
@@ -319,7 +333,7 @@ int main( int argc, char *argv[] )
                 MPI_Reduce(&temp_1d_integrated_occupation[0], &temp_1d_integrated_occupation[0], sbe->Nk[0], 
                     MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
             }
-            if (rank == MASTER)
+            if (mpi_rank == MASTER)
             {
                 for (int m = 0; m < sbe->Nk[0]; ++m)
                 {
@@ -346,22 +360,22 @@ int main( int argc, char *argv[] )
                 }
             }
             // gather
-            if (rank == MASTER)
+            if (mpi_rank == MASTER)
             {
-                MPI_Gatherv(MPI_IN_PLACE, blockcounts[rank], MPI_DOUBLE, 
+                MPI_Gatherv(MPI_IN_PLACE, blockcounts[mpi_rank], MPI_DOUBLE, 
                     snapshot_nc, blockcounts, displs, MPI_DOUBLE, MASTER, MPI_COMM_WORLD);
-                MPI_Gatherv(MPI_IN_PLACE, blockcounts[rank], MPI_DOUBLE_COMPLEX, 
+                MPI_Gatherv(MPI_IN_PLACE, blockcounts[mpi_rank], MPI_DOUBLE_COMPLEX, 
                     snapshot_pi, blockcounts, displs, MPI_DOUBLE_COMPLEX, MASTER, MPI_COMM_WORLD);
             }
             else
             {
-                MPI_Gatherv(&snapshot_nc[displs[rank]], blockcounts[rank], MPI_DOUBLE, 
+                MPI_Gatherv(&snapshot_nc[displs[mpi_rank]], blockcounts[mpi_rank], MPI_DOUBLE, 
                     snapshot_nc, blockcounts, displs, MPI_DOUBLE, MASTER, MPI_COMM_WORLD);
-                MPI_Gatherv(&snapshot_pi[displs[rank]], blockcounts[rank], MPI_DOUBLE_COMPLEX, 
+                MPI_Gatherv(&snapshot_pi[displs[mpi_rank]], blockcounts[mpi_rank], MPI_DOUBLE_COMPLEX, 
                     snapshot_pi, blockcounts, displs, MPI_DOUBLE_COMPLEX, MASTER, MPI_COMM_WORLD);
             }
             // write
-            if (rank == MASTER)
+            if (mpi_rank == MASTER)
             {
                 fwrite(snapshot_nc, sizeof(double), sbe->kmesh->Ntotal, nc_out);
                 fwrite(snapshot_pi, sizeof(complex), sbe->kmesh->Ntotal, pi_out);
@@ -381,7 +395,7 @@ int main( int argc, char *argv[] )
                 temp_density_matrix_integrated[ij] = density_matrix_integrated[ktime][ij];
             }
             MPI_Barrier(MPI_COMM_WORLD);
-            if (rank == MASTER)
+            if (mpi_rank == MASTER)
             {
                 MPI_Reduce(MPI_IN_PLACE, &temp_density_matrix_integrated[0], Nband*Nband, 
                     MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
@@ -391,7 +405,7 @@ int main( int argc, char *argv[] )
                 MPI_Reduce(&temp_density_matrix_integrated[0], &temp_density_matrix_integrated[0], Nband*Nband, 
                     MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
             }
-            if (rank == MASTER)
+            if (mpi_rank == MASTER)
             {
                 currentcycle = currenttime - (sbe->fpulses->pulses[0].t0 - sbe->fpulses->pulses[0].twidth);
                 if (currentcycle < 0) 
@@ -430,7 +444,7 @@ int main( int argc, char *argv[] )
     MPI_Barrier( MPI_COMM_WORLD );
     for (int i = 0; i < 2; ++i)
     {
-        if (rank == MASTER)
+        if (mpi_rank == MASTER)
         {
             MPI_Reduce(MPI_IN_PLACE, inter_rad[i], sbe->fpulses->Nt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
         }
@@ -439,7 +453,7 @@ int main( int argc, char *argv[] )
             MPI_Reduce(inter_rad[i], inter_rad[i], sbe->fpulses->Nt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
         }
         MPI_Barrier( MPI_COMM_WORLD );
-        if (rank == MASTER)
+        if (mpi_rank == MASTER)
         {
             MPI_Reduce(MPI_IN_PLACE, intra_rad[i], sbe->fpulses->Nt, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
         }
@@ -449,7 +463,7 @@ int main( int argc, char *argv[] )
         }
         MPI_Barrier( MPI_COMM_WORLD );
     }
-    if (rank == MASTER)
+    if (mpi_rank == MASTER)
     {
         MPI_Reduce(MPI_IN_PLACE, &density_matrix_integrated[0][0], sbe->fpulses->Nt * Nband*Nband, MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
     }
@@ -459,7 +473,7 @@ int main( int argc, char *argv[] )
     }
     MPI_Barrier( MPI_COMM_WORLD );
     
-    if (rank == MASTER)
+    if (mpi_rank == MASTER)
     {
         cout << "\n\nWriting output-data\n\n";
 
@@ -481,7 +495,7 @@ int main( int argc, char *argv[] )
     }
     
     //fclose(  fout     );
-    if (rank==MASTER)    
+    if (mpi_rank==MASTER)    
     {       
 
         fclose( interj_out );
@@ -509,7 +523,7 @@ int main( int argc, char *argv[] )
     //fclose(simulation_out);
     
     
-    cout << "\n***********************\nEND OF THE PROGRAM with No. of cores = " << Nprocessors << "  uses j = " << jstart << ";  to  j = " << jend << "  with rank = "  << rank << "\n\n" <<  endl;
+    cout << "\n***********************\nEND OF THE PROGRAM with No. of cores = " << mpi_size << "  uses j = " << jstart << ";  to  j = " << jend << "  with rank = "  << mpi_rank << "\n\n" <<  endl;
     cout << "=====================\n\n";
     
     
