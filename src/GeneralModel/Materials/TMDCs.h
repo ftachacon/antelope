@@ -1,8 +1,8 @@
 /// Material property generator for TMDCs - 3 band approximation
 /**
- * Equation for this class comes from Phys. Rev. B 88, 085433
+ * @brief Material property generator for TMDCs - 3 band approximation. 
+ * @details Equation for this class comes from Phys. Rev. B 88, 085433. Spinless - 3band, soc - 6 band.
  * @author Dasol Kim
- * @author Alexis Agustín  Chacón Salazar
 */
 #pragma once
 

@@ -1,8 +1,8 @@
-/// Hamiltonian and dipole generator for XYH lattice
 /**
- * Model comes from Phys. Rev. B 105, 075421 (2022).
- * XYHlattice = px,py orbitals in Honeycomb lattice.
- * This model only includes NN interaction.
+ * @brief  Hamiltonian and dipole generator for XYH lattice
+ * @details Model comes from Phys. Rev. B 105, 075421 (2022).
+ *          XYHlattice = px,py orbitals in Honeycomb lattice.
+ *          This model only includes NN interaction.
  * @author Dasol Kim
 */
 #pragma once
