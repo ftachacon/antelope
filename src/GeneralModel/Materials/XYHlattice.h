@@ -131,10 +131,10 @@ void XYHlattice::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint)
     _jstore[0][12] = conj(_jstore[0][3]);     
     _jstore[0][13] = conj(_jstore[0][7]);
 
-    _jstore[1][2] = (3./4 * tl + 1./4 * tr) * dx_Acomp[0] + tr * dx_Acomp[2];      
-    _jstore[1][3] = sqrt(3.)/4 * (tl - tr) * dx_Acomp[1];
+    _jstore[1][2] = (3./4 * tl + 1./4 * tr) * dy_Acomp[0] + tr * dy_Acomp[2];      
+    _jstore[1][3] = sqrt(3.)/4 * (tl - tr) * dy_Acomp[1];
     _jstore[1][6] = _jstore[1][3];                                            
-    _jstore[1][7] = (1./4 * tl + 3./4 * tr) * dx_Acomp[0] + tl * dx_Acomp[2];
+    _jstore[1][7] = (1./4 * tl + 3./4 * tr) * dy_Acomp[0] + tl * dy_Acomp[2];
 
     _jstore[1][8] = conj(_jstore[1][2]);
     _jstore[1][9] = conj(_jstore[1][6]);
