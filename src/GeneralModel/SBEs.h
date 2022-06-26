@@ -515,6 +515,7 @@ void SBEs::InitializeLaser(const libconfig::Setting *_laser)
                 && pulses[i].lookupValue("ncycles", t_ncycles) && pulses[i].lookupValue("cep", t_cep) && pulses[i].lookupValue("t0", t_t0) 
                 && pulses[i].lookupValue("phix", t_phix) && pulses[i].lookupValue("env_name", t_env_name) )
             {
+                t_cep *= pi/180.0;
                 t_thetaz = 0.;  t_phiz = 0.;    // this parameters can be omitted from config file
                 pulses[i].lookupValue("thetaz", t_thetaz);
                 pulses[i].lookupValue("phiz", t_phiz);
