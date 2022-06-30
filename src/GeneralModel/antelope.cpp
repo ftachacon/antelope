@@ -14,6 +14,7 @@
 #include <string.h>
 #include <math.h>
 #include <complex>
+#include <vector>
 
 // 3rd-party headeres
 #include "mpi.h"
@@ -31,6 +32,12 @@
 #define MASTER 0    /* task id of master task or node */
 
 void My_MPI_CLX_SUM( complex *in, complex *inout, int *len, MPI_Datatype *dptr );
+
+// calculate global index in whole BZ + Nband*Nband space.
+int global_index(int kindex, int m, int n, int Nband)
+{
+    return Nband*Nband*kindex + m*Nband + n;
+}
 
 /**
  * @brief to store the every calculation-related paramters.
@@ -66,6 +73,9 @@ int main( int argc, char *argv[] )
 
 	MPI_Comm_rank( MPI_COMM_WORLD, &mpi_rank );	//Getting the local id or rank process
 	MPI_Comm_size( MPI_COMM_WORLD, &mpi_size );	//Getting the size or number of proccesses or nodes
+
+    
+ 
 	
     // ##############################
     // communicator for local node
@@ -132,7 +142,26 @@ int main( int argc, char *argv[] )
     const int Nt = sbe->fpulses->Nt;
     const double dt = sbe->fpulses->dt;
 
+    // Number of k-grid for each process
+    // and their displacement in global buffer
+    vector<int> blockcounts(mpi_size);
+    vector<int> displs(mpi_size);
 
+    int jstart, jend, ktemp;
+
+    int Npoints = sbe->kmesh->Ntotal;
+    for (int itemp = 0; itemp < mpi_size; ++itemp)
+    {
+        ParaRange(Npoints, 0, mpi_size, itemp, &jstart, &jend);
+
+        blockcounts[itemp] = (jend - jstart);
+        displs[itemp] = jstart;
+    }
+    ParaRange(Npoints, 0, mpi_size, mpi_rank, &jstart, &jend);
+
+
+    
+    cout << "\nrank = " << mpi_rank << "  uses j = " << jstart << ";  to  j = " << jend << "  with Nprocesses = " << mpi_size <<endl << endl;
     //#############################
     // initialize shared memory window for local node
 
@@ -140,25 +169,50 @@ int main( int argc, char *argv[] )
     calc_param param;
 
     // array spanning whole BZ
+    // complex *dMatrix, *initMatrix;
+    // MPI_Win wintable;
+    // // Allocate shared memory for local node
+    // // Note: alloc_shared_noncontig is true. If this makes unexpected behavior, back to MPI_INFO_NULL.
+    // MPI_Info mpi_info;
+    // MPI_Info_create(&mpi_info);
+    // MPI_Info_set(mpi_info, "alloc_shared_noncontig", "true");
+    // //MPI_Win_allocate_shared(blockcounts[mpi_rank] * sizeof(complex), sizeof(complex), MPI_INFO_NULL, nodecomm, &dMatrix, &wintable);
+    // MPI_Win_allocate_shared(blockcounts[mpi_rank] * sizeof(complex), sizeof(complex), mpi_info, nodecomm, &dMatrix, &wintable);
 
-	MPI_Barrier( MPI_COMM_WORLD );	
+    // // get window memory model info. (https://www.mpi-forum.org/docs/mpi-3.1/mpi31-report/node278.htm#Node278)
+    // {
+    //     int mpi_memory_model, mpi_flag;
+    //     MPI_Win_get_attr(wintable, MPI_WIN_MODEL, &mpi_memory_model, &mpi_flag);
+
+    //     if (mpi_flag != 1)
+    //     {
+    //         cout << "Error: MPI_WIN_MODEL is not set.\n";
+    //         return(EXIT_FAILURE);
+    //     }
+    //     else if (mpi_memory_model == MPI_WIN_UNIFIED)
+    //     {
+    //         cout << "MPI_WIN_MODEL is MPI_WIN_UNIFIED.\n";
+    //     }
+    //     else if (mpi_memory_model == MPI_WIN_SEPARATE)
+    //     {
+    //         cout << "MPI_WIN_MODEL is MPI_WIN_SEPARATE.\n";
+    //     }
+    //     else
+    //     {
+    //         cout << "unknown MPI_WIN_MODEL \n";
+    //     }
+    // }
+
 
     //###############################
     //Variables
-    int jstart, jend, ktemp;
+
     complex *inter_rad[Ngrad];
     complex *intra_rad[Ngrad];
     complex **density_matrix_integrated;
 
     double at=0, nv=0.;
     
-    complex **dMatrix = Create2D<complex>(Ntotal, Nband*Nband);
-    complex **initMatrix  = Create2D<complex>(Ntotal, Nband*Nband);
-
-    // Number of k-grid for each process
-    // and their displacement in global buffer
-    int *blockcounts;
-    int *displs;
 
     int kindex;
 
@@ -228,22 +282,6 @@ int main( int argc, char *argv[] )
     MPI_Barrier( MPI_COMM_WORLD );
     
     
-    blockcounts = new int[mpi_size];
-    displs = new int[mpi_size];
-
-    int Npoints = sbe->kmesh->Ntotal;
-    for (int itemp = 0; itemp < mpi_size; ++itemp)
-    {
-        ParaRange(Npoints, 0, mpi_size, itemp, &jstart, &jend);
-
-        blockcounts[itemp] = (jend - jstart);
-        displs[itemp] = jstart;
-    }
-    ParaRange(Npoints, 0, mpi_size, mpi_rank, &jstart, &jend);
- 
-    
-    cout << "\nrank = " << mpi_rank << "  uses j = " << jstart << ";  to  j = " << jend << "  with Nprocesses = " << mpi_size <<endl << endl;
-    
     
     if(mpi_rank==MASTER)
     {
@@ -270,8 +308,8 @@ int main( int argc, char *argv[] )
     if (mpi_rank == MASTER)
     {
         dm1dout = fopen("occupation_1d_integration.dat", "w");
-        nc_out = fopen("fisrt_conduction.dat", "w");
-        pi_out = fopen("fisrt_coherence.dat", "w");
+        nc_out = fopen("first_conduction.dat", "w");
+        pi_out = fopen("first_coherence.dat", "w");
         shot_out = fopen("snapshot_log.dat", "w");
     }
     double occup_temp = 0;
@@ -384,16 +422,16 @@ int main( int argc, char *argv[] )
             if (mpi_rank == MASTER)
             {
                 MPI_Gatherv(MPI_IN_PLACE, blockcounts[mpi_rank], MPI_DOUBLE, 
-                    snapshot_nc, blockcounts, displs, MPI_DOUBLE, MASTER, MPI_COMM_WORLD);
+                    snapshot_nc, blockcounts.data(), displs.data(), MPI_DOUBLE, MASTER, MPI_COMM_WORLD);
                 MPI_Gatherv(MPI_IN_PLACE, blockcounts[mpi_rank], MPI_DOUBLE_COMPLEX, 
-                    snapshot_pi, blockcounts, displs, MPI_DOUBLE_COMPLEX, MASTER, MPI_COMM_WORLD);
+                    snapshot_pi, blockcounts.data(), displs.data(), MPI_DOUBLE_COMPLEX, MASTER, MPI_COMM_WORLD);
             }
             else
             {
                 MPI_Gatherv(&snapshot_nc[displs[mpi_rank]], blockcounts[mpi_rank], MPI_DOUBLE, 
-                    snapshot_nc, blockcounts, displs, MPI_DOUBLE, MASTER, MPI_COMM_WORLD);
+                    snapshot_nc, blockcounts.data(), displs.data(), MPI_DOUBLE, MASTER, MPI_COMM_WORLD);
                 MPI_Gatherv(&snapshot_pi[displs[mpi_rank]], blockcounts[mpi_rank], MPI_DOUBLE_COMPLEX, 
-                    snapshot_pi, blockcounts, displs, MPI_DOUBLE_COMPLEX, MASTER, MPI_COMM_WORLD);
+                    snapshot_pi, blockcounts.data(), displs.data(), MPI_DOUBLE_COMPLEX, MASTER, MPI_COMM_WORLD);
             }
             // write
             if (mpi_rank == MASTER)
@@ -535,15 +573,7 @@ int main( int argc, char *argv[] )
         delete( intra_rad[itemp] );  
     }
 
-    delete[] blockcounts;
-    delete[] displs;
-
     Delete2D<complex>(density_matrix_integrated, Nband*Nband, sbe->fpulses->Nt);
-
-    Delete2D<complex>(dMatrix, Ntotal, Nband*Nband);
-    Delete2D<complex>(initMatrix, Ntotal, Nband*Nband);
-    
-    
     //fclose(simulation_out);
     
     
