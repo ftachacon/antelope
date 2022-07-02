@@ -301,13 +301,11 @@ int main( int argc, char *argv[] )
     ktemp = 0;
     double currenttime, currentcycle;
     complex *temp_density_matrix_integrated = new complex[Nband*Nband];
-    complex *temp_1d_integrated_occupation = new complex[sbe->Nk[0]];
     double *snapshot_nc = new double[sbe->kmesh->Ntotal];
     complex *snapshot_pi = new complex[sbe->kmesh->Ntotal];
-    FILE *dm1dout, *nc_out, *pi_out, *shot_out;
+    FILE *nc_out, *pi_out, *shot_out;
     if (mpi_rank == MASTER)
     {
-        dm1dout = fopen("occupation_1d_integration.dat", "w");
         nc_out = fopen("first_conduction.dat", "w");
         pi_out = fopen("first_coherence.dat", "w");
         shot_out = fopen("snapshot_log.dat", "w");
@@ -326,7 +324,8 @@ int main( int argc, char *argv[] )
     { 
         currenttime = sbe->fpulses->atmin + sbe->fpulses->dt * ktime;
         //###############################
-        //Momentum and time integration
+        // Momentum and time integration
+        // Put things which should be dont at each time step
         for(int jtemp = jstart; jtemp < jend; jtemp++ )
         {
             kindex = jtemp;
@@ -359,48 +358,12 @@ int main( int argc, char *argv[] )
             //##############################################
 
         }
+        // From herer, put things which should be done perodically but not at every time step
+
         // Snapshots - including diagnostics and density plots 
         // if (shotNumber > 0 && ktime % shotNumber == 0)
         if (param.shotNumber > 0 && ktime % shotFrequency == 0)
         {
-            // temporary routine - integrating occupation
-            for (int m = 0; m < sbe->Nk[0]; ++m)
-            {
-                temp_1d_integrated_occupation[m] = 0.;
-            }
-            for(int jtemp = jstart; jtemp < jend; jtemp++ )
-            {
-                auto ki = sbe->kmesh->index(jtemp);
-                if (sbe->gauge == GaugeType::LengthWannier)
-                {
-                    sbe->WannierToHamiltonian(sbe->newdMatrix, sbe->dmatrix[jtemp], jtemp, currenttime);
-                    temp_1d_integrated_occupation[ki[0]] += sbe->newdMatrix[sbe->material->Nval*Nband + sbe->material->Nval] * sbe->kmesh->weight[ jtemp ];
-                }
-                else
-                {
-                    temp_1d_integrated_occupation[ki[0]] += sbe->dmatrix[jtemp][sbe->material->Nval*Nband + sbe->material->Nval] * sbe->kmesh->weight[ jtemp ];
-                }
-            }
-            MPI_Barrier(MPI_COMM_WORLD);
-            if (mpi_rank == MASTER)
-            {
-                MPI_Reduce(MPI_IN_PLACE, &temp_1d_integrated_occupation[0], sbe->Nk[0], 
-                    MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
-            }
-            else
-            {
-                MPI_Reduce(&temp_1d_integrated_occupation[0], &temp_1d_integrated_occupation[0], sbe->Nk[0], 
-                    MPI_DOUBLE_COMPLEX, MPI_CLX_SUM, MASTER, MPI_COMM_WORLD);
-            }
-            if (mpi_rank == MASTER)
-            {
-                for (int m = 0; m < sbe->Nk[0]; ++m)
-                {
-                    fprintf(dm1dout, "%16e    ", real(temp_1d_integrated_occupation[m]) / static_cast<double>(sbe->Nk[1]) );
-                }
-                fprintf(dm1dout, "\n");
-            }
-
             // snapshot here
             // move density matrix to contigous array in k-space
             for(int jtemp = jstart; jtemp < jend; jtemp++ )
@@ -471,15 +434,15 @@ int main( int argc, char *argv[] )
                 {
                     currentcycle = 0.;
                 }
+                else if (currentcycle > maxcycles)
+                {
+                    currentcycle = maxcycles;
+                }
                 else
                 {
                     currentcycle /= sbe->fpulses->pulses[0].period0;
                 }
                 
-                if (currentcycle > maxcycles)
-                {
-                    currentcycle = maxcycles;
-                }
                 occup_temp = 0;
                 for (int m = 0; m < Nband; ++m)
                 {
@@ -494,7 +457,6 @@ int main( int argc, char *argv[] )
 
     } //End of Time integration loop
     delete[] temp_density_matrix_integrated;
-    delete[] temp_1d_integrated_occupation;
     delete[] snapshot_nc, snapshot_pi; 
 
     //##############################################
@@ -560,7 +522,6 @@ int main( int argc, char *argv[] )
         fclose( interj_out );
         fclose( intraj_out );
         fclose( occup_out);
-        fclose( dm1dout );
         fclose( nc_out );
         fclose( pi_out );
         fclose( shot_out );
