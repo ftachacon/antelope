@@ -142,35 +142,36 @@ void momaxis::basic_mem()
     weight = new double[Ntotal];
     fill(weight, weight + Ntotal, 1.); // This default value acts as trapzoid
 
-    double temp_weight;
-    for (int i = 0; i < N[0]; ++i)
-    {
-        for (int j = 0; j < N[1]; ++j)
-        {
-            for (int k = 0; k < N[2]; ++k)
-            {
-                temp_weight = 1.0;
-                if (N[0] != 1 && (i ==0 || i == N[0]-1))
-                {
-                    temp_weight /= 2;
-                }
-                if (N[1] != 1 && (j == 0 || j == N[1]-1))
-                {
-                    temp_weight /= 2;
-                }
-                if (N[2] != 1 && (k == 0 || k == N[2]-1))
-                {
-                    temp_weight /= 2;
-                }
-                weight[ index(i, j, k) ] = temp_weight;
-            }
-        }
-    }
-    total_weight = 0.;
-    for (int i = 0; i < Ntotal; ++i)
-    {
-        total_weight += weight[i];
-    }
+    // double temp_weight;
+    // for (int i = 0; i < N[0]; ++i)
+    // {
+    //     for (int j = 0; j < N[1]; ++j)
+    //     {
+    //         for (int k = 0; k < N[2]; ++k)
+    //         {
+    //             temp_weight = 1.0;
+    //             if (N[0] != 1 && (i ==0 || i == N[0]-1))
+    //             {
+    //                 temp_weight /= 2;
+    //             }
+    //             if (N[1] != 1 && (j == 0 || j == N[1]-1))
+    //             {
+    //                 temp_weight /= 2;
+    //             }
+    //             if (N[2] != 1 && (k == 0 || k == N[2]-1))
+    //             {
+    //                 temp_weight /= 2;
+    //             }
+    //             weight[ index(i, j, k) ] = temp_weight;
+    //         }
+    //     }
+    // }
+    // total_weight = 0.;
+    // for (int i = 0; i < Ntotal; ++i)
+    // {
+    //     total_weight += weight[i];
+    // }
+    total_weight = Ntotal;
 }
 
 
@@ -335,19 +336,22 @@ void momaxis::set_brillouin_zone_grid()
         if (N[0] == 1)
             ifrac = 0.;
         else
-            ifrac = static_cast<double>(i)/(N[0]-1) - 0.5;
+            //ifrac = static_cast<double>(i)/(N[0]-1) - 0.5;
+            ifrac = static_cast<double>(i)/N[0];
         for (int j = 0; j < N[1]; ++j)
         {
             if (N[1] == 1)
                 jfrac = 0.;
             else
-                jfrac = static_cast<double>(j)/(N[1]-1) - 0.5;
+                //jfrac = static_cast<double>(j)/(N[1]-1) - 0.5;
+                jfrac = static_cast<double>(j)/N[1];
             for (int k = 0; k < N[2]; ++k)
             {
                 if (N[2] == 1)
                     kfrac = 0.;
                 else
-                    kfrac = static_cast<double>(k)/(N[2]-1) - 0.5;
+                    //kfrac = static_cast<double>(k)/(N[2]-1) - 0.5;
+                    kfrac = static_cast<double>(k)/N[2];
                 kindex = index(i, j, k);
                 kgrid[kindex] = {BzOrigin[0] + ifrac*BzAxes[0*Ndim + 0] + jfrac*BzAxes[1*Ndim + 0] + kfrac*BzAxes[2*Ndim + 0], 
                                     BzOrigin[1] + ifrac*BzAxes[0*Ndim + 1] + jfrac*BzAxes[1*Ndim + 1] + kfrac*BzAxes[2*Ndim + 1], 
