@@ -37,7 +37,7 @@ public:
     const GaugeType gauge;
     InitialValueType initType;
 
-    complex **dmatrix;
+    complex *dmatrix;
     complex **initMatrix; 
 
     BaseMaterial *material;  ///< dipole&Hamiltonian generator
@@ -59,6 +59,8 @@ public:
 
     int Nband;
     array<int, Ndim> Nk;
+
+    int kstart, kend;   ///< start and end index of k-space
 
     double Ef;          ///< Fermi energy
     double thermalE;    ///< Thermal energy (kT) in a.u.
@@ -98,7 +100,7 @@ public:
     bool isDipoleZero;                                  ///< default is true. Wannier dipole is non-zero in very rare cases.
     bool isInterIntra;                                  ///< default is true. Separate inter/intra when this is true. Total current is in inter when false.
 
-    SBEs(const libconfig::Setting * _cfg, GaugeType _gauge);
+    SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, std::complex *_dmatrix, std::vector<complex *> _rkmatrix, int _kstart, int _kend);
     ~SBEs();
     
     void RunSBEs(int _kindex, double _time);
@@ -121,8 +123,9 @@ public:
 
 };
 
-SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
+SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, std::complex *_dmatrix, std::vector<complex *> _rkmatrix, int _kstart, int _kend) : gauge(_gauge)
 {
+    kstart = _kstart;   kend = _kend;
     const libconfig::Setting &cfg = (*_cfg);
     InitializeGeneral( &cfg["calc"]);
     InitializeLaser( &cfg["laser"]);
@@ -162,44 +165,7 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
     }
 
     // Initialize specific material
-    //isWannier90 = false;
-    if (targetMaterial == "Haldane")
-    {
-        material = new Haldane( &(cfg[targetMaterial.c_str()]) );
-    }
-    else if (targetMaterial == "Haldane2L")
-    {
-        material = new Haldane2L( &(cfg[targetMaterial.c_str()]) );
-    }
-    else if (targetMaterial == "KaneMele")
-    {
-        material = new KaneMele( &(cfg[targetMaterial.c_str()]) );
-    }
-    else if (targetMaterial == "WilsonMass")
-    {
-        material = new WilsonMass( &(cfg[targetMaterial.c_str()]) );
-    }
-    else if (targetMaterial == "Bi2Se3surf")
-    {
-        material = new BieSe3surf( &cfg );
-    }
-    else if (targetMaterial == "TMDCs")
-    {
-        material = new TMDCs( &cfg[targetMaterial.c_str()] );
-    }
-    else if (targetMaterial == "XYHlattice")
-    {
-        material = new XYHlattice( &cfg[targetMaterial.c_str() ]);
-    }
-    else
-    {
-        cerr << "Undefined Material\n";
-        exit(EXIT_FAILURE);
-        //material = new Wannier90( &(cfg[targetMaterial.c_str()]) );
-        //isDipoleZero = dynamic_cast<Wannier90*>(material)->isDipoleZero;
-        //vec_lattice = dynamic_cast<Wannier90*>(material)->vec_lattice;
-        //isWannier90 = true;
-    }
+    material = InitializeMaterial(targetMaterial, _cfg);
     
     Nband = material->Nband;
 
@@ -235,9 +201,8 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
         dynamic_cast<Wannier90*>(material)->CalculateKMesh(kmesh);
     }*/
     
-
-    dmatrix = Create2D<complex>(this->kmesh->Ntotal, Nband*Nband);
-    initMatrix = Create2D<complex>(this->kmesh->Ntotal, Nband*Nband);
+    dmatrix = _dmatrix; // do not allocate, just get shared memory window pointer
+    initMatrix = Create2D<complex>(kend-kstart, Nband*Nband);
 
     hamiltonian = new complex[Nband * Nband];
     temp1Matrix = new complex[Nband * Nband];
@@ -250,8 +215,8 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
     ctransuMatrix = new complex[Nband * Nband];
     dephasingMatrix = new double[Nband * Nband];
 
-    pMatrix = Create3D<complex>(this->kmesh->Ntotal, Ndim, Nband*Nband);
-    edispersion = Create2D<double>(this->kmesh->Ntotal, Nband);
+    pMatrix = Create3D<complex>(kend-kstart, Ndim, Nband*Nband);
+    edispersion = Create2D<double>(kend-kstart, Nband);
 
     tempIsuppz = new int[Nband];
     tempEval = new double[Nband];
@@ -266,13 +231,14 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
     double *tempInitVal = new double[Nband];
     double tempInitSum = 0;
 
-    fill(&dmatrix[0][0], &dmatrix[0][0] + kmesh->Ntotal*Nband*Nband, 0.);
+    fill(&dmatrix[kstart*Nband*Nband], &dmatrix[kstart*Nband*Nband] + (kend-kstart)*Nband*Nband, 0.);
 
-    for (int k = 0; k < kmesh->Ntotal; ++k)
+    for (int k = 0; k < kend-kstart; ++k)
     {
+        int kglobal = k + kstart; // global index = kglobal, local index = k
         // edispersion generation & temporary umatrix generation
         int num_of_eig;
-        material->GenHamiltonian(hamiltonian, kmesh->kgrid[k]);
+        material->GenHamiltonian(hamiltonian, kmesh->kgrid[kglobal]);
         int info = LAPACKE_zheevr( LAPACK_ROW_MAJOR, 'V', 'A', 'U',
                                 Nband, hamiltonian, Nband, 0., 0., 0, 0, 
                                 eps, &num_of_eig, edispersion[k], uMatrix, Nband, tempIsuppz );
@@ -309,7 +275,7 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
             for (int m = 0; m < Nband; ++m)
             {
                 if (m < material->Nval)
-                    dmatrix[k][m*Nband + m] = 1.0;
+                    dmatrix[kglobal*Nband*Nband + m*Nband + m] = 1.0;
             }
             break;
 
@@ -322,12 +288,12 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
             }
             for (int m = 0; m < Nband; ++m)
             {
-                dmatrix[k][m*Nband + m] = tempInitVal[m] / tempInitSum;
+                dmatrix[kglobal*Nband*Nband + m*Nband + m] = tempInitVal[m] / tempInitSum;
             }
             break;
 
         case InitialValueType::Custom:
-            material->GenInitialValue(&dmatrix[k][0], kmesh->kgrid[k]);
+            material->GenInitialValue(&dmatrix[kglobal*Nband*Nband], kmesh->kgrid[kglobal]);
             break;
         
         default:
@@ -338,20 +304,20 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
 
         if (gauge == GaugeType::LengthWannier)
         {
-            MatrixMult(temp1Matrix, &dmatrix[k][0], ctransuMatrix, Nband);
-            MatrixMult(&dmatrix[k][0], uMatrix, temp1Matrix, Nband);
+            MatrixMult(temp1Matrix, &dmatrix[kglobal*Nband*Nband], ctransuMatrix, Nband);
+            MatrixMult(&dmatrix[kglobal*Nband*Nband], uMatrix, temp1Matrix, Nband);
         }
 
         for (int m = 0; m < Nband; ++m)
         {
             for (int n = 0; n < Nband; ++n)
             {
-                initMatrix[k][m*Nband + n] = dmatrix[k][m*Nband + n];
+                initMatrix[k][m*Nband + n] = dmatrix[kglobal*Nband*Nband + m*Nband + n];
             }
         }
 
         // pmatrix generation
-        material->GenJMatrix(jMatrix, kmesh->kgrid[k]);
+        material->GenJMatrix(jMatrix, kmesh->kgrid[kglobal]);
         for (int iaxis = 0; iaxis < Ndim; ++iaxis)
         {
             MatrixMult(temp1Matrix, jMatrix[iaxis], uMatrix, Nband);
@@ -447,7 +413,7 @@ void SBEs::InitializeGeneral(const libconfig::Setting *_calc)
         calc.lookupValue("T2", dephasing_time_inter );
         calc.lookupValue("shotNumber", shotNumber);
         calc.lookupValue("diagnostic", diagnostic);
-        calc.lookupValue("RKorder", RKorder);
+        //calc.lookupValue("RKorder", RKorder); // disable temporary because NumRK is hard-coded.
         calc.lookupValue("InterIntra", isInterIntra );
         // ksfactor - value & array
         const libconfig::Setting &ksfactor_setting = calc["ksfactor"];
@@ -546,8 +512,7 @@ void SBEs::InitializeLaser(const libconfig::Setting *_laser)
 
 SBEs::~SBEs()
 {
-    Delete2D<complex>(dmatrix, this->kmesh->Ntotal, Nband*Nband);
-    Delete2D<complex>(initMatrix, this->kmesh->Ntotal, Nband*Nband);
+    Delete2D<complex>(initMatrix, kend-kstart, Nband*Nband);
 
     delete[] hamiltonian;
     delete[] newdMatrix;
@@ -558,8 +523,8 @@ SBEs::~SBEs()
     Delete2D<complex>(jMatrix, Ndim, Nband*Nband);
     Delete2D<complex>(dipoleMatrix, Ndim, Nband*Nband);
 
-    Delete3D<complex>(pMatrix, this->kmesh->Ntotal, Ndim, Nband*Nband);
-    Delete2D<double>(edispersion, this->kmesh->Ntotal, Nband);
+    Delete3D<complex>(pMatrix, kend-kstart, Ndim, Nband*Nband);
+    Delete2D<double>(edispersion, kend-kstart, Nband);
 
     delete[] tRK;
     delete[] bRK;
@@ -579,14 +544,14 @@ SBEs::~SBEs()
 
 void SBEs::RunSBEs(int _kindex, double  _time)
 {
-    GenDifferentialDM( rkMatrix[0], dmatrix[_kindex], _kindex, _time);
+    GenDifferentialDM( rkMatrix[0], &dmatrix[_kindex*Nband*Nband], _kindex, _time);
     for (int irk = 0; irk < NumRK-1; ++irk)
     {
         for (int m = 0; m < Nband; ++m)
         {
             for (int n = 0; n < Nband; ++n)
             {
-                newdMatrix[m*Nband + n] = dmatrix[_kindex][m*Nband + n];
+                newdMatrix[m*Nband + n] = dmatrix[_kindex*Nband*Nband + m*Nband + n];
                 for (int jrk = 0; jrk < irk+1; ++jrk)
                 {
                     newdMatrix[m*Nband + n] += fpulses->dt*aRK[irk][jrk] * rkMatrix[jrk][m*Nband + n];
@@ -601,7 +566,7 @@ void SBEs::RunSBEs(int _kindex, double  _time)
         {
             for (int irk = 0; irk < NumRK; ++irk)
             {
-                dmatrix[_kindex][m*Nband + n] += fpulses->dt*bRK[irk] * rkMatrix[irk][m*Nband + n];
+                dmatrix[_kindex*Nband*Nband + m*Nband + n] += fpulses->dt*bRK[irk] * rkMatrix[irk][m*Nband + n];
             }
         }
     }
@@ -634,7 +599,7 @@ array<double, Ndim> SBEs::GenCurrent(int _kindex, double _time)
             {
                 for (int j = 0; j < Nband; ++j)
                 {
-                    outCurrent[iaxis] += real( dmatrix[_kindex][Nband*i + j] * jMatrix[iaxis][Nband*j + i] );
+                    outCurrent[iaxis] += real( dmatrix[_kindex*Nband*Nband + Nband*i + j] * jMatrix[iaxis][Nband*j + i] );
                 }
             }
         }
@@ -658,7 +623,7 @@ array<double, Ndim> SBEs::GenCurrent(int _kindex, double _time)
             {
                 for (int j = 0; j < Nband; ++j)
                 {
-                    outCurrent[iaxis] += real( dmatrix[_kindex][Nband*i + j] * temp2Matrix[Nband*j + i] );
+                    outCurrent[iaxis] += real( dmatrix[_kindex*Nband*Nband + Nband*i + j] * temp2Matrix[Nband*j + i] );
                 }
             }
         }
@@ -681,6 +646,8 @@ std::tuple<array<double, Ndim>, array<double, Ndim> > SBEs::GenInterIntraCurrent
     fill(interCurrent.begin(), interCurrent.end(), 0.);
     fill(intraCurrent.begin(), intraCurrent.end(), 0.);
     array<double, Ndim> _tkp;
+
+    complex *dmatrix_at_k = &dmatrix[_kindex*Nband*Nband];
 
     // K+A(t) for LG and k for VG
     if (gauge == GaugeType::LengthWannier || gauge == GaugeType::LengthHamiltonian)
@@ -706,12 +673,12 @@ std::tuple<array<double, Ndim>, array<double, Ndim> > SBEs::GenInterIntraCurrent
     // Wannier-->Hamiltonian: U^dagger * rho * U = rho^{H}
     if (gauge == GaugeType::LengthWannier)
     {
-        MatrixMult(temp1Matrix, dmatrix[_kindex], uMatrix, Nband);
+        MatrixMult(temp1Matrix, dmatrix_at_k, uMatrix, Nband);
         MatrixMult(newdMatrix, ctransuMatrix, temp1Matrix, Nband);
     }
     else
     {
-        copy(dmatrix[_kindex], dmatrix[_kindex]+Nband*Nband, newdMatrix);
+        copy(dmatrix_at_k, dmatrix_at_k+Nband*Nband, newdMatrix);
     }
         
     for (int iaxis = 0; iaxis < Ndim; ++iaxis)
@@ -748,6 +715,7 @@ void SBEs::GenDifferentialDM(complex *out, complex *input, int _kindex, double _
     array<double, Ndim> evector = fpulses->elaser(_time);
     auto avector = fpulses->avlaser(_time);
     auto _tkp = GenKpulsA(kmesh->kgrid[_kindex], _time);
+    int local_kindex = _kindex - kstart;
 
     if (gauge == GaugeType::LengthWannier)
     {
@@ -763,13 +731,13 @@ void SBEs::GenDifferentialDM(complex *out, complex *input, int _kindex, double _
             {
                 for (int iaxis = 0; iaxis < Ndim; ++iaxis)
                 {
-                    temp1Matrix[m*Nband + n] += avector[iaxis] * pMatrix[_kindex][iaxis][m*Nband + n];
+                    temp1Matrix[m*Nband + n] += avector[iaxis] * pMatrix[local_kindex][iaxis][m*Nband + n];
                 }
             }
         }
         for (int m = 0; m < Nband; ++m)
         {
-            temp1Matrix[m*Nband + m] += edispersion[_kindex][m];
+            temp1Matrix[m*Nband + m] += edispersion[local_kindex][m];
         }
         MatrixMult(out, temp1Matrix, input, Nband);
     }
@@ -848,7 +816,7 @@ void SBEs::GenDifferentialDM(complex *out, complex *input, int _kindex, double _
         {
             for (int n = 0; n < Nband; ++n)
             {
-                out[m*Nband + n] -= (input[m*Nband + n] - initMatrix[_kindex][m*Nband + n]) * dephasingMatrix[m*Nband + n];
+                out[m*Nband + n] -= (input[m*Nband + n] - initMatrix[local_kindex][m*Nband + n]) * dephasingMatrix[m*Nband + n];
             }
         }
     }

@@ -28,6 +28,7 @@
 #include "momaxis.h"
 #include "SBEs.h"
 #include "utility.h"
+#include "system_list.h"
 
 #define MASTER 0    /* task id of master task or node */
 
@@ -133,31 +134,98 @@ int main( int argc, char *argv[] )
         tempGauge = GaugeType::LengthWannier;
     }
 
-    SBEs *sbe = new SBEs(&cfg.getRoot(), tempGauge);
+    // TODO: separate reading config file and initialization of class
+    // There are some initilization which should be done after the ParaRange and etc.
+    // as a temporoary solution, just read Npoints from config file.
 
+    int tempNtotal = 0;
+    string tempTarget;
+    const int NumRK = 6; // FIXME: hardcoded number of RK steps
+    {
+        cfg.getRoot().lookupValue("target", tempTarget);
+        const libconfig::Setting &calc = cfg.getRoot()["calc"];
+        const libconfig::Setting &npoints_setting = calc["Npoints"];
+        int Nk[3] {1, 1, 1};
+        for (int i = 0; i < npoints_setting.getLength(); ++i)
+        {
+            Nk[i] = npoints_setting[i];
+        }
+        tempNtotal = Nk[0] * Nk[1] * Nk[2];
+    }
     // Redefine local const variable for convinience.
-    const double dV = sbe->kmesh->dV;
-    const int Nband = sbe->Nband;
-    const int Ntotal = sbe->kmesh->Ntotal;
-    const int Nt = sbe->fpulses->Nt;
-    const double dt = sbe->fpulses->dt;
+    const int Ntotal = tempNtotal;
 
+    // distribute k-points to each process
     // Number of k-grid for each process
     // and their displacement in global buffer
     vector<int> blockcounts(mpi_size);
     vector<int> displs(mpi_size);
-
     int jstart, jend, ktemp;
 
-    int Npoints = sbe->kmesh->Ntotal;
     for (int itemp = 0; itemp < mpi_size; ++itemp)
     {
-        ParaRange(Npoints, 0, mpi_size, itemp, &jstart, &jend);
+        ParaRange(Ntotal, 0, mpi_size, itemp, &jstart, &jend);
 
         blockcounts[itemp] = (jend - jstart);
         displs[itemp] = jstart;
     }
-    ParaRange(Npoints, 0, mpi_size, mpi_rank, &jstart, &jend);
+    ParaRange(Ntotal, 0, mpi_size, mpi_rank, &jstart, &jend);
+
+    // array spanning whole BZ
+    complex *dMatrix, *local_dMatrix; // density matrix global and local
+    MPI_Win win_dmatrix;
+
+    vector<complex*> rkMatrix(NumRK);       // temp array for explicit Runge-Kutta methods (global)
+    vector<complex*> local_rkMatrix(NumRK); // temp array for explicit Runge-Kutta methods (local)
+    vector<MPI_Win> win_rkmatrix(NumRK);
+    // Allocate shared memory for local node
+    //------------------------------------------------------
+    // IMPORTNAT NOTE: alloc_shared_noncontig is set to false (default).
+    //                  This is because of complex implmentation, and also the fact that we have one cpu per node.
+    //                  When we move to complex NUMA system, enable this to boost the performance. (we need to fix the code a lot)
+    //MPI_Info mpi_info;
+    //MPI_Info_create(&mpi_info);
+    //MPI_Info_set(mpi_info, "alloc_shared_noncontig", "true");
+    //MPI_Win_allocate_shared(blockcounts[mpi_rank] * sizeof(complex), sizeof(complex), mpi_info, nodecomm, &dMatrix, &wintable);
+    //-------------------------------------------------------
+    BaseMaterial *tempMaterial = InitializeMaterial(tempTarget, &cfg.getRoot()[tempTarget.c_str()]);  // temporary solution.
+    int tempNband = tempMaterial->Nband;
+    delete tempMaterial;
+    MPI_Win_allocate_shared(blockcounts[mpi_rank] *tempNband*tempNband * sizeof(complex), sizeof(complex), 
+        MPI_INFO_NULL, nodecomm, &local_dMatrix, &win_dmatrix);
+    for (int i = 0; i < NumRK; ++i)
+    {
+        MPI_Win_allocate_shared(blockcounts[mpi_rank] *tempNband*tempNband * sizeof(complex), sizeof(complex), 
+            MPI_INFO_NULL, nodecomm, &local_rkMatrix[i], &win_rkmatrix[i]);
+    }
+
+    // Using pointer starts from 0. (from rank 0)
+    if (node_rank == MASTER)
+    {
+        dMatrix = local_dMatrix;
+        for (int i = 0; i < NumRK; ++i) { rkMatrix[i] = local_rkMatrix[i]; }
+    }
+    else
+    {
+        MPI_Aint winsize;
+        int windisp;
+        MPI_Win_shared_query(win_dmatrix, 0, &winsize, &windisp, &dMatrix);
+        for (int i = 0; i < NumRK; ++i) { MPI_Win_shared_query(win_rkmatrix[i], 0, &winsize, &windisp, &rkMatrix[i]); }
+    }
+
+    // MPI_Win_fence(0, win_dmatrix);
+    // for (int i = 0; i < NumRK; ++i) MPI_Win_fence(0, win_rkmatrix[i]);
+
+    // initialize SBEs
+    SBEs *sbe = new SBEs(&cfg.getRoot(), tempGauge, dMatrix, rkMatrix, jstart, jend);
+
+    // Redefine local const variable for convinience.
+    const double dV = sbe->kmesh->dV;
+    const int Nband = sbe->Nband;
+    const int Nt = sbe->fpulses->Nt;
+    const double dt = sbe->fpulses->dt;
+
+
 
 
     
@@ -168,40 +236,6 @@ int main( int argc, char *argv[] )
     // paramters
     calc_param param;
 
-    // array spanning whole BZ
-    // complex *dMatrix, *initMatrix;
-    // MPI_Win wintable;
-    // // Allocate shared memory for local node
-    // // Note: alloc_shared_noncontig is true. If this makes unexpected behavior, back to MPI_INFO_NULL.
-    // MPI_Info mpi_info;
-    // MPI_Info_create(&mpi_info);
-    // MPI_Info_set(mpi_info, "alloc_shared_noncontig", "true");
-    // //MPI_Win_allocate_shared(blockcounts[mpi_rank] * sizeof(complex), sizeof(complex), MPI_INFO_NULL, nodecomm, &dMatrix, &wintable);
-    // MPI_Win_allocate_shared(blockcounts[mpi_rank] * sizeof(complex), sizeof(complex), mpi_info, nodecomm, &dMatrix, &wintable);
-
-    // // get window memory model info. (https://www.mpi-forum.org/docs/mpi-3.1/mpi31-report/node278.htm#Node278)
-    // {
-    //     int mpi_memory_model, mpi_flag;
-    //     MPI_Win_get_attr(wintable, MPI_WIN_MODEL, &mpi_memory_model, &mpi_flag);
-
-    //     if (mpi_flag != 1)
-    //     {
-    //         cout << "Error: MPI_WIN_MODEL is not set.\n";
-    //         return(EXIT_FAILURE);
-    //     }
-    //     else if (mpi_memory_model == MPI_WIN_UNIFIED)
-    //     {
-    //         cout << "MPI_WIN_MODEL is MPI_WIN_UNIFIED.\n";
-    //     }
-    //     else if (mpi_memory_model == MPI_WIN_SEPARATE)
-    //     {
-    //         cout << "MPI_WIN_MODEL is MPI_WIN_SEPARATE.\n";
-    //     }
-    //     else
-    //     {
-    //         cout << "unknown MPI_WIN_MODEL \n";
-    //     }
-    // }
 
 
     //###############################
@@ -286,7 +320,6 @@ int main( int argc, char *argv[] )
     if(mpi_rank==MASTER)
     {
         cout.precision( 5 );
-
         
         cout << "\n\n\n//############################################//" ;
         cout <<"\n#*********==============**********#\n ";
@@ -350,7 +383,8 @@ int main( int argc, char *argv[] )
                 for (int n = 0; n < Nband; ++n)
                 {
                     //if (m > n) continue;
-                    density_matrix_integrated[ktime][m*Nband + n] += sbe->dmatrix[kindex][m*Nband + n] * sbe->kmesh->weight[ kindex ];
+                    density_matrix_integrated[ktime][m*Nband + n] += dMatrix[kindex*Nband*Nband + m*Nband + n] 
+                        * sbe->kmesh->weight[ kindex ];
                 }
             }
             sbe->RunSBEs(kindex, currenttime);
@@ -371,14 +405,14 @@ int main( int argc, char *argv[] )
                 auto ki = sbe->kmesh->index(jtemp);
                 if (sbe->gauge == GaugeType::LengthWannier)
                 {
-                    sbe->WannierToHamiltonian(sbe->newdMatrix, sbe->dmatrix[jtemp], jtemp, currenttime);
+                    sbe->WannierToHamiltonian(sbe->newdMatrix, &dMatrix[jtemp*Nband*Nband], jtemp, currenttime);
                     snapshot_nc[jtemp] = real(sbe->newdMatrix[sbe->material->Nval*Nband + sbe->material->Nval]);
                     snapshot_pi[jtemp] = sbe->newdMatrix[sbe->material->Nval*Nband + sbe->material->Nval-1];
                 }
                 else
                 {
-                    snapshot_nc[jtemp] = real(sbe->dmatrix[jtemp][sbe->material->Nval*Nband + sbe->material->Nval]);
-                    snapshot_pi[jtemp] = sbe->dmatrix[jtemp][sbe->material->Nval*Nband + sbe->material->Nval-1];
+                    snapshot_nc[jtemp] = real(dMatrix[jtemp*Nband*Nband + sbe->material->Nval*Nband + sbe->material->Nval]);
+                    snapshot_pi[jtemp] = dMatrix[jtemp*Nband*Nband + sbe->material->Nval*Nband + sbe->material->Nval-1];
                 }
             }
             // gather
@@ -450,7 +484,7 @@ int main( int argc, char *argv[] )
                 }
                 occup_temp /= sbe->kmesh->total_weight;
                 cout << ktime << " / " << sbe->fpulses->Nt << ", " << currentcycle << " / " << maxcycles;
-                cout << ", nc = " << temp_density_matrix_integrated[sbe->material->Nval*Nband + sbe->material->Nval] / static_cast<double>(Npoints);
+                cout << ", nc = " << temp_density_matrix_integrated[sbe->material->Nval*Nband + sbe->material->Nval] / static_cast<double>(Ntotal);
                 cout << ", ntotal = " << occup_temp << endl;
             }
         }
@@ -505,10 +539,10 @@ int main( int argc, char *argv[] )
             occup_temp = 0;
             for (int m = 0; m < Nband; ++m)
             {
-                fprintf(occup_out, "%.16e    ", real(density_matrix_integrated[ktime][m*Nband + m]) / Npoints);
+                fprintf(occup_out, "%.16e    ", real(density_matrix_integrated[ktime][m*Nband + m]) / Ntotal);
                 occup_temp += real(density_matrix_integrated[ktime][m*Nband + m]);
             }
-            fprintf(occup_out, "%.16e\n", occup_temp / Npoints);
+            fprintf(occup_out, "%.16e\n", occup_temp / Ntotal);
         }
         fflush(interj_out);
         fflush(intraj_out);
@@ -536,6 +570,15 @@ int main( int argc, char *argv[] )
 
     Delete2D<complex>(density_matrix_integrated, Nband*Nband, sbe->fpulses->Nt);
     //fclose(simulation_out);
+
+    // global memory free
+    MPI_Win_free(&win_dmatrix);
+    for (int i = 0; i < sbe->NumRK; ++i)
+    {
+        MPI_Win_free(&win_rkmatrix[i]);
+    }
+
+    delete sbe;
     
     
     cout << "\n***********************\nEND OF THE PROGRAM with No. of cores = " << mpi_size << "  uses j = " << jstart << ";  to  j = " << jend << "  with rank = "  << mpi_rank << "\n\n" <<  endl;
@@ -543,10 +586,8 @@ int main( int argc, char *argv[] )
     
     
     MPI_Finalize( )	;	
-	exit(0);
+	exit(EXIT_SUCCESS);
 
-
-    
 };
 
 
