@@ -116,22 +116,26 @@ int main( int argc, char *argv[] )
     // Read gauge from config
     string gaugeString; GaugeType tempGauge;
     cfg.lookupValue("gauge", gaugeString);
-    if (gaugeString == "Wannier" || gaugeString == "LengthWannier")
+    if (gaugeString == "WannierMoving")
     {
-        tempGauge = GaugeType::LengthWannier;
+        tempGauge = GaugeType::WannierMoving;
     }
-    else if (gaugeString == "Hamiltonian" || gaugeString == "LengthHamiltonian")
+    else if (gaugeString == "WannierStatic")
     {
-        tempGauge = GaugeType::LengthHamiltonian;
+        tempGauge = GaugeType::WannierStatic;
     }
-    else if (gaugeString == "Velocity" || gaugeString == "VelocityHamiltonian")
+    else if (gaugeString == "HamiltonianStatic")
     {
-        tempGauge = GaugeType::VelocityHamiltonian;
+        tempGauge = GaugeType::HamiltonianStatic;
+    }
+    else if (gaugeString == "Velocity")
+    {
+        tempGauge = GaugeType::Velocity;
     }
     else
     {
-        if (mpi_rank == MASTER) cout << "Warning: No gauge type is specified. Choose LengthWannier for default gauge.\n";
-        tempGauge = GaugeType::LengthWannier;
+        if (mpi_rank == MASTER) cout << "Warning: No gauge type is specified. Choose WannierMoving for default gauge.\n";
+        tempGauge = GaugeType::WannierMoving;
     }
 
     // TODO: separate reading config file and initialization of class
@@ -401,7 +405,7 @@ int main( int argc, char *argv[] )
             for(int jtemp = jstart; jtemp < jend; jtemp++ )
             {
                 auto ki = sbe->kmesh->index(jtemp);
-                if (sbe->gauge == GaugeType::LengthWannier)
+                if (sbe->gauge == GaugeType::WannierMoving || sbe->gauge == GaugeType::WannierStatic)
                 {
                     sbe->WannierToHamiltonian(sbe->newdMatrix, &dMatrix[jtemp*Nband*Nband], jtemp, currenttime);
                     snapshot_nc[jtemp] = real(sbe->newdMatrix[sbe->material->Nval*Nband + sbe->material->Nval]);

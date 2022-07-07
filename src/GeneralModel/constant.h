@@ -41,9 +41,13 @@ const int Ngrad     = 2;
 
 enum class GaugeType
 {
-    LengthWannier,
-    LengthHamiltonian,
-    VelocityHamiltonian
+    // LengthWannier,
+    // LengthHamiltonian,
+    // VelocityHamiltonian
+    HamiltonianStatic,
+    WannierStatic,
+    WannierMoving,
+    Velocity
 };
 
 

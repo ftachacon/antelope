@@ -311,7 +311,7 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, complex *_dmatrix,
             break;
         }
 
-        if (gauge == GaugeType::LengthWannier)
+        if (gauge == GaugeType::WannierMoving || gauge == GaugeType::WannierStatic)
         {
             MatrixMult(temp1Matrix, &dmatrix[kglobal*Nband*Nband], ctransuMatrix, Nband);
             MatrixMult(&dmatrix[kglobal*Nband*Nband], uMatrix, temp1Matrix, Nband);
@@ -608,19 +608,19 @@ array<double, Ndim> SBEs::GenCurrent(int _kindex, double _time)
     fill(outCurrent.begin(), outCurrent.end(), 0.);
     array<double, Ndim> _tkp;
 
-    // K+A(t) for LG and k for VG
-    if (gauge == GaugeType::LengthWannier || gauge == GaugeType::LengthHamiltonian)
+    // K+A(t) for moving frame and k for static frame
+    if (gauge == GaugeType::WannierMoving)
     {
         _tkp = GenKpulsA(kmesh->kgrid[_kindex], _time);
     }
-    else if (gauge == GaugeType::VelocityHamiltonian)
+    else
     {
         _tkp = kmesh->kgrid[_kindex];
     }
     material->GenJMatrix(jMatrix, _tkp);
 
     // Wannier ues jMatrix
-    if (gauge == GaugeType::LengthWannier)
+    if (gauge == GaugeType::WannierMoving || gauge == GaugeType::WannierStatic)
     {
         // J = Tr{densitymatrix j}
         for (int iaxis = 0; iaxis < Ndim; ++iaxis)
@@ -634,7 +634,7 @@ array<double, Ndim> SBEs::GenCurrent(int _kindex, double _time)
             }
         }
     }
-    else // both LengthHamiltonian and VelocityHamiltonian uses momentum matrix element
+    else // both Hamiltonian and Velocity uses momentum matrix element
     {
         GenUMatrix(uMatrix, _tkp);
         for (int m = 0; m < Nband; ++m)
@@ -659,7 +659,7 @@ array<double, Ndim> SBEs::GenCurrent(int _kindex, double _time)
         }
     }
     // for VG, j = -(p + A(t)), additional A(t) component added
-    if (gauge == GaugeType::VelocityHamiltonian)
+    if (gauge == GaugeType::Velocity)
     {
         auto avector = fpulses->avlaser(_time);
         for (int iaxis = 0; iaxis < Ndim; ++iaxis)
@@ -679,12 +679,12 @@ std::tuple<array<double, Ndim>, array<double, Ndim> > SBEs::GenInterIntraCurrent
 
     complex *dmatrix_at_k = &dmatrix[_kindex*Nband*Nband];
 
-    // K+A(t) for LG and k for VG
-    if (gauge == GaugeType::LengthWannier || gauge == GaugeType::LengthHamiltonian)
+    // K+A(t) for moving frame and k for static frame
+    if (gauge == GaugeType::WannierMoving)
     {
         _tkp = GenKpulsA(kmesh->kgrid[_kindex], _time);
     }
-    else if (gauge == GaugeType::VelocityHamiltonian)
+    else
     {
         _tkp = kmesh->kgrid[_kindex];
     }
@@ -701,7 +701,7 @@ std::tuple<array<double, Ndim>, array<double, Ndim> > SBEs::GenInterIntraCurrent
     }
 
     // Wannier-->Hamiltonian: U^dagger * rho * U = rho^{H}
-    if (gauge == GaugeType::LengthWannier)
+    if (gauge == GaugeType::WannierMoving || gauge == GaugeType::WannierStatic)
     {
         MatrixMult(temp1Matrix, dmatrix_at_k, uMatrix, Nband);
         MatrixMult(newdMatrix, ctransuMatrix, temp1Matrix, Nband);
@@ -728,7 +728,7 @@ std::tuple<array<double, Ndim>, array<double, Ndim> > SBEs::GenInterIntraCurrent
         }
     }
     // for VG, j = -(p + A(t)), additional A(t) component added
-    if (gauge == GaugeType::VelocityHamiltonian)
+    if (gauge == GaugeType::Velocity)
     {
         auto avector = fpulses->avlaser(_time);
         for (int iaxis = 0; iaxis < Ndim; ++iaxis)
@@ -747,12 +747,12 @@ void SBEs::GenDifferentialDM(complex *out, complex *input, int _kindex, double _
     auto _tkp = GenKpulsA(kmesh->kgrid[_kindex], _time);
     int local_kindex = _kindex - kstart;
 
-    if (gauge == GaugeType::LengthWannier)
+    if (gauge == GaugeType::WannierMoving)
     {
         material->GenHamiltonian(hamiltonian, _tkp);
         MatrixMult(out, hamiltonian, input, Nband);
     }
-    else if (gauge == GaugeType::VelocityHamiltonian)
+    else if (gauge == GaugeType::Velocity)
     {
         fill(temp1Matrix, temp1Matrix+Nband*Nband, 0.);
         for (int m = 0; m < Nband; ++m)
@@ -771,7 +771,7 @@ void SBEs::GenDifferentialDM(complex *out, complex *input, int _kindex, double _
         }
         MatrixMult(out, temp1Matrix, input, Nband);
     }
-    else if (gauge == GaugeType::LengthHamiltonian)
+    else
     {
         cout << "Not implemeted yet";
     }
@@ -809,7 +809,7 @@ void SBEs::GenDifferentialDM(complex *out, complex *input, int _kindex, double _
         }
     }
     // Add dephainsg process here!
-    if (gauge == GaugeType::LengthWannier)
+    if (gauge == GaugeType::WannierMoving || gauge == GaugeType::WannierStatic)
     {
         GenUMatrix(uMatrix, _tkp);
         for (int m = 0; m < Nband; ++m)
@@ -934,14 +934,17 @@ void SBEs::PrintInfo()
     cout << "Current gauge: ";
     switch (gauge)
     {
-    case GaugeType::LengthWannier:
-        cout << "LengthWannier\n";
+    case GaugeType::WannierMoving:
+        cout << "WannierMoving\n";
         break;
-    case GaugeType::LengthHamiltonian:
-        cout << "LengthHamiltonian\n";
+    case GaugeType::WannierStatic:
+        cout << "WannierStatic\n";
         break;
-    case GaugeType::VelocityHamiltonian:
-        cout << "VelocityHamiltonian\n";
+    case GaugeType::Velocity:
+        cout << "Velocity\n";
+        break;
+    case GaugeType::HamiltonianStatic:
+        cout << "HamiltonianStatic\n";
         break;
     
     default:
