@@ -12,6 +12,8 @@
 #include <fstream>
 #include <algorithm>
 
+#include "mpi.h"
+
 #include <libconfig.h++>
 
 // To prevnet include <complex.h> --> which undef complex
@@ -42,12 +44,15 @@ public:
 
     BaseMaterial *material;  ///< dipole&Hamiltonian generator
 
+    complex **rkmatrix; ///< buffers for RK methods
+    MPI_Win *win_dm; ///< window for dmatrix
+    MPI_Win *win_rk; ///< window for rkmatrix
+
     // allocated memory with no value - to reduce costs for making temporoary variables
     complex *hamiltonian;
     complex **dipoleMatrix, **jMatrix;
     complex *newdMatrix;
     complex *temp1Matrix, *temp2Matrix;
-    complex **rkMatrix;
 
     complex *uMatrix, *ctransuMatrix;
     double *dephasingMatrix;
@@ -100,10 +105,11 @@ public:
     bool isDipoleZero;                                  ///< default is true. Wannier dipole is non-zero in very rare cases.
     bool isInterIntra;                                  ///< default is true. Separate inter/intra when this is true. Total current is in inter when false.
 
-    SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, std::complex *_dmatrix, std::vector<complex *> _rkmatrix, int _kstart, int _kend);
+    SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, complex *_dmatrix, complex **_rkmatrix,
+        MPI_Win *_win_dm, MPI_Win *_win_rk, int _kstart, int _kend);
     ~SBEs();
     
-    void RunSBEs(int _kindex, double _time);
+    void RunSBEs(double _time);
 
     array<double, Ndim> GenCurrent(int _kindex, double _time);
     std::tuple<array<double, Ndim>, array<double, Ndim> > GenInterIntraCurrent(int _kindex, double _time);
@@ -123,9 +129,13 @@ public:
 
 };
 
-SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, std::complex *_dmatrix, std::vector<complex *> _rkmatrix, int _kstart, int _kend) : gauge(_gauge)
+SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, complex *_dmatrix, complex **_rkmatrix,
+    MPI_Win *_win_dm, MPI_Win *_win_rk, int _kstart, int _kend) : gauge(_gauge)
 {
     kstart = _kstart;   kend = _kend;
+    dmatrix = _dmatrix; rkmatrix = _rkmatrix; // do not allocate, just get shared memory window pointer
+    win_dm = _win_dm; win_rk = _win_rk;
+
     const libconfig::Setting &cfg = (*_cfg);
     InitializeGeneral( &cfg["calc"]);
     InitializeLaser( &cfg["laser"]);
@@ -200,7 +210,6 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, std::complex *_dma
         dynamic_cast<Wannier90*>(material)->CalculateKMesh(kmesh);
     }*/
     
-    dmatrix = _dmatrix; // do not allocate, just get shared memory window pointer
     initMatrix = Create2D<complex>(kend-kstart, Nband*Nband);
 
     hamiltonian = new complex[Nband * Nband];
@@ -241,6 +250,7 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, std::complex *_dma
         int info = LAPACKE_zheevr( LAPACK_ROW_MAJOR, 'V', 'A', 'U',
                                 Nband, hamiltonian, Nband, 0., 0., 0, 0, 
                                 eps, &num_of_eig, edispersion[k], uMatrix, Nband, tempIsuppz );
+
         if (info != 0)
         {
             std::cerr << "Problem in lapack, info = " << info <<  std::endl;
@@ -332,7 +342,6 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, std::complex *_dma
     bRK = new double[NumRK];
     aRK = new double*[NumRK-1];
 
-    rkMatrix = Create2D<complex>(NumRK, Nband * Nband);
 
     for (int i = 0; i < NumRK-1; ++i)
     {
@@ -518,7 +527,6 @@ SBEs::~SBEs()
     delete[] temp1Matrix, temp2Matrix;
     delete[] dephasingMatrix;
     delete[] uMatrix, ctransuMatrix;
-    Delete2D<complex>(rkMatrix, NumRK, Nband*Nband);
     Delete2D<complex>(jMatrix, Ndim, Nband*Nband);
     Delete2D<complex>(dipoleMatrix, Ndim, Nband*Nband);
 
@@ -541,31 +549,54 @@ SBEs::~SBEs()
     delete[] tempIsuppz, tempEval, tempHmat;
 }
 
-void SBEs::RunSBEs(int _kindex, double  _time)
+void SBEs::RunSBEs(double  _time)
 {
-    GenDifferentialDM( rkMatrix[0], &dmatrix[_kindex*Nband*Nband], _kindex, _time);
-    for (int irk = 0; irk < NumRK-1; ++irk)
+    // always fence before differential equation, for input array.
+    MPI_Win_fence(0, *win_dm);
+    // k0 = f(tn, yn)
+    for (int k = kstart; k < kend; ++k)
+        GenDifferentialDM( &rkmatrix[0][k*Nband*Nband], &dmatrix[k*Nband*Nband], k, _time);
+
+    for (int irk = 1; irk < NumRK; ++irk)
+    {
+        // NumRK --> buffer
+        std::copy( &dmatrix[kstart*Nband*Nband], 
+            &dmatrix[kstart*Nband*Nband] + (kend-kstart)*Nband*Nband, 
+            &rkmatrix[NumRK][kstart*Nband*Nband]);
+        for (int k = kstart; k < kend; ++k)
+        {
+            for (int m = 0; m < Nband; ++m)
+            {
+                for (int n = 0; n < Nband; ++n)
+                {
+                    for (int jrk = 0; jrk < irk+1; ++jrk)
+                    {
+                        // yn + dt *\sum_{j=0}^{i-1} aRk[i-1][j] * k_j
+                        rkmatrix[NumRK][k*Nband*Nband + m*Nband + n] 
+                            += fpulses->dt*aRK[irk-1][jrk] * rkmatrix[jrk][k*Nband*Nband + m*Nband + n];
+                    }
+                }
+            }
+        }
+        MPI_Win_fence(0, win_rk[NumRK]);
+        // k_i = f(tn + dt*t[i-1], yn + dt*\sum_{j=0}^{i-1} aRk[i-1][j] * k_j)
+        for (int k = kstart; k < kend; ++k)
+        {
+            GenDifferentialDM(&rkmatrix[irk][kstart*Nband*Nband], &rkmatrix[NumRK][kstart*Nband*Nband], 
+                k, _time + tRK[irk-1]*fpulses->dt);
+        }
+    }
+    for (int k = kstart; k < kend; ++k)
     {
         for (int m = 0; m < Nband; ++m)
         {
             for (int n = 0; n < Nband; ++n)
             {
-                newdMatrix[m*Nband + n] = dmatrix[_kindex*Nband*Nband + m*Nband + n];
-                for (int jrk = 0; jrk < irk+1; ++jrk)
+                for (int irk = 0; irk < NumRK; ++irk)
                 {
-                    newdMatrix[m*Nband + n] += fpulses->dt*aRK[irk][jrk] * rkMatrix[jrk][m*Nband + n];
+                    // y_{n+1} = y_n + dt*\sum_{i=0}^{N-1} b[i] * k_i
+                    dmatrix[k*Nband*Nband + m*Nband + n] += fpulses->dt*bRK[irk] * rkmatrix[irk][k*Nband*Nband + m*Nband + n];
                 }
-            }
-        }
-        GenDifferentialDM(rkMatrix[irk+1], newdMatrix, _kindex, _time + tRK[irk]*fpulses->dt);
-    }
-    for (int m = 0; m < Nband; ++m)
-    {
-        for (int n = 0; n < Nband; ++n)
-        {
-            for (int irk = 0; irk < NumRK; ++irk)
-            {
-                dmatrix[_kindex*Nband*Nband + m*Nband + n] += fpulses->dt*bRK[irk] * rkMatrix[irk][m*Nband + n];
             }
         }
     }

@@ -140,7 +140,9 @@ int main( int argc, char *argv[] )
 
     int tempNtotal = 0;
     string tempTarget;
-    const int NumRK = 6; // FIXME: hardcoded number of RK steps
+    
+    // last index of rkMatrix is used as a buffer.
+    const int NumRKp1 = 6+1; // FIXME: hardcoded number of RK steps + 1
     {
         cfg.getRoot().lookupValue("target", tempTarget);
         const libconfig::Setting &calc = cfg.getRoot()["calc"];
@@ -175,9 +177,9 @@ int main( int argc, char *argv[] )
     complex *dMatrix, *local_dMatrix; // density matrix global and local
     MPI_Win win_dmatrix;
 
-    vector<complex*> rkMatrix(NumRK);       // temp array for explicit Runge-Kutta methods (global)
-    vector<complex*> local_rkMatrix(NumRK); // temp array for explicit Runge-Kutta methods (local)
-    vector<MPI_Win> win_rkmatrix(NumRK);
+    vector<complex*> rkMatrix(NumRKp1);       // temp array for explicit Runge-Kutta methods (global)
+    vector<complex*> local_rkMatrix(NumRKp1); // temp array for explicit Runge-Kutta methods (local)
+    vector<MPI_Win> win_rkmatrix(NumRKp1);
 
     // Allocate shared memory for local node
     //------------------------------------------------------
@@ -195,7 +197,7 @@ int main( int argc, char *argv[] )
     // initialize shared memory window for local node
     MPI_Win_allocate_shared(blockcounts[mpi_rank] *tempNband*tempNband * sizeof(complex), sizeof(complex), 
         MPI_INFO_NULL, nodecomm, &local_dMatrix, &win_dmatrix);
-    for (int i = 0; i < NumRK; ++i)
+    for (int i = 0; i < NumRKp1; ++i)
     {
         MPI_Win_allocate_shared(blockcounts[mpi_rank] *tempNband*tempNband * sizeof(complex), sizeof(complex), 
             MPI_INFO_NULL, nodecomm, &local_rkMatrix[i], &win_rkmatrix[i]);
@@ -205,21 +207,21 @@ int main( int argc, char *argv[] )
     if (node_rank == MASTER)
     {
         dMatrix = local_dMatrix;
-        for (int i = 0; i < NumRK; ++i) { rkMatrix[i] = local_rkMatrix[i]; }
+        for (int i = 0; i < NumRKp1; ++i) { rkMatrix[i] = local_rkMatrix[i]; }
     }
     else
     {
         MPI_Aint winsize;
         int windisp;
         MPI_Win_shared_query(win_dmatrix, 0, &winsize, &windisp, &dMatrix);
-        for (int i = 0; i < NumRK; ++i) { MPI_Win_shared_query(win_rkmatrix[i], 0, &winsize, &windisp, &rkMatrix[i]); }
+        for (int i = 0; i < NumRKp1; ++i) { MPI_Win_shared_query(win_rkmatrix[i], 0, &winsize, &windisp, &rkMatrix[i]); }
     }
 
     // MPI_Win_fence(0, win_dmatrix);
-    // for (int i = 0; i < NumRK; ++i) MPI_Win_fence(0, win_rkmatrix[i]);
+    // for (int i = 0; i < NumRKp1; ++i) MPI_Win_fence(0, win_rkmatrix[i]);
 
     // initialize SBEs
-    SBEs *sbe = new SBEs(&cfg.getRoot(), tempGauge, dMatrix, rkMatrix, jstart, jend);
+    SBEs *sbe = new SBEs(&cfg.getRoot(), tempGauge, dMatrix, rkMatrix.data(), &win_dmatrix, win_rkmatrix.data(), jstart, jend);
 
     // Redefine local const variable for convinience.
     const double dV = sbe->kmesh->dV;
@@ -382,11 +384,12 @@ int main( int argc, char *argv[] )
                         * sbe->kmesh->weight[ kindex ];
                 }
             }
-            sbe->RunSBEs(kindex, currenttime);
 
             //##############################################
 
         }
+        // For static method, syncronization should be done after each BZ loop.
+        sbe->RunSBEs(currenttime);
         // From herer, put things which should be done perodically but not at every time step
 
         // Snapshots - including diagnostics and density plots 
@@ -568,7 +571,7 @@ int main( int argc, char *argv[] )
 
     // global memory free
     MPI_Win_free(&win_dmatrix);
-    for (int i = 0; i < sbe->NumRK; ++i)
+    for (int i = 0; i < NumRKp1; ++i)
     {
         MPI_Win_free(&win_rkmatrix[i]);
     }
