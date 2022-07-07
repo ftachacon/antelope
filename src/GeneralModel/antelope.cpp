@@ -178,6 +178,7 @@ int main( int argc, char *argv[] )
     vector<complex*> rkMatrix(NumRK);       // temp array for explicit Runge-Kutta methods (global)
     vector<complex*> local_rkMatrix(NumRK); // temp array for explicit Runge-Kutta methods (local)
     vector<MPI_Win> win_rkmatrix(NumRK);
+
     // Allocate shared memory for local node
     //------------------------------------------------------
     // IMPORTNAT NOTE: alloc_shared_noncontig is set to false (default).
@@ -188,9 +189,10 @@ int main( int argc, char *argv[] )
     //MPI_Info_set(mpi_info, "alloc_shared_noncontig", "true");
     //MPI_Win_allocate_shared(blockcounts[mpi_rank] * sizeof(complex), sizeof(complex), mpi_info, nodecomm, &dMatrix, &wintable);
     //-------------------------------------------------------
-    BaseMaterial *tempMaterial = InitializeMaterial(tempTarget, &cfg.getRoot()[tempTarget.c_str()]);  // temporary solution.
+    BaseMaterial *tempMaterial = InitializeMaterial(tempTarget, &cfg.getRoot());  // temporary solution.
     int tempNband = tempMaterial->Nband;
     delete tempMaterial;
+    // initialize shared memory window for local node
     MPI_Win_allocate_shared(blockcounts[mpi_rank] *tempNband*tempNband * sizeof(complex), sizeof(complex), 
         MPI_INFO_NULL, nodecomm, &local_dMatrix, &win_dmatrix);
     for (int i = 0; i < NumRK; ++i)
@@ -224,18 +226,11 @@ int main( int argc, char *argv[] )
     const int Nband = sbe->Nband;
     const int Nt = sbe->fpulses->Nt;
     const double dt = sbe->fpulses->dt;
-
-
-
-
     
     cout << "\nrank = " << mpi_rank << "  uses j = " << jstart << ";  to  j = " << jend << "  with Nprocesses = " << mpi_size <<endl << endl;
-    //#############################
-    // initialize shared memory window for local node
 
     // paramters
     calc_param param;
-
 
 
     //###############################

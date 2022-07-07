@@ -163,7 +163,6 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, std::complex *_dma
     {
         initType = InitialValueType::UniformValence;
     }
-
     // Initialize specific material
     material = InitializeMaterial(targetMaterial, _cfg);
     
@@ -218,7 +217,7 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, std::complex *_dma
     pMatrix = Create3D<complex>(kend-kstart, Ndim, Nband*Nband);
     edispersion = Create2D<double>(kend-kstart, Nband);
 
-    tempIsuppz = new int[Nband];
+    tempIsuppz = new int[2*Nband];
     tempEval = new double[Nband];
     tempHmat = new complex[Nband*Nband];
 
@@ -232,7 +231,7 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, std::complex *_dma
     double tempInitSum = 0;
 
     fill(&dmatrix[kstart*Nband*Nband], &dmatrix[kstart*Nband*Nband] + (kend-kstart)*Nband*Nband, 0.);
-
+    
     for (int k = 0; k < kend-kstart; ++k)
     {
         int kglobal = k + kstart; // global index = kglobal, local index = k
@@ -318,6 +317,7 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, std::complex *_dma
 
         // pmatrix generation
         material->GenJMatrix(jMatrix, kmesh->kgrid[kglobal]);
+        
         for (int iaxis = 0; iaxis < Ndim; ++iaxis)
         {
             MatrixMult(temp1Matrix, jMatrix[iaxis], uMatrix, Nband);
@@ -338,7 +338,6 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, std::complex *_dma
     {
         aRK[i] = new double[i+1];
     }
-
     // Explicit Runge-Kutta method:
     // y_{n+1} = y_{n} + dt * sum_{i=0}^{N-1} b_{i}*k_{i}
     // k0 = f(tn, yn)
@@ -367,7 +366,7 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, std::complex *_dma
             throw out_of_range("Undefined Runge-Kutta order");
             break;
     }
-
+    
     // dephasing matrix
     for (int i = 0; i < Nband; ++i)
     {
