@@ -108,7 +108,7 @@ void ParaRange(int totalLength, int offset, int mpi_size, int mpi_rank, int *ist
     iwork1 = totalLength / mpi_size;
     iwork2 = totalLength % mpi_size;
 
-    *istart = iwork1 * mpi_rank + min(iwork2, mpi_rank) + offset;
+    *istart = iwork1 * mpi_rank + std::min(iwork2, mpi_rank) + offset;
     *iend = *istart + iwork1;
     if (iwork2 > mpi_rank)
         *iend = *iend + 1;

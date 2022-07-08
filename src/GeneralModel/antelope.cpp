@@ -30,6 +30,8 @@
 
 #define MASTER 0    /* task id of master task or node */
 
+using namespace std;
+
 void My_MPI_CLX_SUM( complex *in, complex *inout, int *len, MPI_Datatype *dptr );
 
 string targetMaterial;

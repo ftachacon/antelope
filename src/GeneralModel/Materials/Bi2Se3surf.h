@@ -102,10 +102,10 @@ void BieSe3surf::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint)
 {
     double xderHcomp[5];    double yderHcomp[5];
     double xderBcomp[4];    double yderBcomp[4];
-    fill(xderBcomp, xderBcomp+4, 0.);
-    fill(yderBcomp, yderBcomp+4, 0.);
-    fill(xderHcomp, xderHcomp+5, 0.);
-    fill(yderHcomp, yderHcomp+5, 0.);
+    std::fill(xderBcomp, xderBcomp+4, 0.);
+    std::fill(yderBcomp, yderBcomp+4, 0.);
+    std::fill(xderHcomp, xderHcomp+5, 0.);
+    std::fill(yderHcomp, yderHcomp+5, 0.);
     double cosAvecSum = 0.;
     double sinAvecSum = 0.;
     double cosBvecSum = 0.;
@@ -225,14 +225,14 @@ void BieSe3surf::SetBasis()
 
 void BieSe3surf::PrintMaterialInformation()
 {
-    cout << "============================================\n";
-    cout << "Bi2Se3 surface - paramters are hard-coded\n";
-    cout << "============================================\n";
+    std::cout << "============================================\n";
+    std::cout << "Bi2Se3 surface - paramters are hard-coded\n";
+    std::cout << "============================================\n";
 }
 
 void BieSe3surf::GenBcomp(std::array<double, Ndim> _kpoint)
 {
-    fill(Bcomp, Bcomp+4, 0.);
+    std::fill(Bcomp, Bcomp+4, 0.);
     double cosAvecSum = 0.;
     double sinAvecSum = 0.;
     double cosBvecSum = 0.;

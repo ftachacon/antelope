@@ -59,8 +59,8 @@ KaneMele::KaneMele( const libconfig::Setting *params )
     }
     else
     {
-        cerr << "Some KaneMele paramters are missing" << endl;
-        exit(EXIT_FAILURE);
+        std::cerr << "Some KaneMele paramters are missing" << std::endl;
+        std::exit(EXIT_FAILURE);
     }
 
     SetBasis();
@@ -76,7 +76,7 @@ KaneMele::KaneMele( const libconfig::Setting *params )
 
 void KaneMele::GenHamiltonian(complex *_hstore, std::array<double, Ndim> _kpoint)
 {
-    fill(_hstore, _hstore+Nband*Nband, 0.);
+    std::fill(_hstore, _hstore+Nband*Nband, 0.);
 
     GenBcomp(_kpoint, phi0);
 
@@ -99,9 +99,9 @@ void KaneMele::GenHamiltonian(complex *_hstore, std::array<double, Ndim> _kpoint
 void KaneMele::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint)
 {
     double xderBcomp[4];    double yderBcomp[4];
-    fill(Bcomp, Bcomp+4, 0.);
-    fill(xderBcomp, xderBcomp+4, 0.);
-    fill(yderBcomp, yderBcomp+4, 0.);
+    std::fill(Bcomp, Bcomp+4, 0.);
+    std::fill(xderBcomp, xderBcomp+4, 0.);
+    std::fill(yderBcomp, yderBcomp+4, 0.);
     for (int i = 0; i < 3; ++i)
     {
         angle_a0 = _kpoint[0]*vec_a[i][0] + _kpoint[1]*vec_a[i][1];
@@ -199,19 +199,19 @@ void KaneMele::SetBasis()
 
 void KaneMele::PrintMaterialInformation()
 {
-    cout << "============================================\n";
-    cout << "Kane-Mele Model paramters\n";
-    cout << "a0         = " << a0 << " a.u. \n";
-    cout << "t1         = " << t1 << " a.u. \n";
-    cout << "t2         = " << t2 << " a.u. \n";
-    cout << "M0         = " << M0 << " a.u. \n";
-    cout << "phi0         = " << phi0 << " rad \n";
-    cout << "============================================\n";
+    std::cout << "============================================\n";
+    std::cout << "Kane-Mele Model paramters\n";
+    std::cout << "a0         = " << a0 << " a.u. \n";
+    std::cout << "t1         = " << t1 << " a.u. \n";
+    std::cout << "t2         = " << t2 << " a.u. \n";
+    std::cout << "M0         = " << M0 << " a.u. \n";
+    std::cout << "phi0         = " << phi0 << " rad \n";
+    std::cout << "============================================\n";
 }
 
 void KaneMele::GenBcomp(std::array<double, Ndim> _kpoint, double _phi0)
 {
-    fill(Bcomp, Bcomp+4, 0.);
+    std::fill(Bcomp, Bcomp+4, 0.);
     for (int i = 0; i < 3; ++i)
     {
         angle_a0 = _kpoint[0]*vec_a[i][0] + _kpoint[1]*vec_a[i][1];

@@ -39,8 +39,8 @@ public:
      */
     virtual void GenInitialValue(complex *_dmstore, std::array<double, Ndim> _kpoint)
     {
-        cerr << "Error: Try to using custom inital value without implementing GenInitialValue.";
-        exit(EXIT_FAILURE);
+        std::cerr << "Error: Try to using custom inital value without implementing GenInitialValue.";
+        std::exit(EXIT_FAILURE);
     };
 
     /// Generate Hamiltonian matrix - tight binding matrix

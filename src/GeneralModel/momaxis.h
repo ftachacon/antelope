@@ -25,18 +25,15 @@
 #include "constant.h"
 #include "utility.h"
 
-#define complex complex<double>
-using namespace std;
-
 
 class momaxis
 {
     
 public:
     
-    array<double, Ndim> *kgrid; 
-    array<double, Ndim*Ndim> BzAxes;
-    array<double, Ndim> BzOrigin;
+    std::array<double, Ndim> *kgrid; 
+    std::array<double, Ndim*Ndim> BzAxes;
+    std::array<double, Ndim> BzOrigin;
     //double AxisVec[Ngrad][Ngrad];       // axisvec[i][j] = j th component of i th vector
     //double StartPoint[Ngrad];  
     
@@ -44,14 +41,14 @@ public:
     double *weight;
     double total_weight;
     
-    array<int, Ndim> N;
+    std::array<int, Ndim> N;
     
     int Ntotal;
     
     double Volume, dV;
-    string imethod;
+    std::string imethod;
     
-    momaxis( array<int, Ndim> _N ,array<double, Ndim*Ndim> _axisvec, array<double, Ndim> _origink )
+    momaxis( std::array<int, Ndim> _N ,std::array<double, Ndim*Ndim> _axisvec, std::array<double, Ndim> _origink )
         : N(_N), BzAxes(_axisvec), BzOrigin(_origink)
     {
         steps_sizes( _N, _axisvec, _origink );
@@ -63,7 +60,7 @@ public:
 
     void basic_mem();                        // Setting memory ...
 
-    void steps_sizes( array<int, Ndim> _N ,array<double, Ndim*Ndim> _axisvec, array<double, Ndim> _origink );            // Momentum calculation
+    void steps_sizes( std::array<int, Ndim> _N ,std::array<double, Ndim*Ndim> _axisvec, std::array<double, Ndim> _origink );            // Momentum calculation
 
     void set_brillouin_zone_grid( );         // Creating axis ...
 
@@ -77,11 +74,11 @@ public:
     {
         return N[1]*N[2]*i + N[2]*j + k;
     };
-    int index( const array<int, Ndim> _indexArr )
+    int index( const std::array<int, Ndim> _indexArr )
     {
         return N[1]*N[2]*_indexArr[0] + N[2]*_indexArr[1] + _indexArr[2];
     };
-    array<int, Ndim> index( int _kindex)
+    std::array<int, Ndim> index( int _kindex)
     {
         return { _kindex/(N[1]*N[2]), (_kindex/N[2])%N[1], _kindex%N[2] };
     };
@@ -128,8 +125,8 @@ void momaxis::checker(  )
 {
     if ( N[0] <= 0 || N[1] <= 0 || N[2] <= 0)
     {
-        cerr << "Number of grid is negative or zero. check N = (" << N[0] << ", " << N[1] << ", " << N[2] << ")\n";
-        exit(EXIT_FAILURE);
+        std::cerr << "Number of grid is negative or zero. check N = (" << N[0] << ", " << N[1] << ", " << N[2] << ")\n";
+        std::exit(EXIT_FAILURE);
     }
 }
 
@@ -137,10 +134,10 @@ void momaxis::checker(  )
 //Creating basic memory
 void momaxis::basic_mem()
 {
-    kgrid = new array<double, Ndim>[Ntotal];
+    kgrid = new std::array<double, Ndim>[Ntotal];
 
     weight = new double[Ntotal];
-    fill(weight, weight + Ntotal, 1.); // This default value acts as trapzoid
+    std::fill(weight, weight + Ntotal, 1.); // This default value acts as trapzoid
 
     double temp_weight;
     for (int i = 0; i < N[0]; ++i)
@@ -177,7 +174,7 @@ void momaxis::basic_mem()
 
 
 //Momentum steps and sizes
-void  momaxis::steps_sizes( array<int, Ndim> _N ,array<double, Ndim*Ndim> _axisvec, array<double, Ndim> _origink )
+void  momaxis::steps_sizes( std::array<int, Ndim> _N ,std::array<double, Ndim*Ndim> _axisvec, std::array<double, Ndim> _origink )
 {
     Ntotal = N[0] * N[1] * N[2];
     
@@ -185,7 +182,7 @@ void  momaxis::steps_sizes( array<int, Ndim> _N ,array<double, Ndim*Ndim> _axisv
     
     basic_mem( );
     
-    vector<array<double, Ndim> > axesList;
+    std::vector<std::array<double, Ndim> > axesList;
     for (int i = 0; i < Ndim; ++i)
     {
         if (N[i] != 1)
@@ -193,24 +190,24 @@ void  momaxis::steps_sizes( array<int, Ndim> _N ,array<double, Ndim*Ndim> _axisv
             axesList.push_back({BzAxes[Ndim*i + 0], BzAxes[Ndim*i + 1], BzAxes[Ndim*i + 2]});
         }
     }
-    array<double, Ndim> tempArray;
+    std::array<double, Ndim> tempArray;
     switch (axesList.size())
     {
     case 1: // length of first vector
-        Volume = sqrt( inner_product(axesList[0].begin(), axesList[0].end(), axesList[0].begin(), 0.0) );
+        Volume = sqrt( std::inner_product(axesList[0].begin(), axesList[0].end(), axesList[0].begin(), 0.0) );
         break;
     case 2: // length of cross product between two vectors
         tempArray = CrossProduct( axesList[0], axesList[1] );
-        Volume = sqrt( inner_product(tempArray.begin(), tempArray.end(), tempArray.begin(), 0.0) );
+        Volume = sqrt( std::inner_product(tempArray.begin(), tempArray.end(), tempArray.begin(), 0.0) );
         break;
     case 3: // triple product
         tempArray = CrossProduct( axesList[0], axesList[1] );
-        Volume = sqrt( inner_product(tempArray.begin(), tempArray.end(), axesList[2].begin(), 0.0) );
+        Volume = sqrt( std::inner_product(tempArray.begin(), tempArray.end(), axesList[2].begin(), 0.0) );
         break;
     default: // single point
         // cerr << "Something is wrong while calculating Brillouin zone volume\n";
         // exit(EXIT_FAILURE);
-        cerr << "Warning: You are using single point condition.\n";
+        std::cerr << "Warning: You are using single point condition.\n";
         Volume = 1.;
         break;
     }
@@ -367,9 +364,9 @@ void momaxis::mom_outputs( FILE *output, int skip0=1, int skip1=1, int skip2=1 )
 
 void momaxis::print_info()
 {
-    cout << "\n==========================================\n";
-    cout << "Brillouin zone volume = " << Volume <<  " a.u.\n";
-    cout << "\n==========================================\n";
+    std::cout << "\n==========================================\n";
+    std::cout << "Brillouin zone volume = " << Volume <<  " a.u.\n";
+    std::cout << "\n==========================================\n";
     //cout << "Second K' point = ("<< Kpoint2[0] << " , " << Kpoint2[1] << " ) a.u.\n";
     //cout << "Delta-K' point = (" << DeltaKp[0] << " , " << DeltaKp[1] << " ) a.u.\n========================\n\n";
 }
