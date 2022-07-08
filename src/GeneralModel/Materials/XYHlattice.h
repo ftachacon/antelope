@@ -58,8 +58,8 @@ XYHlattice::XYHlattice( const libconfig::Setting *params )
     }
     else
     {
-        cerr << "Some XYHlattice paramters are missing" << endl;
-        exit(EXIT_FAILURE);
+        std::cerr << "Some XYHlattice paramters are missing" << std::endl;
+        std::exit(EXIT_FAILURE);
     }
 
     SetBasis();
@@ -75,7 +75,7 @@ XYHlattice::XYHlattice( const libconfig::Setting *params )
 
 void XYHlattice::GenHamiltonian(complex *_hstore, std::array<double, Ndim> _kpoint)
 {
-    fill(_hstore, _hstore+Nband*Nband, 0.);
+    std::fill(_hstore, _hstore+Nband*Nband, 0.);
 
     GenBcomp(_kpoint);
 
@@ -107,8 +107,8 @@ void XYHlattice::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint)
     //Bcomp[0] *= 2.* t2 * cos( phi0 );       Bcomp[1] *= t1;
     //Bcomp[2] *= t1;                         Bcomp[3] = M0 - 2.*t2*sin( phi0 )*Bcomp[3];
 
-    fill(_jstore[0], _jstore[0] + 16, 0.);
-    fill(_jstore[1], _jstore[0] + 16, 0.);
+    std::fill(_jstore[0], _jstore[0] + 16, 0.);
+    std::fill(_jstore[1], _jstore[0] + 16, 0.);
 
     // Acomp --> alpha_plus, alpha_minus, beta
     complex dx_Acomp[3];    complex dy_Acomp[3];
@@ -161,13 +161,13 @@ void XYHlattice::SetBasis()
 
 void XYHlattice::PrintMaterialInformation()
 {
-    cout << "============================================\n";
-    cout << "Kane-Mele Model paramters\n";
-    cout << "a0         = " << a0 << " a.u. \n";
-    cout << "tl         = " << tl << " a.u. \n";
-    cout << "tr         = " << tr << " a.u. \n";
-    cout << "lambda     = " << lambda << " a.u. \n";
-    cout << "============================================\n";
+    std::cout << "============================================\n";
+    std::cout << "Kane-Mele Model paramters\n";
+    std::cout << "a0         = " << a0 << " a.u. \n";
+    std::cout << "tl         = " << tl << " a.u. \n";
+    std::cout << "tr         = " << tr << " a.u. \n";
+    std::cout << "lambda     = " << lambda << " a.u. \n";
+    std::cout << "============================================\n";
 }
 
 void XYHlattice::GenBcomp(std::array<double, Ndim> _kpoint)

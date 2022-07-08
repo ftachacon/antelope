@@ -11,14 +11,6 @@
 
 #include <string>
 
-// To prevnet include <complex.h> --> which undef complex
-// As you see re-define keyword is very dangerous
-#undef complex
-#define lapack_complex_float std::complex<float>
-#define lapack_complex_double std::complex<double>
-#include <lapacke.h>
-#define complex complex<double>
-
 class TMDCs : public BaseMaterial
 {
 public:
@@ -31,7 +23,7 @@ public:
     double eps;                  ///< to avoid singular norm
 
     bool isSOC;
-    string material;
+    std::string material;
 
     double angle_a0[3], angle_b0[3];
 
@@ -120,8 +112,8 @@ TMDCs::TMDCs( const libconfig::Setting *params )
     }
     else
     {
-        cout << "Unknowm material: " << material << endl;
-        exit(EXIT_FAILURE);
+        std::cout << "Unknowm material: " << material << std::endl;
+        std::exit(EXIT_FAILURE);
     }
     
 
@@ -202,7 +194,7 @@ void TMDCs::GenHamiltonian(complex *_hstore, std::array<double, Ndim> _kpoint)
 
     if (isSOC)
     {
-        fill(_hstore, _hstore + Nband*Nband, 0.);
+        std::fill(_hstore, _hstore + Nband*Nband, 0.);
         _hstore[0] = V0;                _hstore[1] = V1;                        _hstore[2] = V2;
         _hstore[6] = conj(V1);          _hstore[7] = V11;                       _hstore[8] = V12 + I*socparam;
         _hstore[12] = conj(V2);         _hstore[13] = conj(V12) - I*socparam;   _hstore[14] = V22;
@@ -323,7 +315,7 @@ std::tuple<std::array<double, Ndim*Ndim>, std::array<double, Ndim> > TMDCs::GenB
 
 void TMDCs::PrintMaterialInformation()
 {
-    cout << "============================================\n";
-    cout << "TMDC - target: " << material << endl;
-    cout << "============================================\n";
+    std::cout << "============================================\n";
+    std::cout << "TMDC - target: " << material << std::endl;
+    std::cout << "============================================\n";
 }

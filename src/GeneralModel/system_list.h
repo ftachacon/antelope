@@ -50,8 +50,8 @@ BaseMaterial* InitializeMaterial(std::string targetMaterial, const libconfig::Se
     }
     else
     {
-        cerr << "Undefined Material\n";
-        exit(EXIT_FAILURE);
+        std::cerr << "Undefined Material\n";
+        std::exit(EXIT_FAILURE);
         //material = new Wannier90( &(cfg[targetMaterial.c_str()]) );
         //isDipoleZero = dynamic_cast<Wannier90*>(material)->isDipoleZero;
         //vec_lattice = dynamic_cast<Wannier90*>(material)->vec_lattice;

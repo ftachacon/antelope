@@ -49,8 +49,8 @@ WilsonMass::WilsonMass( const libconfig::Setting *params )
     }
     else
     {
-        cerr << "Some Haldane paramters are missing" << endl;
-        exit(EXIT_FAILURE);
+        std::cerr << "Some Haldane paramters are missing" << std::endl;
+        std::exit(EXIT_FAILURE);
     }
 
     double kxMax = pi/a0;  double kyMax = pi/a1;
@@ -98,14 +98,14 @@ std::tuple<std::array<double, Ndim*Ndim>, std::array<double, Ndim> > WilsonMass:
 
 void WilsonMass::PrintMaterialInformation()
 {
-    cout << "============================================\n";
-    cout << "WilsonMass Model paramters\n";
-    cout << "t          = " << t << " a.u. \n";
-    cout << "mu         = " << mu << " a.u. \n";
-    cout << "delta      = " << delta << " a.u. \n";
-    cout << "a0         = " << a0 << " a.u. \n";
-    cout << "a1         = " << a1 << " a.u. \n";
-    cout << "============================================\n";
+    std::cout << "============================================\n";
+    std::cout << "WilsonMass Model paramters\n";
+    std::cout << "t          = " << t << " a.u. \n";
+    std::cout << "mu         = " << mu << " a.u. \n";
+    std::cout << "delta      = " << delta << " a.u. \n";
+    std::cout << "a0         = " << a0 << " a.u. \n";
+    std::cout << "a1         = " << a1 << " a.u. \n";
+    std::cout << "============================================\n";
 }
 
 void WilsonMass::GenBcomp(std::array<double, Ndim> _kpoint)

@@ -18,8 +18,6 @@
 //#define MKL_Complex16 std::complex<double>
 #define complex std::complex<double>
 
-using namespace std;
-
 
 const complex I=complex(0.,1.);	                //Imaginary basic number i=sqrt(-1)
 const double lightC_au = 137.036;				//Speed of the light in atomic units 

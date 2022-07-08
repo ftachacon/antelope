@@ -22,7 +22,7 @@
 #define lapack_complex_float std::complex<float>
 #define lapack_complex_double std::complex<double>
 #include <lapacke.h>
-#define complex complex<double>
+#define complex std::complex<double>
 
 #include "momaxis.h"
 #include "laser.h"
@@ -30,8 +30,6 @@
 #include "utility.h"
 
 #include "system_list.h"
-
-using namespace std;
 
 class SBEs
 {
@@ -63,7 +61,7 @@ public:
     laser *fpulses;
 
     int Nband;
-    array<int, Ndim> Nk;
+    std::array<int, Ndim> Nk;
 
     int kstart, kend;   ///< start and end index of k-space
 
@@ -83,8 +81,8 @@ public:
     double **aRK;
 
     momaxis *kmesh;
-    string targetMaterial;
-    array<double, Ndim> ksfactor;
+    std::string targetMaterial;
+    std::array<double, Ndim> ksfactor;
     int shotNumber;
     int diagnostic;
 private:
@@ -111,8 +109,8 @@ public:
     
     void RunSBEs(double _time);
 
-    array<double, Ndim> GenCurrent(int _kindex, double _time);
-    std::tuple<array<double, Ndim>, array<double, Ndim> > GenInterIntraCurrent(int _kindex, double _time);
+    std::array<double, Ndim> GenCurrent(int _kindex, double _time);
+    std::tuple<std::array<double, Ndim>, std::array<double, Ndim> > GenInterIntraCurrent(int _kindex, double _time);
 
     void GenDifferentialDM(complex *out, complex *input, int _kindex, double _time);
 
@@ -121,7 +119,7 @@ public:
 
     void GenUMatrix(complex *_ustore, std::array<double, Ndim> _kpoint);    ///< Generate U matrix
 
-    array<double, Ndim> GenKpulsA(array<double, Ndim> _kpoint, double time);
+    std::array<double, Ndim> GenKpulsA(std::array<double, Ndim> _kpoint, double time);
 
     void WannierToHamiltonian(complex *out, complex *input, int _kindex, double _time); ///< Convert Wannier representation to Hamiltonian representation
 
@@ -145,18 +143,18 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, complex *_dmatrix,
         //targetMaterial = cfg.lookup("target").c_str();
         if (!cfg.lookupValue("target", targetMaterial))
         {
-            cerr << "No 'target' in input file\n";
-            exit(EXIT_FAILURE);
+            std::cerr << "No 'target' in input file\n";
+            std::exit(EXIT_FAILURE);
         }
         
         //Nband = cfg[targetMaterial.c_str()].lookup("Nband");
     }
     catch(const libconfig::SettingNotFoundException &nfex)
     {
-        cerr << "No 'target' in inputParam.cfg or no 'Nband' parameter" << endl; 
-        exit(EXIT_FAILURE);
+        std::cerr << "No 'target' in inputParam.cfg or no 'Nband' parameter" << std::endl; 
+        std::exit(EXIT_FAILURE);
     }
-    //cout << "Target :  " << targetMaterial << endl;
+    //cout << "Target :  " << targetMaterial << std::endl;
 
     bool usingCustomInitial = false;
     if (cfg.exists(targetMaterial))
@@ -239,7 +237,7 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, complex *_dmatrix,
     double *tempInitVal = new double[Nband];
     double tempInitSum = 0;
 
-    fill(&dmatrix[kstart*Nband*Nband], &dmatrix[kstart*Nband*Nband] + (kend-kstart)*Nband*Nband, 0.);
+    std::fill(&dmatrix[kstart*Nband*Nband], &dmatrix[kstart*Nband*Nband] + (kend-kstart)*Nband*Nband, 0.);
     
     for (int k = 0; k < kend-kstart; ++k)
     {
@@ -260,14 +258,14 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, complex *_dmatrix,
                 {
                     std::cout << hamiltonian[m*Nband + n] << "     ";
                 }
-                std::cout << endl;
+                std::cout << std::endl;
             }
             for (int m = 0; m < Nband; ++m)
             {
                 std::cout << edispersion[k][m] << "      ";
             }
-            std::cout << endl;
-            exit(EXIT_FAILURE);
+            std::cout << std::endl;
+            std::exit(EXIT_FAILURE);
         }
         for (int m = 0; m < Nband; ++m)
         {
@@ -306,8 +304,8 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, complex *_dmatrix,
             break;
         
         default:
-            cerr<<"Undefined Initial type\n";
-            exit(EXIT_FAILURE);
+            std::cerr<<"Undefined Initial type\n";
+            std::exit(EXIT_FAILURE);
             break;
         }
 
@@ -372,7 +370,7 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, complex *_dmatrix,
             aRK[4][0] = -8./27.;    aRK[4][1] = 2.; aRK[4][2] = -3544./2565; aRK[4][3] = 1859./4104; aRK[4][4] = -11./40.;
             break;
         default:
-            throw out_of_range("Undefined Runge-Kutta order");
+            throw std::out_of_range("Undefined Runge-Kutta order");
             break;
     }
     
@@ -395,7 +393,7 @@ void SBEs::InitializeGeneral(const libconfig::Setting *_calc)
     // default values of parameters
     isDipoleZero = true;
     isInterIntra = true;
-    fill(ksfactor.begin(), ksfactor.end(), 1.0);
+    std::fill(ksfactor.begin(), ksfactor.end(), 1.0);
     RKorder = 5;
     dephasing_time_inter = -1.;
     dephasing_time_intra = -1.;
@@ -403,7 +401,7 @@ void SBEs::InitializeGeneral(const libconfig::Setting *_calc)
     isInterIntra = false;
 
     const libconfig::Setting &calc = (*_calc);
-    fill(Nk.begin(), Nk.end(), 1);
+    std::fill(Nk.begin(), Nk.end(), 1);
     // Get calculation parameters
     try
     {
@@ -432,13 +430,13 @@ void SBEs::InitializeGeneral(const libconfig::Setting *_calc)
     }
     catch(const libconfig::SettingNotFoundException &nfex)
     {
-        cerr << "Setting not found while search calc group \n";
-        exit(EXIT_FAILURE);
+        std::cerr << "Setting not found while search calc group \n";
+        std::exit(EXIT_FAILURE);
     }
     catch(const libconfig::SettingTypeException &tex )
     {
-        cerr << "Type exception in calc group\n";
-        exit(EXIT_FAILURE);
+        std::cerr << "Type exception in calc group\n";
+        std::exit(EXIT_FAILURE);
     }
 
     // some post-process
@@ -463,8 +461,8 @@ void SBEs::InitializeGeneral(const libconfig::Setting *_calc)
             NumRK = 6;
             break;
         default:
-            cerr << "Not-implemented RK order: " << RKorder << "\n";
-            exit(EXIT_FAILURE);
+            std::cerr << "Not-implemented RK order: " << RKorder << "\n";
+            std::exit(EXIT_FAILURE);
             break;
     }
 }
@@ -482,7 +480,7 @@ void SBEs::InitializeLaser(const libconfig::Setting *_laser)
         fpulses = new laser();
 
         double t_E0, t_ellip, t_w0, t_ncycles, t_cep, t_t0, t_phix, t_thetaz, t_phiz;
-        string t_env_name;
+        std::string t_env_name;
         for (int i = 0; i < pulseNum; ++i)
         {
             if ( pulses[i].lookupValue("E0", t_E0) && pulses[i].lookupValue("ellip", t_ellip) && pulses[i].lookupValue("w0", t_w0) 
@@ -500,8 +498,8 @@ void SBEs::InitializeLaser(const libconfig::Setting *_laser)
             }
             else
             {
-                cerr << "Error while initilizng laser pulses. Check config file\n";
-                exit(EXIT_FAILURE);
+                std::cerr << "Error while initilizng laser pulses. Check config file\n";
+                std::exit(EXIT_FAILURE);
             }
         }
         if ( laserCfg.exists("offset") )
@@ -512,8 +510,8 @@ void SBEs::InitializeLaser(const libconfig::Setting *_laser)
     }
     catch(const libconfig::SettingNotFoundException &nfex)
     {
-        cerr << "No laser, check config file \n";
-        exit(EXIT_FAILURE);
+        std::cerr << "No laser, check config file \n";
+        std::exit(EXIT_FAILURE);
     }
     fpulses->Initialize(dt, offset_before, offset_after);
 }
@@ -602,11 +600,11 @@ void SBEs::RunSBEs(double  _time)
     }
 }
 
-array<double, Ndim> SBEs::GenCurrent(int _kindex, double _time)
+std::array<double, Ndim> SBEs::GenCurrent(int _kindex, double _time)
 {
-    array<double, Ndim> outCurrent;
-    fill(outCurrent.begin(), outCurrent.end(), 0.);
-    array<double, Ndim> _tkp;
+    std::array<double, Ndim> outCurrent;
+    std::fill(outCurrent.begin(), outCurrent.end(), 0.);
+    std::array<double, Ndim> _tkp;
 
     // K+A(t) for moving frame and k for static frame
     if (gauge == GaugeType::WannierMoving)
@@ -670,12 +668,12 @@ array<double, Ndim> SBEs::GenCurrent(int _kindex, double _time)
     
     return outCurrent;
 }
-std::tuple<array<double, Ndim>, array<double, Ndim> > SBEs::GenInterIntraCurrent(int _kindex, double _time)
+std::tuple<std::array<double, Ndim>, std::array<double, Ndim> > SBEs::GenInterIntraCurrent(int _kindex, double _time)
 {
-    array<double, Ndim> interCurrent, intraCurrent;
-    fill(interCurrent.begin(), interCurrent.end(), 0.);
-    fill(intraCurrent.begin(), intraCurrent.end(), 0.);
-    array<double, Ndim> _tkp;
+    std::array<double, Ndim> interCurrent, intraCurrent;
+    std::fill(interCurrent.begin(), interCurrent.end(), 0.);
+    std::fill(intraCurrent.begin(), intraCurrent.end(), 0.);
+    std::array<double, Ndim> _tkp;
 
     complex *dmatrix_at_k = &dmatrix[_kindex*Nband*Nband];
 
@@ -742,7 +740,7 @@ std::tuple<array<double, Ndim>, array<double, Ndim> > SBEs::GenInterIntraCurrent
 
 void SBEs::GenDifferentialDM(complex *out, complex *input, int _kindex, double _time)
 {
-    array<double, Ndim> evector = fpulses->elaser(_time);
+    std::array<double, Ndim> evector = fpulses->elaser(_time);
     auto avector = fpulses->avlaser(_time);
     auto _tkp = GenKpulsA(kmesh->kgrid[_kindex], _time);
     int local_kindex = _kindex - kstart;
@@ -772,7 +770,7 @@ void SBEs::GenDifferentialDM(complex *out, complex *input, int _kindex, double _
     // hamiltonian = H0 + A(t)P
     else if (gauge == GaugeType::Velocity)
     {
-        fill(hamiltonian, hamiltonian+Nband*Nband, 0.);
+        std::fill(hamiltonian, hamiltonian+Nband*Nband, 0.);
         for (int m = 0; m < Nband; ++m)
         {
             hamiltonian[m*Nband + m] += edispersion[local_kindex][m];
@@ -787,9 +785,29 @@ void SBEs::GenDifferentialDM(complex *out, complex *input, int _kindex, double _
         // out = (H0 + A(t)P)\rho
         MatrixMult(out, hamiltonian, input, Nband);
     }
+    else if (gauge == GaugeType::WannierStatic)
+    {
+        // material->GenHamiltonian(hamiltonian, kmesh->kgrid[_kindex]);
+        // if (!material->isDipoleZero)
+        // {
+        //     material->GenDipole(dipoleMatrix, kmesh->kgrid[_kindex]);
+        //     for (int m = 0; m < Nband; ++m)
+        //     {
+        //         for (int n = 0; n < Nband; ++n)
+        //         {
+        //             hamiltonian[m*Nband + n] += (evector[0]*dipoleMatrix[0][m*Nband + n] 
+        //                                         + evector[1]*dipoleMatrix[1][m*Nband + n]
+        //                                         + evector[2]*dipoleMatrix[2][m*Nband + n]);
+        //         }
+        //     }
+        // }
+        // // out = (H0 + E(t)D)\rho
+        // MatrixMult(out, hamiltonian, input, Nband);
+    }
     else
     {
-        cout << "Not implemeted yet";
+        std::cout << "Not implemeted yet";
+        std::exit(EXIT_FAILURE);
     }
 
 
@@ -869,21 +887,21 @@ void SBEs::GenUMatrix(complex *_ustore, std::array<double, Ndim> _kpoint)
             {
                 std::cout << tempHmat[m*Nband + n] << "     ";
             }
-            std::cout << endl;
+            std::cout << std::endl;
         }
         for (int m = 0; m < Nband; ++m)
         {
             std::cout << tempEval[m] << "      ";
         }
-        std::cout << endl;
-        exit(EXIT_FAILURE);
+        std::cout << std::endl;
+        std::exit(EXIT_FAILURE);
     }
 }
 
-array<double, Ndim> SBEs::GenKpulsA(array<double, Ndim> _kpoint, double time)
+std::array<double, Ndim> SBEs::GenKpulsA(std::array<double, Ndim> _kpoint, double time)
 {
     auto avector = fpulses->avlaser(time);
-    array<double, Ndim> tkp = {_kpoint[0]+avector[0], _kpoint[1]+avector[1], _kpoint[2]+avector[2]};
+    std::array<double, Ndim> tkp = {_kpoint[0]+avector[0], _kpoint[1]+avector[1], _kpoint[2]+avector[2]};
     return tkp;
 }
 
@@ -905,47 +923,47 @@ void SBEs::WannierToHamiltonian(complex *out, complex *input, int _kindex, doubl
 
 void SBEs::PrintInfo()
 {
-    cout << "===============================================\n";
-    cout << "Target: " <<targetMaterial << endl;
-    cout << "===============================================\n";
+    std::cout << "===============================================\n";
+    std::cout << "Target: " <<targetMaterial << std::endl;
+    std::cout << "===============================================\n";
 
     material->PrintMaterialInformation();
     fpulses->Print_LaserInfo();
 
-    cout << "===============================================\n";
-    cout << "Current gauge: ";
+    std::cout << "===============================================\n";
+    std::cout << "Current gauge: ";
     switch (gauge)
     {
     case GaugeType::WannierMoving:
-        cout << "WannierMoving\n";
+        std::cout << "WannierMoving\n";
         break;
     case GaugeType::WannierStatic:
-        cout << "WannierStatic\n";
+        std::cout << "WannierStatic\n";
         break;
     case GaugeType::Velocity:
-        cout << "Velocity\n";
+        std::cout << "Velocity\n";
         break;
     case GaugeType::HamiltonianStatic:
-        cout << "HamiltonianStatic\n";
+        std::cout << "HamiltonianStatic\n";
         break;
     
     default:
-        cerr << "Undefined gauge??\n";
-        exit(EXIT_FAILURE);
+        std::cerr << "Undefined gauge??\n";
+        std::exit(EXIT_FAILURE);
         break;
     }
 
-    cout << "Inital value type: ";
+    std::cout << "Inital value type: ";
     switch (initType)
     {
     case InitialValueType::UniformValence:
-        cout << "UniformValence, Nval = " << material->Nval << std::endl;
+        std::cout << "UniformValence, Nval = " << material->Nval << std::endl;
         break;
     case InitialValueType::FermiDirac:
-        cout << "FermiDirac, Ef = " << Ef << std::endl;
+        std::cout << "FermiDirac, Ef = " << Ef << std::endl;
         break;
     case InitialValueType::Custom:
-        cout << "Custom, make sure that you have implemented GenInitialValue " << std::endl;
+        std::cout << "Custom, make sure that you have implemented GenInitialValue " << std::endl;
         break;
 
     default:

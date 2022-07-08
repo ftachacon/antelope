@@ -32,7 +32,7 @@ public:
     std::array<double, 3> BZorigin;
 
     // polytype - 2H or 3R
-    string polytype;
+    std::string polytype;
 
     Haldane2L( const libconfig::Setting *params );
     void SetBasis();
@@ -66,15 +66,15 @@ Haldane2L::Haldane2L( const libconfig::Setting *params )
             }
             else
             {
-                cerr << "M0 param missing" << endl;
-                exit(EXIT_FAILURE);
+                std::cerr << "M0 param missing" << std::endl;
+                std::exit(EXIT_FAILURE);
             }
         }
     }
     else
     {
-        cerr << "Some Haldane2L paramters are missing" << endl;
-        exit(EXIT_FAILURE);
+        std::cerr << "Some Haldane2L paramters are missing" << std::endl;
+        std::exit(EXIT_FAILURE);
     }
 
     if (polytype == "AA")
@@ -121,8 +121,8 @@ Haldane2L::Haldane2L( const libconfig::Setting *params )
     }
     else
     {
-        cerr << "Undefined polytype" << endl;
-        exit(1);
+        std::cerr << "Undefined polytype" << std::endl;
+        std::exit(EXIT_FAILURE);
     }
 
     SetBasis();
@@ -165,9 +165,9 @@ void Haldane2L::GenHamiltonian(complex *_hstore, std::array<double, Ndim> _kpoin
 void Haldane2L::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint)
 {
     double xderBcomp[4];    double yderBcomp[4];
-    fill(Bcomp, Bcomp+4, 0.);
-    fill(xderBcomp, xderBcomp+4, 0.);
-    fill(yderBcomp, yderBcomp+4, 0.);
+    std::fill(Bcomp, Bcomp+4, 0.);
+    std::fill(xderBcomp, xderBcomp+4, 0.);
+    std::fill(yderBcomp, yderBcomp+4, 0.);
     for (int i = 0; i < 3; ++i)
     {
         angle_a0 = _kpoint[0]*vec_a[i][0] + _kpoint[1]*vec_a[i][1];
@@ -220,22 +220,22 @@ void Haldane2L::SetBasis()
 
 void Haldane2L::PrintMaterialInformation()
 {
-    cout << "============================================\n";
-    cout << "Haldane2L Model paramters\n";
-    cout << "a0         = " << a0 << " a.u. \n";
-    cout << "t1         = " << t1 << " a.u. \n";
-    cout << "t2         = " << t2 << " a.u. \n";
-    cout << "M0         = " << M0 << " a.u. \n";
-    cout << "B3 sign    = " << B3sign[0] << ", " << B3sign[1] << " \n";
-    cout << "phi0       = " << phi0 << " rad \n";
-    cout << "t11        = " << t11 << " a.u. \n";
-    cout << "polytype   = " << polytype << "\n";
-    cout << "============================================\n";
+    std::cout << "============================================\n";
+    std::cout << "Haldane2L Model paramters\n";
+    std::cout << "a0         = " << a0 << " a.u. \n";
+    std::cout << "t1         = " << t1 << " a.u. \n";
+    std::cout << "t2         = " << t2 << " a.u. \n";
+    std::cout << "M0         = " << M0 << " a.u. \n";
+    std::cout << "B3 sign    = " << B3sign[0] << ", " << B3sign[1] << " \n";
+    std::cout << "phi0       = " << phi0 << " rad \n";
+    std::cout << "t11        = " << t11 << " a.u. \n";
+    std::cout << "polytype   = " << polytype << "\n";
+    std::cout << "============================================\n";
 }
 
 void Haldane2L::GenBcomp(std::array<double, Ndim> _kpoint)
 {
-    fill(Bcomp, Bcomp+4, 0.);
+    std::fill(Bcomp, Bcomp+4, 0.);
     for (int i = 0; i < 3; ++i)
     {
         angle_a0 = _kpoint[0]*vec_a[i][0] + _kpoint[1]*vec_a[i][1];

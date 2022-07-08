@@ -61,15 +61,15 @@ Haldane::Haldane( const libconfig::Setting *params )
             }
             else
             {
-                cerr << "M0 param missing" << endl;
-                exit(EXIT_FAILURE);
+                std::cerr << "M0 param missing" << std::endl;
+                std::exit(EXIT_FAILURE);
             }
         }
     }
     else
     {
-        cerr << "Some Haldane paramters are missing" << endl;
-        exit(EXIT_FAILURE);
+        std::cerr << "Some Haldane paramters are missing" << std::endl;
+        std::exit(EXIT_FAILURE);
     }
 
     SetBasis();
@@ -94,9 +94,9 @@ void Haldane::GenHamiltonian(complex *_hstore, std::array<double, Ndim> _kpoint)
 void Haldane::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint)
 {
     double xderBcomp[4];    double yderBcomp[4];
-    fill(Bcomp, Bcomp+4, 0.);
-    fill(xderBcomp, xderBcomp+4, 0.);
-    fill(yderBcomp, yderBcomp+4, 0.);
+    std::fill(Bcomp, Bcomp+4, 0.);
+    std::fill(xderBcomp, xderBcomp+4, 0.);
+    std::fill(yderBcomp, yderBcomp+4, 0.);
     for (int i = 0; i < 3; ++i)
     {
         angle_a0 = _kpoint[0]*vec_a[i][0] + _kpoint[1]*vec_a[i][1];
@@ -144,19 +144,19 @@ void Haldane::SetBasis()
 
 void Haldane::PrintMaterialInformation()
 {
-    cout << "============================================\n";
-    cout << "Haldane Model paramters\n";
-    cout << "a0         = " << a0 << " a.u. \n";
-    cout << "t1         = " << t1 << " a.u. \n";
-    cout << "t2         = " << t2 << " a.u. \n";
-    cout << "M0         = " << M0 << " a.u. \n";
-    cout << "phi0         = " << phi0 << " rad \n";
-    cout << "============================================\n";
+    std::cout << "============================================\n";
+    std::cout << "Haldane Model paramters\n";
+    std::cout << "a0         = " << a0 << " a.u. \n";
+    std::cout << "t1         = " << t1 << " a.u. \n";
+    std::cout << "t2         = " << t2 << " a.u. \n";
+    std::cout << "M0         = " << M0 << " a.u. \n";
+    std::cout << "phi0         = " << phi0 << " rad \n";
+    std::cout << "============================================\n";
 }
 
 void Haldane::GenBcomp(std::array<double, Ndim> _kpoint)
 {
-    fill(Bcomp, Bcomp+4, 0.);
+    std::fill(Bcomp, Bcomp+4, 0.);
     for (int i = 0; i < 3; ++i)
     {
         angle_a0 = _kpoint[0]*vec_a[i][0] + _kpoint[1]*vec_a[i][1];
