@@ -39,7 +39,7 @@ public:
 
 WilsonMass::WilsonMass( const libconfig::Setting *params )
 {
-    Nband = 2;  Nval = 1;
+    Nband = 2;  Nval = 1;   isDipoleZero = true;
     if (params->lookupValue("t", t)
         && params->lookupValue("delta", delta)
         && params->lookupValue("mu", mu) 

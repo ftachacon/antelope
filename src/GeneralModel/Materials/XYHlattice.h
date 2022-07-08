@@ -48,7 +48,7 @@ public:
 
 XYHlattice::XYHlattice( const libconfig::Setting *params )
 {
-    Nband = 4;  Nval = 2;
+    Nband = 4;  Nval = 2;   isDipoleZero = true;
     if (params->lookupValue("tl", tl)
         && params->lookupValue("tr", tr)
         && params->lookupValue("lambda", lambda)

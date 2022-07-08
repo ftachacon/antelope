@@ -747,9 +747,25 @@ void SBEs::GenDifferentialDM(complex *out, complex *input, int _kindex, double _
     auto _tkp = GenKpulsA(kmesh->kgrid[_kindex], _time);
     int local_kindex = _kindex - kstart;
 
+    // d\rho/dt = -i [H0 + E(t)D, \rho] + ...
+    // hamiltonian = H0 + E(t)D
     if (gauge == GaugeType::WannierMoving)
     {
         material->GenHamiltonian(hamiltonian, _tkp);
+        if (!material->isDipoleZero)
+        {
+            material->GenDipole(dipoleMatrix, _tkp);
+            for (int m = 0; m < Nband; ++m)
+            {
+                for (int n = 0; n < Nband; ++n)
+                {
+                    hamiltonian[m*Nband + n] += (evector[0]*dipoleMatrix[0][m*Nband + n] 
+                                                + evector[1]*dipoleMatrix[1][m*Nband + n]
+                                                + evector[2]*dipoleMatrix[2][m*Nband + n]);
+                }
+            }
+        }
+        // out = (H0 + E(t)D)\rho
         MatrixMult(out, hamiltonian, input, Nband);
     }
     else if (gauge == GaugeType::Velocity)
@@ -777,22 +793,7 @@ void SBEs::GenDifferentialDM(complex *out, complex *input, int _kindex, double _
     }
 
 
-    /*if (!isDipoleZero)
-    {
-        material->GenDipole(dipoleMatrix, _tkp);
-        for (int m = 0; m < Nband; ++m)
-        {
-            for (int n = 0; n < Nband; ++n)
-            {
-                for (int l = 0; l < Nband; ++l)
-                {
-                    out[m*Nband + n] += (evector[0]*dipoleMatrix[0][m*Nband + l] 
-                                        + evector[1]*dipoleMatrix[1][m*Nband + l]
-                                        + evector[2]*dipoleMatrix[2][m*Nband + l]) * input[l*Nband + n];
-                }
-            }
-        }
-    }*/
+    
     for (int m = 0; m < Nband; ++m)
     {
         for (int n = 0; n < Nband; ++n)
@@ -804,6 +805,7 @@ void SBEs::GenDifferentialDM(complex *out, complex *input, int _kindex, double _
     {
         for (int n = 0; n < Nband; ++n)
         {
+            //-i[H, \rho]_mn = -i(H\rho - \rho*H)_mn = -i ((H\rho) - (H\rho)^\dagger)_mn
             out[m*Nband + n] -= conj(hamiltonian[n*Nband + m]);
             out[m*Nband + n] *= -I;
         }
