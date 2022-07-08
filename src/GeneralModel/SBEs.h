@@ -768,24 +768,24 @@ void SBEs::GenDifferentialDM(complex *out, complex *input, int _kindex, double _
         // out = (H0 + E(t)D)\rho
         MatrixMult(out, hamiltonian, input, Nband);
     }
+    // d\rho/dt = -i [H0 + A(t)P, \rho] + ...
+    // hamiltonian = H0 + A(t)P
     else if (gauge == GaugeType::Velocity)
     {
-        fill(temp1Matrix, temp1Matrix+Nband*Nband, 0.);
+        fill(hamiltonian, hamiltonian+Nband*Nband, 0.);
         for (int m = 0; m < Nband; ++m)
         {
+            hamiltonian[m*Nband + m] += edispersion[local_kindex][m];
             for (int n = 0; n < Nband; ++n)
             {
                 for (int iaxis = 0; iaxis < Ndim; ++iaxis)
                 {
-                    temp1Matrix[m*Nband + n] += avector[iaxis] * pMatrix[local_kindex][iaxis][m*Nband + n];
+                    hamiltonian[m*Nband + n] += avector[iaxis] * pMatrix[local_kindex][iaxis][m*Nband + n];
                 }
             }
         }
-        for (int m = 0; m < Nband; ++m)
-        {
-            temp1Matrix[m*Nband + m] += edispersion[local_kindex][m];
-        }
-        MatrixMult(out, temp1Matrix, input, Nband);
+        // out = (H0 + A(t)P)\rho
+        MatrixMult(out, hamiltonian, input, Nband);
     }
     else
     {
@@ -884,26 +884,6 @@ array<double, Ndim> SBEs::GenKpulsA(array<double, Ndim> _kpoint, double time)
 {
     auto avector = fpulses->avlaser(time);
     array<double, Ndim> tkp = {_kpoint[0]+avector[0], _kpoint[1]+avector[1], _kpoint[2]+avector[2]};
-    /*if (isWannier90)
-    {
-        // k = sum_i g_i bvec_i
-        // k.avec_i = 2pi g_i
-        array<double, Ndim> returnVal;
-        fill(returnVal.begin(), returnVal.end(), 0.0);
-        for (int i = 0; i < Ndim; ++i)
-        {
-            for (int j =0; j < Ndim; ++j)
-            {
-                returnVal[i] += vec_lattice[i][j] * tkp[j];
-            }
-            returnVal[i] /= (2*pi);
-        }
-        return returnVal;
-    }
-    else
-    {
-        return tkp;
-    }*/
     return tkp;
 }
 
