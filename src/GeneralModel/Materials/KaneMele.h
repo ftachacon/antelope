@@ -46,7 +46,7 @@ public:
 
 KaneMele::KaneMele( const libconfig::Setting *params )
 {
-    Nband = 4;  Nval = 2;
+    Nband = 4;  Nval = 2;   isDipoleZero = true;
     if (params->lookupValue("t1", t1)
         && params->lookupValue("t2", t2)
         && params->lookupValue("tR", tR)

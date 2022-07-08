@@ -50,7 +50,7 @@ public:
 
 BieSe3surf::BieSe3surf( const libconfig::Setting *params )
 {
-    Nband = 2;  Nval = 1;
+    Nband = 2;  Nval = 1;   isDipoleZero = true;
     
     // hard-coded paramter
     acomp[0] = -0.0255 / au_eV;

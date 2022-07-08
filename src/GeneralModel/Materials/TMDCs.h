@@ -59,6 +59,7 @@ TMDCs::TMDCs( const libconfig::Setting *params )
     {
         Nband = 3;  Nval = 1;
     }
+    isDipoleZero = true;
     
     //string tempmaterial = params->lookup("Material");
     //material = tempmaterial;

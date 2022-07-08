@@ -26,6 +26,8 @@ public:
     int Nband;
     /// Number of valence bands - only used for indicating which band is lowest conduction band
     int Nval;
+    /// Indicator for speical case with have no dipole in Wannier basis. When true, dipole is zero.
+    bool isDipoleZero;
 
     /// virtual desctructor is used to prevent memory leak
     virtual ~BaseMaterial() {};

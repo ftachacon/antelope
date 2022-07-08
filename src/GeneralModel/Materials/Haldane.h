@@ -45,7 +45,7 @@ public:
 
 Haldane::Haldane( const libconfig::Setting *params )
 {
-    Nband = 2;  Nval = 1;
+    Nband = 2;  Nval = 1;   isDipoleZero = true;
     if (params->lookupValue("t1", t1)
         && params->lookupValue("t2", t2)
         //&& params->lookupValue("Mt2", M0)
