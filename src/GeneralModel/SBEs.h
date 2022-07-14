@@ -17,7 +17,7 @@
 #include <libconfig.h++>
 
 // To prevnet include <complex.h> --> which undef complex
-// As you see re-define keyword is very dangerous
+// As you see re-define keyword is very dangerous (not exactly keword...)
 #undef complex
 #define lapack_complex_float std::complex<float>
 #define lapack_complex_double std::complex<double>
@@ -90,7 +90,7 @@ private:
 
     // used for lapack routines
     int num_of_eig;
-    complex *tempHmat;
+    complex *tempLapackHmat; // separate vraible to prevent unexpected overwriting of hamiltonian matrix
     double *tempEval;
     int *tempIsuppz;
     double eps;
@@ -226,7 +226,7 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, complex *_dmatrix,
 
     tempIsuppz = new int[2*Nband];
     tempEval = new double[Nband];
-    tempHmat = new complex[Nband*Nband];
+    tempLapackHmat = new complex[Nband*Nband];
 
     thermalE = 300.;
     thermalE /= 3.15775024804e5;     // hartree energy (4.3597447222071×10−18) / Boltzman constant(1.380649×10−23)
@@ -544,7 +544,7 @@ SBEs::~SBEs()
 
     delete kmesh;
 
-    delete[] tempIsuppz, tempEval, tempHmat;
+    delete[] tempIsuppz, tempEval, tempLapackHmat;
 }
 
 void SBEs::RunSBEs(double  _time)
@@ -874,9 +874,9 @@ void SBEs::GenDifferentialDM(complex *out, complex *input, int _kindex, double _
 
 void SBEs::GenUMatrix(complex *_ustore, std::array<double, Ndim> _kpoint)
 {
-    material->GenHamiltonian(tempHmat, _kpoint); 
+    material->GenHamiltonian(tempLapackHmat, _kpoint); 
     int info = LAPACKE_zheevr( LAPACK_ROW_MAJOR, 'V', 'A', 'U',
-                                Nband, tempHmat, Nband, 0., 0., 0, 0, 
+                                Nband, tempLapackHmat, Nband, 0., 0., 0, 0, 
                                 eps, &num_of_eig, tempEval, _ustore, Nband, tempIsuppz );
     if (info != 0)
     {
@@ -885,7 +885,7 @@ void SBEs::GenUMatrix(complex *_ustore, std::array<double, Ndim> _kpoint)
         {
             for (int n = 0; n < Nband; ++ n)
             {
-                std::cout << tempHmat[m*Nband + n] << "     ";
+                std::cout << tempLapackHmat[m*Nband + n] << "     ";
             }
             std::cout << std::endl;
         }
