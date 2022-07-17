@@ -17,7 +17,7 @@ configfile = 'inputParam.cfg'
 currentPath = Path.cwd()
 dirList = [x for x in currentPath.iterdir() if x.is_dir() and (x/checkFile).exists()]
 
-for dr1 in currentPath.iterdir():
+for dr1 in dirList:
     if dr1.is_dir():
         print(dr1.name)
         result = subprocess.run([analysisScript, dr1.name, dr1.name, '--noshow', '--f', '-mn' ],
