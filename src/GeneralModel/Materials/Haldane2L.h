@@ -149,10 +149,11 @@ Haldane2L::Haldane2L( const libconfig::Setting *params )
 
     SetBasis();
 
-    double kxMax = pi/sqrt(3.)/a0;  double kyMax = 2.*pi/3./a0;
-    BZaxis = { 2*kxMax,       0,         0,
-                  0,       2*kyMax,      0,
-                  0,          0,         0};
+    //double kxMax = pi/sqrt(3.)/a0;  double kyMax = 2.*pi/3./a0;
+    double klength = 4*pi/(3*sqrt(3.)*a0);
+    BZaxis = { klength*3./2,  klength*sqrt(3.)/2,     0,
+                     0,       klength*sqrt(3.),       0,
+                     0,                0,             0};
 
     // using reciprocal vector
     // corresponding to: (1, 0) *sqrt(3)a0,   (-1/2, sqrt(3)/2) *sqrt(3)a0

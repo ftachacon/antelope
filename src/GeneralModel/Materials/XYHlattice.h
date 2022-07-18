@@ -64,10 +64,10 @@ XYHlattice::XYHlattice( const libconfig::Setting *params )
 
     SetBasis();
 
-    double kxMax = pi/a0;  double kyMax = 2.*pi/sqrt(3.)/a0;
-    BZaxis = { 2*kxMax,       0,         0,
-                  0,       2*kyMax,      0,
-                  0,          0,         0};
+    double klength = 4*pi/(3*a0);
+    BZaxis = { klength*3./2,  klength*sqrt(3.)/2,     0,
+                     0,       klength*sqrt(3.),       0,
+                     0,                0,             0};
     BZorigin = {0, 0, 0};
 
     eps = 1.0e-18;
