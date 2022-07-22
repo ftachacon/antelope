@@ -148,9 +148,9 @@ void KaneMele::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint)
 
         Rcomp[1] += (coeff_R[i][0]-I*coeff_R[i][1]) * exp(-I * angle_a0)    *-I*vec_a[i][0];
 
-        Rcomp[2] += (coeff_R[i][0]+I*coeff_R[i][1]) * exp(I * angle_a0)     *I*vec_a[i][0];
+        Rcomp[2] -= (coeff_R[i][0]+I*coeff_R[i][1]) * exp(I * angle_a0)     *I*vec_a[i][0];
 
-        Rcomp[3] += (coeff_R[i][0]+I*coeff_R[i][1]) * exp(-I * angle_a0)    *-I*vec_a[i][0];
+        Rcomp[3] -= (coeff_R[i][0]+I*coeff_R[i][1]) * exp(-I * angle_a0)    *-I*vec_a[i][0];
     }
     for (int i = 0; i < 3; ++i) Rcomp[i] *= I*tR;
     _jstore[0][3] = Rcomp[0];
@@ -168,9 +168,9 @@ void KaneMele::GenJMatrix(complex **_jstore, std::array<double, Ndim> _kpoint)
 
         Rcomp[1] += (coeff_R[i][0]-I*coeff_R[i][1]) * exp(-I * angle_a0)    *-I*vec_a[i][1];
 
-        Rcomp[2] += (coeff_R[i][0]+I*coeff_R[i][1]) * exp(I * angle_a0)     *I*vec_a[i][1];
+        Rcomp[2] -= (coeff_R[i][0]+I*coeff_R[i][1]) * exp(I * angle_a0)     *I*vec_a[i][1];
 
-        Rcomp[3] += (coeff_R[i][0]+I*coeff_R[i][1]) * exp(-I * angle_a0)    *-I*vec_a[i][1];
+        Rcomp[3] -= (coeff_R[i][0]+I*coeff_R[i][1]) * exp(-I * angle_a0)    *-I*vec_a[i][1];
     }
     for (int i = 0; i < 3; ++i) Rcomp[i] *= I*tR;
     _jstore[1][3] = Rcomp[0];
