@@ -195,9 +195,9 @@ void KaneMele::SetBasis()
     vec_b[2][0] = -sqrt(3.)/2*a0;       vec_b[2][1] = -3./2.*a0;
 
     // -sigma_x, 1/2*sigma_x - sqrt(3)/2*sigma_y, 1/2*sigma_x + sqrt(3)/2*sigma_y
-    coeff_R[0][0] = -1.;                coeff_R[0][1] = 0.;
-    coeff_R[1][0] = 0.5;                coeff_R[1][1] = -sqrt(3.)/2;
-    coeff_R[2][0] = 0.5;                coeff_R[2][1] = sqrt(3.)/2;
+    coeff_R[0][0] = 1.;                 coeff_R[0][1] = 0.;
+    coeff_R[1][0] = -0.5;               coeff_R[1][1] = sqrt(3.)/2;
+    coeff_R[2][0] = -0.5;               coeff_R[2][1] = -sqrt(3.)/2;
 }
 
 void KaneMele::PrintMaterialInformation()
@@ -240,9 +240,13 @@ void KaneMele::GenRcomp(std::array<double, Ndim> _kpoint)
 
         Rcomp[1] += (coeff_R[i][0]-I*coeff_R[i][1]) * exp(-I * angle_a0);
 
-        Rcomp[2] += (coeff_R[i][0]+I*coeff_R[i][1]) * exp(I * angle_a0);
+        //Rcomp[2] += -(coeff_R[i][0]+I*coeff_R[i][1]) * exp(I * angle_a0);
 
-        Rcomp[3] += (coeff_R[i][0]+I*coeff_R[i][1]) * exp(-I * angle_a0);
+        //Rcomp[3] += -(coeff_R[i][0]+I*coeff_R[i][1]) * exp(-I * angle_a0);
     }
-    for (int i = 0; i < 3; ++i) Rcomp[i] *= I*tR;
+    //for (int i = 0; i < 3; ++i) Rcomp[i] *= I*tR;
+    Rcomp[0] *= I*tR;   Rcomp[1] *= I*tR;
+
+    Rcomp[2] = conj(Rcomp[1]);
+    Rcomp[3] = conj(Rcomp[0]);
 }
