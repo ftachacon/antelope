@@ -567,7 +567,7 @@ void SBEs::RunSBEs(double  _time)
             {
                 for (int n = 0; n < Nband; ++n)
                 {
-                    for (int jrk = 0; jrk < irk+1; ++jrk)
+                    for (int jrk = 0; jrk < irk; ++jrk)
                     {
                         // yn + dt *\sum_{j=0}^{i-1} aRk[i-1][j] * k_j
                         rkmatrix[NumRK][k*Nband*Nband + m*Nband + n] 
