@@ -191,7 +191,7 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
     }
     else
     {
-        cerr << "Undefined Material\n";
+        std::cerr << "Undefined Material\n";
         exit(EXIT_FAILURE);
         //material = new Wannier90( &(cfg[targetMaterial.c_str()]) );
         //isDipoleZero = dynamic_cast<Wannier90*>(material)->isDipoleZero;
