@@ -220,7 +220,7 @@ void KaneMele::GenBcomp(std::array<double, Ndim> _kpoint, double _phi0)
         Bcomp[2] += sin( angle_a0 );    Bcomp[3] += sin( angle_b0 );
     }
 
-    Bcomp[0] *= 2.* t2 * cos( phi0 );       Bcomp[1] *= t1;
+    Bcomp[0] *= 2.* t2 * cos( _phi0 );       Bcomp[1] *= t1;
     Bcomp[2] *= t1;                         Bcomp[3] = M0 - 2.*t2*sin( _phi0 )*Bcomp[3];
 }
 
