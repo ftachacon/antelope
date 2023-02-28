@@ -135,7 +135,7 @@ int main( int argc, char *argv[] )
     //######################################
     //Opening output files!
     FILE *laserout, *mout, *fout, *engout;
-    FILE *inh_out, *occup_out, *sparamout, *lparamout;
+    FILE *inh_out, *occup_out, *sparamout, *lparamout, *coherence_out;
     FILE *simulation_out;
     FILE *density_out, *densitytime_out, *polarization_out;
     FILE *intraj_out, *interj_out;
@@ -148,6 +148,7 @@ int main( int argc, char *argv[] )
         interj_out       = fopen( "interband_dipole_full_evol.dat", "w");
         intraj_out       = fopen( "intraband_current_full_evol.dat", "w");
         occup_out        = fopen( "occupation__full__evol.dat", "w");
+        coherence_out    = fopen( "coherence__full__evol.dat", "w");
     }
     
     
@@ -476,10 +477,17 @@ int main( int argc, char *argv[] )
                 occup_temp += real(density_matrix_integrated[ktime][m*Nband + m]);
             }
             fprintf(occup_out, "%.16e\n", occup_temp / Npoints);
+
+            // only recorde the coherence between the highest valence band and the lowest conduction band
+            fprintf(coherence_out, "%.16e    ", 
+                real(density_matrix_integrated[ktime][sbe->material->Nval*Nband + (sbe->material->Nval+1)]) / Npoints);
+            fprintf(coherence_out, "%.16e\n", 
+                imag(density_matrix_integrated[ktime][sbe->material->Nval*Nband + (sbe->material->Nval+1)]) / Npoints);
         }
         fflush(interj_out);
         fflush(intraj_out);
         fflush(occup_out);
+        fflush(coherence_out);
     }
     
     //fclose(  fout     );
@@ -489,6 +497,7 @@ int main( int argc, char *argv[] )
         fclose( interj_out );
         fclose( intraj_out );
         fclose( occup_out);
+        fclose( coherence_out);
         fclose( dm1dout );
         fclose( nc_out );
         fclose( pi_out );
