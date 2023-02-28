@@ -505,7 +505,7 @@ void SBEs::InitializeLaser(const libconfig::Setting *_laser)
         int pulseNum = pulses.getLength();
         fpulses = new laser();
 
-        double t_E0, t_ellip, t_w0, t_ncycles, t_cep, t_t0, t_phix, t_thetaz, t_phiz;
+        double t_E0, t_ellip, t_w0, t_ncycles, t_cep, t_t0, t_phix, t_ncycles_clipped, t_thetaz, t_phiz;
         std::string t_env_name;
         for (int i = 0; i < pulseNum; ++i)
         {
@@ -520,7 +520,10 @@ void SBEs::InitializeLaser(const libconfig::Setting *_laser)
                 t_phix *= pi/180.0;
                 t_thetaz *= pi/180.0;
                 t_phiz *= pi/180.0;
-                fpulses->pulses.push_back(Pulse(t_E0, t_w0, t_ellip, t_ncycles, t_cep, t_t0, t_phix, t_env_name, t_thetaz, t_phiz));
+
+                t_ncycles_clipped = 0.;
+                pulses[i].lookupValue("ncycles_clipped", t_ncycles_clipped);
+                fpulses->pulses.push_back(Pulse(t_E0, t_w0, t_ellip, t_ncycles, t_cep, t_t0, t_phix, t_ncycles_clipped, t_env_name, t_thetaz, t_phiz));
             }
             else
             {

@@ -18,7 +18,8 @@ const double gaussian_factor = gaussian_width_multiply*gaussian_width_multiply* 
 enum Envelope
 {
     ENVELOPE_GAUSSIAN,
-    ENVELOPE_COS4
+    ENVELOPE_COS4,
+    ENVELOPE_COS4_CLIPPED
 };
 
 /// representation of single pulse
@@ -36,12 +37,16 @@ public:
     double phix;                            ///< Azimuthal angle of semi-major axis in transformed coordinate (rad)
 	std::string envname;	                ///< Name of envelope type used in the pulse ("cos4", "gauss")
 
+    double ncycles_clipped;                 ///< Number of cycles in clipped part of cos4 envelope
+
 // below variables are only for internal data processing or printing
     double I0;			                    // Intensity per pulse (W/cm^2)
     double period0;		                    //Period per pulse (a.u.)
     double E0x, E0y;	                    //Electric Field Component in the x, y-direction
 	double A0x, A0y;	                    //Vector potential component in the x, y-direction
     double twidth;		                    // Time bandwidth per pulse (-twidth <= <= twidth is active region)
+
+    double twidth_clipped;                  // Time bandwidth of clipped part of cos4 envelope
 
     Envelope envtype;               
 
@@ -59,15 +64,18 @@ public:
      * direction of thumb is same as propagtion direction (out of source).
      * To doing standard 2d calculation (x-y plane), set thetaz = 0 and phiz = 0, or just omit them from the constructor. 
      */
-    Pulse(double _E0, double _w0, double _ellip, double _ncycle, double _cep,  double _t0, double _phix, std::string _env_name, double _thetaz = 0.0, double _phiz = 0.0 )
-        : E0(_E0), w0(_w0), ellip(_ellip), ncycles(_ncycle), cep(_cep), t0(_t0), phix(_phix), envname(_env_name), thetaz(_thetaz), phiz(_phiz)
+    Pulse(double _E0, double _w0, double _ellip, double _ncycle, double _cep,  double _t0, double _phix, double _ncycle_clipped,
+        std::string _env_name, double _thetaz = 0.0, double _phiz = 0.0 )
+        : E0(_E0), w0(_w0), ellip(_ellip), ncycles(_ncycle), cep(_cep), t0(_t0), phix(_phix), ncycles_clipped(_ncycle_clipped),
+         envname(_env_name), thetaz(_thetaz), phiz(_phiz)
     {
         I0 = E0*E0 * 3.5e16;
 
         period0    =  dospi/w0; // laser period or cycle
         
-        if (envname == "cos4")  envtype = ENVELOPE_COS4;
-        else if (envname == "gauss") envtype = ENVELOPE_GAUSSIAN;
+        if (envname == "cos4")  {envtype = ENVELOPE_COS4;}
+        else if (envname == "gauss") {envtype = ENVELOPE_GAUSSIAN;}
+        else if (envname == "cos4_clipped") {envtype = ENVELOPE_COS4_CLIPPED;}
         else
         {
             std::cerr << "invalid envelope type\n";
@@ -83,8 +91,15 @@ public:
             break;
         
         // same for every cos n-square envelope
-        default:
+        case ENVELOPE_COS4:
             twidth = ncycles*period0/2;
+            envfactor = w0/(2*ncycles);
+            break;
+        
+        // clipped part give additional length
+        case ENVELOPE_COS4_CLIPPED:
+            twidth = (ncycles + ncycles_clipped)*period0/2;
+            twidth_clipped = ncycles_clipped*period0/2;
             envfactor = w0/(2*ncycles);
             break;
         }
@@ -132,9 +147,28 @@ public:
             if (abs(_t) > twidth) return 0;
             if (_isDt) return -4.* envfactor *sin(_t* envfactor) * pow( cos(_t* envfactor ), 3. );
             else return pow( cos(_t *envfactor ), 4. );
+
+        case ENVELOPE_COS4_CLIPPED:
+            if (abs(_t) > twidth) return 0;
+            if (_t > twidth_clipped)
+            {
+                double _t_outside = _t - twidth_clipped;
+                if (_isDt) return -4.* envfactor *sin(_t_outside* envfactor) * pow( cos(_t_outside* envfactor ), 3. );
+                else return pow( cos(_t_outside *envfactor ), 4. );
+            }
+            else if (_t > -twidth_clipped)
+            {
+                if (_isDt) return 0.;
+                else return 1.;
+            }
+            else
+            {
+                double _t_outside = _t + twidth_clipped;
+                if (_isDt) return -4.* envfactor *sin(_t_outside* envfactor) * pow( cos(_t_outside* envfactor ), 3. );
+                else return pow( cos(_t_outside *envfactor ), 4. );
+            }
         
-        // default is gausssian
-        default:
+        case ENVELOPE_GAUSSIAN:
             //if (_isDt) return -2*gaussian_factor* _t/(twidth*twidth)*exp( -gaussian_factor* _t*_t/(twidth*twidth) );
             //else return exp( -gaussian_factor* _t*_t/(twidth*twidth) );
             if (_isDt) return 2* _t * envfactor *exp( envfactor * _t*_t );
