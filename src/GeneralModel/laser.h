@@ -13,11 +13,12 @@
 #include <algorithm>
 
 const double gaussian_width_multiply = 2.0;
-const double gaussian_factor = gaussian_width_multiply*gaussian_width_multiply* 4*log(2);
+//const double gaussian_factor = gaussian_width_multiply*gaussian_width_multiply* 4*log(2);
 
 enum Envelope
 {
     ENVELOPE_GAUSSIAN,
+    ENVELOPE_GAUSSIAN_CLIPPED,
     ENVELOPE_COS4,
     ENVELOPE_COS4_CLIPPED
 };
@@ -37,7 +38,7 @@ public:
     double phix;                            ///< Azimuthal angle of semi-major axis in transformed coordinate (rad)
 	std::string envname;	                ///< Name of envelope type used in the pulse ("cos4", "gauss")
 
-    double ncycles_clipped;                 ///< Number of cycles in clipped part of cos4 envelope
+    double ncycles_clipped;                 ///< Number of cycles in clipped part of envelope
 
 // below variables are only for internal data processing or printing
     double I0;			                    // Intensity per pulse (W/cm^2)
@@ -46,7 +47,7 @@ public:
 	double A0x, A0y;	                    //Vector potential component in the x, y-direction
     double twidth;		                    // Time bandwidth per pulse (-twidth <= <= twidth is active region)
 
-    double twidth_clipped;                  // Time bandwidth of clipped part of cos4 envelope
+    double twidth_clipped;                  // Time bandwidth of clipped part of envelope
 
     Envelope envtype;               
 
@@ -75,6 +76,7 @@ public:
         
         if (envname == "cos4")  {envtype = ENVELOPE_COS4;}
         else if (envname == "gauss") {envtype = ENVELOPE_GAUSSIAN;}
+        else if (envname == "gauss_clipped") {envtype = ENVELOPE_GAUSSIAN_CLIPPED;}
         else if (envname == "cos4_clipped") {envtype = ENVELOPE_COS4_CLIPPED;}
         else
         {
@@ -87,9 +89,15 @@ public:
         {
         case ENVELOPE_GAUSSIAN:
             twidth = gaussian_width_multiply * ncycles*period0;
-            envfactor = -gaussian_factor/(twidth*twidth);
+            //envfactor = -gaussian_factor/(twidth*twidth);
+            envfactor = -4*log(2)/(ncycles*period0 * ncycles*period0);
             break;
         
+        case ENVELOPE_GAUSSIAN_CLIPPED:
+            twidth = gaussian_width_multiply * ncycles*period0 + ncycles_clipped*period0/2;
+            twidth_clipped = ncycles_clipped*period0/2;
+            envfactor = -4*log(2)/(ncycles*period0 * ncycles*period0);
+            break;
         // same for every cos n-square envelope
         case ENVELOPE_COS4:
             twidth = ncycles*period0/2;
@@ -173,6 +181,27 @@ public:
             //else return exp( -gaussian_factor* _t*_t/(twidth*twidth) );
             if (_isDt) return 2* _t * envfactor *exp( envfactor * _t*_t );
             else return exp( envfactor * _t*_t );
+
+        case ENVELOPE_GAUSSIAN_CLIPPED:
+            //if (_isDt) return -2*gaussian_factor* _t/(twidth*twidth)*exp( -gaussian_factor* _t*_t/(twidth*twidth) );
+            //else return exp( -gaussian_factor* _t*_t/(twidth*twidth) );
+            if (_t > twidth_clipped)
+            {
+                double _t_outside = _t - twidth_clipped;
+                if (_isDt) return 2* _t_outside * envfactor *exp( envfactor * _t_outside*_t_outside );
+                else return exp( envfactor * _t_outside*_t_outside );
+            }
+            else if (_t > -twidth_clipped)
+            {
+                if (_isDt) return 0.;
+                else return 1.;
+            }
+            else
+            {
+                double _t_outside = _t + twidth_clipped;
+                if (_isDt) return 2* _t_outside * envfactor *exp( envfactor * _t_outside*_t_outside );
+                else return exp( envfactor * _t_outside*_t_outside );
+            }
         }
     };
     /// generate vector potential in laser 2d-plane
