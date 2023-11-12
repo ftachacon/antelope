@@ -189,6 +189,10 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
     {
         material = new XYHlattice( &cfg[targetMaterial.c_str() ]);
     }
+    else if (targetMaterial == "SquareSBand")
+    {
+        material = new SquareSBand( &cfg[targetMaterial.c_str()]);
+    }
     else
     {
         std::cerr << "Undefined Material\n";

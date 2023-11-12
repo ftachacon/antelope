@@ -11,6 +11,7 @@
 #include "Materials/TMDCs.h"
 #include "Materials/KaneMele.h"
 #include "Materials/XYHlattice.h"
+#include "Materials/SquareSBand.h"
 
 //#include "Materials/Wannier90.h"
 
