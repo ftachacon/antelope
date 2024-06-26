@@ -113,15 +113,11 @@ int main( int argc, char *argv[] )
     //###############################
     //Variables
     int jstart, jend, ktemp;
-    complex *inter_rad[Ngrad];
-    complex *intra_rad[Ngrad];
+    complex *inter_rad[Ndim];
+    complex *intra_rad[Ndim];
     complex **density_matrix_integrated;
 
     double at=0, nv=0.;
-
-    complex tgv_v[Ngrad] = {0.,0.};
-    complex tgv_c[Ngrad] = {0.,0.};
-    complex tdip_cv[Ngrad]={0.,0.};
     
     // Number of k-grid for each process
     // and their displacement in global buffer
@@ -161,7 +157,7 @@ int main( int argc, char *argv[] )
     //##########################
     //Coherence and occupations
     
-    for (int itemp=0; itemp<Ngrad; itemp++ )
+    for (int itemp=0; itemp<Ndim; itemp++ )
     {        
         inter_rad[itemp] = new complex[sbe->fpulses->Nt];
         intra_rad[itemp] = new complex[sbe->fpulses->Nt];
@@ -184,8 +180,18 @@ int main( int argc, char *argv[] )
 
             Etemp = sbe->fpulses->elaser(  at );
             Atemp = sbe->fpulses->avlaser( at );
-                
-            fprintf( laserout,"%e    %e    %e    %e    %e    %e    %e\n", at, Etemp[0], Etemp[1], Etemp[2], Atemp[0], Atemp[1], Atemp[2] );
+
+            fprintf( laserout, "%e    ", at );
+            for (int itemp = 0; itemp < Ndim; itemp++)
+            {
+                fprintf( laserout, "%e      ", Etemp[itemp]);
+            }
+            for (int itemp = 0; itemp < Ndim; itemp++)
+            {
+                fprintf( laserout, "%e      ", Atemp[itemp]);
+            }
+            fprintf( laserout, "\n");    
+            //fprintf( laserout,"%e    %e    %e    %e    %e    %e    %e\n", at, Etemp[0], Etemp[1], Etemp[2], Atemp[0], Atemp[1], Atemp[2] );
 
         } 
         fflush( laserout );
@@ -265,16 +271,20 @@ int main( int argc, char *argv[] )
             {
                 tie(tempCurrent_inter, tempCurrent_intra) = sbe->GenInterIntraCurrent(kindex, currenttime);
 
-                intra_rad[0][ktime] += tempCurrent_intra[0] * sbe->kmesh->weight[ kindex ];
-                intra_rad[1][ktime] += tempCurrent_intra[1] * sbe->kmesh->weight[ kindex ];
+                for (int itemp = 0; itemp < Ndim; itemp++)
+                {
+                    intra_rad[itemp][ktime] += tempCurrent_intra[itemp] * sbe->kmesh->weight[ kindex ];
+                }
             }
             else
             {
                 tempCurrent_inter = sbe->GenCurrent(kindex, currenttime);
             }
 
-            inter_rad[0][ktime] += tempCurrent_inter[0] * sbe->kmesh->weight[ kindex ] ;
-            inter_rad[1][ktime] += tempCurrent_inter[1] * sbe->kmesh->weight[ kindex ] ;
+            for (int itemp = 0; itemp < Ndim; itemp++)
+            {
+                inter_rad[itemp][ktime] += tempCurrent_inter[itemp] * sbe->kmesh->weight[ kindex ];
+            }
 
             for (int m = 0; m < Nband; ++m)
             {
@@ -372,7 +382,17 @@ int main( int argc, char *argv[] )
                 array<double, Ndim> Etemp, Atemp;
                 Etemp = sbe->fpulses->elaser(currenttime);
                 Atemp = sbe->fpulses->avlaser(currenttime);
-                fprintf(shot_out, "%d   %e  %e  %e  %e  %e\n", ktime, currenttime, Etemp[0], Etemp[1], Atemp[0], Atemp[1]);
+                //fprintf(shot_out, "%d   %e  %e  %e  %e  %e\n", ktime, currenttime, Etemp[0], Etemp[1], Atemp[0], Atemp[1]);
+                fprintf( laserout, "%d      %e    ", ktime, currenttime );
+                for (int itemp = 0; itemp < Ndim; itemp++)
+                {
+                    fprintf( laserout, "%e      ", Etemp[itemp]);
+                }
+                for (int itemp = 0; itemp < Ndim; itemp++)
+                {
+                    fprintf( laserout, "%e      ", Atemp[itemp]);
+                }
+                fprintf( laserout, "\n");
             }
         }
 
@@ -431,7 +451,7 @@ int main( int argc, char *argv[] )
     // inter, intrabnad currents, occupation, cohereneces are integrated through every sub-grids (all-processors)
     // inter, intra - currents and radiation by group and anomalous velocity
     MPI_Barrier( MPI_COMM_WORLD );
-    for (int i = 0; i < 2; ++i)
+    for (int i = 0; i < Ndim; ++i)
     {
         if (rank == MASTER)
         {
@@ -468,8 +488,16 @@ int main( int argc, char *argv[] )
 
         for (int ktime = 0; ktime < sbe->fpulses->Nt; ++ktime)
         {
-            fprintf(interj_out, "%.16e    %.16e\n", real(inter_rad[0][ktime]) * dV, real(inter_rad[1][ktime]) * dV);
-            fprintf(intraj_out, "%.16e    %.16e\n", real(intra_rad[0][ktime]) * dV, real(intra_rad[1][ktime]) * dV);
+            // fprintf(interj_out, "%.16e    %.16e\n", real(inter_rad[0][ktime]) * dV, real(inter_rad[1][ktime]) * dV);
+            // fprintf(intraj_out, "%.16e    %.16e\n", real(intra_rad[0][ktime]) * dV, real(intra_rad[1][ktime]) * dV);
+            for (int itemp = 0; itemp < Ndim; itemp++)
+            {
+                fprintf(interj_out, "%.16e    ", real(inter_rad[itemp][ktime]) * dV);
+                fprintf(intraj_out, "%.16e    ", real(intra_rad[itemp][ktime]) * dV);
+            }
+            fprintf(interj_out, "\n");
+            fprintf(intraj_out, "\n");
+
             occup_temp = 0;
             for (int m = 0; m < Nband; ++m)
             {
@@ -505,7 +533,7 @@ int main( int argc, char *argv[] )
     }   
     
     
-    for (int itemp=0; itemp < Ngrad; itemp++)
+    for (int itemp=0; itemp < Ndim; itemp++)
     {
         delete( inter_rad[itemp] );
         delete( intra_rad[itemp] );  

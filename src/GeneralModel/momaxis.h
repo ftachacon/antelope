@@ -34,8 +34,6 @@ public:
     std::array<double, Ndim> *kgrid; 
     std::array<double, Ndim*Ndim> BzAxes;
     std::array<double, Ndim> BzOrigin;
-    //double AxisVec[Ngrad][Ngrad];       // axisvec[i][j] = j th component of i th vector
-    //double StartPoint[Ngrad];  
     
     //double *dk;                             //grid or mesh steps
     double *weight;

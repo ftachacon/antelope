@@ -12,6 +12,7 @@
 #include "Materials/KaneMele.h"
 #include "Materials/XYHlattice.h"
 #include "Materials/SquareSBand.h"
+#include "Materials/WDSM_TaAs.h"
 
 //#include "Materials/Wannier90.h"
 

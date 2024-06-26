@@ -193,6 +193,10 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
     {
         material = new SquareSBand( &cfg[targetMaterial.c_str()]);
     }
+    else if (targetMaterial == "WDSM_TaAs")
+    {
+        material = new WDSM_TaAs( &cfg[targetMaterial.c_str()] );
+    }
     else
     {
         std::cerr << "Undefined Material\n";

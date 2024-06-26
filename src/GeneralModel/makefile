@@ -3,7 +3,7 @@
 #MKLROOT=/opt/intel
 #COMPOSERLIB=$(MKLROOT)
 
-CXXFLAGS= -O2 -std=c++14 -Wall
+CXXFLAGS= -O2 -std=c++14 -Wall -Wextra
 LIBS= -lconfig++ -llapacke -llapack -lblas -lm
 #INTEL= icpc
 MPI= mpicxx
