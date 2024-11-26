@@ -43,6 +43,9 @@ int diagnostic = 0;
 int shotNumber   = 0;
 int printFrequency = 100;   // determine print log frequency
 
+std::array<int, Ndim> Nk;  // Number of k-points
+int Ntotal = 1;
+
 //################################
 int main( int argc, char *argv[] )
 {
@@ -62,7 +65,26 @@ int main( int argc, char *argv[] )
 	MPI_Comm_size( MPI_COMM_WORLD, &Nprocessors );	//Getting the size or number of proccesses or nodes
 	MPI_Barrier( MPI_COMM_WORLD );	
 
+    //###############################
+    //Variables
+    int jstart, jend, ktemp;
+    complex *inter_rad[Ndim];
+    complex *intra_rad[Ndim];
+    complex **density_matrix_integrated;
 
+    double at=0, nv=0.;
+    
+    // Number of k-grid for each process
+    // and their displacement in global buffer
+    int *blockcounts;
+    int *displs;
+
+    int kindex;
+
+    array<double, Ndim> tempCurrent_inter, tempCurrent_intra;
+
+
+    //###############################
     // Test libconfigc++
     // try-catch code are copied from libconfig example
     libconfig::Config cfg;
@@ -82,6 +104,9 @@ int main( int argc, char *argv[] )
         return(EXIT_FAILURE);
     }
 
+    const libconfig::Setting &cfgRoot = cfg.getRoot();
+
+    //###############################
     // Read gauge from config
     string gaugeString; GaugeType tempGauge;
     cfg.lookupValue("gauge", gaugeString);
@@ -103,30 +128,41 @@ int main( int argc, char *argv[] )
         tempGauge = GaugeType::LengthWannier;
     }
 
-    SBEs *sbe = new SBEs(&cfg.getRoot(), tempGauge);
+    // Read number of k-points
+    const libconfig::Setting &npoints_setting = cfgRoot["calc"]["Npoints"];
+    std::fill(Nk.begin(), Nk.end(), 1);
+    for (int i = 0; i < npoints_setting.getLength(); ++i)
+    {
+        Nk[i] = npoints_setting[i];
+        Ntotal *= Nk[i];
+    }
+
+    //###############################
+    // Calculate distributition of k-points for each process
+    blockcounts = new int[Nprocessors];
+    displs = new int[Nprocessors];
+
+    for (int itemp = 0; itemp < Nprocessors; ++itemp)
+    {
+        ParaRange(Ntotal, 0, Nprocessors, itemp, &jstart, &jend);
+
+        blockcounts[itemp] = (jend - jstart);
+        displs[itemp] = jstart;
+    }
+    ParaRange(Ntotal, 0, Nprocessors, rank, &jstart, &jend);
+ 
+    
+    cout << "\nrank = " << rank << "  uses j = " << jstart << ";  to  j = " << jend << "  with Nprocesses = " << Nprocessors <<endl << endl;
+
+    //###############################
+    // Create SBEs object
+    SBEs *sbe = new SBEs(&cfg.getRoot(), tempGauge, jstart, jend);
 
     double dV = sbe->kmesh->dV;
     int Nband = sbe->Nband;
 
 	MPI_Barrier( MPI_COMM_WORLD );	
 
-    //###############################
-    //Variables
-    int jstart, jend, ktemp;
-    complex *inter_rad[Ndim];
-    complex *intra_rad[Ndim];
-    complex **density_matrix_integrated;
-
-    double at=0, nv=0.;
-    
-    // Number of k-grid for each process
-    // and their displacement in global buffer
-    int *blockcounts;
-    int *displs;
-
-    int kindex;
-
-    array<double, Ndim> tempCurrent_inter, tempCurrent_intra;
     
     //######################################
     //Opening output files!
@@ -202,23 +238,6 @@ int main( int argc, char *argv[] )
     MPI_Barrier( MPI_COMM_WORLD );
     
     
-    blockcounts = new int[Nprocessors];
-    displs = new int[Nprocessors];
-
-    int Npoints = sbe->kmesh->Ntotal;
-    for (int itemp = 0; itemp < Nprocessors; ++itemp)
-    {
-        ParaRange(Npoints, 0, Nprocessors, itemp, &jstart, &jend);
-
-        blockcounts[itemp] = (jend - jstart);
-        displs[itemp] = jstart;
-    }
-    ParaRange(Npoints, 0, Nprocessors, rank, &jstart, &jend);
- 
-    
-    cout << "\nrank = " << rank << "  uses j = " << jstart << ";  to  j = " << jend << "  with Nprocesses = " << Nprocessors <<endl << endl;
-    
-    
     if(rank==MASTER)
     {
         cout.precision( 5 );
@@ -236,25 +255,40 @@ int main( int argc, char *argv[] )
 
     ktemp = 0;
     double currenttime, currentcycle;
-    complex *temp_density_matrix_integrated = new complex[Nband*Nband];
-    complex *temp_1d_integrated_occupation = new complex[sbe->Nk[0]];
-    double *snapshot_nc = new double[sbe->kmesh->Ntotal];
-    complex *snapshot_pi = new complex[sbe->kmesh->Ntotal];
-    FILE *dm1dout, *nc_out, *pi_out, *shot_out;
-    if (rank == MASTER)
-    {
-        dm1dout = fopen("occupation_1d_integration.dat", "w");
-        nc_out = fopen("fisrt_conduction.dat", "w");
-        pi_out = fopen("fisrt_coherence.dat", "w");
-        shot_out = fopen("snapshot_log.dat", "w");
-    }
+
     double occup_temp = 0;
     double maxcycles = 2*sbe->fpulses->pulses[0].twidth / sbe->fpulses->pulses[0].period0;
 
+    //#####################################
+    // Snapshot related intialization
+    complex *temp_density_matrix_integrated;
+    complex *temp_1d_integrated_occupation;
+    double *snapshot_nc;
+    complex *snapshot_pi;
+    FILE *dm1dout, *nc_out, *pi_out, *shot_out;
+
     shotNumber = sbe->shotNumber;
     int shotFrequency = sbe->fpulses->Nt + 100;
-    if (shotNumber != 0)
+    if (shotNumber > 0)
+    {
         shotFrequency = int(sbe->fpulses->pulses[0].period0/shotNumber/sbe->fpulses->dt);
+        temp_density_matrix_integrated = new complex[Nband*Nband];
+        temp_1d_integrated_occupation = new complex[sbe->Nk[0]];
+        snapshot_nc = new double[sbe->kmesh->Ntotal];
+        snapshot_pi = new complex[sbe->kmesh->Ntotal];
+
+        // Note that the current implementation allocate memory buffer for snapshot for each process
+        // This cannot be avoided easily; I need to think about the structure of the code
+        if (rank == MASTER)
+        {
+            std::cout << "Warning: Snapshot feature is enabled. This may cause memory issue for large number of k-points.\n";
+
+            dm1dout = fopen("occupation_1d_integration.dat", "w");
+            nc_out = fopen("fisrt_conduction.dat", "w");
+            pi_out = fopen("fisrt_coherence.dat", "w");
+            shot_out = fopen("snapshot_log.dat", "w");
+        }
+    }
     //#####################################
     //#####################################
     //Time integration loop
@@ -265,7 +299,8 @@ int main( int argc, char *argv[] )
         //Momentum and time integration
         for(int jtemp = jstart; jtemp < jend; jtemp++ )
         {
-            kindex = jtemp;
+            // convert from global index to local index
+            kindex = jtemp - jstart;
 
             if (sbe->isInterIntra)
             {
@@ -299,6 +334,8 @@ int main( int argc, char *argv[] )
             //##############################################
 
         }
+        
+        // ##############################################
         // Snapshots - including diagnostics and density plots 
         // if (shotNumber > 0 && ktime % shotNumber == 0)
         if (shotNumber > 0 && ktime % shotFrequency == 0)
@@ -310,15 +347,17 @@ int main( int argc, char *argv[] )
             }
             for(int jtemp = jstart; jtemp < jend; jtemp++ )
             {
+                kindex = jtemp - jstart;
+                // Note that for index function, global index is used directly
                 auto ki = sbe->kmesh->index(jtemp);
                 if (sbe->gauge == GaugeType::LengthWannier)
                 {
                     sbe->WannierToHamiltonian(sbe->newdMatrix, sbe->dmatrix[jtemp], jtemp, currenttime);
-                    temp_1d_integrated_occupation[ki[0]] += sbe->newdMatrix[sbe->material->Nval*Nband + sbe->material->Nval] * sbe->kmesh->weight[ jtemp ];
+                    temp_1d_integrated_occupation[ki[0]] += sbe->newdMatrix[sbe->material->Nval*Nband + sbe->material->Nval] * sbe->kmesh->weight[ kindex ];
                 }
                 else
                 {
-                    temp_1d_integrated_occupation[ki[0]] += sbe->dmatrix[jtemp][sbe->material->Nval*Nband + sbe->material->Nval] * sbe->kmesh->weight[ jtemp ];
+                    temp_1d_integrated_occupation[ki[0]] += sbe->dmatrix[jtemp][sbe->material->Nval*Nband + sbe->material->Nval] * sbe->kmesh->weight[ kindex ];
                 }
             }
             MPI_Barrier(MPI_COMM_WORLD);
@@ -376,26 +415,12 @@ int main( int argc, char *argv[] )
             // write
             if (rank == MASTER)
             {
-                fwrite(snapshot_nc, sizeof(double), sbe->kmesh->Ntotal, nc_out);
-                fwrite(snapshot_pi, sizeof(complex), sbe->kmesh->Ntotal, pi_out);
-
-                array<double, Ndim> Etemp, Atemp;
-                Etemp = sbe->fpulses->elaser(currenttime);
-                Atemp = sbe->fpulses->avlaser(currenttime);
-                //fprintf(shot_out, "%d   %e  %e  %e  %e  %e\n", ktime, currenttime, Etemp[0], Etemp[1], Atemp[0], Atemp[1]);
-                fprintf( laserout, "%d      %e    ", ktime, currenttime );
-                for (int itemp = 0; itemp < Ndim; itemp++)
-                {
-                    fprintf( laserout, "%e      ", Etemp[itemp]);
-                }
-                for (int itemp = 0; itemp < Ndim; itemp++)
-                {
-                    fprintf( laserout, "%e      ", Atemp[itemp]);
-                }
-                fprintf( laserout, "\n");
+                fwrite(snapshot_nc, sizeof(double), Ntotal, nc_out);
+                fwrite(snapshot_pi, sizeof(complex), Ntotal, pi_out);
             }
         }
 
+        // ##############################################
         // stdout print log
         if (ktime % printFrequency == 0)
         {
@@ -437,15 +462,18 @@ int main( int argc, char *argv[] )
                 }
                 occup_temp /= sbe->kmesh->total_weight;
                 cout << ktime << " / " << sbe->fpulses->Nt << ", " << currentcycle << " / " << maxcycles;
-                cout << ", nc = " << temp_density_matrix_integrated[sbe->material->Nval*Nband + sbe->material->Nval] / static_cast<double>(Npoints);
+                cout << ", nc = " << temp_density_matrix_integrated[sbe->material->Nval*Nband + sbe->material->Nval] / static_cast<double>(Ntotal);
                 cout << ", ntotal = " << occup_temp << endl;
             }
         }
 
     } //End of Time integration loop
-    delete[] temp_density_matrix_integrated;
-    delete[] temp_1d_integrated_occupation;
-    delete[] snapshot_nc, snapshot_pi; 
+    if (shotNumber > 0)
+    {
+        delete[] temp_density_matrix_integrated;
+        delete[] temp_1d_integrated_occupation;
+        delete[] snapshot_nc, snapshot_pi; 
+    }
 
     //##############################################
     // inter, intrabnad currents, occupation, cohereneces are integrated through every sub-grids (all-processors)
@@ -501,16 +529,16 @@ int main( int argc, char *argv[] )
             occup_temp = 0;
             for (int m = 0; m < Nband; ++m)
             {
-                fprintf(occup_out, "%.16e    ", real(density_matrix_integrated[ktime][m*Nband + m]) / Npoints);
+                fprintf(occup_out, "%.16e    ", real(density_matrix_integrated[ktime][m*Nband + m]) / Ntotal);
                 occup_temp += real(density_matrix_integrated[ktime][m*Nband + m]);
             }
-            fprintf(occup_out, "%.16e\n", occup_temp / Npoints);
+            fprintf(occup_out, "%.16e\n", occup_temp / Ntotal);
 
             // only recorde the coherence between the highest valence band and the lowest conduction band
             fprintf(coherence_out, "%.16e    ", 
-                real(density_matrix_integrated[ktime][sbe->material->Nval*Nband + (sbe->material->Nval+1)]) / Npoints);
+                real(density_matrix_integrated[ktime][sbe->material->Nval*Nband + (sbe->material->Nval+1)]) / Ntotal);
             fprintf(coherence_out, "%.16e\n", 
-                imag(density_matrix_integrated[ktime][sbe->material->Nval*Nband + (sbe->material->Nval+1)]) / Npoints);
+                imag(density_matrix_integrated[ktime][sbe->material->Nval*Nband + (sbe->material->Nval+1)]) / Ntotal);
         }
         fflush(interj_out);
         fflush(intraj_out);
@@ -526,10 +554,14 @@ int main( int argc, char *argv[] )
         fclose( intraj_out );
         fclose( occup_out);
         fclose( coherence_out);
-        fclose( dm1dout );
-        fclose( nc_out );
-        fclose( pi_out );
-        fclose( shot_out );
+
+        if (shotNumber > 0)
+        {
+            fclose( dm1dout );
+            fclose( nc_out );
+            fclose( pi_out );
+            fclose( shot_out );
+        }
     }   
     
     

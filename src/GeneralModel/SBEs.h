@@ -96,7 +96,10 @@ public:
     bool isDipoleZero;                                  ///< default is true. Wannier dipole is non-zero in very rare cases.
     bool isInterIntra;                                  ///< default is true. Separate inter/intra when this is true. Total current is in inter when false.
 
-    SBEs(const libconfig::Setting * _cfg, GaugeType _gauge);
+    // Note: prefix start with underscore is not recommended due to conflict with c++ standard
+    //       However, as this is used in this project for long time, and fix this will take some time.
+    //       So, I will keep this for now. I do not think this will cause any problem.
+    SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, int idx_start, int idx_end);
     ~SBEs();
     
     void RunSBEs(int _kindex, double _time);
@@ -119,7 +122,7 @@ public:
 
 };
 
-SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
+SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge, int idx_start=-1, int idx_end=-1) : gauge(_gauge)
 {
     const libconfig::Setting &cfg = (*_cfg);
     InitializeGeneral( &cfg["calc"]);
@@ -238,7 +241,7 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
     }
 
     // generate k-grid
-    kmesh = new momaxis( Nk, bzaxes, bzori );
+    kmesh = new momaxis( Nk, bzaxes, bzori, idx_start, idx_end );
 
     /*if (isWannier90)
     {
@@ -246,8 +249,8 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
     }*/
     
 
-    dmatrix = Create2D<complex>(this->kmesh->Ntotal, Nband*Nband);
-    initMatrix = Create2D<complex>(this->kmesh->Ntotal, Nband*Nband);
+    dmatrix = Create2D<complex>(this->kmesh->Npartial, Nband*Nband);
+    initMatrix = Create2D<complex>(this->kmesh->Npartial, Nband*Nband);
 
     hamiltonian = new complex[Nband * Nband];
     temp1Matrix = new complex[Nband * Nband];
@@ -260,8 +263,8 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
     ctransuMatrix = new complex[Nband * Nband];
     dephasingMatrix = new double[Nband * Nband];
 
-    pMatrix = Create3D<complex>(this->kmesh->Ntotal, Ndim, Nband*Nband);
-    edispersion = Create2D<double>(this->kmesh->Ntotal, Nband);
+    pMatrix = Create3D<complex>(this->kmesh->Npartial, Ndim, Nband*Nband);
+    edispersion = Create2D<double>(this->kmesh->Npartial, Nband);
 
     tempIsuppz = new int[Nband];
     tempEval = new double[Nband];
@@ -276,9 +279,9 @@ SBEs::SBEs(const libconfig::Setting * _cfg, GaugeType _gauge) : gauge(_gauge)
     double *tempInitVal = new double[Nband];
     double tempInitSum = 0;
 
-    std::fill(&dmatrix[0][0], &dmatrix[0][0] + kmesh->Ntotal*Nband*Nband, 0.);
+    std::fill(&dmatrix[0][0], &dmatrix[0][0] + kmesh->Npartial*Nband*Nband, 0.);
 
-    for (int k = 0; k < kmesh->Ntotal; ++k)
+    for (int k = 0; k < kmesh->Npartial; ++k)
     {
         // edispersion generation & temporary umatrix generation
         int num_of_eig;
@@ -559,8 +562,8 @@ void SBEs::InitializeLaser(const libconfig::Setting *_laser)
 
 SBEs::~SBEs()
 {
-    Delete2D<complex>(dmatrix, this->kmesh->Ntotal, Nband*Nband);
-    Delete2D<complex>(initMatrix, this->kmesh->Ntotal, Nband*Nband);
+    Delete2D<complex>(dmatrix, this->kmesh->Npartial, Nband*Nband);
+    Delete2D<complex>(initMatrix, this->kmesh->Npartial, Nband*Nband);
 
     delete[] hamiltonian;
     delete[] newdMatrix;
@@ -571,8 +574,8 @@ SBEs::~SBEs()
     Delete2D<complex>(jMatrix, Ndim, Nband*Nband);
     Delete2D<complex>(dipoleMatrix, Ndim, Nband*Nband);
 
-    Delete3D<complex>(pMatrix, this->kmesh->Ntotal, Ndim, Nband*Nband);
-    Delete2D<double>(edispersion, this->kmesh->Ntotal, Nband);
+    Delete3D<complex>(pMatrix, this->kmesh->Npartial, Ndim, Nband*Nband);
+    Delete2D<double>(edispersion, this->kmesh->Npartial, Nband);
 
     delete[] tRK;
     delete[] bRK;

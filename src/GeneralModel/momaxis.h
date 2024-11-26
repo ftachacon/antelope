@@ -41,14 +41,20 @@ public:
     
     std::array<int, Ndim> N;
     
-    int Ntotal;
+    // Now internal (index 0 <= < Npartial) corresponds to global index (idx_start <= < idx_end)
+    int Ntotal; // Total number of grid points
+    int Npartial; // Number of grid points belonging to this process
+    int idx_start, idx_end; // Starting and ending index of grid points belonging to this process
     
     double Volume, dV;
     std::string imethod;
     
-    momaxis( std::array<int, Ndim> _N ,std::array<double, Ndim*Ndim> _axisvec, std::array<double, Ndim> _origink )
+    momaxis( std::array<int, Ndim> _N ,std::array<double, Ndim*Ndim> _axisvec, std::array<double, Ndim> _origink, int idx_start=-1, int idx_end=-1 )
         : N(_N), BzAxes(_axisvec), BzOrigin(_origink)
     {
+        idx_start = idx_start; idx_end = idx_end;
+        Npartial = idx_end - idx_start;
+
         steps_sizes( _N, _axisvec, _origink );
         set_brillouin_zone_grid( );
         //imethod = "Trapz";
@@ -126,18 +132,24 @@ void momaxis::checker(  )
         std::cerr << "Number of grid is negative or zero. check N = (" << N[0] << ", " << N[1] << ", " << N[2] << ")\n";
         std::exit(EXIT_FAILURE);
     }
+    if (idx_start < 0 || idx_end < 0 || idx_start >= Ntotal || idx_end > Ntotal || idx_start > idx_end)
+    {
+        std::cerr << "Index is out of range. check idx_start = " << idx_start << ", idx_end = " << idx_end << "\n";
+        std::exit(EXIT_FAILURE);
+    }
 }
 
 
 //Creating basic memory
 void momaxis::basic_mem()
 {
-    kgrid = new std::array<double, Ndim>[Ntotal];
+    kgrid = new std::array<double, Ndim>[Npartial];
 
-    weight = new double[Ntotal];
-    std::fill(weight, weight + Ntotal, 1.); // This default value acts as trapzoid
+    weight = new double[Npartial];
+    std::fill(weight, weight + Npartial, 1.); // This default value acts as trapzoid
 
     double temp_weight;
+    int kindex = 0;
     for (int i = 0; i < N[0]; ++i)
     {
         for (int j = 0; j < N[1]; ++j)
@@ -157,12 +169,14 @@ void momaxis::basic_mem()
                 {
                     temp_weight /= 2;
                 }
-                weight[ index(i, j, k) ] = temp_weight;
+                kindex = index(i, j, k) - idx_start;
+                if (0 <= kindex && kindex < Npartial)
+                    weight[ kindex ] = temp_weight;
             }
         }
     }
     total_weight = 0.;
-    for (int i = 0; i < Ntotal; ++i)
+    for (int i = 0; i < Npartial; ++i)
     {
         total_weight += weight[i];
     }
@@ -175,6 +189,14 @@ void momaxis::basic_mem()
 void  momaxis::steps_sizes( std::array<int, Ndim> _N ,std::array<double, Ndim*Ndim> _axisvec, std::array<double, Ndim> _origink )
 {
     Ntotal = N[0] * N[1] * N[2];
+
+    // if partial is not set, set Npartial to Ntotal
+    if (idx_start == -1)
+    {
+        Npartial = Ntotal;
+        idx_start = 0;
+        idx_end = Ntotal;
+    }
     
     checker( );
     
@@ -343,10 +365,12 @@ void momaxis::set_brillouin_zone_grid()
                     kfrac = 0.;
                 else
                     kfrac = static_cast<double>(k)/(N[2]-1) - 0.5;
-                kindex = index(i, j, k);
-                kgrid[kindex] = {BzOrigin[0] + ifrac*BzAxes[0*Ndim + 0] + jfrac*BzAxes[1*Ndim + 0] + kfrac*BzAxes[2*Ndim + 0], 
-                                    BzOrigin[1] + ifrac*BzAxes[0*Ndim + 1] + jfrac*BzAxes[1*Ndim + 1] + kfrac*BzAxes[2*Ndim + 1], 
-                                    BzOrigin[2] + ifrac*BzAxes[0*Ndim + 2] + jfrac*BzAxes[1*Ndim + 2] + kfrac*BzAxes[2*Ndim + 2] };
+                // Now internal (index 0 <= < Npartial) corresponds to global index (idx_start <= < idx_end)
+                kindex = index(i, j, k) - idx_start;
+                if (0 <= kindex && kindex < Npartial)
+                    kgrid[kindex] = {BzOrigin[0] + ifrac*BzAxes[0*Ndim + 0] + jfrac*BzAxes[1*Ndim + 0] + kfrac*BzAxes[2*Ndim + 0], 
+                                        BzOrigin[1] + ifrac*BzAxes[0*Ndim + 1] + jfrac*BzAxes[1*Ndim + 1] + kfrac*BzAxes[2*Ndim + 1], 
+                                        BzOrigin[2] + ifrac*BzAxes[0*Ndim + 2] + jfrac*BzAxes[1*Ndim + 2] + kfrac*BzAxes[2*Ndim + 2] };
             }
         }
     }
