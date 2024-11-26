@@ -74,17 +74,20 @@ public:
                      , int skip2 );          //Momentum output
     
     
+    // Index is only for partial grid (local index only)
     int index( const int i ,const int j ,const int k )
     {
-        return N[1]*N[2]*i + N[2]*j + k;
+        //return N[1]*N[2]*i + N[2]*j + k;
+        return N[1]*N[2]*i + N[2]*j + k - idx_start;
     };
     int index( const std::array<int, Ndim> _indexArr )
     {
-        return N[1]*N[2]*_indexArr[0] + N[2]*_indexArr[1] + _indexArr[2];
+        return N[1]*N[2]*_indexArr[0] + N[2]*_indexArr[1] + _indexArr[2] - idx_start;
     };
     std::array<int, Ndim> index( int _kindex)
     {
-        return { _kindex/(N[1]*N[2]), (_kindex/N[2])%N[1], _kindex%N[2] };
+        int global_index = _kindex + idx_start;
+        return { global_index/(N[1]*N[2]), (global_index/N[2])%N[1], global_index%N[2] };
     };
  
     //void Simpson();
@@ -366,11 +369,13 @@ void momaxis::set_brillouin_zone_grid()
                 else
                     kfrac = static_cast<double>(k)/(N[2]-1) - 0.5;
                 // Now internal (index 0 <= < Npartial) corresponds to global index (idx_start <= < idx_end)
-                kindex = index(i, j, k) - idx_start;
+                kindex = index(i, j, k);
                 if (0 <= kindex && kindex < Npartial)
+                {
                     kgrid[kindex] = {BzOrigin[0] + ifrac*BzAxes[0*Ndim + 0] + jfrac*BzAxes[1*Ndim + 0] + kfrac*BzAxes[2*Ndim + 0], 
                                         BzOrigin[1] + ifrac*BzAxes[0*Ndim + 1] + jfrac*BzAxes[1*Ndim + 1] + kfrac*BzAxes[2*Ndim + 1], 
                                         BzOrigin[2] + ifrac*BzAxes[0*Ndim + 2] + jfrac*BzAxes[1*Ndim + 2] + kfrac*BzAxes[2*Ndim + 2] };
+                }
             }
         }
     }

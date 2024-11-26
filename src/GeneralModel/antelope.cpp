@@ -348,16 +348,15 @@ int main( int argc, char *argv[] )
             for(int jtemp = jstart; jtemp < jend; jtemp++ )
             {
                 kindex = jtemp - jstart;
-                // Note that for index function, global index is used directly
-                auto ki = sbe->kmesh->index(jtemp);
+                auto ki = sbe->kmesh->index(kindex);
                 if (sbe->gauge == GaugeType::LengthWannier)
                 {
-                    sbe->WannierToHamiltonian(sbe->newdMatrix, sbe->dmatrix[jtemp], jtemp, currenttime);
+                    sbe->WannierToHamiltonian(sbe->newdMatrix, sbe->dmatrix[kindex], kindex, currenttime);
                     temp_1d_integrated_occupation[ki[0]] += sbe->newdMatrix[sbe->material->Nval*Nband + sbe->material->Nval] * sbe->kmesh->weight[ kindex ];
                 }
                 else
                 {
-                    temp_1d_integrated_occupation[ki[0]] += sbe->dmatrix[jtemp][sbe->material->Nval*Nband + sbe->material->Nval] * sbe->kmesh->weight[ kindex ];
+                    temp_1d_integrated_occupation[ki[0]] += sbe->dmatrix[kindex][sbe->material->Nval*Nband + sbe->material->Nval] * sbe->kmesh->weight[ kindex ];
                 }
             }
             MPI_Barrier(MPI_COMM_WORLD);
@@ -384,17 +383,18 @@ int main( int argc, char *argv[] )
             // move density matrix to contigous array in k-space
             for(int jtemp = jstart; jtemp < jend; jtemp++ )
             {
-                auto ki = sbe->kmesh->index(jtemp);
+                auto ki = sbe->kmesh->index(kindex);
                 if (sbe->gauge == GaugeType::LengthWannier)
                 {
-                    sbe->WannierToHamiltonian(sbe->newdMatrix, sbe->dmatrix[jtemp], jtemp, currenttime);
-                    snapshot_nc[jtemp] = real(sbe->newdMatrix[sbe->material->Nval*Nband + sbe->material->Nval]);
-                    snapshot_pi[jtemp] = sbe->newdMatrix[sbe->material->Nval*Nband + sbe->material->Nval-1];
+                    sbe->WannierToHamiltonian(sbe->newdMatrix, sbe->dmatrix[kindex], kindex, currenttime);
+                    snapshot_nc[kindex] = real(sbe->newdMatrix[sbe->material->Nval*Nband + sbe->material->Nval]);
+                    snapshot_pi[kindex] = sbe->newdMatrix[sbe->material->Nval*Nband + sbe->material->Nval-1];
                 }
                 else
                 {
-                    snapshot_nc[jtemp] = real(sbe->dmatrix[jtemp][sbe->material->Nval*Nband + sbe->material->Nval]);
-                    snapshot_pi[jtemp] = sbe->dmatrix[jtemp][sbe->material->Nval*Nband + sbe->material->Nval-1];
+                    // snapshot is stored in the global buffer -- use jtemp instead of kindex
+                    snapshot_nc[jtemp] = real(sbe->dmatrix[kindex][sbe->material->Nval*Nband + sbe->material->Nval]);
+                    snapshot_pi[jtemp] = sbe->dmatrix[kindex][sbe->material->Nval*Nband + sbe->material->Nval-1];
                 }
             }
             // gather
