@@ -172,7 +172,7 @@ void momaxis::basic_mem()
                 {
                     temp_weight /= 2;
                 }
-                kindex = index(i, j, k) - idx_start;
+                kindex = index(i, j, k);
                 if (0 <= kindex && kindex < Npartial)
                     weight[ kindex ] = temp_weight;
             }
