@@ -49,10 +49,10 @@ public:
     double Volume, dV;
     std::string imethod;
     
-    momaxis( std::array<int, Ndim> _N ,std::array<double, Ndim*Ndim> _axisvec, std::array<double, Ndim> _origink, int idx_start=-1, int idx_end=-1 )
+    momaxis( std::array<int, Ndim> _N ,std::array<double, Ndim*Ndim> _axisvec, std::array<double, Ndim> _origink, int _idx_start=-1, int _idx_end=-1 )
         : N(_N), BzAxes(_axisvec), BzOrigin(_origink)
     {
-        idx_start = idx_start; idx_end = idx_end;
+        idx_start = _idx_start; idx_end = _idx_end;
         Npartial = idx_end - idx_start;
 
         steps_sizes( _N, _axisvec, _origink );
