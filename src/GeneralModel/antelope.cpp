@@ -254,14 +254,17 @@ int main( int argc, char *argv[] )
     }
 
     ktemp = 0;
+
+    // ##############################################
+    // stdout log related
     double currenttime, currentcycle;
 
     double occup_temp = 0;
     double maxcycles = 2*sbe->fpulses->pulses[0].twidth / sbe->fpulses->pulses[0].period0;
+    complex *temp_density_matrix_integrated  = new complex[Nband*Nband];
 
     //#####################################
     // Snapshot related intialization
-    complex *temp_density_matrix_integrated;
     complex *temp_1d_integrated_occupation;
     double *snapshot_nc;
     complex *snapshot_pi;
@@ -272,7 +275,6 @@ int main( int argc, char *argv[] )
     if (shotNumber > 0)
     {
         shotFrequency = int(sbe->fpulses->pulses[0].period0/shotNumber/sbe->fpulses->dt);
-        temp_density_matrix_integrated = new complex[Nband*Nband];
         temp_1d_integrated_occupation = new complex[sbe->Nk[0]];
         snapshot_nc = new double[sbe->kmesh->Ntotal];
         snapshot_pi = new complex[sbe->kmesh->Ntotal];
@@ -334,7 +336,6 @@ int main( int argc, char *argv[] )
             //##############################################
 
         }
-        
         // ##############################################
         // Snapshots - including diagnostics and density plots 
         // if (shotNumber > 0 && ktime % shotNumber == 0)
@@ -468,9 +469,9 @@ int main( int argc, char *argv[] )
         }
 
     } //End of Time integration loop
+    delete[] temp_density_matrix_integrated;
     if (shotNumber > 0)
     {
-        delete[] temp_density_matrix_integrated;
         delete[] temp_1d_integrated_occupation;
         delete[] snapshot_nc, snapshot_pi; 
     }
